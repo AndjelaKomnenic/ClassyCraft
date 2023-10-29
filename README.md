@@ -188,7 +188,7 @@ U opisu zahteva je za svaki naveden njegov nivo prioriteta:
 
 # Funkcionalni dijagram
 
-![finaleFINITO.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/07d644fb-09a9-42a7-b2cb-c29b2a62a7ac/761e079f-edb5-48d9-938f-0c2f4ada7adb/finaleFINITO.png)
+![alt text for screen readers](dijagram.png "Dijagram")
 
 # UseCase:
 
