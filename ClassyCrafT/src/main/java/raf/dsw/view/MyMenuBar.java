@@ -1,6 +1,6 @@
-package view;
+package raf.dsw.view;
 
-import controller.ExitAction;
+import raf.dsw.controller.ExitAction;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
