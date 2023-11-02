@@ -1,13 +1,15 @@
-package view;
+package raf.dsw.view;
 
-import controller.ActionManager;
+import lombok.Getter;
+import lombok.Setter;
+import raf.dsw.controller.ActionManager;
 
 import javax.swing.*;
 import java.awt.*;
 
-// i ovde posle koristi biblioteku
+@Getter
+@Setter
 public class MainFrame extends JFrame {
-
     private static MainFrame instance;
     private ActionManager actionManager;
 
@@ -46,11 +48,4 @@ public class MainFrame extends JFrame {
         return instance;
     }
 
-    public ActionManager getActionManager() {
-        return actionManager;
-    }
-
-    public void setActionManager(ActionManager actionManager) {
-        this.actionManager = actionManager;
-    }
 }

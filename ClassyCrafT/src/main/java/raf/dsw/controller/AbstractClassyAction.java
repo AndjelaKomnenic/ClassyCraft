@@ -1,4 +1,4 @@
-package controller;
+package raf.dsw.controller;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ public abstract class AbstractClassyAction extends AbstractAction {
     public Icon loadIcon(String fileName){
 
         Icon icon = null;
-        URL ImageURL = getClass().getResource("/images/exit.png"); // dodaj URL
+        URL ImageURL = getClass().getResource(fileName);
         if (ImageURL != null){
 
             Image img = new ImageIcon(ImageURL).getImage();
