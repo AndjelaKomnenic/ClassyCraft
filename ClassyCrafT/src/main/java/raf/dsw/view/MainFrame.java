@@ -1,17 +1,28 @@
-package view;
+package raf.dsw.view;
+
+import lombok.Getter;
+import lombok.Setter;
+import raf.dsw.controller.ActionManager;
 
 import javax.swing.*;
 import java.awt.*;
 
+@Getter
+@Setter
 public class MainFrame extends JFrame {
-
     private static MainFrame instance;
+    private ActionManager actionManager;
 
     private MainFrame(){
 
     }
 
-    private void initialize(){
+    private void initialise(){
+        actionManager = new ActionManager();
+        initializeGUI();
+    }
+
+    private void initializeGUI(){
 
         Toolkit kit = Toolkit.getDefaultToolkit();
         Dimension screenSize = kit.getScreenSize();
@@ -32,7 +43,7 @@ public class MainFrame extends JFrame {
     public static MainFrame getInstance(){
         if (instance == null){
             instance = new MainFrame();
-            instance.initialize();
+            instance.initialise();
         }
         return instance;
     }

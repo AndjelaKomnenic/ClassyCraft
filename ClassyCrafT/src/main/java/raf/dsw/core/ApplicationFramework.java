@@ -1,6 +1,7 @@
-package core;
+package raf.dsw.core;
 
-import view.MainFrame;
+import raf.dsw.view.MainFrame;
+
 public class ApplicationFramework {
     private static ApplicationFramework instance;
 

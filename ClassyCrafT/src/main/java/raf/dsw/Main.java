@@ -1,4 +1,6 @@
-import core.ApplicationFramework;
+package raf.dsw;
+
+import raf.dsw.core.ApplicationFramework;
 
 public class Main {
     public static void main(String[] args) {
