@@ -1,9 +1,5 @@
 package raf.dsw.core;
 
-import raf.dsw.composite.ClassyRepository;
-import raf.dsw.composite.ClassyRepositoryImplementation;
-import raf.dsw.message.MessageGenerator;
-import raf.dsw.message.MessageGeneratorImplementation;
 import raf.dsw.view.MainFrame;
 
 public class ApplicationFramework {
@@ -14,7 +10,6 @@ public class ApplicationFramework {
     }
 
     public void initialize(){
-        ClassyRepository classyRepo =  new ClassyRepositoryImplementation();
         MainFrame.getInstance().setVisible(true);
     }
 
