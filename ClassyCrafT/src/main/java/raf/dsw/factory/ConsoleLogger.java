@@ -1,4 +1,4 @@
-package core;
+package raf.dsw.factory;
 
 public class ConsoleLogger implements Logger{
     public ConsoleLogger(){
