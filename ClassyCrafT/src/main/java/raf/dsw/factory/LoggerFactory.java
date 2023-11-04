@@ -1,4 +1,4 @@
-package core;
+package raf.dsw.factory;
 
 public class LoggerFactory {
     public LoggerFactory(){
