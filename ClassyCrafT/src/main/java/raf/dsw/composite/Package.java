@@ -13,7 +13,7 @@ public class Package extends ClassyNodeComposite{
 
     @Override
     public void addChild(ClassyNode child) {
-
+        this.setCounter();
     }
 
     @Override

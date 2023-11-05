@@ -9,5 +9,7 @@ public class MyToolBar extends JToolBar {
 
         add(MainFrame.getInstance().getActionManager().getExitAction());
         add(MainFrame.getInstance().getActionManager().getAboutUsAction());
+        add(MainFrame.getInstance().getActionManager().getAddNode());
+        add(MainFrame.getInstance().getActionManager().getRemoveNode());
     }
 }

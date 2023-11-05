@@ -10,6 +10,7 @@ public class ApplicationFramework {
 
     protected Gui gui;
     protected ClassyRepository classyRepository;
+    //protected MessageGeneratorImplementation messageGenerator;
 
     public void run(){
         this.gui.start();
@@ -19,6 +20,7 @@ public class ApplicationFramework {
     {
         this.gui = gui;
         this.classyRepository = classyRepository;
+        //this.messageGenerator = new MessageGeneratorImplementation();
     }
 
     private static ApplicationFramework instance;

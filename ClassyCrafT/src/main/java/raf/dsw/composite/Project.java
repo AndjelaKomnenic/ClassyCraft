@@ -17,6 +17,7 @@ public class Project extends ClassyNodeComposite{
                 children.add(child);
         }
         this.notifySubscriber("NEW");
+        this.setCounter();
     }
 
     public void setAuthor(String author){
