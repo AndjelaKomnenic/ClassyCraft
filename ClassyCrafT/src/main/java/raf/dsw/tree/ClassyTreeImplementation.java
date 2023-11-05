@@ -47,6 +47,9 @@ public class ClassyTreeImplementation implements ClassyTree{
             return  new Project("Project" +new Random().nextInt(100), parent);
         return null;
     }*/
+    @Override
+    public void deleteChild(ClassyTreeItem child){
 
+    }
 
 }
