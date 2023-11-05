@@ -27,6 +27,7 @@ public class ClassyTreeImplementation implements ClassyTree{
 
         if (!(parent.getClassyNode() instanceof ClassyNodeComposite))
             return;
+        //ispis greske da nemoze da se doda dete ne composite cvoru
         ClassyNode child = null;
         //ClassyNode child = createChild(parent.getClassyNode());
         //napisati dobar createChild
