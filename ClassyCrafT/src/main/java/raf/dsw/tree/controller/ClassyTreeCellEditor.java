@@ -7,10 +7,11 @@ import javax.swing.tree.DefaultTreeCellEditor;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.util.EventObject;
 
-public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements ActionListener{
+public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements ActionListener {
     private Object clickedOn =null;
     private JTextField edit=null;
 
