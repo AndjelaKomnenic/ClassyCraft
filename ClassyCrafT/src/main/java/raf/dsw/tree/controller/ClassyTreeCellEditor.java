@@ -1,5 +1,7 @@
 package raf.dsw.tree.controller;
 
+import raf.dsw.composite.ClassyNode;
+import raf.dsw.composite.ClassyNodeComposite;
 import raf.dsw.tree.model.ClassyTreeItem;
 
 import javax.swing.*;
@@ -40,10 +42,19 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
 
         if (!(clickedOn instanceof ClassyTreeItem))
             return;
-
+        boolean ok = true;
         ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
-        clicked.setName(e.getActionCommand());
-
+        String newName = e.getActionCommand();
+        ClassyTreeItem parent = (ClassyTreeItem)clicked.getParent();
+        for(ClassyNode kid: ((ClassyNodeComposite)parent.getClassyNode()).getChildren()){
+            if(kid.getName().equalsIgnoreCase(newName)){
+                //pucaj gresku
+                ok = false;
+            }
+        }
+        if(ok){
+            clicked.setName(e.getActionCommand());
+        }
     }
 
 }

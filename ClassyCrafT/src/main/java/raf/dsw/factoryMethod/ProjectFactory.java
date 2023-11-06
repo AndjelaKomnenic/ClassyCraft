@@ -9,10 +9,25 @@ import raf.dsw.tree.model.ClassyTreeItem;
 public class ProjectFactory extends NodeFactory{
     @Override
     public ClassyTreeItem createNode(ClassyTreeItem parent) {
-        String author = "autor";
+        String author = "";
         int nmb = ((ClassyNodeComposite)parent.getClassyNode()).getCounter();
-        String name = "Project" + nmb;
-        ClassyNode child = new Project(name, parent.getClassyNode(), author);
+        String tryName = "";
+        boolean ok = true;
+        boolean flag = false;
+        while(!flag) {
+            ok = true;
+            tryName = "Projekat"+((ClassyNodeComposite)parent.getClassyNode()).getCounter();
+            for (ClassyNode kid : ((ClassyNodeComposite) parent.getClassyNode()).getChildren()) {
+                if (kid.getName().equalsIgnoreCase(tryName)) {
+                    ok = false;
+                }
+            }
+            if(ok)
+                flag = true;
+            else
+                ((ClassyNodeComposite)parent.getClassyNode()).setCounter();
+        }
+        ClassyNode child = new Project(tryName, parent.getClassyNode(), author);
         ClassyTreeItem childTreeItem = new ClassyTreeItem(child);
         return childTreeItem;
     }

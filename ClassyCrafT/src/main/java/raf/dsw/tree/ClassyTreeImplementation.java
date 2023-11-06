@@ -6,6 +6,7 @@ import raf.dsw.composite.Project;
 import raf.dsw.composite.ProjectExplorer;
 import raf.dsw.factoryMethod.FactoryUtils;
 import raf.dsw.factoryMethod.NodeFactory;
+import raf.dsw.factoryMethod.PackageFactory;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.tree.view.ClassyTreeView;
 import raf.dsw.view.MainFrame;
@@ -36,7 +37,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         parent.add(child);
         ((ClassyNodeComposite) parent.getClassyNode()).addChild(child.getClassyNode());
         treeView.expandPath(treeView.getSelectionPath());
-        SwingUtilities.updateComponentTreeUI(treeView);
+        update();
         /*ClassyNode child = null;
         //ClassyNode child = createChild(parent.getClassyNode());
         //napisati dobar createChild
@@ -58,9 +59,24 @@ public class ClassyTreeImplementation implements ClassyTree{
     }*/
     @Override
     public void deleteChild(ClassyTreeItem child){
-        //yourJTree.repaint();
+        /*treeView.repaint();
+        SwingUtilities.updateComponentTreeUI(treeView);*/
+        ClassyTreeItem parent = (ClassyTreeItem) child.getParent();
+        ((ClassyNodeComposite)parent.getClassyNode()).removeChild(child.getClassyNode());
+        parent.remove(child);
+        treeModel.nodeStructureChanged(parent);
+        update();
+    }
+    public void update(){
         SwingUtilities.updateComponentTreeUI(treeView);
-
+    }
+    public void addPP(ClassyTreeItem parent){
+        PackageFactory factory = new PackageFactory();
+        ClassyTreeItem child = factory.createNode(parent);
+        parent.add(child);
+        ((ClassyNodeComposite) parent.getClassyNode()).addChild(child.getClassyNode());
+        treeView.expandPath(treeView.getSelectionPath());
+        update();
     }
 
 }

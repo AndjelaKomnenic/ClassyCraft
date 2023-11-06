@@ -25,4 +25,7 @@ public abstract class ClassyNodeComposite extends ClassyNode{
     public int getCounter() {
     return counter;
     }
+    public List<ClassyNode> getChildren(){
+        return this.children;
+    }
 }

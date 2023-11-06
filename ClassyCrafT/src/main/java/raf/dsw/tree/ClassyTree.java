@@ -9,4 +9,6 @@ public interface ClassyTree {
     void addChild(ClassyTreeItem parent);
     ClassyTreeItem getSelectedNode();
     void deleteChild(ClassyTreeItem child);
+    void update();
+    void addPP(ClassyTreeItem parent);
 }
