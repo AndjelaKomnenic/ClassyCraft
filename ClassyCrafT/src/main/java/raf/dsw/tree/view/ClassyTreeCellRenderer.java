@@ -16,7 +16,7 @@ public class ClassyTreeCellRenderer extends DefaultTreeCellRenderer {
         URL imageURL = null;
 
         if (((ClassyTreeItem)value).getClassyNode() instanceof ProjectExplorer) {
-            imageURL = getClass().getResource("/images/tdiagram.gif");
+            imageURL = getClass().getResource("/images/projectExplore.png");
         }
         else if (((ClassyTreeItem)value).getClassyNode() instanceof Project) {
             imageURL = getClass().getResource("/images/tproject.gif");

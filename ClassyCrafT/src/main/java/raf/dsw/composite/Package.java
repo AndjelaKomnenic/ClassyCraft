@@ -13,7 +13,9 @@ public class Package extends ClassyNodeComposite{
 
     @Override
     public void addChild(ClassyNode child) {
-
+        //jos uvek nije implementirano kkao treba nego je meni ovo potrebno za JTree
+        this.setCounter();
+        children.add(child);
     }
 
     @Override

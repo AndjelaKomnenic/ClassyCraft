@@ -7,6 +7,22 @@ import raf.dsw.message.MessageGeneratorImplementation;
 import raf.dsw.view.MainFrame;
 
 public class ApplicationFramework {
+
+    protected Gui gui;
+    protected ClassyRepository classyRepository;
+    //protected MessageGeneratorImplementation messageGenerator;
+
+    public void run(){
+        this.gui.start();
+    }
+
+    public void initialise(Gui gui, ClassyRepository classyRepository)
+    {
+        this.gui = gui;
+        this.classyRepository = classyRepository;
+        //this.messageGenerator = new MessageGeneratorImplementation();
+    }
+
     private static ApplicationFramework instance;
 
     private ApplicationFramework() {
@@ -22,5 +38,8 @@ public class ApplicationFramework {
         if (instance == null)
             instance = new ApplicationFramework();
         return instance;
+    }
+    public ClassyRepository getClassyRepository(){
+        return this.classyRepository;
     }
 }

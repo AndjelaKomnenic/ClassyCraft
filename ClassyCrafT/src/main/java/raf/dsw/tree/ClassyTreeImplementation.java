@@ -4,8 +4,12 @@ import raf.dsw.composite.ClassyNode;
 import raf.dsw.composite.ClassyNodeComposite;
 import raf.dsw.composite.Project;
 import raf.dsw.composite.ProjectExplorer;
+import raf.dsw.factoryMethod.FactoryUtils;
+import raf.dsw.factoryMethod.NodeFactory;
+import raf.dsw.factoryMethod.PackageFactory;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.tree.view.ClassyTreeView;
+import raf.dsw.view.MainFrame;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
@@ -27,14 +31,20 @@ public class ClassyTreeImplementation implements ClassyTree{
 
         if (!(parent.getClassyNode() instanceof ClassyNodeComposite))
             return;
-        //ispis greske da nemoze da se doda dete ne composite cvoru
-        ClassyNode child = null;
+        FactoryUtils utils = new FactoryUtils();
+        NodeFactory factory = utils.nodeFactory(parent);
+        ClassyTreeItem child = factory.createNode(parent);
+        parent.add(child);
+        ((ClassyNodeComposite) parent.getClassyNode()).addChild(child.getClassyNode());
+        treeView.expandPath(treeView.getSelectionPath());
+        update();
+        /*ClassyNode child = null;
         //ClassyNode child = createChild(parent.getClassyNode());
         //napisati dobar createChild
         parent.add(new ClassyTreeItem(child));
         ((ClassyNodeComposite) parent.getClassyNode()).addChild(child);
         treeView.expandPath(treeView.getSelectionPath());
-        SwingUtilities.updateComponentTreeUI(treeView);
+        SwingUtilities.updateComponentTreeUI(treeView);*/
     }
 
     @Override
@@ -47,6 +57,26 @@ public class ClassyTreeImplementation implements ClassyTree{
             return  new Project("Project" +new Random().nextInt(100), parent);
         return null;
     }*/
-
+    @Override
+    public void deleteChild(ClassyTreeItem child){
+        /*treeView.repaint();
+        SwingUtilities.updateComponentTreeUI(treeView);*/
+        ClassyTreeItem parent = (ClassyTreeItem) child.getParent();
+        ((ClassyNodeComposite)parent.getClassyNode()).removeChild(child.getClassyNode());
+        parent.remove(child);
+        treeModel.nodeStructureChanged(parent);
+        update();
+    }
+    public void update(){
+        SwingUtilities.updateComponentTreeUI(treeView);
+    }
+    public void addPP(ClassyTreeItem parent){
+        PackageFactory factory = new PackageFactory();
+        ClassyTreeItem child = factory.createNode(parent);
+        parent.add(child);
+        ((ClassyNodeComposite) parent.getClassyNode()).addChild(child.getClassyNode());
+        treeView.expandPath(treeView.getSelectionPath());
+        update();
+    }
 
 }

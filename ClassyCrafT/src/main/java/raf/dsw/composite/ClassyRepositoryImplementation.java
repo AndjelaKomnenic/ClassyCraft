@@ -16,4 +16,8 @@ public class ClassyRepositoryImplementation implements ClassyRepository{
     public void addChild(ClassyNodeComposite parent, ClassyNode chiild) {
 
     }
+    @Override
+    public ProjectExplorer getProjectExplorer(){
+        return this.projectExplorer;
+    }
 }

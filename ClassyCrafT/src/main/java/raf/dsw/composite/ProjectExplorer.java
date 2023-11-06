@@ -13,5 +13,6 @@ public class ProjectExplorer extends ClassyNodeComposite{
                 children.add(child);
         }
         this.notifySubscriber("NEW");
+        this.setCounter();
     }
 }

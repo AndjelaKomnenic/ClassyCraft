@@ -3,6 +3,9 @@ package raf.dsw.view;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.controller.ActionManager;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.tree.ClassyTree;
+import raf.dsw.tree.ClassyTreeImplementation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +15,7 @@ import java.awt.*;
 public class MainFrame extends JFrame {
     private static MainFrame instance;
     private ActionManager actionManager;
+    private ClassyTree classyTree;
 
     private MainFrame(){
 
@@ -19,6 +23,7 @@ public class MainFrame extends JFrame {
 
     private void initialise(){
         actionManager = new ActionManager();
+        classyTree = new ClassyTreeImplementation();
         initializeGUI();
     }
 
@@ -38,6 +43,18 @@ public class MainFrame extends JFrame {
 
         MyToolBar toolBar = new MyToolBar();
         add(toolBar, BorderLayout.NORTH);
+
+        ////
+        JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
+        JPanel desktop = new JPanel();
+
+        JScrollPane scroll=new JScrollPane(projectExplorer);
+        scroll.setMinimumSize(new Dimension(200,150));
+        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
+        getContentPane().add(split,BorderLayout.CENTER);
+        split.setDividerLocation(250);
+        split.setOneTouchExpandable(true);
+
     }
 
     public static MainFrame getInstance(){
