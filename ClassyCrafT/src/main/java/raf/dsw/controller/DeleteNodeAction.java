@@ -1,5 +1,8 @@
 package raf.dsw.controller;
 
+import raf.dsw.composite.ProjectExplorer;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.message.PossibleErrors;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
 
@@ -17,6 +20,10 @@ public class DeleteNodeAction extends AbstractClassyAction{
     @Override
     public void actionPerformed(ActionEvent e) {
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
+        if(selected.getClassyNode() instanceof ProjectExplorer){
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NODE_CANNOT_BE_DELETED);
+            return;
+        }
         MainFrame.getInstance().getClassyTree().deleteChild(selected);
     }
 }

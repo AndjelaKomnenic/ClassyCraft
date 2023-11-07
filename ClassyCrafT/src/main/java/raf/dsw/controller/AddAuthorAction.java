@@ -1,6 +1,8 @@
 package raf.dsw.controller;
 
 import raf.dsw.composite.Project;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.message.PossibleErrors;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
 
@@ -23,7 +25,11 @@ public class AddAuthorAction extends AbstractClassyAction{
             ((Project) selected.getClassyNode()).setAuthor(author);
         }
         else{
-            JOptionPane.showMessageDialog(null, "Postavljanje autora je moguce samo za projekat", "Obavestenje", JOptionPane.PLAIN_MESSAGE);
+            generateMessage(PossibleErrors.AUTHOR_ACTION_FOR_NOT_PROJECT);
         }
+    }
+    public void generateMessage(PossibleErrors pe){
+        ApplicationFramework.getInstance().getMessageGenerator().createMessage(pe);
+
     }
 }

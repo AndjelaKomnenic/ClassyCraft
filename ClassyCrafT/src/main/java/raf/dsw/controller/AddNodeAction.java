@@ -1,5 +1,9 @@
 package raf.dsw.controller;
 
+import raf.dsw.composite.ClassyNodeComposite;
+import raf.dsw.composite.Diagram;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.message.PossibleErrors;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
 
@@ -17,7 +21,12 @@ public class AddNodeAction extends AbstractClassyAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
-        //String nodeName = JOptionPane.showInputDialog("Unesite naziv novog elementa");
+        if(selected == null)
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NO_NODE_SELECTED_FOR_ADD_CHILD);
+        if (!(selected.getClassyNode() instanceof ClassyNodeComposite)){
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.CANT_ADD_CHILD);
+            return;
+        }
         MainFrame.getInstance().getClassyTree().addChild(selected);
     }
 }

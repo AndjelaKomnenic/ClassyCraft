@@ -2,6 +2,8 @@ package raf.dsw.tree.controller;
 
 import raf.dsw.composite.ClassyNode;
 import raf.dsw.composite.ClassyNodeComposite;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.message.PossibleErrors;
 import raf.dsw.tree.model.ClassyTreeItem;
 
 import javax.swing.*;
@@ -22,7 +24,7 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
     }
 
     public Component getTreeCellEditorComponent(JTree arg0, Object arg1, boolean arg2, boolean arg3, boolean arg4, int arg5) {
-        //super.getTreeCellEditorComponent(arg0,arg1,arg2,arg3,arg4,arg5);
+        super.getTreeCellEditorComponent(arg0,arg1,arg2,arg3,arg4,arg5);
         clickedOn =arg1;
         edit=new JTextField(arg1.toString());
         edit.addActionListener(this);
@@ -54,6 +56,9 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
         }
         if(ok){
             clicked.setName(e.getActionCommand());
+        }
+        else{
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_ALREADY_EXISTS);
         }
     }
 

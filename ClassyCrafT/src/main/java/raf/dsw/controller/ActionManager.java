@@ -2,6 +2,7 @@ package raf.dsw.controller;
 
 import lombok.Getter;
 import lombok.Setter;
+import raf.dsw.core.ApplicationFramework;
 
 @Getter
 @Setter

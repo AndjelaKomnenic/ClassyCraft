@@ -1,5 +1,5 @@
 package raf.dsw.observer;
 
-public interface IObserver {
+public interface ISubscriber {
     void update(Object notification);
 }

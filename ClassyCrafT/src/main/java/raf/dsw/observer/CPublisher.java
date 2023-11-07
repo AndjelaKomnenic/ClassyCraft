@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class CSubject implements ISubject {
-    private List<IObserver> subscribers;
+public class CPublisher implements IPublisher {
+    private List<ISubscriber> subscribers;
 
     @Override
-    public void addSubscriber(IObserver subscriber) {
+    public void addSubscriber(ISubscriber subscriber) {
         if (subscriber == null)
             return;
         if (subscribers == null)
@@ -20,7 +20,7 @@ public class CSubject implements ISubject {
     }
 
     @Override
-    public void removeSubscriber(IObserver subscriber) {
+    public void removeSubscriber(ISubscriber subscriber) {
         /*if (subscribers == null || subscribers.isEmpty() || !subscribers.contains(subscriber))
             return;
         subscribers.remove(subscriber);*/

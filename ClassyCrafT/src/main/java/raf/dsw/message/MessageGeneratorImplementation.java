@@ -1,10 +1,10 @@
 package raf.dsw.message;
 
-import raf.dsw.observer.CSubject;
+import raf.dsw.observer.CPublisher;
 
 import java.sql.Timestamp;
 
-public class MessageGeneratorImplementation extends CSubject implements MessageGenerator{
+public class MessageGeneratorImplementation extends CPublisher implements MessageGenerator{
     @Override
     public void createMessage(PossibleErrors possibleErrors) {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());

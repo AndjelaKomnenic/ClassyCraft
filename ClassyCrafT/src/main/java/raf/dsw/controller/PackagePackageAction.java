@@ -1,6 +1,8 @@
 package raf.dsw.controller;
 
 import raf.dsw.composite.Package;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.message.PossibleErrors;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
 
@@ -22,7 +24,7 @@ public class PackagePackageAction extends AbstractClassyAction{
             MainFrame.getInstance().getClassyTree().addPP(selected);
         }
         else{
-            JOptionPane.showMessageDialog(null, "Molimo odaberite paket", "Obavestenje", JOptionPane.PLAIN_MESSAGE);
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.PP_ACTION_FOR_NOTPP);
         }
     }
 }
