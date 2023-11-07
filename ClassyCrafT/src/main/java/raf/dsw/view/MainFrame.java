@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.controller.ActionManager;
 import raf.dsw.core.ApplicationFramework;
+import raf.dsw.factory.Logger;
+import raf.dsw.message.Message;
+import raf.dsw.observer.ISubscriber;
 import raf.dsw.tree.ClassyTree;
 import raf.dsw.tree.ClassyTreeImplementation;
 
@@ -12,7 +15,7 @@ import java.awt.*;
 
 @Getter
 @Setter
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ISubscriber {
     private static MainFrame instance;
     private ActionManager actionManager;
     private ClassyTree classyTree;
@@ -25,6 +28,7 @@ public class MainFrame extends JFrame {
         actionManager = new ActionManager();
         classyTree = new ClassyTreeImplementation();
         initializeGUI();
+        ApplicationFramework.getInstance().getMessageGenerator().addSubscriber(this);
     }
 
     private void initializeGUI(){
@@ -63,6 +67,19 @@ public class MainFrame extends JFrame {
             instance.initialise();
         }
         return instance;
+    }
+    public void update(Object object){
+        if(object instanceof Message) {
+            Message message = (Message) object;
+            String type = message.getType();
+            if (type.equalsIgnoreCase("warning")) {
+                JOptionPane.showMessageDialog(null, message.getText(), "Upozorenje", JOptionPane.WARNING_MESSAGE);
+            } else if (type.equalsIgnoreCase("error")) {
+                JOptionPane.showMessageDialog(null, message.getText(), "Greska", JOptionPane.ERROR_MESSAGE);
+            } else if (type.equalsIgnoreCase("information")) {
+                JOptionPane.showMessageDialog(null, message.getText(), "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
     }
 
 }

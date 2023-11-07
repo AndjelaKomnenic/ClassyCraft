@@ -1,22 +1,20 @@
-package raf.dsw.factoryMethod;
+package raf.dsw.composite.factoryMethod;
 
 import raf.dsw.composite.ClassyNode;
 import raf.dsw.composite.ClassyNodeComposite;
-import raf.dsw.composite.Diagram;
-import raf.dsw.composite.Project;
+import raf.dsw.composite.Package;
 import raf.dsw.tree.model.ClassyTreeItem;
 
-public class ProjectFactory extends NodeFactory{
+public class PackageFactory extends NodeFactory {
     @Override
     public ClassyTreeItem createNode(ClassyTreeItem parent) {
-        String author = "";
         int nmb = ((ClassyNodeComposite)parent.getClassyNode()).getCounter();
         String tryName = "";
         boolean ok = true;
         boolean flag = false;
         while(!flag) {
             ok = true;
-            tryName = "Projekat"+((ClassyNodeComposite)parent.getClassyNode()).getCounter();
+            tryName = "Paket"+((ClassyNodeComposite)parent.getClassyNode()).getCounter();
             for (ClassyNode kid : ((ClassyNodeComposite) parent.getClassyNode()).getChildren()) {
                 if (kid.getName().equalsIgnoreCase(tryName)) {
                     ok = false;
@@ -27,7 +25,7 @@ public class ProjectFactory extends NodeFactory{
             else
                 ((ClassyNodeComposite)parent.getClassyNode()).setCounter();
         }
-        ClassyNode child = new Project(tryName, parent.getClassyNode(), author);
+        ClassyNode child = new Package(tryName, parent.getClassyNode());
         ClassyTreeItem childTreeItem = new ClassyTreeItem(child);
         return childTreeItem;
     }

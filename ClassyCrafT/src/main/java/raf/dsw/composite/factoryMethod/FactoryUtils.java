@@ -1,7 +1,5 @@
-package raf.dsw.factoryMethod;
+package raf.dsw.composite.factoryMethod;
 
-import raf.dsw.composite.ClassyNode;
-import raf.dsw.composite.ClassyNodeComposite;
 import raf.dsw.composite.Package;
 import raf.dsw.composite.Project;
 import raf.dsw.composite.ProjectExplorer;

@@ -1,5 +1,8 @@
 package raf.dsw.controller;
 
+import raf.dsw.message.Message;
+import raf.dsw.message.MessageGenerator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
@@ -20,4 +23,6 @@ public abstract class AbstractClassyAction extends AbstractAction {
 
         return icon;
     }
+    public void generateMessage(Message message){};
+
 }

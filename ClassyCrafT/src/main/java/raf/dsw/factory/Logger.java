@@ -1,5 +1,7 @@
 package raf.dsw.factory;
 
-public interface Logger {
-    void logMessage();
+import raf.dsw.observer.ISubscriber;
+
+public interface Logger extends ISubscriber {
+    void update(Object object);
 }

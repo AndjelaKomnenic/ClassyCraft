@@ -1,19 +1,15 @@
 package raf.dsw.tree;
 
-import raf.dsw.composite.ClassyNode;
 import raf.dsw.composite.ClassyNodeComposite;
-import raf.dsw.composite.Project;
 import raf.dsw.composite.ProjectExplorer;
-import raf.dsw.factoryMethod.FactoryUtils;
-import raf.dsw.factoryMethod.NodeFactory;
-import raf.dsw.factoryMethod.PackageFactory;
+import raf.dsw.composite.factoryMethod.FactoryUtils;
+import raf.dsw.composite.factoryMethod.NodeFactory;
+import raf.dsw.composite.factoryMethod.PackageFactory;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.tree.view.ClassyTreeView;
-import raf.dsw.view.MainFrame;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
-import java.util.Random;
 
 public class ClassyTreeImplementation implements ClassyTree{
     private ClassyTreeView treeView;
@@ -28,9 +24,6 @@ public class ClassyTreeImplementation implements ClassyTree{
 
     @Override
     public void addChild(ClassyTreeItem parent) {
-
-        if (!(parent.getClassyNode() instanceof ClassyNodeComposite))
-            return;
         FactoryUtils utils = new FactoryUtils();
         NodeFactory factory = utils.nodeFactory(parent);
         ClassyTreeItem child = factory.createNode(parent);

@@ -2,6 +2,8 @@ package raf.dsw.controller;
 
 import raf.dsw.composite.ClassyNode;
 import raf.dsw.composite.ClassyNodeComposite;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.message.PossibleErrors;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
 
@@ -33,6 +35,9 @@ public class RenameAction extends AbstractClassyAction{
         }
         if(ok){
             clicked.setName(newName);
+        }
+        else{
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_ALREADY_EXISTS);
         }
         MainFrame.getInstance().getClassyTree().update();
     }

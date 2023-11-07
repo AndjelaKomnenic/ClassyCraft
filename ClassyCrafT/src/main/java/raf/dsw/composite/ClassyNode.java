@@ -2,11 +2,11 @@ package raf.dsw.composite;
 
 import lombok.Getter;
 import lombok.Setter;
-import raf.dsw.observer.CSubject;
+import raf.dsw.observer.CPublisher;
 
 @Getter
 @Setter
-public abstract class ClassyNode extends CSubject {
+public abstract class ClassyNode extends CPublisher {
     private String name;
     private ClassyNode parent;
 
