@@ -18,6 +18,8 @@ public class FileLogger implements Logger{
             PrintWriter printWriter = null;
             try {
                 fileWriter = new FileWriter("log.txt");
+                fileWriter.write(String.valueOf(message));
+                fileWriter.flush();
                 printWriter = new PrintWriter(fileWriter);
                 printWriter.println(message);
             } catch (IOException e) {

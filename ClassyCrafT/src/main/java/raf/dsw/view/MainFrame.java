@@ -2,6 +2,7 @@ package raf.dsw.view;
 
 import lombok.Getter;
 import lombok.Setter;
+import raf.dsw.composite.ProjectExplorer;
 import raf.dsw.controller.ActionManager;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.factory.Logger;
@@ -9,16 +10,21 @@ import raf.dsw.message.Message;
 import raf.dsw.observer.ISubscriber;
 import raf.dsw.tree.ClassyTree;
 import raf.dsw.tree.ClassyTreeImplementation;
+import raf.dsw.tree.controller.MouseControl;
+import raf.dsw.tree.view.ClassyTreeView;
+import raf.dsw.workspace.IWorkspace;
+import raf.dsw.workspace.WorkSpaceImplementation;
 
 import javax.swing.*;
 import java.awt.*;
 
 @Getter
 @Setter
-public class MainFrame extends JFrame implements ISubscriber {
+public class MainFrame extends JFrame {
     private static MainFrame instance;
     private ActionManager actionManager;
     private ClassyTree classyTree;
+    private IWorkspace workspace;
 
     private MainFrame(){
 
@@ -27,8 +33,9 @@ public class MainFrame extends JFrame implements ISubscriber {
     private void initialise(){
         actionManager = new ActionManager();
         classyTree = new ClassyTreeImplementation();
+        workspace = new WorkSpaceImplementation();
         initializeGUI();
-        ApplicationFramework.getInstance().getMessageGenerator().addSubscriber(this);
+        //ApplicationFramework.getInstance().getMessageGenerator().addSubscriber(this);
     }
 
     private void initializeGUI(){
@@ -48,16 +55,22 @@ public class MainFrame extends JFrame implements ISubscriber {
         MyToolBar toolBar = new MyToolBar();
         add(toolBar, BorderLayout.NORTH);
 
-        ////
-        JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
-        JPanel desktop = new JPanel();
+        JPanel rightPanel = workspace.generateWorkspace();
 
-        JScrollPane scroll=new JScrollPane(projectExplorer);
+        ProjectExplorer pe = ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer();
+        ClassyTreeView jTreeProjectExplorer = classyTree.generateTree(pe);
+        pe.addSubscriber(jTreeProjectExplorer);
+        jTreeProjectExplorer.addMouseListener(new MouseControl(jTreeProjectExplorer));
+        /*JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
+        projectExplorer.addMouseListener(new MouseControl(projectExplorer));*/
+        JScrollPane scroll=new JScrollPane(jTreeProjectExplorer);
         scroll.setMinimumSize(new Dimension(200,150));
-        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scroll,desktop);
+        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scroll, rightPanel);
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
+
+
 
     }
 

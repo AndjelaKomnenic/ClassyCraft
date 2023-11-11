@@ -1,5 +1,10 @@
 package raf.dsw.composite;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Project extends ClassyNodeComposite{
     protected String filePath;
     private String author;
