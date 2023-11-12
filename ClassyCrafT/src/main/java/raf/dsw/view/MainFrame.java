@@ -60,16 +60,13 @@ public class MainFrame extends JFrame implements ISubscriber {
         ClassyTreeView jTreeProjectExplorer = classyTree.generateTree(pe);
         pe.addSubscriber(jTreeProjectExplorer);
         jTreeProjectExplorer.addMouseListener(new MouseControl(jTreeProjectExplorer));
-        /*JTree projectExplorer = classyTree.generateTree(ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer());
-        projectExplorer.addMouseListener(new MouseControl(projectExplorer));*/
+
         JScrollPane scroll=new JScrollPane(jTreeProjectExplorer);
         scroll.setMinimumSize(new Dimension(200,150));
         JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scroll, rightPanel);
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
-
-
 
     }
 

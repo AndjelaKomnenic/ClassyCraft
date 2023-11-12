@@ -5,6 +5,8 @@ import lombok.Setter;
 import raf.dsw.classyrepository.composite.*;
 import raf.dsw.classyrepository.composite.Package;
 import raf.dsw.observer.ISubscriber;
+import raf.dsw.tree.model.ClassyTreeItem;
+import raf.dsw.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +24,7 @@ public class PackageView extends JPanel implements ISubscriber {
     private String packagePName = "";
     private String author = "";
     private ClassyNode packageP = null;
+
     private JTabbedPane tabbedPane = new JTabbedPane();
     private List<DiagramView> tabs = new ArrayList<>();
 
@@ -34,20 +37,7 @@ public class PackageView extends JPanel implements ISubscriber {
     }
 
     public void updateWorkspace(ClassyNode selectedPackage){
-        /*if(this.packageP != null)
-            this.packageP.removeSubscriber(this);
-        selectedPackage.addSubscriber(this);
-
-        tabbedPane.removeAll();
-        tabs.clear();
-
-        this.packageP = selectedPackage;
-        this.packagePName = selectedPackage.getName();
-        this.author = ((Project) selectedPackage.getParent()).getAuthor();
-        this.lpackagePName.setText(selectedPackage.getName());
-        this.lAuthor.setText(author);*/
         if (selectedPackage == null || selectedPackage.getParent() == null) {
-            // Handle null case to avoid NullPointerException
             return;
         }
 
@@ -55,6 +45,7 @@ public class PackageView extends JPanel implements ISubscriber {
             this.packageP.removeSubscriber(this);
 
         selectedPackage.addSubscriber(this);
+        selectedPackage.getParent().addSubscriber(this);
 
         tabbedPane.removeAll();
         tabs.clear();
@@ -76,7 +67,6 @@ public class PackageView extends JPanel implements ISubscriber {
                 tabs.add(tab);
             }
 
-
         }
 
         for(DiagramView tab : tabs){
@@ -92,6 +82,8 @@ public class PackageView extends JPanel implements ISubscriber {
         if (notification.equals("ADD_AUTHOR")){
             this.author = ((Project)packageP.getParent()).getAuthor();
             this.lAuthor.setText(author);
+            /*System.out.println("Peder");
+            ((WorkSpaceImplementation)MainFrame.getInstance().getWorkspace()).getPackageView().updateWorkspace(this.getPackageP());*/
         }
         else if (notification.equals("NEW")){
             ClassyNodeComposite mpcpackageP = (ClassyNodeComposite) packageP;
