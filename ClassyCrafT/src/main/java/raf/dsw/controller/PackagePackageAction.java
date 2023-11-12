@@ -1,6 +1,6 @@
 package raf.dsw.controller;
 
-import raf.dsw.classyrepository.composite.Package;
+import raf.dsw.classyrepository.implementation.Package;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.PossibleErrors;
 import raf.dsw.tree.model.ClassyTreeItem;
@@ -13,7 +13,7 @@ import java.awt.event.KeyEvent;
 public class PackagePackageAction extends AbstractClassyAction{
     public PackagePackageAction(){
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_P, ActionEvent.ALT_MASK));
-        putValue(SMALL_ICON, loadIcon("/images/pp.png")); // za sada ima exit slicicu posle treba dodati odgovarajucu!
+        putValue(SMALL_ICON, loadIcon("/images/pp.png"));
         putValue(NAME, "PackagePackage");
         putValue(SHORT_DESCRIPTION, "PackagePackage");
     }

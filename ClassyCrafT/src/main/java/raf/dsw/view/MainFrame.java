@@ -2,7 +2,7 @@ package raf.dsw.view;
 
 import lombok.Getter;
 import lombok.Setter;
-import raf.dsw.classyrepository.composite.ProjectExplorer;
+import raf.dsw.classyrepository.implementation.ProjectExplorer;
 import raf.dsw.controller.ActionManager;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.Message;

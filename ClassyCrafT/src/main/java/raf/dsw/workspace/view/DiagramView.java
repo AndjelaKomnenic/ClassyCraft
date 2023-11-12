@@ -1,13 +1,14 @@
-package raf.dsw.workspace;
+package raf.dsw.workspace.view;
 
 import lombok.Getter;
 import lombok.Setter;
-import raf.dsw.classyrepository.composite.Diagram;
+import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.observer.ISubscriber;
 import raf.dsw.view.MainFrame;
+import raf.dsw.workspace.IWorkspace;
+import raf.dsw.workspace.WorkSpaceImplementation;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.Objects;
 
 @Getter

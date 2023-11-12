@@ -1,9 +1,11 @@
 package raf.dsw.classyrepository.composite;
 
+import raf.dsw.classyrepository.composite.ClassyNode;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ClassyNodeComposite extends ClassyNode{
+public abstract class ClassyNodeComposite extends ClassyNode {
     protected List<ClassyNode> children;
     private int counter;
 

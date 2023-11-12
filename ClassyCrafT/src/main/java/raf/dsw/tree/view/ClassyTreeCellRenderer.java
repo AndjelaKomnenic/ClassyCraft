@@ -1,7 +1,7 @@
 package raf.dsw.tree.view;
 
-import raf.dsw.classyrepository.composite.Project;
-import raf.dsw.classyrepository.composite.ProjectExplorer;
+import raf.dsw.classyrepository.implementation.Project;
+import raf.dsw.classyrepository.implementation.ProjectExplorer;
 import raf.dsw.tree.model.ClassyTreeItem;
 
 import javax.swing.*;

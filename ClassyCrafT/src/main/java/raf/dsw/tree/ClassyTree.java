@@ -1,6 +1,6 @@
 package raf.dsw.tree;
 
-import raf.dsw.classyrepository.composite.ProjectExplorer;
+import raf.dsw.classyrepository.implementation.ProjectExplorer;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.tree.view.ClassyTreeView;
 

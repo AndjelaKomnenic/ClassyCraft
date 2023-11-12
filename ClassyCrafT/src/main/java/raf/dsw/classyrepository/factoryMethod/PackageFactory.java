@@ -1,8 +1,8 @@
-package raf.dsw.classyrepository.composite.factoryMethod;
+package raf.dsw.classyrepository.factoryMethod;
 
-import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
-import raf.dsw.classyrepository.composite.Package;
+import raf.dsw.classyrepository.implementation.Package;
+import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.tree.model.ClassyTreeItem;
 
 public class PackageFactory extends NodeFactory {

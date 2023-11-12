@@ -1,12 +1,13 @@
-package raf.dsw.classyrepository.composite;
+package raf.dsw.classyrepository.implementation;
 
 import lombok.Getter;
 import lombok.Setter;
+import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 
 @Getter
 @Setter
-public class Package extends ClassyNodeComposite{
-    /*TODO*/
+public class Package extends ClassyNodeComposite {
     public Package(String name, ClassyNode parent) {
         super(name, parent);
     }

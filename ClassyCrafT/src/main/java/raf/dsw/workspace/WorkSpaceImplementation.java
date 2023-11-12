@@ -2,8 +2,7 @@ package raf.dsw.workspace;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.swing.*;
+import raf.dsw.workspace.view.PackageView;
 
 @Getter
 @Setter

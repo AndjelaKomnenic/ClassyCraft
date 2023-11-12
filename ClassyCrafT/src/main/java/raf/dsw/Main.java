@@ -1,6 +1,6 @@
 package raf.dsw;
 
-import raf.dsw.classyrepository.composite.ClassyRepositoryImplementation;
+import raf.dsw.classyrepository.ClassyRepositoryImplementation;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.classyrepository.composite.ClassyRepository;
 import raf.dsw.core.Gui;

@@ -1,8 +1,8 @@
-package raf.dsw.classyrepository.composite.factoryMethod;
+package raf.dsw.classyrepository.factoryMethod;
 
-import raf.dsw.classyrepository.composite.Package;
-import raf.dsw.classyrepository.composite.Project;
-import raf.dsw.classyrepository.composite.ProjectExplorer;
+import raf.dsw.classyrepository.implementation.Package;
+import raf.dsw.classyrepository.implementation.Project;
+import raf.dsw.classyrepository.implementation.ProjectExplorer;
 import raf.dsw.tree.model.ClassyTreeItem;
 
 public class FactoryUtils {

@@ -1,10 +1,10 @@
 package raf.dsw.tree;
 
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
-import raf.dsw.classyrepository.composite.ProjectExplorer;
-import raf.dsw.classyrepository.composite.factoryMethod.FactoryUtils;
-import raf.dsw.classyrepository.composite.factoryMethod.NodeFactory;
-import raf.dsw.classyrepository.composite.factoryMethod.PackageFactory;
+import raf.dsw.classyrepository.implementation.ProjectExplorer;
+import raf.dsw.classyrepository.factoryMethod.FactoryUtils;
+import raf.dsw.classyrepository.factoryMethod.NodeFactory;
+import raf.dsw.classyrepository.factoryMethod.PackageFactory;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.tree.view.ClassyTreeView;
 

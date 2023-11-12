@@ -1,4 +1,4 @@
-package raf.dsw.classyrepository.composite.factoryMethod;
+package raf.dsw.classyrepository.factoryMethod;
 
 import raf.dsw.tree.model.ClassyTreeItem;
 

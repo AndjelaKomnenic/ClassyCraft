@@ -1,6 +1,9 @@
-package raf.dsw.classyrepository.composite;
+package raf.dsw.classyrepository.implementation;
 
-public class ProjectExplorer extends ClassyNodeComposite{
+import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.classyrepository.composite.ClassyNodeComposite;
+
+public class ProjectExplorer extends ClassyNodeComposite {
     public ProjectExplorer(String name) {
         super(name, null);
     }

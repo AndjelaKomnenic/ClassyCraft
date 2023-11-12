@@ -1,7 +1,7 @@
 package raf.dsw.core;
 
 import raf.dsw.classyrepository.composite.ClassyRepository;
-import raf.dsw.classyrepository.composite.ClassyRepositoryImplementation;
+import raf.dsw.classyrepository.ClassyRepositoryImplementation;
 import raf.dsw.factory.Logger;
 import raf.dsw.factory.LoggerFactory;
 import raf.dsw.message.MessageGenerator;
@@ -37,7 +37,7 @@ public class ApplicationFramework {
     }
 
     public void initialize(){
-        ClassyRepository classyRepo =  new ClassyRepositoryImplementation();
+        //ClassyRepository classyRepo =  new ClassyRepositoryImplementation();
         MainFrame.getInstance().setVisible(true);
     }
 

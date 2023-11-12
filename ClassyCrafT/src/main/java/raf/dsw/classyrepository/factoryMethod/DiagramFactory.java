@@ -1,21 +1,21 @@
-package raf.dsw.classyrepository.composite.factoryMethod;
+package raf.dsw.classyrepository.factoryMethod;
 
-import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
-import raf.dsw.classyrepository.composite.Project;
+import raf.dsw.classyrepository.implementation.Diagram;
+import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.tree.model.ClassyTreeItem;
 
-public class ProjectFactory extends NodeFactory{
+public class DiagramFactory extends NodeFactory{
+
     @Override
     public ClassyTreeItem createNode(ClassyTreeItem parent) {
-        String author = "";
         int nmb = ((ClassyNodeComposite)parent.getClassyNode()).getCounter();
         String tryName = "";
         boolean ok = true;
         boolean flag = false;
         while(!flag) {
             ok = true;
-            tryName = "Projekat"+((ClassyNodeComposite)parent.getClassyNode()).getCounter();
+            tryName = "Dijagram"+((ClassyNodeComposite)parent.getClassyNode()).getCounter();
             for (ClassyNode kid : ((ClassyNodeComposite) parent.getClassyNode()).getChildren()) {
                 if (kid.getName().equalsIgnoreCase(tryName)) {
                     ok = false;
@@ -26,7 +26,7 @@ public class ProjectFactory extends NodeFactory{
             else
                 ((ClassyNodeComposite)parent.getClassyNode()).setCounter();
         }
-        ClassyNode child = new Project(tryName, parent.getClassyNode(), author);
+        ClassyNode child = new Diagram(tryName, parent.getClassyNode());
         ClassyTreeItem childTreeItem = new ClassyTreeItem(child);
         return childTreeItem;
     }

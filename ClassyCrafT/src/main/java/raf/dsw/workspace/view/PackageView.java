@@ -1,19 +1,18 @@
-package raf.dsw.workspace;
+package raf.dsw.workspace.view;
 
 import lombok.Getter;
 import lombok.Setter;
-import raf.dsw.classyrepository.composite.*;
-import raf.dsw.classyrepository.composite.Package;
+import raf.dsw.classyrepository.implementation.Diagram;
+import raf.dsw.classyrepository.implementation.Package;
+import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.classyrepository.composite.ClassyNodeComposite;
+import raf.dsw.classyrepository.implementation.Project;
 import raf.dsw.observer.ISubscriber;
-import raf.dsw.tree.model.ClassyTreeItem;
-import raf.dsw.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Getter
 @Setter
@@ -82,8 +81,6 @@ public class PackageView extends JPanel implements ISubscriber {
         if (notification.equals("ADD_AUTHOR")){
             this.author = ((Project)packageP.getParent()).getAuthor();
             this.lAuthor.setText(author);
-            /*System.out.println("Peder");
-            ((WorkSpaceImplementation)MainFrame.getInstance().getWorkspace()).getPackageView().updateWorkspace(this.getPackageP());*/
         }
         else if (notification.equals("NEW")){
             ClassyNodeComposite mpcpackageP = (ClassyNodeComposite) packageP;

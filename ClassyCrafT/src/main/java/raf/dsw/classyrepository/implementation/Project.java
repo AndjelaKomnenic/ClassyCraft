@@ -1,11 +1,13 @@
-package raf.dsw.classyrepository.composite;
+package raf.dsw.classyrepository.implementation;
 
 import lombok.Getter;
 import lombok.Setter;
+import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 
 @Getter
 @Setter
-public class Project extends ClassyNodeComposite{
+public class Project extends ClassyNodeComposite {
     protected String filePath;
     private String author;
 

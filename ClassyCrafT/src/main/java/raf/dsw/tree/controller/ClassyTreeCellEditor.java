@@ -40,25 +40,6 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
 
     public void actionPerformed(ActionEvent e){
 
-        /*if (!(clickedOn instanceof ClassyTreeItem))
-            return;
-        boolean ok = true;
-        ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
-        String newName = e.getActionCommand();
-        ClassyTreeItem parent = (ClassyTreeItem)clicked.getParent();
-        for(ClassyNode kid: ((ClassyNodeComposite)parent.getClassyNode()).getChildren()){
-            if(kid.getName().equalsIgnoreCase(newName)){
-                //pucaj gresku
-                ok = false;
-            }
-        }
-        if(ok){
-            clicked.setName(e.getActionCommand());
-        }
-        else{
-            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_ALREADY_EXISTS);
-        }*/
-
         if (!(clickedOn instanceof ClassyTreeItem))
             return;
 

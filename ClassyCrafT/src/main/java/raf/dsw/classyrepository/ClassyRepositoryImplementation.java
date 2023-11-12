@@ -1,11 +1,15 @@
-package raf.dsw.classyrepository.composite;
+package raf.dsw.classyrepository;
 
 import lombok.Getter;
 import lombok.Setter;
+import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.classyrepository.composite.ClassyNodeComposite;
+import raf.dsw.classyrepository.composite.ClassyRepository;
+import raf.dsw.classyrepository.implementation.ProjectExplorer;
 
 @Getter
 @Setter
-public class ClassyRepositoryImplementation implements ClassyRepository{
+public class ClassyRepositoryImplementation implements ClassyRepository {
     private ProjectExplorer projectExplorer;
 
     public ClassyRepositoryImplementation() {

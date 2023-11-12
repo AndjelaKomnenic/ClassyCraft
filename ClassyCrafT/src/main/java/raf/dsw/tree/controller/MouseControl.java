@@ -3,7 +3,7 @@ package raf.dsw.tree.controller;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
-import raf.dsw.classyrepository.composite.Package;
+import raf.dsw.classyrepository.implementation.Package;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.IWorkspace;
