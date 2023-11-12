@@ -6,6 +6,7 @@ import raf.dsw.classyrepository.composite.ProjectExplorer;
 import raf.dsw.controller.ActionManager;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.Message;
+import raf.dsw.observer.ISubscriber;
 import raf.dsw.tree.ClassyTree;
 import raf.dsw.tree.ClassyTreeImplementation;
 import raf.dsw.tree.controller.MouseControl;
@@ -18,7 +19,7 @@ import java.awt.*;
 
 @Getter
 @Setter
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ISubscriber {
     private static MainFrame instance;
     private ActionManager actionManager;
     private ClassyTree classyTree;
@@ -33,7 +34,7 @@ public class MainFrame extends JFrame {
         classyTree = new ClassyTreeImplementation();
         workspace = new WorkSpaceImplementation();
         initializeGUI();
-        //ApplicationFramework.getInstance().getMessageGenerator().addSubscriber(this);
+        ApplicationFramework.getInstance().getMessageGenerator().addSubscriber(this);
     }
 
     private void initializeGUI(){

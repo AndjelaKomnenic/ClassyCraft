@@ -31,6 +31,19 @@ public class MessageGeneratorImplementation extends CPublisher implements Messag
             case AUTHOR_ACTION_FOR_NOT_PROJECT:
                 message = new Message("Author can only be set up for a project", "WARNING", timestamp);
                 break;
+            //
+            case NODE_NOT_SELECTED:
+                message = new Message("You did not select any component", "INFORMATION", timestamp);
+                break;
+            case NAME_CANNOT_BE_EMPTY:
+                message = new Message("Name cannot be empty", "ERROR", timestamp);
+                break;
+            case EXISTS_SAME_NAME_COMPONENT:
+                message = new Message("Cannot have same name on the same level", "ERROR", timestamp);
+                break;
+            case CANNOT_DELETE_PROJECTEXPLORER:
+            message = new Message("Cannot delete ProjectExplorer", "ERROR", timestamp);
+                break;
         }
 
         notifySubscriber(message);

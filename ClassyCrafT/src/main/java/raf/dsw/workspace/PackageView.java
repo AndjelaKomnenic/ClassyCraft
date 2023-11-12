@@ -17,34 +17,56 @@ import java.util.Map;
 @Setter
 public class PackageView extends JPanel implements ISubscriber {
 
-    private JLabel lProjectName = new JLabel("");
+    private JLabel lpackagePName = new JLabel("");
     private JLabel lAuthor = new JLabel("");
-    private String projectName = "";
+    private String packagePName = "";
     private String author = "";
-    private ClassyNode project = null;
+    private ClassyNode packageP = null;
     private JTabbedPane tabbedPane = new JTabbedPane();
     private List<DiagramView> tabs = new ArrayList<>();
 
 
     public PackageView() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        add(lProjectName);
+        add(lpackagePName);
         add(lAuthor);
         add(tabbedPane);
     }
 
     public void updateWorkspace(ClassyNode selectedPackage){
-        if(this.project != null)
-            this.project.removeSubscriber(this);
+        /*if(this.packageP != null)
+            this.packageP.removeSubscriber(this);
         selectedPackage.addSubscriber(this);
 
         tabbedPane.removeAll();
         tabs.clear();
 
-        this.project = selectedPackage;
-        /*this.projectName = selectedPackage.getName();
-        this.author = ((Project) selectedPackage).getAuthor();*/
-        this.lProjectName.setText(selectedPackage.getName());
+        this.packageP = selectedPackage;
+        this.packagePName = selectedPackage.getName();
+        this.author = ((Project) selectedPackage.getParent()).getAuthor();
+        this.lpackagePName.setText(selectedPackage.getName());
+        this.lAuthor.setText(author);*/
+        if (selectedPackage == null || selectedPackage.getParent() == null) {
+            // Handle null case to avoid NullPointerException
+            return;
+        }
+
+        if (this.packageP != null)
+            this.packageP.removeSubscriber(this);
+
+        selectedPackage.addSubscriber(this);
+
+        tabbedPane.removeAll();
+        tabs.clear();
+
+        this.packageP = selectedPackage;
+        this.packagePName = selectedPackage.getName();
+
+        if (selectedPackage.getParent() instanceof Project) {
+            this.author = ((Project) selectedPackage.getParent()).getAuthor();
+        }
+
+        this.lpackagePName.setText(selectedPackage.getName());
         this.lAuthor.setText(author);
 
         for (ClassyNode child : ((ClassyNodeComposite) selectedPackage).getChildren()) {
@@ -63,35 +85,22 @@ public class PackageView extends JPanel implements ISubscriber {
         }
     }
 
-
     @Override
     public void update(Object notification) {
         SwingUtilities.updateComponentTreeUI(this);
 
         if (notification.equals("ADD_AUTHOR")){
-            this.author = ((Project)project).getAuthor();
+            this.author = ((Project)packageP.getParent()).getAuthor();
             this.lAuthor.setText(author);
         }
         else if (notification.equals("NEW")){
-            /*ClassyNodeComposite mpcProject = (ClassyNodeComposite)project;
-            ClassyNode newDiagram = mpcProject.getChildren().get(mpcProject.getChildren().size() - 1);
+            ClassyNodeComposite mpcpackageP = (ClassyNodeComposite) packageP;
 
-            DiagramView tab = new DiagramView((Diagram) newDiagram);
-            newDiagram.addSubscriber(tab);
-            tabs.add(tab);
-
-            JComponent panelForDiagram = new JPanel();
-            panelForDiagram.setLayout(new GridLayout(1, 1));
-            tabbedPane.addTab(tab.getDiagram().getName(), null, tab);*/
-            ClassyNodeComposite mpcProject = (ClassyNodeComposite) project;
-
-            for (ClassyNode child : mpcProject.getChildren()) {
-                // Check if the child is an instance of Diagram before casting
+            for (ClassyNode child : mpcpackageP.getChildren()) {
                 if (child instanceof Diagram) {
                     DiagramView tab = new DiagramView((Diagram) child);
                     child.addSubscriber(tab);
 
-                    // Check if the tab is not already present before adding
                     if (!tabs.contains(tab)) {
                         tabs.add(tab);
 
@@ -103,18 +112,19 @@ public class PackageView extends JPanel implements ISubscriber {
             }
 
         }
-        else if (notification.equals("RENAME") && project instanceof Package){
-            this.projectName = project.getName();
-            this.lProjectName.setText(projectName);
+        else if (notification.equals("RENAME") && packageP instanceof Package){
+            this.packagePName = packageP.getName();
+            this.lpackagePName.setText(packagePName);
         }
         else if (notification.equals("REMOVE")){
-            this.project = null;
-            projectName = "";
+            this.packageP = null;
+            packagePName = "";
             author = "";
-            lProjectName.setText(projectName);
+            lpackagePName.setText(packagePName);
             lAuthor.setText(author);
             tabs.clear();
             getTabbedPane().removeAll();
+
         }
 
     }

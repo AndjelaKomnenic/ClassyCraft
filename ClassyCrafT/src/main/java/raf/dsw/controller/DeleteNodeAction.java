@@ -1,5 +1,7 @@
 package raf.dsw.controller;
 
+import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.composite.ProjectExplorer;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.PossibleErrors;
@@ -19,11 +21,25 @@ public class DeleteNodeAction extends AbstractClassyAction{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
+        /*ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
         if(selected.getClassyNode() instanceof ProjectExplorer){
             ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NODE_CANNOT_BE_DELETED);
             return;
         }
-        MainFrame.getInstance().getClassyTree().deleteChild(selected);
+        MainFrame.getInstance().getClassyTree().deleteChild(selected);*/
+        ClassyTreeItem selectedWrapper = MainFrame.getInstance().getClassyTree().getSelectedNode();
+        if(selectedWrapper == null){
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NODE_NOT_SELECTED);
+            return;
+        }
+
+        ClassyNode selected = selectedWrapper.getClassyNode();
+        if(selected instanceof ProjectExplorer){
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.CANNOT_DELETE_PROJECTEXPLORER);
+            return;
+        }
+
+        ((ClassyNodeComposite)selected.getParent()).removeChild(selected);
+        MainFrame.getInstance().getClassyTree().deleteChild(MainFrame.getInstance().getClassyTree().getSelectedNode());
     }
 }

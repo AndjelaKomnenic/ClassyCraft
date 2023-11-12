@@ -15,45 +15,26 @@ import java.awt.event.KeyEvent;
 public class RenameAction extends AbstractClassyAction{
     public RenameAction(){
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_R, ActionEvent.ALT_MASK));
-        putValue(SMALL_ICON, loadIcon("/images/rename.png")); // za sada ima exit slicicu posle treba dodati odgovarajucu!
+        putValue(SMALL_ICON, loadIcon("/images/rename.png"));
         putValue(NAME, "RenameNode");
         putValue(SHORT_DESCRIPTION, "RenameNode");
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         ClassyTreeItem selectedWrapper = MainFrame.getInstance().getClassyTree().getSelectedNode();
-        /*if (!(selected instanceof ClassyTreeItem))
-            return;
-        boolean ok = true;
-        ClassyTreeItem clicked = (ClassyTreeItem) selected;
-        String newName = JOptionPane.showInputDialog("Unesite novi naziv elementa");
-        ClassyTreeItem parent = (ClassyTreeItem)clicked.getParent();
-        for(ClassyNode kid: ((ClassyNodeComposite)parent.getClassyNode()).getChildren()){
-            if(kid.getName().equalsIgnoreCase(newName)){
-                //pucaj gresku
-                ok = false;
-            }
-        }
-        if(ok){
-            clicked.setName(newName);
-        }
-        else{
-            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_ALREADY_EXISTS);
-        }
-        MainFrame.getInstance().getClassyTree().update();*/
 
         if(selectedWrapper == null){
-            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NODE_NOT_SELECTED); // nije odradjen error
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NODE_NOT_SELECTED);
             return;
         }
         ClassyNode selected = selectedWrapper.getClassyNode();
 
         String newName = JOptionPane.showInputDialog(new JFrame(), "Novo ime: ", "Izmeni ime komponente", JOptionPane.PLAIN_MESSAGE);
         if(newName.trim().equals("")){
-            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_CANNOT_BE_EMPTY); // nije i ovaj
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_CANNOT_BE_EMPTY);
             return;
         } else if(((ClassyNodeComposite)selected.getParent()).cotainsSameNameComponent(newName)){
-            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.EXISTS_SAME_NAME_COMPONENT); // ni ovaj
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.EXISTS_SAME_NAME_COMPONENT);
             return;
         }
         selected.setName(newName);

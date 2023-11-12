@@ -19,20 +19,13 @@ public class FileLogger implements Logger{
             Message message = (Message) obj;
             FileWriter fileWriter = null;
             PrintWriter printWriter = null;
-            File file = new File(getClass().getResource(".").getFile() + "/log.txt");
+            File file = new File("log.txt");
 
             try {
-
-                if (file.createNewFile()) {
-                    System.out.println("File is created!");
-                } else {
-                    System.out.println("File already exists.");
-                }
-                fileWriter = new FileWriter(file);
-                fileWriter.write(String.valueOf(message));
+                fileWriter = new FileWriter(file, true);
+                fileWriter.append(String.valueOf(message));
                 printWriter = new PrintWriter(fileWriter, true);
                 printWriter.println(message);
-                printWriter.flush();
             } catch (IOException e) {
                 System.out.println("Fajl log.txt nije pronadjen");
             } finally {
