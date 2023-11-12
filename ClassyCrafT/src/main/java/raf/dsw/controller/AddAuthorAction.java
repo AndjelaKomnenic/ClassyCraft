@@ -1,6 +1,6 @@
 package raf.dsw.controller;
 
-import raf.dsw.composite.Project;
+import raf.dsw.classyrepository.composite.Project;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.PossibleErrors;
 import raf.dsw.tree.model.ClassyTreeItem;
@@ -19,7 +19,7 @@ public class AddAuthorAction extends AbstractClassyAction{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
+        ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
         if(selected.getClassyNode() instanceof Project) {
             String author = JOptionPane.showInputDialog("Unesite autora za projekat");
             ((Project) selected.getClassyNode()).setAuthor(author);

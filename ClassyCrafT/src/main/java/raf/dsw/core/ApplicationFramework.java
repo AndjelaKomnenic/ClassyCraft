@@ -1,8 +1,7 @@
 package raf.dsw.core;
 
-import raf.dsw.composite.ClassyRepository;
-import raf.dsw.composite.ClassyRepositoryImplementation;
-import raf.dsw.controller.ActionManager;
+import raf.dsw.classyrepository.composite.ClassyRepository;
+import raf.dsw.classyrepository.composite.ClassyRepositoryImplementation;
 import raf.dsw.factory.Logger;
 import raf.dsw.factory.LoggerFactory;
 import raf.dsw.message.MessageGenerator;

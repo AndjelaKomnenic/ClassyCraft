@@ -24,6 +24,6 @@ public class Message {
 
     @Override
     public String toString() {
-        return "[" + type + "][" + timestamp + "] " + text;
+        return "[" + type + "][" + timestamp + "] " + text + "\n";
     }
 }

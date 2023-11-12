@@ -2,11 +2,14 @@ package raf.dsw.factory;
 
 import raf.dsw.message.Message;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 public class FileLogger implements Logger{
+    //URL path = getClass().getResource("log.txt");
+
     public FileLogger(){
 
     }
@@ -16,9 +19,12 @@ public class FileLogger implements Logger{
             Message message = (Message) obj;
             FileWriter fileWriter = null;
             PrintWriter printWriter = null;
+            File file = new File("log.txt");
+
             try {
-                fileWriter = new FileWriter("log.txt");
-                printWriter = new PrintWriter(fileWriter);
+                fileWriter = new FileWriter(file, true);
+                fileWriter.append(String.valueOf(message));
+                printWriter = new PrintWriter(fileWriter, true);
                 printWriter.println(message);
             } catch (IOException e) {
                 System.out.println("Fajl log.txt nije pronadjen");

@@ -1,7 +1,6 @@
 package raf.dsw.tree.controller;
 
-import raf.dsw.composite.ClassyNode;
-import raf.dsw.composite.ClassyNodeComposite;
+import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.PossibleErrors;
 import raf.dsw.tree.model.ClassyTreeItem;
@@ -22,7 +21,7 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
     public ClassyTreeCellEditor(JTree arg0, DefaultTreeCellRenderer arg1) {
         super(arg0, arg1);
     }
-
+    @Override
     public Component getTreeCellEditorComponent(JTree arg0, Object arg1, boolean arg2, boolean arg3, boolean arg4, int arg5) {
         super.getTreeCellEditorComponent(arg0,arg1,arg2,arg3,arg4,arg5);
         clickedOn =arg1;
@@ -39,10 +38,9 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
     }
 
 
-
     public void actionPerformed(ActionEvent e){
 
-        if (!(clickedOn instanceof ClassyTreeItem))
+        /*if (!(clickedOn instanceof ClassyTreeItem))
             return;
         boolean ok = true;
         ClassyTreeItem clicked = (ClassyTreeItem) clickedOn;
@@ -59,7 +57,17 @@ public class ClassyTreeCellEditor extends DefaultTreeCellEditor implements Actio
         }
         else{
             ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_ALREADY_EXISTS);
+        }*/
+
+        if (!(clickedOn instanceof ClassyTreeItem))
+            return;
+
+        String newName = e.getActionCommand();
+        if(((ClassyNodeComposite)((ClassyTreeItem) clickedOn).getClassyNode().getParent()).cotainsSameNameComponent(newName)) {
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.EXISTS_SAME_NAME_COMPONENT); // DODATI ERROR NIJE ISPISANO ZA NJEGA NIS
+            return;
         }
+        ((ClassyTreeItem) clickedOn).getClassyNode().setName(e.getActionCommand());
     }
 
 }
