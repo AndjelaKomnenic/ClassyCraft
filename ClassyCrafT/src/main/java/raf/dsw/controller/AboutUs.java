@@ -9,7 +9,7 @@ public class AboutUs extends AbstractClassyAction {
 
     public AboutUs() {
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_I, ActionEvent.ALT_MASK));
-        putValue(SMALL_ICON, loadIcon("/images/information.png")); // za sada ima exit slicicu posle treba dodati odgovarajucu!
+        putValue(SMALL_ICON, loadIcon("/images/information.png"));
         putValue(NAME, "AboutUs");
         putValue(SHORT_DESCRIPTION, "AboutUs");
     }

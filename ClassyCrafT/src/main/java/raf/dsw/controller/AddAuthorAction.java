@@ -13,7 +13,7 @@ import java.awt.event.KeyEvent;
 public class AddAuthorAction extends AbstractClassyAction{
     public AddAuthorAction(){
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.ALT_MASK));
-        putValue(SMALL_ICON, loadIcon("/images/author.png")); // za sada ima exit slicicu posle treba dodati odgovarajucu!
+        putValue(SMALL_ICON, loadIcon("/images/author.png"));
         putValue(NAME, "AddAuthor");
         putValue(SHORT_DESCRIPTION, "AddAuthor");
     }

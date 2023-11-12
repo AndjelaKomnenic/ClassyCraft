@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
 public class DeleteNodeAction extends AbstractClassyAction{
     public DeleteNodeAction(){
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_D, ActionEvent.ALT_MASK));
-        putValue(SMALL_ICON, loadIcon("/images/remove.png")); // za sada ima exit slicicu posle treba dodati odgovarajucu!
+        putValue(SMALL_ICON, loadIcon("/images/remove.png"));
         putValue(NAME, "RemoveNode");
         putValue(SHORT_DESCRIPTION, "RemoveNode");
     }

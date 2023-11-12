@@ -13,7 +13,7 @@ import java.awt.event.KeyEvent;
 public class AddNodeAction extends AbstractClassyAction {
     public AddNodeAction(){
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_A, ActionEvent.ALT_MASK));
-        putValue(SMALL_ICON, loadIcon("/images/add.png")); // za sada ima exit slicicu posle treba dodati odgovarajucu!
+        putValue(SMALL_ICON, loadIcon("/images/add.png"));
         putValue(NAME, "AddChild");
         putValue(SHORT_DESCRIPTION, "AddChild");
     }
