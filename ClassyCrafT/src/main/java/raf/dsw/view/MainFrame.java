@@ -2,12 +2,10 @@ package raf.dsw.view;
 
 import lombok.Getter;
 import lombok.Setter;
-import raf.dsw.composite.ProjectExplorer;
+import raf.dsw.classyrepository.composite.ProjectExplorer;
 import raf.dsw.controller.ActionManager;
 import raf.dsw.core.ApplicationFramework;
-import raf.dsw.factory.Logger;
 import raf.dsw.message.Message;
-import raf.dsw.observer.ISubscriber;
 import raf.dsw.tree.ClassyTree;
 import raf.dsw.tree.ClassyTreeImplementation;
 import raf.dsw.tree.controller.MouseControl;

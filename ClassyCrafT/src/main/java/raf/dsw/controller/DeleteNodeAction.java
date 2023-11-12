@@ -1,6 +1,6 @@
 package raf.dsw.controller;
 
-import raf.dsw.composite.ProjectExplorer;
+import raf.dsw.classyrepository.composite.ProjectExplorer;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.PossibleErrors;
 import raf.dsw.tree.model.ClassyTreeItem;

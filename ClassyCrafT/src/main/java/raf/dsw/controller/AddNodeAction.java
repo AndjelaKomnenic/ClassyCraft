@@ -1,7 +1,6 @@
 package raf.dsw.controller;
 
-import raf.dsw.composite.ClassyNodeComposite;
-import raf.dsw.composite.Diagram;
+import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.PossibleErrors;
 import raf.dsw.tree.model.ClassyTreeItem;
@@ -28,5 +27,6 @@ public class AddNodeAction extends AbstractClassyAction {
             return;
         }
         MainFrame.getInstance().getClassyTree().addChild(selected);
+
     }
 }

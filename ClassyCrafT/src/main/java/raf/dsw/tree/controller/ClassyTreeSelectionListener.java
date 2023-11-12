@@ -11,8 +11,7 @@ public class ClassyTreeSelectionListener implements TreeSelectionListener {
     public void valueChanged(TreeSelectionEvent e) {
         TreePath path = e.getPath();
         ClassyTreeItem treeItemSelected = (ClassyTreeItem)path.getLastPathComponent();
-        /*System.out.println("Selektovan cvor:"+ treeItemSelected.getClassyNode().getName());
-        System.out.println("getPath: "+e.getPath());*/
+
     }
 
 }

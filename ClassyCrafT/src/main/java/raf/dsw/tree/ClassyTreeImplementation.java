@@ -1,10 +1,10 @@
 package raf.dsw.tree;
 
-import raf.dsw.composite.ClassyNodeComposite;
-import raf.dsw.composite.ProjectExplorer;
-import raf.dsw.composite.factoryMethod.FactoryUtils;
-import raf.dsw.composite.factoryMethod.NodeFactory;
-import raf.dsw.composite.factoryMethod.PackageFactory;
+import raf.dsw.classyrepository.composite.ClassyNodeComposite;
+import raf.dsw.classyrepository.composite.ProjectExplorer;
+import raf.dsw.classyrepository.composite.factoryMethod.FactoryUtils;
+import raf.dsw.classyrepository.composite.factoryMethod.NodeFactory;
+import raf.dsw.classyrepository.composite.factoryMethod.PackageFactory;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.tree.view.ClassyTreeView;
 
@@ -31,13 +31,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         ((ClassyNodeComposite) parent.getClassyNode()).addChild(child.getClassyNode());
         treeView.expandPath(treeView.getSelectionPath());
         update();
-        /*ClassyNode child = null;
-        //ClassyNode child = createChild(parent.getClassyNode());
-        //napisati dobar createChild
-        parent.add(new ClassyTreeItem(child));
-        ((ClassyNodeComposite) parent.getClassyNode()).addChild(child);
-        treeView.expandPath(treeView.getSelectionPath());
-        SwingUtilities.updateComponentTreeUI(treeView);*/
+
     }
 
     @Override
