@@ -41,7 +41,6 @@ public class MouseControl implements MouseListener {
                 ((WorkSpaceImplementation) workspace).getPackageView().updateWorkspace(selectedNode);
 
             SwingUtilities.updateComponentTreeUI(MainFrame.getInstance());
-            System.out.println("lololo");
 
         }
 

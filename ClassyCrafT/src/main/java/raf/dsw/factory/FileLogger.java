@@ -18,19 +18,15 @@ public class FileLogger implements Logger{
         if(obj instanceof Message) {
             Message message = (Message) obj;
             FileWriter fileWriter = null;
-            PrintWriter printWriter = null;
             File file = new File("log.txt");
 
             try {
                 fileWriter = new FileWriter(file, true);
                 fileWriter.append(String.valueOf(message));
-                printWriter = new PrintWriter(fileWriter, true);
-                printWriter.println(message);
             } catch (IOException e) {
                 System.out.println("Fajl log.txt nije pronadjen");
             } finally {
                 try {
-                    printWriter.close();
                     fileWriter.close();
                 } catch (Throwable e) {
                     e.printStackTrace();

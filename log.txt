@@ -7,3 +7,7 @@
 [INFORMATION][2023-11-12 20:35:58.442] You did not select any component
 [INFORMATION][2023-11-12 20:35:58.442] You did not select any component
 
+[ERROR][2023-11-12 22:15:31.496] Cannot have same name on the same level
+[ERROR][2023-11-12 22:15:31.496] Cannot have same name on the same level
+
+[INFORMATION][2023-11-12 22:17:00.138] You did not select any component
