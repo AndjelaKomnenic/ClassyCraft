@@ -1,10 +1,12 @@
-package raf.dsw.controller;
+package raf.dsw.controller.topbar;
+
+import raf.dsw.controller.AbstractClassyAction;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class ExitAction extends AbstractClassyAction{
+public class ExitAction extends AbstractClassyAction {
 
     public ExitAction(){
 

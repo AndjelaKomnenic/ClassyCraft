@@ -1,6 +1,7 @@
-package raf.dsw.controller;
+package raf.dsw.controller.topbar;
 
 import raf.dsw.classyrepository.implementation.Project;
+import raf.dsw.controller.AbstractClassyAction;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.PossibleErrors;
 import raf.dsw.tree.model.ClassyTreeItem;
@@ -10,7 +11,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-public class AddAuthorAction extends AbstractClassyAction{
+public class AddAuthorAction extends AbstractClassyAction {
     public AddAuthorAction(){
         putValue(ACCELERATOR_KEY, KeyStroke.getKeyStroke(KeyEvent.VK_C, ActionEvent.ALT_MASK));
         putValue(SMALL_ICON, loadIcon("/images/author.png"));

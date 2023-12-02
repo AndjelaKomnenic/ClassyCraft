@@ -25,9 +25,7 @@ public class MainFrame extends JFrame implements ISubscriber {
     private ClassyTree classyTree;
     private IWorkspace workspace;
 
-    private MainFrame(){
-
-    }
+    private MySideBar sideBar;
 
     private void initialise(){
         actionManager = new ActionManager();
@@ -67,6 +65,9 @@ public class MainFrame extends JFrame implements ISubscriber {
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
+
+        sideBar = new MySideBar();
+        getContentPane().add(sideBar, BorderLayout.EAST);
 
     }
 

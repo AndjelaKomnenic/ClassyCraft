@@ -8,11 +8,16 @@ import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Project;
 import raf.dsw.observer.ISubscriber;
+import raf.dsw.paint.ElementPainter;
+import raf.dsw.state.StateManager;
+import raf.dsw.view.MySideBar;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -27,8 +32,12 @@ public class PackageView extends JPanel implements ISubscriber {
     private JTabbedPane tabbedPane = new JTabbedPane();
     private List<DiagramView> tabs = new ArrayList<>();
 
+    Map<Diagram, List<ElementPainter>> paintersForMap = new HashMap<>();
+    List<ElementPainter> selectedComponents = new ArrayList<>();
+    private StateManager stateManager;
 
     public PackageView() {
+        stateManager = new StateManager();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(lpackagePName);
         add(lAuthor);

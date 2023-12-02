@@ -1,4 +1,6 @@
-package raf.dsw.controller;
+package raf.dsw.controller.topbar;
+
+import raf.dsw.controller.AbstractClassyAction;
 
 import javax.swing.*;
 import java.awt.*;

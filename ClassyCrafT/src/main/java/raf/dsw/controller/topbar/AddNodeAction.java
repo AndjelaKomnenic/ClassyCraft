@@ -1,6 +1,7 @@
-package raf.dsw.controller;
+package raf.dsw.controller.topbar;
 
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
+import raf.dsw.controller.AbstractClassyAction;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.PossibleErrors;
 import raf.dsw.tree.model.ClassyTreeItem;

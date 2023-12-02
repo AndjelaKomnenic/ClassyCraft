@@ -1,6 +1,6 @@
 package raf.dsw.view;
 
-import raf.dsw.controller.*;
+import raf.dsw.controller.topbar.*;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;

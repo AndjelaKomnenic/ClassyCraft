@@ -2,7 +2,8 @@ package raf.dsw.controller;
 
 import lombok.Getter;
 import lombok.Setter;
-import raf.dsw.core.ApplicationFramework;
+import raf.dsw.controller.sidebar.NewInterClassAction;
+import raf.dsw.controller.topbar.*;
 
 @Getter
 @Setter
@@ -14,6 +15,8 @@ public class ActionManager {
     private RenameAction renameAction;
     private AddAuthorAction addAuthorAction;
     private PackagePackageAction packagePackageAction;
+
+    private NewInterClassAction newInterClassAction;
 
     public ActionManager() {
         initialiseActions();
@@ -27,6 +30,7 @@ public class ActionManager {
         renameAction = new RenameAction();
         addAuthorAction = new AddAuthorAction();
         packagePackageAction = new PackagePackageAction();
+        newInterClassAction = new NewInterClassAction();
     }
 
 }
