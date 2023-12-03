@@ -15,7 +15,10 @@ public abstract class InterClass extends DiagramElement{
     private String vidljivost;
     private double x, y;
     private double width, height;
+/*<<<<<<< HEAD
     private List<ClassContent> classContentList = new ArrayList<>();
+=======*/
+    private List<ClassContent> cl = new ArrayList<>();
 
     public InterClass(String name, ClassyNode parent, double x, double y) {
         super(name, parent);
@@ -38,6 +41,6 @@ public abstract class InterClass extends DiagramElement{
         getParent().notifySubscriber("REPAINT");
     }
     public void addToList(ClassContent cc){
-        classContentList.add(cc);
+        cl.add(cc);
     }
 }

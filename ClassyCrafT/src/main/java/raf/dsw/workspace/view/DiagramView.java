@@ -24,6 +24,7 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     private Diagram diagram;
     private List<ElementPainter> painters = new ArrayList<>();
+    private List<ElementPainter> selectedElements = new ArrayList<>();
     private AffineTransform affineTransform = new AffineTransform();
 
     public DiagramView(Diagram diagram){
@@ -77,7 +78,8 @@ public class DiagramView extends JPanel implements ISubscriber {
             if(p instanceof AssociationPainter) p.draw(g2D);
         }*/
         for(ElementPainter p : painters){
-            if(p instanceof InterClassPainter) p.draw(g2D);
+            //if(p instanceof InterClassPainter)
+                p.draw(g2D);
         }
         g2D.dispose();
     }

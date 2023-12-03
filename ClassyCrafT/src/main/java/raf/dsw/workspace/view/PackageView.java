@@ -8,20 +8,16 @@ import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Project;
 import raf.dsw.observer.ISubscriber;
-import raf.dsw.paint.ElementPainter;
 import raf.dsw.state.StateManager;
-import raf.dsw.view.MySideBar;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Getter
 @Setter
-public class PackageView extends JPanel implements ISubscriber {
+public class PackageView extends JPanel implements ISubscriber{
 
     private JLabel lpackagePName = new JLabel("");
     private JLabel lAuthor = new JLabel("");
@@ -32,8 +28,8 @@ public class PackageView extends JPanel implements ISubscriber {
     private JTabbedPane tabbedPane = new JTabbedPane();
     private List<DiagramView> tabs = new ArrayList<>();
 
-    Map<Diagram, List<ElementPainter>> paintersForMap = new HashMap<>();
-    List<ElementPainter> selectedComponents = new ArrayList<>();
+    /*Map<Diagram, List<ElementPainter>> paintersForMap = new HashMap<>();
+    List<ElementPainter> selectedComponents = new ArrayList<>();*/
     private StateManager stateManager;
 
     public PackageView() {
@@ -126,7 +122,19 @@ public class PackageView extends JPanel implements ISubscriber {
         }
 
     }
+    /*
+<<<<<<< HEAD
     public void startBrisanjeState(){
         //stateManager.s
+=======*/
+
+    //samo ga zove ovde
+    public void startMisKliknut(int x, int y, Diagram currDiagram){
+        this.stateManager.setNewDodavanjeState();
+    }
+
+
+    void startState(){
+        //stateManager.getCurrState().misKliknut();
     }
 }
