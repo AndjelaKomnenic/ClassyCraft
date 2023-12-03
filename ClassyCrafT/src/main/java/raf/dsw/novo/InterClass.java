@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 public abstract class InterClass extends DiagramElement{
@@ -12,6 +15,7 @@ public abstract class InterClass extends DiagramElement{
     private String vidljivost;
     private double x, y;
     private double width, height;
+    private List<ClassContent> classContentList = new ArrayList<>();
 
     public InterClass(String name, ClassyNode parent, double x, double y) {
         super(name, parent);
@@ -32,5 +36,8 @@ public abstract class InterClass extends DiagramElement{
     public void setY(double y){
         this.y = y;
         getParent().notifySubscriber("REPAINT");
+    }
+    public void addToList(ClassContent cc){
+        classContentList.add(cc);
     }
 }

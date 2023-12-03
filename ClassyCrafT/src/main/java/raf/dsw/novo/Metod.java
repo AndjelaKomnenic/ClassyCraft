@@ -1,4 +1,4 @@
 package raf.dsw.novo;
 
-public class Metod {
+public class Metod extends ClassContent{
 }

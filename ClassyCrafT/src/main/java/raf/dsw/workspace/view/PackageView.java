@@ -126,4 +126,7 @@ public class PackageView extends JPanel implements ISubscriber {
         }
 
     }
+    public void startBrisanjeState(){
+        //stateManager.s
+    }
 }

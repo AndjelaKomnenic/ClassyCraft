@@ -1,4 +1,4 @@
 package raf.dsw.novo;
 
-public class Atribut {
+public class Atribut extends ClassContent{
 }
