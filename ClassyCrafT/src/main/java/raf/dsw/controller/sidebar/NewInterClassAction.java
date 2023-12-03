@@ -1,6 +1,8 @@
 package raf.dsw.controller.sidebar;
 
 import raf.dsw.controller.AbstractClassyAction;
+import raf.dsw.popUps.PopUpChooseIC;
+import raf.dsw.popUps.PopUpSetUpParameters;
 import raf.dsw.state.StateManager;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.WorkSpaceImplementation;
@@ -22,5 +24,7 @@ public class NewInterClassAction extends AbstractClassyAction {
     public void actionPerformed(ActionEvent e) {
         StateManager stateManager = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView().getStateManager();
         stateManager.setNewDodavanjeState();
+        PopUpChooseIC popUp = new PopUpChooseIC();
+       // PopUpSetUpParameters pop = new PopUpSetUpParameters("test", MainFrame.getInstance());
     }
 }

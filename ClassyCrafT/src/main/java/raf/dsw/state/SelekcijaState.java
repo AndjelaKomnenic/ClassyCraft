@@ -5,19 +5,20 @@ import raf.dsw.workspace.view.PackageView;
 
 import java.awt.*;
 
-public class SelekcijaState extends State{
+public class SelekcijaState implements State{
+
     @Override
-    public void mousePressed(Point e, PackageView packageView, Diagram currDiagram) {
+    public void misKliknut(int x, int y, Diagram currDiagram) {
 
     }
 
     @Override
-    public void mouseReleased(Point e, PackageView packageView, Diagram currDiagram) {
+    public void misOtpusten(Point e, PackageView packageView, Diagram currDiagram) {
 
     }
 
     @Override
-    public void mouseDragged(Point e, PackageView packageView, Diagram currDiagram) {
+    public void misPrivucen(Point e, PackageView packageView, Diagram currDiagram) {
 
     }
 }
