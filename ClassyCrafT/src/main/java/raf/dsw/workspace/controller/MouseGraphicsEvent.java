@@ -24,16 +24,20 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
 
     @Override
     public void mousePressed(MouseEvent e) {
+        /*PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
+        Point worldP = getWorldCoordinates(e);*/
+
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        Point worldP = getWorldCoordinates(e);
+        packageView.startMisKliknut(e.getX(), e.getY(), currDiagram);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        /*PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        Point worldP = getWorldCoordinates(e);
+        Point worldP = getWorldCoordinates(e);*/
     }
 
     @Override
@@ -48,9 +52,9 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        /*PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        Point worldP = getWorldCoordinates(e);
+        Point worldP = getWorldCoordinates(e);*/
 
     }
 

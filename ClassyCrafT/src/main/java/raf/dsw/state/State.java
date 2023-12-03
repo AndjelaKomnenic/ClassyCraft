@@ -5,9 +5,9 @@ import raf.dsw.workspace.view.PackageView;
 
 import java.awt.*;
 
-public abstract class State {
+public interface  State {
 
-    public abstract void mousePressed(Point e, PackageView packageView, Diagram currDiagram);
-    public abstract void mouseReleased(Point e, PackageView packageView, Diagram currDiagram);
-    public abstract void mouseDragged(Point e, PackageView packageView, Diagram currDiagram);
+     void misKliknut(int x, int y, Diagram currDiagram);
+     void misOtpusten(Point e, PackageView packageView, Diagram currDiagram);
+     void misPrivucen(Point e, PackageView packageView, Diagram currDiagram);
 }
