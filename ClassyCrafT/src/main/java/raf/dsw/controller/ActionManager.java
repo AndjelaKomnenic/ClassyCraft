@@ -2,7 +2,7 @@ package raf.dsw.controller;
 
 import lombok.Getter;
 import lombok.Setter;
-import raf.dsw.controller.sidebar.NewInterClassAction;
+import raf.dsw.controller.sidebar.*;
 import raf.dsw.controller.topbar.*;
 
 @Getter
@@ -17,6 +17,10 @@ public class ActionManager {
     private PackagePackageAction packagePackageAction;
 
     private NewInterClassAction newInterClassAction;
+    private NewConnectionAction newConnectionAction;
+    private DeleteRightAction deleteRightAction;
+    private SelectAction selectAction;
+    private AddClassContentAction addClassContentAction;
 
     public ActionManager() {
         initialiseActions();
@@ -31,6 +35,10 @@ public class ActionManager {
         addAuthorAction = new AddAuthorAction();
         packagePackageAction = new PackagePackageAction();
         newInterClassAction = new NewInterClassAction();
+        newConnectionAction = new NewConnectionAction();
+        deleteRightAction = new DeleteRightAction();
+        selectAction = new SelectAction();
+        addClassContentAction = new AddClassContentAction();
     }
 
 }

@@ -63,7 +63,6 @@ public class PopUpSetUpParameters extends JDialog {
             gridbag.setConstraints(lb3, c);
             add(lb3);
         }
-        //c.weightx = 0;
         c.gridx = 0;
         c.gridy = 1;
         c.gridwidth = 2;

@@ -13,5 +13,9 @@ public class MySideBar extends JToolBar {
         setFloatable(false);
 
         add(MainFrame.getInstance().getActionManager().getNewInterClassAction());
+        add(MainFrame.getInstance().getActionManager().getNewConnectionAction());
+        add(MainFrame.getInstance().getActionManager().getDeleteRightAction());
+        add(MainFrame.getInstance().getActionManager().getSelectAction());
+        add(MainFrame.getInstance().getActionManager().getAddClassContentAction());
     }
 }

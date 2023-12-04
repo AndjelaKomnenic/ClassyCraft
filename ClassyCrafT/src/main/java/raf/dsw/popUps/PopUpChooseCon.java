@@ -7,27 +7,30 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PopUpChooseIC extends JDialog {
+public class PopUpChooseCon extends JDialog {
     String rbResult = "";
     ButtonGroup buttonGroup = new ButtonGroup();
-    JRadioButton radioButton1 = new JRadioButton("Interfejs");
-    JRadioButton radioButton2 = new JRadioButton("Klasa");
-    JRadioButton radioButton3 = new JRadioButton("Enum");
-    public PopUpChooseIC(){
-        super(MainFrame.getInstance(), "Dodavanje novog elementa", true);
+    JRadioButton radioButton1 = new JRadioButton("Agregacija");
+    JRadioButton radioButton2 = new JRadioButton("Kompozicija");
+    JRadioButton radioButton3 = new JRadioButton("Zavisnost");
+    JRadioButton radioButton4 = new JRadioButton("Generalizacija");
+    public PopUpChooseCon(){
+        super(MainFrame.getInstance(), "Dodavanje nove veze", true);
         setUp();
     }
     public void setUp(){
         setLayout(new GridLayout(3, 1));
-        JLabel label = new JLabel("Odaberite koji element biste dodali");
-        JPanel radioButtons = new JPanel(new GridLayout(1, 3));
+        JLabel label = new JLabel("Odaberite tip veze koju biste dodali");
+        JPanel radioButtons = new JPanel(new GridLayout(1, 4));
         JPanel buttonHolder = new JPanel(new GridLayout(1, 3));
         buttonGroup.add(radioButton1);
         buttonGroup.add(radioButton2);
         buttonGroup.add(radioButton3);
+        buttonGroup.add(radioButton4);
         radioButtons.add(radioButton1, 0);
         radioButtons.add(radioButton2, 1);
         radioButtons.add(radioButton3, 2);
+        radioButtons.add(radioButton4, 3);
         JButton addElement = new JButton("Dodaj");
         addElement.addActionListener(new ActionListener() {
             @Override
@@ -41,24 +44,11 @@ public class PopUpChooseIC extends JDialog {
         add(label, 0);
         add(radioButtons, 1);
         add(buttonHolder, 2);
-        setSize(300, 150);
+        setSize(500, 150);
         setLocationRelativeTo(MainFrame.getInstance());
         setVisible(true);
     }
     public void handleButtonClick(){
-        //dodati gresku ako nije nista
-        if(radioButton1.isSelected())
-            rbResult = "Interfejs";
-        else if(radioButton2.isSelected())
-            rbResult = "Klasa";
-        else if(radioButton3.isSelected())
-            rbResult = "Enum";
         dispose();
-        if(rbResult.equalsIgnoreCase("Enum")){
-            PopUpEnumDetails popEnum = new PopUpEnumDetails(this);
-        }
-        else {
-            PopUpSetUpParameters popSet = new PopUpSetUpParameters(rbResult, this);
-        }
     }
 }

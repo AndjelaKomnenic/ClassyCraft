@@ -45,20 +45,6 @@ public class PopUpEnumDetails extends JDialog {
         c.gridwidth = 2;
         gridbag.setConstraints(napravi, c);
         add(napravi);
-        /*Dimension d = new Dimension(120, 20);
-        addAtribut.setPreferredSize(d);
-        addMetodu.setPreferredSize(d);
-        gridbag.setConstraints(addAtribut, c);
-        add(addAtribut);
-        c.gridx = 2;
-        c.gridy = 1;
-        gridbag.setConstraints(addMetodu, c);
-        add(addMetodu);
-        c.gridx = 0;
-        c.gridy = 2;
-        c.gridwidth = 1;
-        gridbag.setConstraints(napravi, c);
-        add(napravi);*/
         addClan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
