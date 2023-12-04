@@ -1,11 +1,17 @@
 package raf.dsw.popUps;
 
+import raf.dsw.novo.ClanEnuma;
+import raf.dsw.novo.ClassContent;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PopUpEnumDetails extends JDialog {
+    private List<ClassContent> cl = new ArrayList<>();
     JTextField naziv = new JTextField();
     JButton addClan = new JButton("Dodaj clan enuma");
     JButton napravi = new JButton("Napravi");
@@ -56,7 +62,6 @@ public class PopUpEnumDetails extends JDialog {
         addClan.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Call your function or perform an action when the button is clicked
                 handleButtonClick1();
             }
         });
@@ -68,5 +73,10 @@ public class PopUpEnumDetails extends JDialog {
     public void handleButtonClick1(){
         //dispose();
         var name = JOptionPane.showInputDialog("Novi clan:");
+        ClanEnuma ce = new ClanEnuma(name);
+        addToList(ce);
+    }
+    public void addToList(ClassContent cc){
+        cl.add(cc);
     }
 }

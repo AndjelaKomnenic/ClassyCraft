@@ -1,7 +1,12 @@
 package raf.dsw.popUps;
 
+import raf.dsw.novo.Atribut;
+import raf.dsw.novo.Metod;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PopUpMetoda extends JDialog {
     //PopUpSetUpParameters parent;
@@ -9,8 +14,10 @@ public class PopUpMetoda extends JDialog {
     private JTextField povratnaVrednost = new JTextField();
     private JTextField naziv = new JTextField();
     private JButton dodaj = new JButton("Dodaj");
+    private PopUpSetUpParameters parent;
     public PopUpMetoda(PopUpSetUpParameters parent){
         super(parent, "Dodavanje metode", true);
+        this.parent = parent;
         setUp();
     }
     public void setUp(){
@@ -26,6 +33,12 @@ public class PopUpMetoda extends JDialog {
         thirdRow.add(new Label("Naziv: "), 0);
         thirdRow.add(naziv, 1);
         fourthRow.add(dodaj);
+        dodaj.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleButtonClick();
+            }
+        });
         add(firstRow, 0);
         add(secondRow, 1);
         add(thirdRow, 2);
@@ -34,5 +47,13 @@ public class PopUpMetoda extends JDialog {
         setSize(300, 150);
         setLocationRelativeTo(getParent());
         setVisible(true);
+    }
+    public void handleButtonClick(){
+        String v = vidljivost.getText();
+        String p = povratnaVrednost.getText();
+        String n = naziv.getText();
+        Metod m = new Metod(v, p, n);
+        parent.addToList(m);
+        dispose();
     }
 }

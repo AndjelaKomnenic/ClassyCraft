@@ -1,15 +1,21 @@
 package raf.dsw.popUps;
 
+import raf.dsw.novo.Atribut;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PopUpAtribut extends JDialog {
     private JTextField vidljivost = new JTextField();
     private JTextField tip = new JTextField();
     private JTextField naziv = new JTextField();
     private JButton dodaj = new JButton("Dodaj");
+    private PopUpSetUpParameters parent;
     public PopUpAtribut(PopUpSetUpParameters parent){
         super(parent, "Dodavanje atributa", true);
+        this.parent = parent;
         setUp();
     }
     public void setUp(){
@@ -29,10 +35,23 @@ public class PopUpAtribut extends JDialog {
         add(secondRow, 1);
         add(thirdRow, 2);
         add(fourthRow, 3);
-        dodaj.addActionListener(e ->{dispose();});
+        dodaj.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleButtonClick();
+            }
+        });
         setSize(300, 150);
         setLocationRelativeTo(getParent());
         setVisible(true);
+    }
+    public void handleButtonClick(){
+        String v = vidljivost.getText();
+        String t = tip.getText();
+        String n = naziv.getText();
+        Atribut a = new Atribut(v, t, n);
+        parent.addToList(a);
+        dispose();
     }
 
 }

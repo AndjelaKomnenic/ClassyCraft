@@ -1,14 +1,19 @@
 package raf.dsw.popUps;
 
+import raf.dsw.novo.ClassContent;
+import raf.dsw.novo.Klasa;
 import raf.dsw.view.MainFrame;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PopUpSetUpParameters extends JDialog {
     String s;
+    private List<ClassContent> cl = new ArrayList<>();
     JTextField naziv = new JTextField();
     JTextField vidljivost = new JTextField();
     JButton addAtribut = new JButton("Dodaj atribut");
@@ -96,28 +101,43 @@ public class PopUpSetUpParameters extends JDialog {
         addMetodu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Call your function or perform an action when the button is clicked
                 handleButtonClick1();
             }
         });
         addAtribut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Call your function or perform an action when the button is clicked
                 handleButtonClick2();
             }
         });
-        napravi.addActionListener(e ->{dispose();});
+        napravi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleButtonClick3();
+            }
+        });
         setSize(300, 200);
         setLocationRelativeTo(getParent());
         setVisible(true);
     }
     public void handleButtonClick1(){
-        //dispose();
         PopUpMetoda popMet = new PopUpMetoda(this);
     }
     public void handleButtonClick2(){
-        //dispose();
         PopUpAtribut popMet = new PopUpAtribut(this);
+    }
+    public void handleButtonClick3(){
+        /*
+        napraviti novu klasu ili interfejs
+        if(s.equalsIgnoreCase("Klasa")){
+            Klasa k = new Klasa(naziv.getText(), )
+        }if(s.equalsIgnoreCase("Interfejs")){
+            Interfejs i = new Interfejs(naziv.getText(), )
+        }*/
+        dispose();
+    }
+    public void addToList(ClassContent c){
+        cl.add(c);
+        //System.out.println(c.getNaziv() + " " + c.getVidljivost() + " " + c.getTip());
     }
 }
