@@ -20,7 +20,64 @@ public class PopUpSetUpParameters extends JDialog {
         setUp();
     }
     public void setUp(){
-        System.out.println(s);
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        setLayout(gridbag);
+        naziv.setSize(200, 50);
+        vidljivost.setSize(200, 50);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        Label lb1 = new Label("Naziv:");
+        c.gridx = 0;
+        c.gridy = 0;
+        gridbag.setConstraints(lb1, c);
+        add(lb1);
+        c.gridx = 1;
+        c.gridy = 0;
+        gridbag.setConstraints(naziv, c);
+        add(naziv);
+        if(s.equalsIgnoreCase("klasa")) {
+            Label lb2 = new Label("Vidljivost:");
+            c.gridx = 2;
+            c.gridy = 0;
+            gridbag.setConstraints(lb2, c);
+            add(lb2);
+            c.gridx = 3;
+            c.gridy = 0;
+            gridbag.setConstraints(vidljivost, c);
+            add(vidljivost);
+        }
+        else{
+            Label lb2 = new Label("");
+            c.gridx = 2;
+            c.gridy = 0;
+            gridbag.setConstraints(lb2, c);
+            add(lb2);
+            Label lb3 = new Label("");
+            c.gridx = 3;
+            c.gridy = 0;
+            gridbag.setConstraints(lb3, c);
+            add(lb3);
+        }
+        //c.weightx = 0;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridwidth = 2;
+        Dimension d = new Dimension(120, 20);
+        addAtribut.setPreferredSize(d);
+        addMetodu.setPreferredSize(d);
+        gridbag.setConstraints(addAtribut, c);
+        add(addAtribut);
+        c.gridx = 2;
+        c.gridy = 1;
+        gridbag.setConstraints(addMetodu, c);
+        add(addMetodu);
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridwidth = 1;
+        gridbag.setConstraints(napravi, c);
+        add(napravi);
+        /*
+        //bez gridBag
         setLayout(new GridLayout(3, 1));
         JPanel firstRow = new JPanel(new GridLayout(1, 4));
         JPanel secondRow = new JPanel(new GridLayout(1, 2));
@@ -35,6 +92,7 @@ public class PopUpSetUpParameters extends JDialog {
         add(firstRow, 0);
         add(secondRow, 1);
         add(napravi, 2);
+        */
         addMetodu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,7 +108,7 @@ public class PopUpSetUpParameters extends JDialog {
             }
         });
         napravi.addActionListener(e ->{dispose();});
-        setSize(300, 150);
+        setSize(300, 200);
         setLocationRelativeTo(getParent());
         setVisible(true);
     }

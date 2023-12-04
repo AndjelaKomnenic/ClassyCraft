@@ -64,7 +64,12 @@ public class PopUpChooseIC extends JDialog {
             rbResult = "Enum";
         //dodati gresku ako nije nista
         dispose();
-        PopUpSetUpParameters popSet = new PopUpSetUpParameters(rbResult, this);
+        if(rbResult.equalsIgnoreCase("Enum")){
+            PopUpEnumDetails popEnum = new PopUpEnumDetails(this);
+        }
+        else {
+            PopUpSetUpParameters popSet = new PopUpSetUpParameters(rbResult, this);
+        }
         //PopUpSetUpParameters popSet = new PopUpSetUpParameters(rbResult, this);
     }
 }
