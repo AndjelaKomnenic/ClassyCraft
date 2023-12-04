@@ -1,5 +1,7 @@
 package raf.dsw.popUps;
 
+import raf.dsw.novo.AbstractFactory;
+import raf.dsw.novo.InterClass;
 import raf.dsw.view.MainFrame;
 
 import javax.swing.*;
@@ -53,12 +55,14 @@ public class PopUpChooseIC extends JDialog {
             rbResult = "Klasa";
         else if(radioButton3.isSelected())
             rbResult = "Enum";
+        AbstractFactory factory = new AbstractFactory();
+        InterClass noviElement = factory.newInterClass(rbResult, null);
         dispose();
         if(rbResult.equalsIgnoreCase("Enum")){
-            PopUpEnumDetails popEnum = new PopUpEnumDetails(this);
+            PopUpEnumDetails popEnum = new PopUpEnumDetails(this, noviElement);
         }
         else {
-            PopUpSetUpParameters popSet = new PopUpSetUpParameters(rbResult, this);
+            PopUpSetUpParameters popSet = new PopUpSetUpParameters(rbResult, this, noviElement);
         }
     }
 }

@@ -2,6 +2,7 @@ package raf.dsw.popUps;
 
 import raf.dsw.novo.ClanEnuma;
 import raf.dsw.novo.ClassContent;
+import raf.dsw.novo.InterClass;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,12 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PopUpEnumDetails extends JDialog {
-    private List<ClassContent> cl = new ArrayList<>();
+    private InterClass noviElement;
     JTextField naziv = new JTextField();
     JButton addClan = new JButton("Dodaj clan enuma");
     JButton napravi = new JButton("Napravi");
-    public PopUpEnumDetails(PopUpChooseIC parent){
+    public PopUpEnumDetails(PopUpChooseIC parent, InterClass noviElement){
         super(parent, "Dodavanje novog enuma", true);
+        this.noviElement = noviElement;
         setUp();
     }
 
@@ -51,7 +53,12 @@ public class PopUpEnumDetails extends JDialog {
                 handleButtonClick1();
             }
         });
-        napravi.addActionListener(e ->{dispose();});
+        napravi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                napraviEnum();
+            }
+        });
         setSize(300, 200);
         setLocationRelativeTo(getParent());
         setVisible(true);
@@ -63,6 +70,9 @@ public class PopUpEnumDetails extends JDialog {
         addToList(ce);
     }
     public void addToList(ClassContent cc){
-        cl.add(cc);
+        noviElement.addToList(cc);
+    }
+    public void NapraviEnum(){
+        noviElement.setName(naziv.getText());
     }
 }

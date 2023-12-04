@@ -1,6 +1,7 @@
 package raf.dsw.popUps;
 
 import raf.dsw.novo.ClassContent;
+import raf.dsw.novo.InterClass;
 import raf.dsw.novo.Klasa;
 import raf.dsw.view.MainFrame;
 
@@ -13,15 +14,16 @@ import java.util.List;
 
 public class PopUpSetUpParameters extends JDialog {
     String s;
-    private List<ClassContent> cl = new ArrayList<>();
+    private InterClass noviElement;
     JTextField naziv = new JTextField();
     JTextField vidljivost = new JTextField();
     JButton addAtribut = new JButton("Dodaj atribut");
     JButton addMetodu = new JButton("Dodaj metodu");
     JButton napravi = new JButton("Napravi");
-    public PopUpSetUpParameters(String s, PopUpChooseIC parent){
+    public PopUpSetUpParameters(String s, PopUpChooseIC parent, InterClass noviElement){
         super(MainFrame.getInstance(), "Podesavanje izgleda elementa", true);
         this.s = s;
+        this.noviElement = noviElement;
         setUp();
     }
     public void setUp(){
@@ -126,17 +128,11 @@ public class PopUpSetUpParameters extends JDialog {
         PopUpAtribut popMet = new PopUpAtribut(this);
     }
     public void handleButtonClick3(){
-        /*
-        napraviti novu klasu ili interfejs
-        if(s.equalsIgnoreCase("Klasa")){
-            Klasa k = new Klasa(naziv.getText(), )
-        }if(s.equalsIgnoreCase("Interfejs")){
-            Interfejs i = new Interfejs(naziv.getText(), )
-        }*/
+        noviElement.setName(naziv.getText());
+        noviElement.setVidljivost(vidljivost.getText());
         dispose();
     }
     public void addToList(ClassContent c){
-        cl.add(c);
-        //System.out.println(c.getNaziv() + " " + c.getVidljivost() + " " + c.getTip());
+        noviElement.addToList(c);
     }
 }
