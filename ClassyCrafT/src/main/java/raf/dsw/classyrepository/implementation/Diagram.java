@@ -15,6 +15,7 @@ public class Diagram extends ClassyNodeComposite {
 
     @Override
     public void addChild(ClassyNode child) {
-
+        this.notifySubscriber("NEW");
+        this.notifySubscriber("REPAINT");
     }
 }

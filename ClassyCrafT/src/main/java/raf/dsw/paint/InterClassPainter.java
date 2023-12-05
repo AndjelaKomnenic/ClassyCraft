@@ -33,7 +33,7 @@ public class InterClassPainter extends ElementPainter{
         g2D.draw(getShape());
 
         double xString = newKlasa.getX() + ((double) (widthRectangle - fm.stringWidth(newKlasa.getName())) / 2);
-        double yString = newKlasa.getY() + ((double) (heightRectangle - fm.getHeight() / 2) + fm.getAscent());
+        double yString = newKlasa.getY() + ((double) (heightRectangle + fm.getAscent()) / 2);
         g2D.drawString(newKlasa.getName(), (float) xString, (float) yString);
     }
 

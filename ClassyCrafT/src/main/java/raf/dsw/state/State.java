@@ -1,13 +1,14 @@
 package raf.dsw.state;
 
 import raf.dsw.classyrepository.implementation.Diagram;
+import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
 import java.awt.*;
 
 public abstract class State {
 
-    public abstract void mousePressed(Point e, PackageView packageView, Diagram currDiagram);
-    public abstract void mouseReleased(Point e, PackageView packageView, Diagram currDiagram);
-    public abstract void mouseDragged(Point e, PackageView packageView, Diagram currDiagram);
+    public abstract void misKliknut(int x, int y, DiagramView currDiagramView, PackageView pkg);
+    public abstract void misOtpusten(int x, int y, DiagramView currDiagram);
+    public abstract void misPrivucen(int x, int y, DiagramView currDiagram);
 }

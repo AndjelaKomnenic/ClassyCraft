@@ -32,7 +32,7 @@ public class PackageView extends JPanel implements ISubscriber {
     private JTabbedPane tabbedPane = new JTabbedPane();
     private List<DiagramView> tabs = new ArrayList<>();
 
-    Map<Diagram, List<ElementPainter>> paintersForMap = new HashMap<>();
+    Map<Diagram, List<ElementPainter>> paintersForDiagram = new HashMap<>();
     List<ElementPainter> selectedComponents = new ArrayList<>();
     private StateManager stateManager;
 
@@ -73,6 +73,8 @@ public class PackageView extends JPanel implements ISubscriber {
                 DiagramView tab = new DiagramView((Diagram) child);
                 child.addSubscriber(tab);
                 tabs.add(tab);
+
+                paintersForDiagram.putIfAbsent((Diagram) child, new ArrayList<>());
             }
 
         }
@@ -98,6 +100,7 @@ public class PackageView extends JPanel implements ISubscriber {
                 if (child instanceof Diagram) {
                     DiagramView tab = new DiagramView((Diagram) child);
                     child.addSubscriber(tab);
+                    paintersForDiagram.putIfAbsent((Diagram) child, new ArrayList<>());
 
                     if (!tabs.contains(tab)) {
                         tabs.add(tab);
@@ -124,6 +127,38 @@ public class PackageView extends JPanel implements ISubscriber {
             getTabbedPane().removeAll();
 
         }
+        else if(notification.equals("REPAINT")) {
+            DiagramView currDiagramView = tabs.get(tabbedPane.getSelectedIndex());
+            currDiagramView.setPainters(paintersForDiagram.get(currDiagramView.getDiagram()));
+        }
+        this.revalidate();
+        this.repaint();
 
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if(tabbedPane == null || tabs == null || tabs.isEmpty()) return;
+        DiagramView currDiagramView = (DiagramView) tabbedPane.getSelectedComponent();
+        currDiagramView.setPainters(paintersForDiagram.get(currDiagramView.getDiagram()));
+        currDiagramView.revalidate();
+        currDiagramView.repaint();
+    }
+
+    public void startMisKliknut(int x, int y, Diagram currDiagram){
+        this.startDodavanjeState();
+    }
+
+    public void startDodavanjeState(){
+        this.stateManager.setNewDodavanjeState();
+    }
+
+    public void addPainterForCurrent(ElementPainter painter){
+       Diagram currDiagram = ((DiagramView)tabbedPane.getSelectedComponent()).getDiagram();
+       paintersForDiagram.get(currDiagram).add(painter);
+       currDiagram.addChild(painter.getDgElement());
+       //dodati u stablo
+        repaint();
     }
 }

@@ -1,24 +1,38 @@
 package raf.dsw.state;
 
 import raf.dsw.classyrepository.implementation.Diagram;
+import raf.dsw.novo.Klasa;
+import raf.dsw.paint.ElementPainter;
+import raf.dsw.paint.InterClassPainter;
+import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
+import javax.swing.*;
 import java.awt.*;
 
 //klase, interfejsa, enuma
 public class DodavanjeState extends State{
     @Override
-    public void mousePressed(Point e, PackageView packageView, Diagram currDiagram) {
+    public void misKliknut(int x, int y, DiagramView currDiagramView, PackageView pkg) {
+        String nameString = JOptionPane.showInputDialog(new JFrame(), "Unesite pojam", "Pojam", JOptionPane.PLAIN_MESSAGE);
+        Klasa newKlasa = new Klasa(nameString, currDiagramView.getDiagram(),x, y);
+        currDiagramView.getDiagram().addChild(newKlasa);
+
+        ElementPainter elementPainter = new InterClassPainter(newKlasa);
+        //currDiagramView.getParent().addPainterForCurrent(elementPainter);
+
+        pkg.addPainterForCurrent(elementPainter);
+
+        System.out.println("da");
+    }
+
+    @Override
+    public void misOtpusten(int x, int y, DiagramView currDiagramView) {
 
     }
 
     @Override
-    public void mouseReleased(Point e, PackageView packageView, Diagram currDiagram) {
-
-    }
-
-    @Override
-    public void mouseDragged(Point e, PackageView packageView, Diagram currDiagram) {
+    public void misPrivucen(int x, int y, DiagramView currDiagramView) {
 
     }
 }
