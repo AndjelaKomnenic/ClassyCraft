@@ -1,5 +1,6 @@
 package raf.dsw.tree;
 
+import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.ProjectExplorer;
 import raf.dsw.classyrepository.factoryMethod.FactoryUtils;
@@ -31,7 +32,14 @@ public class ClassyTreeImplementation implements ClassyTree{
         ((ClassyNodeComposite) parent.getClassyNode()).addChild(child.getClassyNode());
         treeView.expandPath(treeView.getSelectionPath());
         update();
-
+    }
+    public void addChildToDiag(ClassyNodeComposite p, ClassyNode c){
+        ClassyTreeItem parent = new ClassyTreeItem(p);
+        ClassyTreeItem child = new ClassyTreeItem(c);
+        parent.add(child);
+        ((ClassyNodeComposite) parent.getClassyNode()).addChild(child.getClassyNode());
+        treeView.expandPath(treeView.getSelectionPath());
+        update();
     }
 
     @Override
@@ -39,11 +47,6 @@ public class ClassyTreeImplementation implements ClassyTree{
         return (ClassyTreeItem) treeView.getLastSelectedPathComponent();
     }
 
-    /*private ClassyNode createChild(ClassyNode parent) {
-        if (parent instanceof ProjectExplorer)
-            return  new Project("Project" +new Random().nextInt(100), parent);
-        return null;
-    }*/
     @Override
     public void deleteChild(ClassyTreeItem child){
         /*treeView.repaint();

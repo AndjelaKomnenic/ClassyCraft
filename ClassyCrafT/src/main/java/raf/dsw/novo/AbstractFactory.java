@@ -1,9 +1,11 @@
 package raf.dsw.novo;
 
+import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Diagram;
 
 public class AbstractFactory extends AbstractAbstractFactory{
-    public InterClass newInterClass(String type, Diagram parent){
+    public InterClass newInterClass(String type, ClassyNode parent){
         //posle vrati da ovde ne prosledjujemo koordinate vec da se one pri kliku na diagView setuju
         if(type.equalsIgnoreCase("klasa"))
             return new Klasa("", parent, 0, 0);

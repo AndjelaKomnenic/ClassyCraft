@@ -1,9 +1,14 @@
 package raf.dsw.popUps;
 
+import raf.dsw.classyrepository.composite.ClassyNodeComposite;
+import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.novo.ClassContent;
 import raf.dsw.novo.InterClass;
 import raf.dsw.novo.Klasa;
 import raf.dsw.view.MainFrame;
+import raf.dsw.workspace.WorkSpaceImplementation;
+import raf.dsw.workspace.view.DiagramView;
+import raf.dsw.workspace.view.PackageView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -130,6 +135,9 @@ public class PopUpSetUpParameters extends JDialog {
     public void handleButtonClick3(){
         noviElement.setName(naziv.getText());
         noviElement.setVidljivost(vidljivost.getText());
+        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
+        MainFrame.getInstance().getClassyTree().addChildToDiag((ClassyNodeComposite) currDiagram, noviElement);
         dispose();
     }
     public void addToList(ClassContent c){

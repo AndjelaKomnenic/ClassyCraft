@@ -1,8 +1,12 @@
 package raf.dsw.popUps;
 
+import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.novo.AbstractFactory;
 import raf.dsw.novo.InterClass;
 import raf.dsw.view.MainFrame;
+import raf.dsw.workspace.WorkSpaceImplementation;
+import raf.dsw.workspace.view.DiagramView;
+import raf.dsw.workspace.view.PackageView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,7 +60,9 @@ public class PopUpChooseIC extends JDialog {
         else if(radioButton3.isSelected())
             rbResult = "Enum";
         AbstractFactory factory = new AbstractFactory();
-        InterClass noviElement = factory.newInterClass(rbResult, null);
+        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
+        InterClass noviElement = factory.newInterClass(rbResult, currDiagram);
         dispose();
         if(rbResult.equalsIgnoreCase("Enum")){
             PopUpEnumDetails popEnum = new PopUpEnumDetails(this, noviElement);

@@ -56,7 +56,7 @@ public class PopUpEnumDetails extends JDialog {
         napravi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                napraviEnum();
+                //napraviEnum();
             }
         });
         setSize(300, 200);
