@@ -1,8 +1,13 @@
 package raf.dsw.state;
 
 import raf.dsw.classyrepository.implementation.Diagram;
+
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.novo.Klasa;
+
+import raf.dsw.paint.ElementPainter;
+import raf.dsw.paint.InterClassPainter;
+
 import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
@@ -12,31 +17,26 @@ import java.awt.*;
 //klase, interfejsa, enuma
 public class DodavanjeState implements State{
     @Override
-    public void misKliknut(int x, int y, Diagram currDiagram) {
-        /*DiagramView currDiagramView = (DiagramView) currDiagram.getParent().getTabbedPane().getSelectedComponent();
+    public void misKliknut(int x, int y, DiagramView currDiagramView, PackageView pkg) {
+        String nameString = JOptionPane.showInputDialog(new JFrame(), "Unesite pojam", "Pojam", JOptionPane.PLAIN_MESSAGE);
+        Klasa newKlasa = new Klasa(nameString, currDiagramView.getDiagram(),x, y);
+        currDiagramView.getDiagram().addChild(newKlasa);
 
-        String topicString = JOptionPane.showInputDialog(new JFrame(), "Unesite pojam", "Pojam", JOptionPane.PLAIN_MESSAGE);*/
-        /*if(topicString == null || topicString.trim().equals("")){
-            ApplicationFramework.getInstance().getMessageGenerator().createMessage(IllegalEvent.TOPIC_CANNOT_BE_EMPTY);
-            return;
-        }*/
-        /*Klasa newKlasa = new Klasa(topicString, currDiagramView, newKlasa.x, newKlasa.y);
-        currDiagramView.addChild(newTopic);
+        ElementPainter elementPainter = new InterClassPainter(newKlasa);
+        //currDiagramView.getParent().addPainterForCurrent(elementPainter);
 
-        //new painter
-        Painter painter = new TopicPainter(newTopic);
-        thisTopicPainter = painter;
-        projectView.addPainterForCurrent(painter);*/
-        //Klasa newKlasa = new Klasa();
+        pkg.addPainterForCurrent(elementPainter);
+
+        System.out.println("da");
     }
 
     @Override
-    public void misOtpusten(Point e, PackageView packageView, Diagram currDiagram) {
+    public void misOtpusten(int x, int y, DiagramView currDiagramView) {
 
     }
-
     @Override
-    public void misPrivucen(Point e, PackageView packageView, Diagram currDiagram) {
+    public void misPrivucen(int x, int y, DiagramView currDiagramView) {
+
 
     }
 }

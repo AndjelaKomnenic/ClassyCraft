@@ -1,5 +1,6 @@
 package raf.dsw.popUps;
 
+import lombok.var;
 import raf.dsw.novo.ClanEnuma;
 import raf.dsw.novo.ClassContent;
 import raf.dsw.novo.InterClass;

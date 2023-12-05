@@ -1,6 +1,7 @@
 package raf.dsw.state;
 
 import raf.dsw.classyrepository.implementation.Diagram;
+import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
 import java.awt.*;
@@ -8,17 +9,17 @@ import java.awt.*;
 public class SelekcijaState implements State{
 
     @Override
-    public void misKliknut(int x, int y, Diagram currDiagram) {
+    public void misKliknut(int x, int y, DiagramView currDiagram, PackageView pkg) {
 
     }
 
     @Override
-    public void misOtpusten(Point e, PackageView packageView, Diagram currDiagram) {
+    public void misOtpusten(int x, int y, DiagramView currDiagram) {
 
     }
 
     @Override
-    public void misPrivucen(Point e, PackageView packageView, Diagram currDiagram) {
+    public void misPrivucen(int x, int y, DiagramView currDiagram) {
 
     }
 }

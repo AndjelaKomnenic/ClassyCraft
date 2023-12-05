@@ -8,12 +8,15 @@ import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Project;
 import raf.dsw.observer.ISubscriber;
+import raf.dsw.paint.ElementPainter;
 import raf.dsw.state.StateManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -28,8 +31,9 @@ public class PackageView extends JPanel implements ISubscriber{
     private JTabbedPane tabbedPane = new JTabbedPane();
     private List<DiagramView> tabs = new ArrayList<>();
 
-    /*Map<Diagram, List<ElementPainter>> paintersForMap = new HashMap<>();
-    List<ElementPainter> selectedComponents = new ArrayList<>();*/
+    Map<Diagram, List<ElementPainter>> paintersForDiagram = new HashMap<>();
+    List<ElementPainter> selectedComponents = new ArrayList<>();
+
     private StateManager stateManager;
 
     public PackageView() {
@@ -69,6 +73,8 @@ public class PackageView extends JPanel implements ISubscriber{
                 DiagramView tab = new DiagramView((Diagram) child);
                 child.addSubscriber(tab);
                 tabs.add(tab);
+
+                paintersForDiagram.putIfAbsent((Diagram) child, new ArrayList<>());
             }
 
         }
@@ -94,6 +100,7 @@ public class PackageView extends JPanel implements ISubscriber{
                 if (child instanceof Diagram) {
                     DiagramView tab = new DiagramView((Diagram) child);
                     child.addSubscriber(tab);
+                    paintersForDiagram.putIfAbsent((Diagram) child, new ArrayList<>());
 
                     if (!tabs.contains(tab)) {
                         tabs.add(tab);
@@ -120,21 +127,39 @@ public class PackageView extends JPanel implements ISubscriber{
             getTabbedPane().removeAll();
 
         }
+        else if(notification.equals("REPAINT")) {
+            DiagramView currDiagramView = tabs.get(tabbedPane.getSelectedIndex());
+            currDiagramView.setPainters(paintersForDiagram.get(currDiagramView.getDiagram()));
+        }
+        this.revalidate();
+        this.repaint();
 
     }
-    /*
-<<<<<<< HEAD
-    public void startBrisanjeState(){
-        //stateManager.s
-=======*/
 
-    //samo ga zove ovde
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if(tabbedPane == null || tabs == null || tabs.isEmpty()) return;
+        DiagramView currDiagramView = (DiagramView) tabbedPane.getSelectedComponent();
+        currDiagramView.setPainters(paintersForDiagram.get(currDiagramView.getDiagram()));
+        currDiagramView.revalidate();
+        currDiagramView.repaint();
+    }
+
     public void startMisKliknut(int x, int y, Diagram currDiagram){
+        this.startDodavanjeState();
+    }
+
+    public void startDodavanjeState(){
         this.stateManager.setNewDodavanjeState();
     }
 
+    public void addPainterForCurrent(ElementPainter painter){
+       Diagram currDiagram = ((DiagramView)tabbedPane.getSelectedComponent()).getDiagram();
+       paintersForDiagram.get(currDiagram).add(painter);
+       currDiagram.addChild(painter.getDgElement());
+       //dodati u stablo
+        repaint();
 
-    void startState(){
-        //stateManager.getCurrState().misKliknut();
     }
 }

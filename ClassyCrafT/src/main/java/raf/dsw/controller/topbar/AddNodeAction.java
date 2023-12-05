@@ -21,8 +21,11 @@ public class AddNodeAction extends AbstractClassyAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         ClassyTreeItem selected = (ClassyTreeItem) MainFrame.getInstance().getClassyTree().getSelectedNode();
-        if(selected == null)
+        if(selected == null){
             ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NO_NODE_SELECTED_FOR_ADD_CHILD);
+            return;
+        }
+
         if (!(selected.getClassyNode() instanceof ClassyNodeComposite)){
             ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.CANT_ADD_CHILD);
             return;

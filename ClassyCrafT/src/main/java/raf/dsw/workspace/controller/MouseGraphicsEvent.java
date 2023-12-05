@@ -17,6 +17,12 @@ import java.awt.geom.Point2D;
 
 public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, MouseInputListener {
 
+    private DiagramView currDiagramView;
+
+    public MouseGraphicsEvent(DiagramView currDiagramView) {
+        this.currDiagramView = currDiagramView;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -29,8 +35,9 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
         Point worldP = getWorldCoordinates(e);*/
 
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
-        Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        packageView.startMisKliknut(e.getX(), e.getY(), currDiagram);
+        DiagramView currDiagramView = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
+        packageView.getStateManager().getCurrState().misKliknut(e.getX(), e.getY(), currDiagramView, packageView);
+
     }
 
     @Override
