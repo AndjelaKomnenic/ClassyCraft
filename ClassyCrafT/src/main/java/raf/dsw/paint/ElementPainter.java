@@ -2,7 +2,7 @@ package raf.dsw.paint;
 
 import lombok.Getter;
 import lombok.Setter;
-import raf.dsw.novo.DiagramElement;
+import raf.dsw.components.DiagramElement;
 
 import java.awt.*;
 

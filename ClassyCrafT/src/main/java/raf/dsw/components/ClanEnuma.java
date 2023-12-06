@@ -1,4 +1,4 @@
-package raf.dsw.novo;
+package raf.dsw.components;
 
 public class ClanEnuma extends ClassContent{
     public ClanEnuma(String naziv) {

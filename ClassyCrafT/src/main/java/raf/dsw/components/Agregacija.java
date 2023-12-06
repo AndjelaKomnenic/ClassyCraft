@@ -1,4 +1,4 @@
-package raf.dsw.novo;
+package raf.dsw.components;
 
 import raf.dsw.classyrepository.composite.ClassyNode;
 

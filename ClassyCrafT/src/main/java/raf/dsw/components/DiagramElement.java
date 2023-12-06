@@ -1,9 +1,8 @@
-package raf.dsw.novo;
+package raf.dsw.components;
 
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
-import raf.dsw.classyrepository.implementation.Diagram;
 
 @Getter
 @Setter

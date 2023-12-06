@@ -26,6 +26,9 @@ public class DiagramView extends JPanel implements ISubscriber {
     private List<ElementPainter> painters = new ArrayList<>();
     private List<ElementPainter> selectedElements = new ArrayList<>();
     private AffineTransform affineTransform = new AffineTransform();
+    private double scaling = 1.0;
+    private double translateX = 0.0;
+    private double translateY = 0.0;
 
     public DiagramView(Diagram diagram){
         this.diagram = diagram;
@@ -82,5 +85,32 @@ public class DiagramView extends JPanel implements ISubscriber {
                 p.draw(g2D);
         }
         g2D.dispose();
+    }
+
+    public void zoomIn(){
+        double newScaling = scaling * 1.2;
+        if (newScaling >= 5) {
+            newScaling = 5;
+        }
+
+        this.scaling = newScaling;
+        setupTransformation(newScaling);
+    }
+
+    public void zoomOut(){
+        double newScaling = scaling * 0.8;
+        if (newScaling <= 0.2) {
+            newScaling = 0.2;
+        }
+
+        this.scaling = newScaling;
+        setupTransformation(newScaling);
+    }
+
+    public void setupTransformation(double scaling){
+        affineTransform.setToIdentity();
+        affineTransform.translate(translateX, translateY);
+        affineTransform.scale(scaling, scaling);
+        repaint();
     }
 }

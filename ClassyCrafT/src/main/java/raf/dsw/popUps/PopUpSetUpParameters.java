@@ -2,9 +2,8 @@ package raf.dsw.popUps;
 
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Diagram;
-import raf.dsw.novo.ClassContent;
-import raf.dsw.novo.InterClass;
-import raf.dsw.novo.Klasa;
+import raf.dsw.components.ClassContent;
+import raf.dsw.components.InterClass;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.WorkSpaceImplementation;
 import raf.dsw.workspace.view.DiagramView;
@@ -14,8 +13,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PopUpSetUpParameters extends JDialog {
     String s;

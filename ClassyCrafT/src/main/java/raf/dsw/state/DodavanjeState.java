@@ -1,9 +1,6 @@
 package raf.dsw.state;
 
-import raf.dsw.classyrepository.implementation.Diagram;
-
-import raf.dsw.core.ApplicationFramework;
-import raf.dsw.novo.Klasa;
+import raf.dsw.components.Klasa;
 
 import raf.dsw.paint.ElementPainter;
 import raf.dsw.paint.InterClassPainter;
@@ -12,7 +9,6 @@ import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
 import javax.swing.*;
-import java.awt.*;
 
 //klase, interfejsa, enuma
 public class DodavanjeState implements State{

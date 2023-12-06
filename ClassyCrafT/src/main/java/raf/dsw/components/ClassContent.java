@@ -1,4 +1,4 @@
-package raf.dsw.novo;
+package raf.dsw.components;
 
 public abstract class ClassContent {
     private String vidljivost;

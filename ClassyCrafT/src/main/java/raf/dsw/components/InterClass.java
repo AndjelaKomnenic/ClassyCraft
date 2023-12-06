@@ -1,4 +1,4 @@
-package raf.dsw.novo;
+package raf.dsw.components;
 
 import lombok.Getter;
 import lombok.Setter;

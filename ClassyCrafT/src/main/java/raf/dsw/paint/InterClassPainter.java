@@ -1,8 +1,7 @@
 package raf.dsw.paint;
 
-import raf.dsw.novo.DiagramElement;
-import raf.dsw.novo.InterClass;
-import raf.dsw.novo.Klasa;
+import raf.dsw.components.DiagramElement;
+import raf.dsw.components.Klasa;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;

@@ -22,6 +22,9 @@ public class ActionManager {
     private SelectAction selectAction;
     private AddClassContentAction addClassContentAction;
 
+    private ZoomInAction zoomInAction;
+    private ZoomOutAction zoomOutAction;
+
     public ActionManager() {
         initialiseActions();
     }
@@ -39,6 +42,8 @@ public class ActionManager {
         deleteRightAction = new DeleteRightAction();
         selectAction = new SelectAction();
         addClassContentAction = new AddClassContentAction();
+        zoomInAction = new ZoomInAction();
+        zoomOutAction = new ZoomOutAction();
     }
 
 }

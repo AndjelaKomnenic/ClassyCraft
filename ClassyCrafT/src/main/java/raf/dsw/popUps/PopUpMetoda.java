@@ -1,7 +1,6 @@
 package raf.dsw.popUps;
 
-import raf.dsw.novo.Atribut;
-import raf.dsw.novo.Metod;
+import raf.dsw.components.Metod;
 
 import javax.swing.*;
 import java.awt.*;

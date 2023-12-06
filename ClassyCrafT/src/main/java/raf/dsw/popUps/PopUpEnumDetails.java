@@ -1,16 +1,14 @@
 package raf.dsw.popUps;
 
 import lombok.var;
-import raf.dsw.novo.ClanEnuma;
-import raf.dsw.novo.ClassContent;
-import raf.dsw.novo.InterClass;
+import raf.dsw.components.ClanEnuma;
+import raf.dsw.components.ClassContent;
+import raf.dsw.components.InterClass;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PopUpEnumDetails extends JDialog {
     private InterClass noviElement;

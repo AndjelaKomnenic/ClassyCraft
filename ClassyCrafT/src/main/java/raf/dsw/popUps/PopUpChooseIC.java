@@ -1,8 +1,8 @@
 package raf.dsw.popUps;
 
 import raf.dsw.classyrepository.implementation.Diagram;
-import raf.dsw.novo.AbstractFactory;
-import raf.dsw.novo.InterClass;
+import raf.dsw.components.AbstractFactory;
+import raf.dsw.components.InterClass;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.WorkSpaceImplementation;
 import raf.dsw.workspace.view.DiagramView;
