@@ -1,9 +1,16 @@
 package raf.dsw.popUps;
 
-import lombok.var;
+//import lombok.var;
+import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.ClanEnuma;
 import raf.dsw.components.ClassContent;
 import raf.dsw.components.InterClass;
+import raf.dsw.tree.model.ClassyTreeItem;
+import raf.dsw.view.MainFrame;
+import raf.dsw.workspace.WorkSpaceImplementation;
+import raf.dsw.workspace.view.DiagramView;
+import raf.dsw.workspace.view.PackageView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,7 +62,7 @@ public class PopUpEnumDetails extends JDialog {
         napravi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //napraviEnum();
+                napraviEnum();
             }
         });
         setSize(300, 200);
@@ -64,14 +71,35 @@ public class PopUpEnumDetails extends JDialog {
     }
     public void handleButtonClick1(){
         //dispose();
-        var name = JOptionPane.showInputDialog("Novi clan:");
+        String name = JOptionPane.showInputDialog("Novi clan:");
         ClanEnuma ce = new ClanEnuma(name);
         addToList(ce);
     }
     public void addToList(ClassContent cc){
         noviElement.addToList(cc);
     }
-    public void NapraviEnum(){
+    public void napraviEnum(){
         noviElement.setName(naziv.getText());
+        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
+        ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
+        if(myParent != null)
+            MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
+        else
+            System.out.println(currDiagram.getName() + " nije nadjen");
+        dispose();
+    }
+    public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
+        if (root.getClassyNode().getName().equalsIgnoreCase(targetNode.getName())) {
+            return root;
+        } else {
+            for (ClassyTreeItem child : root.getChildren()) {
+                ClassyTreeItem result = findClassyTreeItem(child, targetNode);
+                if (result != null) {
+                    return result;
+                }
+            }
+        }
+        return null;
     }
 }

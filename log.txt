@@ -14,3 +14,4 @@
 [ERROR][2023-11-12 23:32:17.913] Cannot delete ProjectExplorer
 [WARNING][2023-12-04 12:12:23.018] Author can only be set up for a project
 [WARNING][2023-12-04 12:12:28.402] Project as a child of a project can only be executed if project is selected
+[ERROR][2023-12-06 16:26:57.35] Cannot delete ProjectExplorer

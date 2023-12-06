@@ -9,9 +9,10 @@ import raf.dsw.tree.view.ClassyTreeView;
 public interface ClassyTree {
     ClassyTreeView generateTree(ProjectExplorer projectExplorer);
     void addChild(ClassyTreeItem parent);
-    void addChildToDiag(ClassyNodeComposite p, ClassyNode c);
+    void addChildToDiag(ClassyTreeItem p, ClassyNode c);
     ClassyTreeItem getSelectedNode();
     void deleteChild(ClassyTreeItem child);
+    ClassyTreeItem getRoot();
     void update();
     void addPP(ClassyTreeItem parent);
 }

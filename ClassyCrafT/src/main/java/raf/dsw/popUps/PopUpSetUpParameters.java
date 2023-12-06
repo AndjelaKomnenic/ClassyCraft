@@ -1,9 +1,11 @@
 package raf.dsw.popUps;
 
+import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.ClassContent;
 import raf.dsw.components.InterClass;
+import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.WorkSpaceImplementation;
 import raf.dsw.workspace.view.DiagramView;
@@ -134,8 +136,25 @@ public class PopUpSetUpParameters extends JDialog {
         noviElement.setVidljivost(vidljivost.getText());
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        MainFrame.getInstance().getClassyTree().addChildToDiag((ClassyNodeComposite) currDiagram, noviElement);
+        ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
+        if(myParent != null)
+            MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
+        else
+            System.out.println(currDiagram.getName() + " nije nadjen");
         dispose();
+    }
+    public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
+        if (root.getClassyNode().getName().equalsIgnoreCase(targetNode.getName())) {
+            return root;
+        } else {
+            for (ClassyTreeItem child : root.getChildren()) {
+                ClassyTreeItem result = findClassyTreeItem(child, targetNode);
+                if (result != null) {
+                    return result;
+                }
+            }
+        }
+        return null;
     }
     public void addToList(ClassContent c){
         noviElement.addToList(c);
