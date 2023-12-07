@@ -12,7 +12,7 @@ public class BrisanjeState implements State{
 
     @Override
     public void misKliknut(int x, int y, DiagramView currDiagram, PackageView pkg) {
-
+        System.out.println("Brise");
     }
 
     @Override

@@ -28,7 +28,8 @@ public class NewInterClassAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        StateManager stateManager = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView().getStateManager();
-        stateManager.setNewDodavanjeState();
+
+        MainFrame.getInstance().getWorkspace().getPackageView().startDodavanjeState();
+
     }
 }
