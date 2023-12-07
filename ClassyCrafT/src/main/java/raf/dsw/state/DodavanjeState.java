@@ -1,5 +1,6 @@
 package raf.dsw.state;
 
+import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
 import raf.dsw.components.Klasa;
 
@@ -32,7 +33,8 @@ public class DodavanjeState implements State{
     @Override
     public void misPrevucen(int x, int y, DiagramView currDiagramView, PackageView pkg) {
     }
-    public void zavrsenaSelekcija(InterClass noviElement, PackageView pkg){
+    public void zavrsenaSelekcija(DiagramElement novi, PackageView pkg){
+        InterClass noviElement = (InterClass) novi;
         noviElement.setX(x);
         noviElement.setY(y);
         ElementPainter elementPainter = new InterClassPainter(noviElement);

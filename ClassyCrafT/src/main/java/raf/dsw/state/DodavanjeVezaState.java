@@ -3,6 +3,7 @@ package raf.dsw.state;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.Agregacija;
 import raf.dsw.components.Connection;
+import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
 import raf.dsw.paint.ConnectionPainter;
 import raf.dsw.paint.ElementPainter;
@@ -39,7 +40,7 @@ public class DodavanjeVezaState implements State{
 
     @Override
     public void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg) {
-        PopUpChooseCon popCon = new PopUpChooseCon();
+        PopUpChooseCon popCon = new PopUpChooseCon(pocetnaTackaX, pocetnaTackaY, zavrsnaTackaX, zavrsnaTackaY, this);
     }
 
     @Override
@@ -51,7 +52,13 @@ public class DodavanjeVezaState implements State{
     }
 
     @Override
-    public void zavrsenaSelekcija(InterClass inter, PackageView pkg) {
-
+    public void zavrsenaSelekcija(DiagramElement inter, PackageView pkg) {
+        connection.setFromX(0);
+        connection.setFromY(0);
+        connection.setToY(0);
+        connection.setToX(0);
+        Connection c = (Connection) inter;
+        ElementPainter conPain = new ConnectionPainter(c);
+        pkg.addPainterForCurrent(conPain);
     }
 }

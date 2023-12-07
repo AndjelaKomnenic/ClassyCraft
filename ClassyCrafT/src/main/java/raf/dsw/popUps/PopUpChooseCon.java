@@ -5,6 +5,7 @@ import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.AbstractFactory;
 import raf.dsw.components.Connection;
 import raf.dsw.components.InterClass;
+import raf.dsw.state.State;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.WorkSpaceImplementation;
@@ -24,8 +25,15 @@ public class PopUpChooseCon extends JDialog {
     JRadioButton radioButton2 = new JRadioButton("Kompozicija");
     JRadioButton radioButton3 = new JRadioButton("Zavisnost");
     JRadioButton radioButton4 = new JRadioButton("Generalizacija");
-    public PopUpChooseCon(){
+    private int sx, sy, fx, fy;
+    private State calledFrom;
+    public PopUpChooseCon(int sx, int sy, int fx, int fy, State calledFrom){
         super(MainFrame.getInstance(), "Dodavanje nove veze", true);
+        this.fx = fx;
+        this.fy = fy;
+        this.sx = sx;
+        this.sy = sy;
+        this.calledFrom = calledFrom;
         setUp();
     }
     public void setUp(){
@@ -75,11 +83,16 @@ public class PopUpChooseCon extends JDialog {
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
         Connection noviElement = factory.newConnection(rbResult, currDiagram, naziv.getText());
+        noviElement.setToX(fx);
+        noviElement.setToY(fy);
+        noviElement.setFromX(sx);
+        noviElement.setFromY(sy);
         ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
         if(myParent != null)
             MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
         else
             System.out.println(currDiagram.getName() + " nije nadjen");
+        calledFrom.zavrsenaSelekcija(noviElement, packageView);
         dispose();
     }
     public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
