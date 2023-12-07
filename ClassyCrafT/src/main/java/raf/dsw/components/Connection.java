@@ -11,8 +11,8 @@ public abstract class Connection extends DiagramElement{
     private InterClass from;
     private InterClass to;
 
-    private double fromX, fromY;
-    private double toX, toY;
+    private int fromX, fromY;
+    private int toX, toY;
 
     public Connection(String name, ClassyNode parent, InterClass from) {
         super(name, parent);
@@ -22,25 +22,25 @@ public abstract class Connection extends DiagramElement{
     public void setFrom(InterClass fromInter){
         if(fromInter != null) {
             this.from = fromInter;
-            fromX = from.getX() + (from.getWidth() / 2);
-            fromY = from.getY() + (from.getHeight() / 2);
+            fromX = (int)(from.getX() + (from.getWidth() / 2));
+            fromY = (int)(from.getY() + (from.getHeight() / 2));
         }
     }
 
     public void setTo(InterClass toInter){
         this.to = toInter;
-        toX = to.getX() + (to.getWidth() / 2);
-        toY = to.getY() + (to.getHeight() / 2);
+        toX = (int)(to.getX() + (to.getWidth() / 2));
+        toY = (int)(to.getY() + (to.getHeight() / 2));
     }
 
     public void recalculateCoordinates(){
         if (to == null)
             return;
 
-        fromX = from.getX() + (from.getWidth() / 2);
-        fromY = from.getY() + (from.getHeight() / 2);
-        toX = to.getX() + (to.getWidth() / 2);
-        toY = to.getY() + (to.getHeight() / 2);
+        fromX = (int)(from.getX() + (from.getWidth() / 2));
+        fromY = (int)(from.getY() + (from.getHeight() / 2));
+        toX = (int)(to.getX() + (to.getWidth() / 2));
+        toY = (int)(to.getY() + (to.getHeight() / 2));
     }
 
     @Override
@@ -55,6 +55,14 @@ public abstract class Connection extends DiagramElement{
             return this.from.equals(that.from);
         return this.from.equals(that.from) && this.to.equals(that.to) ||
                 this.from.equals(that.to) && this.to.equals(that.from);
+    }
+    public void tempSetFrom(int x, int y){
+        fromX = x;
+        fromY = y;
+    }
+    public void tempSetTo(int x, int y){
+        toX = x;
+        toY = y;
     }
 
 }
