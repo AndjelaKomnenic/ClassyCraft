@@ -25,7 +25,7 @@ public class DodavanjeVezaState implements State{
     }
 
     @Override
-    public void zavrsenaSelekcija(InterClass inter) {
+    public void zavrsenaSelekcija(InterClass inter, PackageView pkg) {
 
     }
 }

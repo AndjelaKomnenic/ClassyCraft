@@ -23,5 +23,5 @@ public class BrisanjeState implements State{
     public void misPrivucen(int x, int y, DiagramView currDiagram) {
 
     }
-    public void zavrsenaSelekcija(InterClass noviElement){}
+    public void zavrsenaSelekcija(InterClass noviElement, PackageView pkg){}
 }

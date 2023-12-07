@@ -12,6 +12,6 @@ public interface  State {
     public abstract void misKliknut(int x, int y, DiagramView currDiagramView, PackageView pkg);
     public abstract void misOtpusten(int x, int y, DiagramView currDiagram);
     public abstract void misPrivucen(int x, int y, DiagramView currDiagram);
-    public abstract void zavrsenaSelekcija(InterClass inter);
+    public abstract void zavrsenaSelekcija(InterClass inter, PackageView pkg);
 
 }

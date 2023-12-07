@@ -16,13 +16,11 @@ import javax.swing.*;
 public class DodavanjeState implements State{
     private int x;
     private int y;
-    private PackageView pkg;
     @Override
     public void misKliknut(int x, int y, DiagramView currDiagramView, PackageView pkg) {
         PopUpChooseIC popUp = new PopUpChooseIC(this);
         this.x = x;
         this.y = y;
-        this.pkg = pkg;
         //String nameString = JOptionPane.showInputDialog(new JFrame(), "Unesite pojam", "Pojam", JOptionPane.PLAIN_MESSAGE);
         System.out.println("da");
     }
@@ -34,13 +32,12 @@ public class DodavanjeState implements State{
     @Override
     public void misPrivucen(int x, int y, DiagramView currDiagramView) {
     }
-    public void zavrsenaSelekcija(InterClass noviElement){
+    public void zavrsenaSelekcija(InterClass noviElement, PackageView pkg){
         noviElement.setX(x);
         noviElement.setY(y);
-
         ElementPainter elementPainter = new InterClassPainter(noviElement);
+        pkg.addPainterForCurrent(elementPainter);
         //currDiagramView.getParent().addPainterForCurrent(elementPainter);
 
-        pkg.addPainterForCurrent(elementPainter);
     }
 }

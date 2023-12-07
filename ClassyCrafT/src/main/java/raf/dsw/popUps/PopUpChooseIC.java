@@ -66,7 +66,6 @@ public class PopUpChooseIC extends JDialog {
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
         InterClass noviElement = factory.newInterClass(rbResult, currDiagram);
-        s.zavrsenaSelekcija(noviElement);
         dispose();
         if(rbResult.equalsIgnoreCase("Enum")){
             PopUpEnumDetails popEnum = new PopUpEnumDetails(this, noviElement);
@@ -74,5 +73,6 @@ public class PopUpChooseIC extends JDialog {
         else {
             PopUpSetUpParameters popSet = new PopUpSetUpParameters(rbResult, this, noviElement);
         }
+        s.zavrsenaSelekcija(noviElement, packageView);
     }
 }
