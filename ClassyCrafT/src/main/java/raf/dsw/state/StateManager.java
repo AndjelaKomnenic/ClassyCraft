@@ -2,7 +2,7 @@ package raf.dsw.state;
 
 import lombok.Getter;
 
-@Getter
+
 public class StateManager {
     private DodavanjeState newDodavanjeState;
     private DodavanjeSadrzajaState newDodavanjeSadrzajaState;
@@ -21,6 +21,7 @@ public class StateManager {
         currState = newDodavanjeState;
     }
 
+    public State getCurrState(){return currState;}
     public void setNewDodavanjeState(){
         currState = newDodavanjeState;
     }

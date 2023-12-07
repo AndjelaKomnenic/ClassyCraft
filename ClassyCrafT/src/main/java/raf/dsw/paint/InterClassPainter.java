@@ -16,6 +16,7 @@ public class InterClassPainter extends ElementPainter{
 
         Klasa newKlasa = (Klasa) super.getDgElement();
 
+
         Graphics2D g2D = (Graphics2D)g;
         FontMetrics fm = g2D.getFontMetrics();
 

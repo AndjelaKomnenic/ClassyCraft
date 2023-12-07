@@ -146,14 +146,14 @@ public class PackageView extends JPanel implements ISubscriber{
         currDiagramView.repaint();
     }
 
-    public void startMisKliknut(int x, int y, Diagram currDiagram){
-        this.startDodavanjeState();
-    }
 
     public void startDodavanjeState(){
         this.stateManager.setNewDodavanjeState();
     }
 
+    public void startBrisanjeState(){
+        this.stateManager.setNewBrisanjeState();
+    }
     public void addPainterForCurrent(ElementPainter painter){
        Diagram currDiagram = ((DiagramView)tabbedPane.getSelectedComponent()).getDiagram();
        paintersForDiagram.get(currDiagram).add(painter);

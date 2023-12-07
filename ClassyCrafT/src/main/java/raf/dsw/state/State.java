@@ -8,10 +8,7 @@ import raf.dsw.workspace.view.PackageView;
 import java.awt.*;
 
 public interface  State {
-
-    public abstract void misKliknut(int x, int y, DiagramView currDiagramView, PackageView pkg);
-    public abstract void misOtpusten(int x, int y, DiagramView currDiagram);
-    public abstract void misPrivucen(int x, int y, DiagramView currDiagram);
-    public abstract void zavrsenaSelekcija(InterClass inter, PackageView pkg);
-
+      void misKliknut(int x, int y, DiagramView currDiagramView, PackageView pkg);
+      void misOtpusten(int x, int y, DiagramView currDiagram);
+      void misPrivucen(int x, int y, DiagramView currDiagram);
 }
