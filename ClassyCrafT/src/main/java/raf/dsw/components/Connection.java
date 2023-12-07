@@ -20,9 +20,11 @@ public abstract class Connection extends DiagramElement{
     }
 
     public void setFrom(InterClass fromInter){
-        this.from = fromInter;
-        fromX = from.getX() + (from.getWidth() / 2);
-        fromY = from.getY() + (from.getHeight() / 2);
+        if(fromInter != null) {
+            this.from = fromInter;
+            fromX = from.getX() + (from.getWidth() / 2);
+            fromY = from.getY() + (from.getHeight() / 2);
+        }
     }
 
     public void setTo(InterClass toInter){

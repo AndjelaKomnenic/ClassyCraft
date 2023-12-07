@@ -1,6 +1,7 @@
 package raf.dsw.state;
 
 import raf.dsw.classyrepository.implementation.Diagram;
+import raf.dsw.components.InterClass;
 import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
@@ -22,4 +23,5 @@ public class DodavanjeSadrzajaState implements State {
     public void misPrivucen(int x, int y, DiagramView currDiagram) {
 
     }
+    public void zavrsenaSelekcija(InterClass noviElement, PackageView pkg){}
 }

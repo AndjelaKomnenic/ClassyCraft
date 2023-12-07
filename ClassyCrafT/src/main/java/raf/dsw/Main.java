@@ -13,6 +13,5 @@ public class Main {
         ClassyRepository classyRepository = new ClassyRepositoryImplementation();
         appCore.initialise(gui, classyRepository);
         appCore.run();
-        //appCore.initialize();
     }
 }

@@ -4,6 +4,7 @@ import lombok.Getter;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.AbstractFactory;
 import raf.dsw.components.InterClass;
+import raf.dsw.state.State;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.WorkSpaceImplementation;
 import raf.dsw.workspace.view.DiagramView;
@@ -22,11 +23,15 @@ public class PopUpChooseIC extends JDialog {
     JRadioButton radioButton2 = new JRadioButton("Klasa");
     JRadioButton radioButton3 = new JRadioButton("Enum");
 
+
     private InterClass selectedElement;
 
-
     public PopUpChooseIC(){
+
+    /*private State s;
+    public PopUpChooseIC(State s){*/  // ne vidim razloga za stejt al ako treba da se vrati nije problem
         super(MainFrame.getInstance(), "Dodavanje novog elementa", true);
+        //this.s = s;
         setUp();
 
     }
@@ -72,6 +77,7 @@ public class PopUpChooseIC extends JDialog {
         else {
             PopUpSetUpParameters popSet = new PopUpSetUpParameters(rbResult, this, selectedElement);
         }
+        s.zavrsenaSelekcija(noviElement, packageView);
     }
 
 

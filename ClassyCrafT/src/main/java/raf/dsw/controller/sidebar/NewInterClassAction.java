@@ -2,9 +2,12 @@ package raf.dsw.controller.sidebar;
 
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.controller.AbstractClassyAction;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.message.PossibleErrors;
 import raf.dsw.popUps.PopUpChooseIC;
 import raf.dsw.popUps.PopUpSetUpParameters;
 import raf.dsw.state.StateManager;
+import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.WorkSpaceImplementation;
 import raf.dsw.workspace.view.DiagramView;
@@ -25,6 +28,7 @@ public class NewInterClassAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         MainFrame.getInstance().getWorkspace().getPackageView().startDodavanjeState();
 
     }

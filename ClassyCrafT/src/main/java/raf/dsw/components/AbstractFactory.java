@@ -12,13 +12,13 @@ public class AbstractFactory extends AbstractAbstractFactory{
             return new Interfejs("", parent, 0, 0);
         return new Enum("", parent, 0, 0);
     }
-    public Connection newConnection(String type, Diagram parent){
+    public Connection newConnection(String type, Diagram parent, String name){
         if(type.equalsIgnoreCase("zavisnost"))
-            return new Zavisnost("", parent, null);
+            return new Zavisnost(name, parent, null);
         else if(type.equalsIgnoreCase("kompozicija"))
-            return new Kompozicija("", parent, null);
+            return new Kompozicija(name, parent, null);
         else if(type.equalsIgnoreCase("generalizacija"))
-            return new Generalizacija("", parent, null);
-        return new Agregacija("", parent, null);
+            return new Generalizacija(name, parent, null);
+        return new Agregacija(name, parent, null);
     }
 }
