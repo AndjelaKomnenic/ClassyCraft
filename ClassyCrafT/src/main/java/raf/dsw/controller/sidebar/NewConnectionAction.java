@@ -23,6 +23,6 @@ public class NewConnectionAction extends AbstractClassyAction {
     public void actionPerformed(ActionEvent e) {
         StateManager stateManager = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView().getStateManager();
         stateManager.setNewDodavanjeVezeState();
-        PopUpChooseCon popCon = new PopUpChooseCon();
+        //PopUpChooseCon popCon = new PopUpChooseCon();
     }
 }

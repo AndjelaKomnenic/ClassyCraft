@@ -15,12 +15,12 @@ public class SelekcijaState implements State{
     }
 
     @Override
-    public void misOtpusten(int x, int y, DiagramView currDiagram) {
+    public void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg) {
 
     }
 
     @Override
-    public void misPrivucen(int x, int y, DiagramView currDiagram) {
+    public void misPrevucen(int x, int y, DiagramView currDiagram, PackageView pkg) {
     }
     public void zavrsenaSelekcija(InterClass noviElement, PackageView pkg){}
 }

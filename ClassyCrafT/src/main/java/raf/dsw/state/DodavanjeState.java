@@ -26,11 +26,11 @@ public class DodavanjeState implements State{
     }
 
     @Override
-    public void misOtpusten(int x, int y, DiagramView currDiagramView) {
+    public void misOtpusten(int x, int y, DiagramView currDiagramView, PackageView pkg) {
 
     }
     @Override
-    public void misPrivucen(int x, int y, DiagramView currDiagramView) {
+    public void misPrevucen(int x, int y, DiagramView currDiagramView, PackageView pkg) {
     }
     public void zavrsenaSelekcija(InterClass noviElement, PackageView pkg){
         noviElement.setX(x);
@@ -38,6 +38,5 @@ public class DodavanjeState implements State{
         ElementPainter elementPainter = new InterClassPainter(noviElement);
         pkg.addPainterForCurrent(elementPainter);
         //currDiagramView.getParent().addPainterForCurrent(elementPainter);
-
     }
 }
