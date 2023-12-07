@@ -1,10 +1,7 @@
 package raf.dsw.state;
 
 import raf.dsw.classyrepository.implementation.Diagram;
-import raf.dsw.components.Agregacija;
-import raf.dsw.components.Connection;
-import raf.dsw.components.DiagramElement;
-import raf.dsw.components.InterClass;
+import raf.dsw.components.*;
 import raf.dsw.paint.ConnectionPainter;
 import raf.dsw.paint.ElementPainter;
 import raf.dsw.paint.InterClassPainter;
@@ -31,7 +28,7 @@ public class DodavanjeVezaState implements State{
         pocetnaTackaX = x;
         this.pkg = pkg;
         this.diag = diag;
-        connection = new Agregacija("agregacija", currDiagram.getDiagram(), null);
+        connection = new TemporaryConnection("temp", currDiagram.getDiagram(), null);
         connection.tempSetFrom(pocetnaTackaX, pocetnaTackaY);
         connection.tempSetTo(pocetnaTackaX, pocetnaTackaY);
         ElementPainter elementPainter = new ConnectionPainter(connection);
