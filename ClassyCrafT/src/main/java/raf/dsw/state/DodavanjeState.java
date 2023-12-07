@@ -1,10 +1,12 @@
 package raf.dsw.state;
 
+import raf.dsw.components.InterClass;
 import raf.dsw.components.Klasa;
 
 import raf.dsw.paint.ElementPainter;
 import raf.dsw.paint.InterClassPainter;
 
+import raf.dsw.popUps.PopUpChooseIC;
 import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
@@ -12,17 +14,16 @@ import javax.swing.*;
 
 //klase, interfejsa, enuma
 public class DodavanjeState implements State{
+    private int x;
+    private int y;
+    private PackageView pkg;
     @Override
     public void misKliknut(int x, int y, DiagramView currDiagramView, PackageView pkg) {
-        String nameString = JOptionPane.showInputDialog(new JFrame(), "Unesite pojam", "Pojam", JOptionPane.PLAIN_MESSAGE);
-        Klasa newKlasa = new Klasa(nameString, currDiagramView.getDiagram(),x, y);
-        currDiagramView.getDiagram().addChild(newKlasa);
-
-        ElementPainter elementPainter = new InterClassPainter(newKlasa);
-        //currDiagramView.getParent().addPainterForCurrent(elementPainter);
-
-        pkg.addPainterForCurrent(elementPainter);
-
+        PopUpChooseIC popUp = new PopUpChooseIC(this);
+        this.x = x;
+        this.y = y;
+        this.pkg = pkg;
+        //String nameString = JOptionPane.showInputDialog(new JFrame(), "Unesite pojam", "Pojam", JOptionPane.PLAIN_MESSAGE);
         System.out.println("da");
     }
 
@@ -32,7 +33,14 @@ public class DodavanjeState implements State{
     }
     @Override
     public void misPrivucen(int x, int y, DiagramView currDiagramView) {
+    }
+    public void zavrsenaSelekcija(InterClass noviElement){
+        noviElement.setX(x);
+        noviElement.setY(y);
 
+        ElementPainter elementPainter = new InterClassPainter(noviElement);
+        //currDiagramView.getParent().addPainterForCurrent(elementPainter);
 
+        pkg.addPainterForCurrent(elementPainter);
     }
 }

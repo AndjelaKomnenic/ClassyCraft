@@ -30,17 +30,5 @@ public class NewInterClassAction extends AbstractClassyAction {
     public void actionPerformed(ActionEvent e) {
         StateManager stateManager = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView().getStateManager();
         stateManager.setNewDodavanjeState();
-        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
-        /*if(packageView == null){
-            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NO_NODE_SELECTED_FOR_ADD_CHILD);
-            return;
-        }
-        Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        if(currDiagram == null){
-            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NO_NODE_SELECTED_FOR_ADD_CHILD);
-            return;
-        }*/
-        PopUpChooseIC popUp = new PopUpChooseIC();
-
     }
 }

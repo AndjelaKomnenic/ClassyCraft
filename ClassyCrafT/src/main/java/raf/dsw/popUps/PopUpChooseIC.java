@@ -3,6 +3,7 @@ package raf.dsw.popUps;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.AbstractFactory;
 import raf.dsw.components.InterClass;
+import raf.dsw.state.State;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.WorkSpaceImplementation;
 import raf.dsw.workspace.view.DiagramView;
@@ -19,8 +20,10 @@ public class PopUpChooseIC extends JDialog {
     JRadioButton radioButton1 = new JRadioButton("Interfejs");
     JRadioButton radioButton2 = new JRadioButton("Klasa");
     JRadioButton radioButton3 = new JRadioButton("Enum");
-    public PopUpChooseIC(){
+    private State s;
+    public PopUpChooseIC(State s){
         super(MainFrame.getInstance(), "Dodavanje novog elementa", true);
+        this.s = s;
         setUp();
     }
     public void setUp(){
@@ -63,6 +66,7 @@ public class PopUpChooseIC extends JDialog {
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
         InterClass noviElement = factory.newInterClass(rbResult, currDiagram);
+        s.zavrsenaSelekcija(noviElement);
         dispose();
         if(rbResult.equalsIgnoreCase("Enum")){
             PopUpEnumDetails popEnum = new PopUpEnumDetails(this, noviElement);
