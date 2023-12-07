@@ -1,5 +1,6 @@
 package raf.dsw.popUps;
 
+import lombok.Getter;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.AbstractFactory;
 import raf.dsw.components.InterClass;
@@ -13,15 +14,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@Getter
 public class PopUpChooseIC extends JDialog {
     String rbResult = "";
     ButtonGroup buttonGroup = new ButtonGroup();
     JRadioButton radioButton1 = new JRadioButton("Interfejs");
     JRadioButton radioButton2 = new JRadioButton("Klasa");
     JRadioButton radioButton3 = new JRadioButton("Enum");
+
+    private InterClass selectedElement;
+
+
     public PopUpChooseIC(){
         super(MainFrame.getInstance(), "Dodavanje novog elementa", true);
         setUp();
+
     }
     public void setUp(){
         setLayout(new GridLayout(3, 1));
@@ -35,12 +42,7 @@ public class PopUpChooseIC extends JDialog {
         radioButtons.add(radioButton2, 1);
         radioButtons.add(radioButton3, 2);
         JButton addElement = new JButton("Dodaj");
-        addElement.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                handleButtonClick();
-            }
-        });
+        addElement.addActionListener(e -> handleButtonClick());
         buttonHolder.add(new Label(), 0);
         buttonHolder.add(addElement, 1);
         buttonHolder.add(new Label(), 2);
@@ -62,13 +64,15 @@ public class PopUpChooseIC extends JDialog {
         AbstractFactory factory = new AbstractFactory();
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        InterClass noviElement = factory.newInterClass(rbResult, currDiagram);
+        selectedElement = factory.newInterClass(rbResult, currDiagram); // ovaj bato
         dispose();
         if(rbResult.equalsIgnoreCase("Enum")){
-            PopUpEnumDetails popEnum = new PopUpEnumDetails(this, noviElement);
+            PopUpEnumDetails popEnum = new PopUpEnumDetails(this, selectedElement);
         }
         else {
-            PopUpSetUpParameters popSet = new PopUpSetUpParameters(rbResult, this, noviElement);
+            PopUpSetUpParameters popSet = new PopUpSetUpParameters(rbResult, this, selectedElement);
         }
     }
+
+
 }

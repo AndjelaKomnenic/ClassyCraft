@@ -38,6 +38,7 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
         DiagramView currDiagramView = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
         packageView.getStateManager().getCurrState().misKliknut(e.getX(), e.getY(), currDiagramView, packageView);
 
+
     }
 
     @Override

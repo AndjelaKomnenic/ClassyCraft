@@ -20,7 +20,6 @@ public class DeleteRightAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        StateManager stateManager = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView().getStateManager();
-        stateManager.setNewBrisanjeState();
+        MainFrame.getInstance().getWorkspace().getPackageView().startBrisanjeState();
     }
 }

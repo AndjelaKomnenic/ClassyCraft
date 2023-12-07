@@ -25,9 +25,7 @@ public class NewInterClassAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        StateManager stateManager = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView().getStateManager();
-        stateManager.setNewDodavanjeState();
-        PopUpChooseIC popUp = new PopUpChooseIC();
+        MainFrame.getInstance().getWorkspace().getPackageView().startDodavanjeState();
 
     }
 }

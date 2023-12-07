@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.observer.ISubscriber;
+import raf.dsw.paint.ClassPainter;
 import raf.dsw.paint.ElementPainter;
 import raf.dsw.paint.InterClassPainter;
 import raf.dsw.view.MainFrame;
@@ -81,7 +82,7 @@ public class DiagramView extends JPanel implements ISubscriber {
             if(p instanceof AssociationPainter) p.draw(g2D);
         }*/
         for(ElementPainter p : painters){
-            //if(p instanceof InterClassPainter)
+            if(p instanceof ClassPainter)
                 p.draw(g2D);
         }
         g2D.dispose();

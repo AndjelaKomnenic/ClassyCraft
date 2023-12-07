@@ -1,5 +1,6 @@
 package raf.dsw.popUps;
 
+import lombok.Getter;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Diagram;
@@ -16,6 +17,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@Getter
 public class PopUpSetUpParameters extends JDialog {
     String s;
     private InterClass noviElement;
