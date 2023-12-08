@@ -43,9 +43,9 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        /*PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
-        Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        Point worldP = getWorldCoordinates(e);*/
+        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        DiagramView currDiagramView = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
+        packageView.getStateManager().getCurrState().misOtpusten(e.getX(), e.getY(), currDiagramView, packageView);
     }
 
     @Override
@@ -60,9 +60,9 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        /*PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
-        Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        Point worldP = getWorldCoordinates(e);*/
+        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        DiagramView currDiagramView = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
+        packageView.getStateManager().getCurrState().misPrevucen(e.getX(), e.getY(), currDiagramView, packageView);
 
     }
 

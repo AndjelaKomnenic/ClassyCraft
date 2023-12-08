@@ -1,6 +1,10 @@
 package raf.dsw.state;
 
+
+import raf.dsw.components.DiagramElement;
+
 import raf.dsw.components.Enum;
+
 import raf.dsw.components.InterClass;
 import raf.dsw.components.Interfejs;
 import raf.dsw.components.Klasa;
@@ -64,18 +68,18 @@ public class DodavanjeState implements State{
     }
 
     @Override
-    public void misOtpusten(int x, int y, DiagramView currDiagramView) {
+    public void misOtpusten(int x, int y, DiagramView currDiagramView, PackageView pkg) {
 
     }
     @Override
-    public void misPrivucen(int x, int y, DiagramView currDiagramView) {
+    public void misPrevucen(int x, int y, DiagramView currDiagramView, PackageView pkg) {
     }
-    public void zavrsenaSelekcija(InterClass noviElement, PackageView pkg){
+    public void zavrsenaSelekcija(DiagramElement novi, PackageView pkg){
+        InterClass noviElement = (InterClass) novi;
         noviElement.setX(x);
         noviElement.setY(y);
         ElementPainter elementPainter = new InterClassPainter(noviElement);
         pkg.addPainterForCurrent(elementPainter);
         //currDiagramView.getParent().addPainterForCurrent(elementPainter);
-
     }
 }
