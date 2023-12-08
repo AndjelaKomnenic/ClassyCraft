@@ -1,16 +1,19 @@
 package raf.dsw.paint;
 
-import raf.dsw.components.*;
+import raf.dsw.components.ClassContent;
+import raf.dsw.components.DiagramElement;
+import raf.dsw.components.InterClass;
+import raf.dsw.components.Metod;
 import raf.dsw.popUps.PopUpChooseIC;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
-public class ClassPainter extends ElementPainter{
+public class EnumPainter extends ElementPainter{
     private PopUpChooseIC popUpChooseICInstance;
     private InterClass selectedElement;
-    public ClassPainter(DiagramElement dgElement, PopUpChooseIC popUpChooseICInstance) {
+    public EnumPainter(DiagramElement dgElement, PopUpChooseIC popUpChooseICInstance) {
         super(dgElement);
         this.popUpChooseICInstance = popUpChooseICInstance;
     }
@@ -36,15 +39,6 @@ public class ClassPainter extends ElementPainter{
             int selectedElementNameWidth = fm.stringWidth(selectedElement.getVidljivost() + " " + selectedElement.getName());
 
 
-            int maxAttributeWidth = 0;
-            for (ClassContent element : ccc) {
-                if (element instanceof Atribut) {
-                    int elementWidth = fm.stringWidth(element.getVidljivost() + " " + element.getTip() + " " + element.getNaziv());
-                    maxAttributeWidth = Math.max(maxAttributeWidth, elementWidth);
-                }
-            }
-
-
             int maxMethodWidth = 0;
             for (ClassContent element : ccc) {
                 if (element instanceof Metod) {
@@ -54,7 +48,7 @@ public class ClassPainter extends ElementPainter{
             }
 
 
-            requiredWidth = Math.max(selectedElementNameWidth, Math.max(maxAttributeWidth, maxMethodWidth)) + 20;
+            requiredWidth = Math.max(selectedElementNameWidth,  maxMethodWidth) + 20;
 
 
 
@@ -70,20 +64,8 @@ public class ClassPainter extends ElementPainter{
 
             int xOffset = (int) selectedElement.getX() + 10;
 
-            g2D.drawString(selectedElement.getVidljivost() + " " + selectedElement.getName(), xOffset, yOffset);
-            yOffset += height + 5;
-
             g2D.drawLine((int) selectedElement.getX(), yOffset, (int) (selectedElement.getX() + requiredWidth), yOffset);
             yOffset += height + 5;
-
-
-            for (ClassContent element : ccc) {
-                if (element instanceof Atribut) {
-                    String attributeString = element.getVidljivost() + " " + element.getTip() + " " + element.getNaziv();
-                    g2D.drawString(attributeString, xOffset, yOffset);
-                    yOffset += height + 5;
-                }
-            }
 
 
             g2D.drawLine((int) selectedElement.getX(), yOffset, (int) (selectedElement.getX() + requiredWidth), yOffset);
@@ -108,6 +90,4 @@ public class ClassPainter extends ElementPainter{
     public boolean elementAt(int x, int y) {
         return getShape().contains(x, y);
     }
-
-
 }

@@ -48,6 +48,7 @@ public class DodavanjeVezaState implements State{
         pkg.repaint();
     }
 
+
     @Override
     public void zavrsenaSelekcija(DiagramElement inter, PackageView pkg) {
         connection.setFromX(0);
@@ -58,4 +59,5 @@ public class DodavanjeVezaState implements State{
         ElementPainter conPain = new ConnectionPainter(c);
         pkg.addPainterForCurrent(conPain);
     }
+
 }
