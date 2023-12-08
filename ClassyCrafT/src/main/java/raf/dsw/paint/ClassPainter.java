@@ -5,6 +5,7 @@ import raf.dsw.popUps.PopUpChooseIC;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClassPainter extends ElementPainter{
@@ -57,7 +58,6 @@ public class ClassPainter extends ElementPainter{
             requiredWidth = Math.max(selectedElementNameWidth, Math.max(maxAttributeWidth, maxMethodWidth)) + 20;
 
 
-
             selectedElement.setWidthAndHeight(requiredWidth, requiredHeight);
             setShape(new Rectangle2D.Double(selectedElement.getX(), selectedElement.getY(), requiredWidth, requiredHeight));
 
@@ -101,7 +101,6 @@ public class ClassPainter extends ElementPainter{
             g2D.setColor(new Color(selectedElement.getColourOutline()));
             g2D.drawRect((int) selectedElement.getX(), (int) selectedElement.getY(), requiredWidth, requiredHeight);
         }
-
     }
 
     @Override

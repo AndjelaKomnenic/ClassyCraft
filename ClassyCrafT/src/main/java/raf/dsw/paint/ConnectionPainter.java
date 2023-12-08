@@ -32,19 +32,19 @@ public class ConnectionPainter extends ElementPainter{
             double newsecondX = startX + unitVectorX * secondDistance;
             double newsecondY = startY + unitVectorY * secondDistance;
             Point newPoint = new Point((int) newfirstX, (int) newfirstY);
-            double perpendicularX1 = unitVectorY;
-            double perpendicularY1 = -unitVectorX;
-            double perpendicularX2 = -unitVectorY;
-            double perpendicularY2 = unitVectorX;
+            double ppX1 = unitVectorY;
+            double ppY1 = -unitVectorX;
+            double ppX2 = -unitVectorY;
+            double ppY2 = unitVectorX;
             double lineLength = 9;
-            Point perpendicularPoint1 = new Point((int) (newfirstX + perpendicularX1 * lineLength),
-                    (int) (newfirstY + perpendicularY1 * lineLength));
-            Point perpendicularPoint2 = new Point((int) (newfirstX + perpendicularX2 * lineLength),
-                    (int) (newfirstY + perpendicularY2 * lineLength));
-            g.drawLine(perpendicularPoint1.x, perpendicularPoint1.y, startX, startY);
-            g.drawLine(perpendicularPoint2.x, perpendicularPoint2.y, startX, startY);
-            g.drawLine((int)newsecondX, (int)newsecondY, perpendicularPoint1.x, perpendicularPoint1.y);
-            g.drawLine((int)newsecondX, (int)newsecondY, perpendicularPoint2.x, perpendicularPoint2.y);
+            Point p1 = new Point((int) (newfirstX + ppX1 * lineLength),
+                    (int) (newfirstY + ppY1 * lineLength));
+            Point p2 = new Point((int) (newfirstX + ppX2 * lineLength),
+                    (int) (newfirstY + ppY2 * lineLength));
+            g.drawLine(p1.x, p1.y, startX, startY);
+            g.drawLine(p2.x, p2.y, startX, startY);
+            g.drawLine((int)newsecondX, (int)newsecondY, p1.x, p1.y);
+            g.drawLine((int)newsecondX, (int)newsecondY, p2.x, p2.y);
             startX = (int)newsecondX;
             startY = (int)newsecondY;
         }
@@ -59,23 +59,23 @@ public class ConnectionPainter extends ElementPainter{
             double newsecondX = startX + unitVectorX * secondDistance;
             double newsecondY = startY + unitVectorY * secondDistance;
             Point newPoint = new Point((int) newfirstX, (int) newfirstY);
-            double perpendicularX1 = unitVectorY;
-            double perpendicularY1 = -unitVectorX;
-            double perpendicularX2 = -unitVectorY;
-            double perpendicularY2 = unitVectorX;
+            double ppX1 = unitVectorY;
+            double ppY1 = -unitVectorX;
+            double ppX2 = -unitVectorY;
+            double ppY2 = unitVectorX;
             double lineLength = 9;
-            Point perpendicularPoint1 = new Point((int) (newfirstX + perpendicularX1 * lineLength),
-                    (int) (newfirstY + perpendicularY1 * lineLength));
-            Point perpendicularPoint2 = new Point((int) (newfirstX + perpendicularX2 * lineLength),
-                    (int) (newfirstY + perpendicularY2 * lineLength));
-            int []xpoints = {startX, (int)perpendicularPoint1.x, (int)newsecondX, (int)perpendicularPoint2.x};
-            int []ypoints = {startY, (int)perpendicularPoint1.y, (int)newsecondY, (int)perpendicularPoint2.y};
+            Point p1 = new Point((int) (newfirstX + ppX1 * lineLength),
+                    (int) (newfirstY + ppY1 * lineLength));
+            Point p2 = new Point((int) (newfirstX + ppX2 * lineLength),
+                    (int) (newfirstY + ppY2 * lineLength));
+            int []xpoints = {startX, (int)p1.x, (int)newsecondX, (int)p2.x};
+            int []ypoints = {startY, (int)p1.y, (int)newsecondY, (int)p2.y};
             Shape s = new Polygon(xpoints, ypoints, 4);
             g.fill(s);
-            g.drawLine(perpendicularPoint1.x, perpendicularPoint1.y, startX, startY);
-            g.drawLine(perpendicularPoint2.x, perpendicularPoint2.y, startX, startY);
-            g.drawLine((int)newsecondX, (int)newsecondY, perpendicularPoint1.x, perpendicularPoint1.y);
-            g.drawLine((int)newsecondX, (int)newsecondY, perpendicularPoint2.x, perpendicularPoint2.y);
+            g.drawLine(p1.x, p1.y, startX, startY);
+            g.drawLine(p2.x, p2.y, startX, startY);
+            g.drawLine((int)newsecondX, (int)newsecondY, p1.x, p1.y);
+            g.drawLine((int)newsecondX, (int)newsecondY, p2.x, p2.y);
             startX = (int)newsecondX;
             startY = (int)newsecondY;
         }
@@ -87,18 +87,18 @@ public class ConnectionPainter extends ElementPainter{
             double newX = finishX + unitVectorX * distance;
             double newY = finishY + unitVectorY * distance;
             Point newPoint = new Point((int) newX, (int) newY);
-            double perpendicularX1 = unitVectorY;
-            double perpendicularY1 = -unitVectorX;
-            double perpendicularX2 = -unitVectorY;
-            double perpendicularY2 = unitVectorX;
+            double ppX1 = unitVectorY;
+            double ppY1 = -unitVectorX;
+            double ppX2 = -unitVectorY;
+            double ppY2 = unitVectorX;
             double lineLength = 9;
-            Point perpendicularPoint1 = new Point((int) (newX + perpendicularX1 * lineLength),
-                    (int) (newY + perpendicularY1 * lineLength));
-            Point perpendicularPoint2 = new Point((int) (newX + perpendicularX2 * lineLength),
-                    (int) (newY + perpendicularY2 * lineLength));
-            g.drawLine(perpendicularPoint1.x, perpendicularPoint1.y, perpendicularPoint2.x, perpendicularPoint2.y);
-            g.drawLine(perpendicularPoint1.x, perpendicularPoint1.y, finishX, finishY);
-            g.drawLine(perpendicularPoint2.x, perpendicularPoint2.y, finishX, finishY);
+            Point p1 = new Point((int) (newX + ppX1 * lineLength),
+                    (int) (newY + ppY1 * lineLength));
+            Point p2 = new Point((int) (newX + ppX2 * lineLength),
+                    (int) (newY + ppY2 * lineLength));
+            g.drawLine(p1.x, p1.y, p2.x, p2.y);
+            g.drawLine(p1.x, p1.y, finishX, finishY);
+            g.drawLine(p2.x, p2.y, finishX, finishY);
             finishX = (int)newX;
             finishY = (int)newY;
         }
