@@ -25,4 +25,6 @@ public class DodavanjeSadrzajaState implements State {
 
     }
     public void zavrsenaSelekcija(DiagramElement noviElement, PackageView pkg){}
+    @Override
+    public void neispravnoCrtanje() {}
 }

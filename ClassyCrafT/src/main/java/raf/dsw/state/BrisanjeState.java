@@ -25,4 +25,7 @@ public class BrisanjeState implements State{
 
     }
     public void zavrsenaSelekcija(DiagramElement noviElement, PackageView pkg){}
+
+    @Override
+    public void neispravnoCrtanje() {}
 }

@@ -1,10 +1,13 @@
 package raf.dsw.popUps;
 
 import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.AbstractFactory;
 import raf.dsw.components.Connection;
+import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
+import raf.dsw.paint.ElementPainter;
 import raf.dsw.state.State;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
@@ -27,6 +30,7 @@ public class PopUpChooseCon extends JDialog {
     JRadioButton radioButton4 = new JRadioButton("Generalizacija");
     private int sx, sy, fx, fy;
     private State calledFrom;
+    //private ClassyNodeComposite parentDiagram;
     public PopUpChooseCon(int sx, int sy, int fx, int fy, State calledFrom){
         super(MainFrame.getInstance(), "Dodavanje nove veze", true);
         this.fx = fx;
@@ -34,7 +38,10 @@ public class PopUpChooseCon extends JDialog {
         this.sx = sx;
         this.sy = sy;
         this.calledFrom = calledFrom;
-        setUp();
+        if(connectsTwoItems())
+            setUp();
+        else
+            calledFrom.neispravnoCrtanje();
     }
     public void setUp(){
         setLayout(new GridLayout(4, 1));
@@ -88,8 +95,10 @@ public class PopUpChooseCon extends JDialog {
         noviElement.setFromX(sx);
         noviElement.setFromY(sy);
         ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
-        if(myParent != null)
+        if(myParent != null) {
             MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
+            //parentDiagram = (ClassyNodeComposite) myParent.getClassyNode();
+        }
         else
             System.out.println(currDiagram.getName() + " nije nadjen");
         calledFrom.zavrsenaSelekcija(noviElement, packageView);
@@ -107,5 +116,28 @@ public class PopUpChooseCon extends JDialog {
             }
         }
         return null;
+    }
+    public boolean connectsTwoItems(){
+        DiagramElement el1 = null;
+        DiagramElement el2 = null;
+        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        DiagramView currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
+        for(ElementPainter ep: currDiagram.getPainters()){
+            if(ep.elementAt(sx, sy)){
+                el1 = ep.getDgElement();
+                break;
+            }
+        }
+        for(ElementPainter ep: currDiagram.getPainters()){
+            if(ep.elementAt(fx, fy)){
+                el2 = ep.getDgElement();
+                break;
+            }
+        }
+        if(el1 == null || el2 == null)
+            return false;
+        if(el1 == el2)
+            return false;
+        return true;
     }
 }

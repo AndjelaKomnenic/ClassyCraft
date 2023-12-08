@@ -13,4 +13,5 @@ public interface  State {
     public abstract void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg);
     public abstract void misPrevucen(int x, int y, DiagramView currDiagram, PackageView pkg);
     public abstract void zavrsenaSelekcija(DiagramElement inter, PackageView pkg);
+    public abstract void neispravnoCrtanje();
 }

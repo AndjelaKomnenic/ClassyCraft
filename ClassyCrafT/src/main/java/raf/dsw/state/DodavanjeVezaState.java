@@ -59,5 +59,12 @@ public class DodavanjeVezaState implements State{
         ElementPainter conPain = new ConnectionPainter(c);
         pkg.addPainterForCurrent(conPain);
     }
+    public void neispravnoCrtanje(){
+        connection.setFromX(0);
+        connection.setFromY(0);
+        connection.setToY(0);
+        connection.setToX(0);
+        pkg.repaint();
+    }
 
 }

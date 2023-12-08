@@ -82,4 +82,6 @@ public class DodavanjeState implements State{
         pkg.addPainterForCurrent(elementPainter);
         //currDiagramView.getParent().addPainterForCurrent(elementPainter);
     }
+    @Override
+    public void neispravnoCrtanje() {}
 }
