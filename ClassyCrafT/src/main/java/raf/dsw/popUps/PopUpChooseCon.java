@@ -29,6 +29,7 @@ public class PopUpChooseCon extends JDialog {
     JRadioButton radioButton3 = new JRadioButton("Zavisnost");
     JRadioButton radioButton4 = new JRadioButton("Generalizacija");
     private int sx, sy, fx, fy;
+    private int noviStartx, noviStarty, noviFinishx, noviFinishy;
     private State calledFrom;
     //private ClassyNodeComposite parentDiagram;
     public PopUpChooseCon(int sx, int sy, int fx, int fy, State calledFrom){
@@ -90,10 +91,10 @@ public class PopUpChooseCon extends JDialog {
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
         Connection noviElement = factory.newConnection(rbResult, currDiagram, naziv.getText());
-        noviElement.setToX(fx);
-        noviElement.setToY(fy);
-        noviElement.setFromX(sx);
-        noviElement.setFromY(sy);
+        noviElement.setToX(noviFinishx);
+        noviElement.setToY(noviFinishy);
+        noviElement.setFromX(noviStartx);
+        noviElement.setFromY(noviStarty);
         ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
         if(myParent != null) {
             MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
@@ -139,5 +140,9 @@ public class PopUpChooseCon extends JDialog {
         if(el1 == el2)
             return false;
         return true;
+    }
+
+    public void twoClosestDots(){
+
     }
 }
