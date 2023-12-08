@@ -1,5 +1,6 @@
 package raf.dsw.popUps;
 
+import lombok.Getter;
 import raf.dsw.components.Atribut;
 
 import javax.swing.*;
@@ -7,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@Getter
 public class PopUpAtribut extends JDialog {
     private JTextField vidljivost = new JTextField();
     private JTextField tip = new JTextField();

@@ -77,6 +77,4 @@ public class PopUpChooseIC extends JDialog {
         }
         s.zavrsenaSelekcija(selectedElement, packageView);
     }
-
-
 }

@@ -7,10 +7,10 @@ import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
-public class ClassPainter extends ElementPainter{
+public class InterfacePainter extends ElementPainter{
     private PopUpChooseIC popUpChooseICInstance;
     private InterClass selectedElement;
-    public ClassPainter(DiagramElement dgElement, PopUpChooseIC popUpChooseICInstance) {
+    public InterfacePainter(DiagramElement dgElement, PopUpChooseIC popUpChooseICInstance) {
         super(dgElement);
         this.popUpChooseICInstance = popUpChooseICInstance;
     }
@@ -33,7 +33,7 @@ public class ClassPainter extends ElementPainter{
             int requiredWidth = maxWidth;
             int requiredHeight = ((ccc.size() + 1) * (height + 5)) + height * 3;
 
-            int selectedElementNameWidth = fm.stringWidth(selectedElement.getVidljivost() + " " + selectedElement.getName());
+            int selectedElementNameWidth = fm.stringWidth(selectedElement.getName());
 
 
             int maxAttributeWidth = 0;
