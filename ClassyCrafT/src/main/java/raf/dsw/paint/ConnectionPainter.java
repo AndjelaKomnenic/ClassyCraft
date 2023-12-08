@@ -1,6 +1,7 @@
 package raf.dsw.paint;
 
 import raf.dsw.components.*;
+import raf.dsw.workspace.view.PackageView;
 
 import java.awt.*;
 
