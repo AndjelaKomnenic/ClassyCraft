@@ -35,7 +35,7 @@ public class DodavanjeState implements State{
 
         pkg.addPainterForCurrent(elementPainter);*/
 
-        PopUpChooseIC popUp = new PopUpChooseIC();
+        PopUpChooseIC popUp = new PopUpChooseIC(this);
 
         popUp.getSelectedElement().setX(x);   // ovo radi ovde al mora da se sredi nije lepo...
         popUp.getSelectedElement().setY(y);   // neka ideja sa clickcoordinates tracker?   --> cuva poslednje klik na dijagramview i njega onda koristimo u absfact
@@ -82,4 +82,6 @@ public class DodavanjeState implements State{
         pkg.addPainterForCurrent(elementPainter);
         //currDiagramView.getParent().addPainterForCurrent(elementPainter);
     }
+    @Override
+    public void neispravnoCrtanje() {}
 }

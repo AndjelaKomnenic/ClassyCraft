@@ -28,6 +28,7 @@ public class PopUpChooseIC extends JDialog {
     private State s;
     public PopUpChooseIC(State s){
 
+
         super(MainFrame.getInstance(), "Dodavanje novog elementa", true);
         this.s = s;
         setUp();
@@ -37,6 +38,10 @@ public class PopUpChooseIC extends JDialog {
 
 
         //public PopUpChooseIC(){*/  // ne vidim razloga za stejt al ako treba da se vrati nije problem
+
+    private State s;
+    public PopUpChooseIC(State s){
+
         super(MainFrame.getInstance(), "Dodavanje novog elementa", true);
         setUp();
 
@@ -84,8 +89,6 @@ public class PopUpChooseIC extends JDialog {
         else {
             PopUpSetUpParameters popSet = new PopUpSetUpParameters(rbResult, this, selectedElement);
         }
-        //s.zavrsenaSelekcija(noviElement, packageView);
+        s.zavrsenaSelekcija(selectedElement, packageView);
     }
-
-
 }

@@ -24,4 +24,6 @@ public class SelekcijaState implements State{
     public void misPrevucen(int x, int y, DiagramView currDiagram, PackageView pkg) {
     }
     public void zavrsenaSelekcija(DiagramElement noviElement, PackageView pkg){}
+    @Override
+    public void neispravnoCrtanje() {}
 }
