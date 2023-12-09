@@ -25,7 +25,6 @@ public class PopUpChooseIC extends JDialog {
 
 
     private InterClass selectedElement;
-
     private State s;
     public PopUpChooseIC(State s){
         super(MainFrame.getInstance(), "Dodavanje novog elementa", true);
@@ -33,6 +32,12 @@ public class PopUpChooseIC extends JDialog {
         setUp();
 
     }
+    public PopUpChooseIC(){
+        super(MainFrame.getInstance(), "Dodavanje novog elementa", true);
+        setUp();
+
+    }
+
     public void setUp(){
         setLayout(new GridLayout(3, 1));
         JLabel label = new JLabel("Odaberite koji element biste dodali");
