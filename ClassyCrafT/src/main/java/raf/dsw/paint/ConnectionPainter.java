@@ -7,6 +7,7 @@ import java.awt.*;
 
 public class ConnectionPainter extends ElementPainter{
     private Connection dgElement;
+    private int startX, startY, finishX, finishY;
     public ConnectionPainter(Connection dgElement) {
         super(dgElement);
         this.dgElement = dgElement;
@@ -18,10 +19,10 @@ public class ConnectionPainter extends ElementPainter{
         Graphics2D g = (Graphics2D) gr;
         g.setStroke(basicStroke);
         g.setColor(Color.BLACK);
-        int startX = dgElement.getFromX();
-        int startY = dgElement.getFromY();
-        int finishX = dgElement.getToX();
-        int finishY = dgElement.getToY();
+        startX = dgElement.getFromX();
+        startY = dgElement.getFromY();
+        finishX = dgElement.getToX();
+        finishY = dgElement.getToY();
         if(dgElement instanceof Agregacija) {
             double length = Math.sqrt((finishX - startX)*(finishX - startX) + (finishY - startY)*(finishY - startY));
             double unitVectorX = (startX - finishX) / length;
@@ -32,7 +33,6 @@ public class ConnectionPainter extends ElementPainter{
             double newfirstY = startY + unitVectorY * firstDistance;
             double newsecondX = startX + unitVectorX * secondDistance;
             double newsecondY = startY + unitVectorY * secondDistance;
-            Point newPoint = new Point((int) newfirstX, (int) newfirstY);
             double ppX1 = unitVectorY;
             double ppY1 = -unitVectorX;
             double ppX2 = -unitVectorY;
@@ -59,7 +59,6 @@ public class ConnectionPainter extends ElementPainter{
             double newfirstY = startY + unitVectorY * firstDistance;
             double newsecondX = startX + unitVectorX * secondDistance;
             double newsecondY = startY + unitVectorY * secondDistance;
-            Point newPoint = new Point((int) newfirstX, (int) newfirstY);
             double ppX1 = unitVectorY;
             double ppY1 = -unitVectorX;
             double ppX2 = -unitVectorY;
@@ -87,7 +86,6 @@ public class ConnectionPainter extends ElementPainter{
             double distance = -10;
             double newX = finishX + unitVectorX * distance;
             double newY = finishY + unitVectorY * distance;
-            Point newPoint = new Point((int) newX, (int) newY);
             double ppX1 = unitVectorY;
             double ppY1 = -unitVectorX;
             double ppX2 = -unitVectorY;
@@ -113,6 +111,9 @@ public class ConnectionPainter extends ElementPainter{
 
     @Override
     public boolean elementAt(int x, int y) {
-        return false;
+        double n = Math.abs((finishX - startX) * (startY - y) - (startX - x) * (finishY - startY));
+        double d = Math.sqrt(Math.pow(finishX - startX, 2) + Math.pow(finishY - startY, 2));
+        double pointToLineDistance = n/d;
+        return pointToLineDistance <= 5;
     }
 }

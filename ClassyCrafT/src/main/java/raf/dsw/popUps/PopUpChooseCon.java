@@ -7,6 +7,7 @@ import raf.dsw.components.AbstractFactory;
 import raf.dsw.components.Connection;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
+import raf.dsw.paint.ClassPainter;
 import raf.dsw.paint.ElementPainter;
 import raf.dsw.state.State;
 import raf.dsw.tree.model.ClassyTreeItem;
@@ -19,6 +20,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Point2D;
+import java.util.List;
 
 public class PopUpChooseCon extends JDialog {
     String rbResult = "";
@@ -31,7 +34,8 @@ public class PopUpChooseCon extends JDialog {
     private int sx, sy, fx, fy;
     private int noviStartx, noviStarty, noviFinishx, noviFinishy;
     private State calledFrom;
-    //private ClassyNodeComposite parentDiagram;
+    private ElementPainter painter1, painter2;
+    private Point2D startingPoint, endingPoint;
     public PopUpChooseCon(int sx, int sy, int fx, int fy, State calledFrom){
         super(MainFrame.getInstance(), "Dodavanje nove veze", true);
         this.fx = fx;
@@ -91,10 +95,11 @@ public class PopUpChooseCon extends JDialog {
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
         Connection noviElement = factory.newConnection(rbResult, currDiagram, naziv.getText());
-        noviElement.setToX(noviFinishx);
-        noviElement.setToY(noviFinishy);
-        noviElement.setFromX(noviStartx);
-        noviElement.setFromY(noviStarty);
+        twoClosestDots();
+        noviElement.setToX((int)endingPoint.getX());
+        noviElement.setToY((int)endingPoint.getY());
+        noviElement.setFromX((int)startingPoint.getX());
+        noviElement.setFromY((int)startingPoint.getY());
         ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
         if(myParent != null) {
             MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
@@ -124,14 +129,16 @@ public class PopUpChooseCon extends JDialog {
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         DiagramView currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
         for(ElementPainter ep: currDiagram.getPainters()){
-            if(ep.elementAt(sx, sy)){
+            if(ep.elementAt(sx, sy) && ep instanceof ClassPainter){
                 el1 = ep.getDgElement();
+                painter1 = ep;
                 break;
             }
         }
         for(ElementPainter ep: currDiagram.getPainters()){
-            if(ep.elementAt(fx, fy)){
+            if(ep.elementAt(fx, fy) && ep instanceof ClassPainter){
                 el2 = ep.getDgElement();
+                painter2 = ep;
                 break;
             }
         }
@@ -143,6 +150,17 @@ public class PopUpChooseCon extends JDialog {
     }
 
     public void twoClosestDots(){
-
+        double curr = 0, max = Integer.MAX_VALUE;
+        for(Point2D point1 :((ClassPainter)painter1).getRectangleCoordinates()){
+            for(Point2D point2: ((ClassPainter)painter2).getRectangleCoordinates()){
+                curr = Math.sqrt((point1.getX() - point2.getX())*(point1.getX() - point2.getX())
+                        + (point1.getY() - point2.getY())*(point1.getY() - point2.getY()));
+                if(curr < max) {
+                    max = curr;
+                    startingPoint = point1;
+                    endingPoint = point2;
+                }
+            }
+        }
     }
 }
