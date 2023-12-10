@@ -41,4 +41,9 @@ public abstract class InterClass extends DiagramElement{
     public void addToList(ClassContent cc){
         cl.add(cc);
     }
+    public List<ClassContent> getList(){return cl;}
+
+    public void setVidljivost(String vidljivost) {
+        this.vidljivost = vidljivost;
+    }
 }

@@ -16,3 +16,6 @@
 [WARNING][2023-12-04 12:12:28.402] Project as a child of a project can only be executed if project is selected
 [ERROR][2023-12-06 16:26:57.35] Cannot delete ProjectExplorer
 [WARNING][2023-12-10 00:38:48.681] Author can only be set up for a project
+[ERROR][2023-12-10 17:24:03.719] Node with this name already exists
+[ERROR][2023-12-10 17:38:51.886] Node with this name already exists
+[ERROR][2023-12-10 18:13:11.029] Cannot delete ProjectExplorer
