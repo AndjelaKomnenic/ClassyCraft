@@ -9,6 +9,7 @@ import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
 import raf.dsw.paint.ClassPainter;
 import raf.dsw.paint.ElementPainter;
+import raf.dsw.paint.InterClassPainter;
 import raf.dsw.state.State;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
