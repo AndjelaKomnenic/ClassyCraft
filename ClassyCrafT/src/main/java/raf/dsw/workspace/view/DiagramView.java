@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.observer.ISubscriber;
-import raf.dsw.paint.ClassPainter;
-import raf.dsw.paint.ConnectionPainter;
-import raf.dsw.paint.ElementPainter;
-import raf.dsw.paint.InterClassPainter;
+import raf.dsw.paint.*;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.IWorkspace;
 import raf.dsw.workspace.controller.MouseGraphicsEvent;
@@ -86,6 +83,8 @@ public class DiagramView extends JPanel implements ISubscriber {
             if(p instanceof ClassPainter)
                 p.draw(g2D);
             else if(p instanceof ConnectionPainter)
+                p.draw(g2D);
+            else if(p instanceof InterfacePainter)
                 p.draw(g2D);
         }
         g2D.dispose();

@@ -28,7 +28,7 @@ public class EnumPainter extends ElementPainter{
             Graphics2D g2D = (Graphics2D) g;
             FontMetrics fm = g2D.getFontMetrics();
 
-            int maxWidth = fm.stringWidth(selectedElement.getName()) + 20;
+            int maxWidth = fm.stringWidth("(E)" + selectedElement.getName()) + 20;
 
             int height = fm.getHeight();
             int yOffset = (int) selectedElement.getY() + fm.getHeight();
@@ -36,7 +36,7 @@ public class EnumPainter extends ElementPainter{
             int requiredWidth = maxWidth;
             int requiredHeight = ((ccc.size() + 1) * (height + 5)) + height * 3;
 
-            int selectedElementNameWidth = fm.stringWidth(selectedElement.getVidljivost() + " " + selectedElement.getName());
+            int selectedElementNameWidth = fm.stringWidth(selectedElement.getName());
 
 
             int maxMethodWidth = 0;
