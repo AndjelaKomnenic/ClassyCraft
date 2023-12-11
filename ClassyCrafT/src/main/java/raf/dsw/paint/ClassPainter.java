@@ -29,7 +29,7 @@ public class ClassPainter extends ElementPainter{
             BasicStroke basicStroke = new BasicStroke(1);
             g2D.setStroke(basicStroke);
 
-            int maxWidth = fm.stringWidth("(C) " + selectedElement.getVidljivost() + " " + selectedElement.getName()) + 20;
+            int maxWidth = fm.stringWidth("(C) " + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName()) + 20;
 
             int height = fm.getHeight();
             int yOffset = (int) selectedElement.getY() + fm.getHeight();
@@ -37,13 +37,13 @@ public class ClassPainter extends ElementPainter{
             int requiredWidth = maxWidth;
             int requiredHeight = ((ccc.size() + 1) * (height + 5)) + height * 3;
 
-            int selectedElementNameWidth = fm.stringWidth("(C) " + selectedElement.getVidljivost() + " " + selectedElement.getName());
+            int selectedElementNameWidth = fm.stringWidth("(C) " + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName());
 
 
             int maxAttributeWidth = 0;
             for (ClassContent element : ccc) {
                 if (element instanceof Atribut) {
-                    int elementWidth = fm.stringWidth(element.getVidljivost() + " " + element.getTip() + " " + element.getNaziv());
+                    int elementWidth = fm.stringWidth(promeniVidljivostUOznaku(element.getVidljivost()) + " " + element.getTip() + " " + element.getNaziv());
                     maxAttributeWidth = Math.max(maxAttributeWidth, elementWidth);
                 }
             }
@@ -52,7 +52,7 @@ public class ClassPainter extends ElementPainter{
             int maxMethodWidth = 0;
             for (ClassContent element : ccc) {
                 if (element instanceof Metod) {
-                    int elementWidth = fm.stringWidth(element.getVidljivost() + " " + element.getTip() + " " + element.getNaziv());
+                    int elementWidth = fm.stringWidth(promeniVidljivostUOznaku(element.getVidljivost()) + " " + element.getTip() + " " + element.getNaziv());
                     maxMethodWidth = Math.max(maxMethodWidth, elementWidth);
                 }
             }
@@ -73,7 +73,7 @@ public class ClassPainter extends ElementPainter{
 
             int xOffset = (int) selectedElement.getX() + 10;
 
-            g2D.drawString("(C)" + selectedElement.getVidljivost() + " " + selectedElement.getName(), xOffset, yOffset);
+            g2D.drawString("(C)" + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName(), xOffset, yOffset);
             yOffset += height + 5;
 
             g2D.drawLine((int) selectedElement.getX(), yOffset, (int) (selectedElement.getX() + requiredWidth), yOffset);
@@ -82,7 +82,7 @@ public class ClassPainter extends ElementPainter{
 
             for (ClassContent element : ccc) {
                 if (element instanceof Atribut) {
-                    String attributeString = element.getVidljivost() + " " + element.getTip() + " " + element.getNaziv();
+                    String attributeString = promeniVidljivostUOznaku(element.getVidljivost()) + " " + element.getTip() + " " + element.getNaziv();
                     g2D.drawString(attributeString, xOffset, yOffset);
                     yOffset += height + 5;
                 }
@@ -94,7 +94,7 @@ public class ClassPainter extends ElementPainter{
 
             for (ClassContent element : ccc) {
                 if (element instanceof Metod) {
-                    String methodString = element.getVidljivost() + " " + element.getTip() + " " + element.getNaziv();
+                    String methodString = promeniVidljivostUOznaku(element.getVidljivost()) + " " + element.getTip() + " " + element.getNaziv();
                     g2D.drawString(methodString, xOffset, yOffset);
                     yOffset += height + 5;
                 }
@@ -154,7 +154,8 @@ public class ClassPainter extends ElementPainter{
             return "-";
         if (str.equals("public"))
             return "+";
-
+        if (str.equals("protected"))
+            return "#";
         return "";
 
     }

@@ -25,7 +25,7 @@ public class InterfacePainter extends ElementPainter{
             Graphics2D g2D = (Graphics2D) g;
             FontMetrics fm = g2D.getFontMetrics();
 
-            int maxWidth = fm.stringWidth(selectedElement.getName()) + 20;
+            int maxWidth = fm.stringWidth("(E)" + selectedElement.getName()) + 20;
 
             int height = fm.getHeight();
             int yOffset = (int) selectedElement.getY() + fm.getHeight();
@@ -33,16 +33,7 @@ public class InterfacePainter extends ElementPainter{
             int requiredWidth = maxWidth;
             int requiredHeight = ((ccc.size() + 1) * (height + 5)) + height * 3;
 
-            int selectedElementNameWidth = fm.stringWidth(selectedElement.getName());
-
-
-            int maxAttributeWidth = 0;
-            for (ClassContent element : ccc) {
-                if (element instanceof Atribut) {
-                    int elementWidth = fm.stringWidth(element.getVidljivost() + " " + element.getTip() + " " + element.getNaziv());
-                    maxAttributeWidth = Math.max(maxAttributeWidth, elementWidth);
-                }
-            }
+            int selectedElementNameWidth = fm.stringWidth("(E)" + selectedElement.getName());
 
 
             int maxMethodWidth = 0;
@@ -53,10 +44,7 @@ public class InterfacePainter extends ElementPainter{
                 }
             }
 
-
-            requiredWidth = Math.max(selectedElementNameWidth, Math.max(maxAttributeWidth, maxMethodWidth)) + 20;
-
-
+            requiredWidth = Math.max(selectedElementNameWidth, maxMethodWidth) + 20;
 
             selectedElement.setWidthAndHeight(requiredWidth, requiredHeight);
             setShape(new Rectangle2D.Double(selectedElement.getX(), selectedElement.getY(), requiredWidth, requiredHeight));
@@ -70,20 +58,8 @@ public class InterfacePainter extends ElementPainter{
 
             int xOffset = (int) selectedElement.getX() + 10;
 
-            g2D.drawString(selectedElement.getVidljivost() + " " + selectedElement.getName(), xOffset, yOffset);
+            g2D.drawString("(E)" + selectedElement.getName(), xOffset, yOffset);
             yOffset += height + 5;
-
-            g2D.drawLine((int) selectedElement.getX(), yOffset, (int) (selectedElement.getX() + requiredWidth), yOffset);
-            yOffset += height + 5;
-
-
-            for (ClassContent element : ccc) {
-                if (element instanceof Atribut) {
-                    String attributeString = element.getVidljivost() + " " + element.getTip() + " " + element.getNaziv();
-                    g2D.drawString(attributeString, xOffset, yOffset);
-                    yOffset += height + 5;
-                }
-            }
 
 
             g2D.drawLine((int) selectedElement.getX(), yOffset, (int) (selectedElement.getX() + requiredWidth), yOffset);
