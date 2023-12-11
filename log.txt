@@ -19,3 +19,6 @@
 [ERROR][2023-12-10 17:24:03.719] Node with this name already exists
 [ERROR][2023-12-10 17:38:51.886] Node with this name already exists
 [ERROR][2023-12-10 18:13:11.029] Cannot delete ProjectExplorer
+[ERROR][2023-12-11 15:01:14.382] Node with this name already exists
+[ERROR][2023-12-11 15:19:06.141] Cannot delete ProjectExplorer
+[ERROR][2023-12-11 16:53:23.863] Node with this name already exists

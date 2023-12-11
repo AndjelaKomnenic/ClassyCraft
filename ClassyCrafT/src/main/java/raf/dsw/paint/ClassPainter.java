@@ -26,6 +26,8 @@ public class ClassPainter extends ElementPainter{
 
             Graphics2D g2D = (Graphics2D) g;
             FontMetrics fm = g2D.getFontMetrics();
+            BasicStroke basicStroke = new BasicStroke(1);
+            g2D.setStroke(basicStroke);
 
             int maxWidth = fm.stringWidth("(C) " + selectedElement.getVidljivost() + " " + selectedElement.getName()) + 20;
 

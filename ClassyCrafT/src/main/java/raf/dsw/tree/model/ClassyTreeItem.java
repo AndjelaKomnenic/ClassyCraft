@@ -20,5 +20,4 @@ public class ClassyTreeItem extends DefaultMutableTreeNode {
     public String toString(){
         return classyNode.getName();
     }
-
 }

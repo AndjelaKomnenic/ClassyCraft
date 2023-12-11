@@ -6,4 +6,6 @@ public class Zavisnost extends Connection{
     public Zavisnost(String name, ClassyNode parent, InterClass from) {
         super(name, parent, from);
     }
+    @Override
+    public String getClassName(){return "Zavisnost";}
 }

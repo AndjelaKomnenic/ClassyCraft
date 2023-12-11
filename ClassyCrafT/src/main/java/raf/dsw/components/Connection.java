@@ -64,5 +64,5 @@ public abstract class Connection extends DiagramElement{
         toX = x;
         toY = y;
     }
-
+    public String getClassName(){return "";}
 }

@@ -7,6 +7,8 @@ import raf.dsw.components.AbstractFactory;
 import raf.dsw.components.Connection;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.message.PossibleErrors;
 import raf.dsw.paint.ClassPainter;
 import raf.dsw.paint.ElementPainter;
 import raf.dsw.paint.InterClassPainter;
@@ -24,7 +26,7 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
 import java.util.List;
 
-public class PopUpChooseCon extends JDialog {
+public class EditPopUpConnection extends JDialog {
     String rbResult = "";
     private JTextField naziv = new JTextField();
     ButtonGroup buttonGroup = new ButtonGroup();
@@ -37,25 +39,21 @@ public class PopUpChooseCon extends JDialog {
     private State calledFrom;
     private ElementPainter painter1, painter2;
     private Point2D startingPoint, endingPoint;
-    public PopUpChooseCon(int sx, int sy, int fx, int fy, State calledFrom){
-        super(MainFrame.getInstance(), "Dodavanje nove veze", true);
-        this.fx = fx;
-        this.fy = fy;
-        this.sx = sx;
-        this.sy = sy;
+    ////////////////////
+    private Connection trenutnaVeza;
+    public EditPopUpConnection(State calledFrom, Connection trenutnaVeza){
+        super(MainFrame.getInstance(), "Izmena odabrane veze", true);
+        this.trenutnaVeza = trenutnaVeza;
         this.calledFrom = calledFrom;
-        if(connectsTwoItems())
-            setUp();
-        else
-            calledFrom.neispravnoCrtanje();
+        setUp();
     }
     public void setUp(){
         setLayout(new GridLayout(4, 1));
-        JLabel label = new JLabel("Odaberite tip veze koju biste dodali");
+        JLabel label = new JLabel("Odaberite novi tip veze, ukoliko zelite da ga promenite");
         JPanel radioButtons = new JPanel(new GridLayout(1, 4));
         JPanel buttonHolder = new JPanel(new GridLayout(1, 3));
         JPanel nameInsertion = new JPanel(new GridLayout(1, 2));
-        nameInsertion.add(new Label("Uneiste naziv veze: "), 0);
+        nameInsertion.add(new Label("Uneiste novi naziv veze: "), 0);
         nameInsertion.add(naziv, 1);
         buttonGroup.add(radioButton1);
         buttonGroup.add(radioButton2);
@@ -65,7 +63,7 @@ public class PopUpChooseCon extends JDialog {
         radioButtons.add(radioButton2, 1);
         radioButtons.add(radioButton3, 2);
         radioButtons.add(radioButton4, 3);
-        JButton addElement = new JButton("Dodaj");
+        JButton addElement = new JButton("Izmeni");
         addElement.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -84,6 +82,8 @@ public class PopUpChooseCon extends JDialog {
         setVisible(true);
     }
     public void handleButtonClick(){
+        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
         if(radioButton1.isSelected())
             rbResult = "Agregacija";
         else if(radioButton2.isSelected())
@@ -93,25 +93,42 @@ public class PopUpChooseCon extends JDialog {
         else if(radioButton4.isSelected())
             rbResult = "Generalizacija";
         AbstractFactory factory = new AbstractFactory();
-        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
-        Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        Connection noviElement = factory.newConnection(rbResult, currDiagram, naziv.getText());
-        twoClosestDots();
-        noviElement.setToX((int)endingPoint.getX());
-        noviElement.setToY((int)endingPoint.getY());
-        noviElement.setFromX((int)startingPoint.getX());
-        noviElement.setFromY((int)startingPoint.getY());
-        ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
-        if(myParent != null) {
-            MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
+        boolean flag = true;
+        if(naziv.getText().length() > 0) {
+            for (ClassyNode cn : currDiagram.getChildren()) {
+                if (cn.getName().equalsIgnoreCase(naziv.getText())) {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                trenutnaVeza.setName(naziv.getText());
+                MainFrame.getInstance().getClassyTree().update();
+            } else {
+                ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_ALREADY_EXISTS);
+            }
         }
-        else
-            System.out.println(currDiagram.getName() + " nije nadjen");
-        calledFrom.zavrsenaSelekcija(noviElement, packageView);
+        Connection proba = factory.newConnection(rbResult, currDiagram, trenutnaVeza.getName());
+        if(proba.getClass()!=(trenutnaVeza.getClass())){
+            proba.setToX(trenutnaVeza.getToX());
+            proba.setToY(trenutnaVeza.getToY());
+            proba.setFromX(trenutnaVeza.getFromX());
+            proba.setFromY(trenutnaVeza.getFromY());
+            ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
+            ClassyTreeItem trenutnaVezaTreeItem =  findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), trenutnaVeza);
+            if(myParent != null) {
+                ((ClassyNodeComposite)(trenutnaVeza.getParent())).removeChild(trenutnaVeza);
+                MainFrame.getInstance().getClassyTree().deleteChild(trenutnaVezaTreeItem);
+                MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, proba);
+            }
+            else
+                System.out.println(currDiagram.getName() + " nije nadjen");
+            calledFrom.zavrsenaSelekcija(proba, packageView);
+        }
         dispose();
     }
     public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
-        if (root.getClassyNode().getName().equalsIgnoreCase(targetNode.getName())) {
+        if (root.getClassyNode().getName().equalsIgnoreCase(targetNode.getName()) && root.getClassyNode().getClass() == targetNode.getClass()) {
             return root;
         } else {
             for (ClassyTreeItem child : root.getChildren()) {
@@ -147,20 +164,5 @@ public class PopUpChooseCon extends JDialog {
         if(el1 == el2)
             return false;
         return true;
-    }
-
-    public void twoClosestDots(){
-        double curr = 0, max = Integer.MAX_VALUE;
-        for(Point2D point1 :((ClassPainter)painter1).getRectangleCoordinates()){
-            for(Point2D point2: ((ClassPainter)painter2).getRectangleCoordinates()){
-                curr = Math.sqrt((point1.getX() - point2.getX())*(point1.getX() - point2.getX())
-                        + (point1.getY() - point2.getY())*(point1.getY() - point2.getY()));
-                if(curr < max) {
-                    max = curr;
-                    startingPoint = point1;
-                    endingPoint = point2;
-                }
-            }
-        }
     }
 }

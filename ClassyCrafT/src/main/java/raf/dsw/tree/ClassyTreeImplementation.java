@@ -44,10 +44,14 @@ public class ClassyTreeImplementation implements ClassyTree{
 
     @Override
     public void deleteChild(ClassyTreeItem child){
-        ClassyTreeItem parent = (ClassyTreeItem) child.getParent();
-        ((ClassyNodeComposite)parent.getClassyNode()).removeChild(child.getClassyNode());
-        parent.remove(child);
-        treeModel.nodeStructureChanged(parent);
+        ClassyTreeItem parent  = (ClassyTreeItem) (child.getParent());
+        if(parent != null) {
+            ((ClassyNodeComposite) parent.getClassyNode()).removeChild(child.getClassyNode());
+            parent.remove(child);
+            treeModel.nodeStructureChanged(parent);
+        }
+        else
+            System.out.println("nema parent");
         update();
     }
     public void update(){
