@@ -154,11 +154,14 @@ public class PackageView extends JPanel implements ISubscriber{
     public void startBrisanjeState(){
         this.stateManager.setNewBrisanjeState();
     }
+    public void startMoveState(){
+        this.stateManager.setNewMoveState();
+    }
     public void addPainterForCurrent(ElementPainter painter){
-       Diagram currDiagram = ((DiagramView)tabbedPane.getSelectedComponent()).getDiagram();
-       paintersForDiagram.get(currDiagram).add(painter);
-       currDiagram.addChild(painter.getDgElement());
-       //dodati u stablo
+        Diagram currDiagram = ((DiagramView)tabbedPane.getSelectedComponent()).getDiagram();
+        paintersForDiagram.get(currDiagram).add(painter);
+        currDiagram.addChild(painter.getDgElement());
+        //dodati u stablo
         repaint();
     }
     public void removePainter(ElementPainter painter){

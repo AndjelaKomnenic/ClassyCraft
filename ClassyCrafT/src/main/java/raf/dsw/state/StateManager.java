@@ -9,6 +9,7 @@ public class StateManager {
     private DodavanjeVezaState newDodavanjeVezeState;
     private BrisanjeState newBrisanjeState;
     private SelekcijaState newSelekcijaState;
+    private MoveState newMoveState;
     private State currState;
 
 
@@ -18,6 +19,7 @@ public class StateManager {
         newDodavanjeVezeState = new DodavanjeVezaState();
         newBrisanjeState = new BrisanjeState();
         newSelekcijaState = new SelekcijaState();
+        newMoveState = new MoveState();
         currState = newDodavanjeState;
     }
 
@@ -29,4 +31,5 @@ public class StateManager {
     public void setNewDodavanjeVezeState(){currState = newDodavanjeVezeState;}
     public void setNewBrisanjeState(){ currState = newBrisanjeState;}
     public void setNewSelekcijaState(){currState = newSelekcijaState;}
+    public void setNewMoveState(){ currState = newMoveState;}
 }

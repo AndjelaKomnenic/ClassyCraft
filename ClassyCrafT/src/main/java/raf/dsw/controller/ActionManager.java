@@ -20,6 +20,7 @@ public class ActionManager {
     private NewConnectionAction newConnectionAction;
     private DeleteRightAction deleteRightAction;
     private SelectAction selectAction;
+    private MoveAction moveAction;
     private AddClassContentAction addClassContentAction;
 
     private ZoomInAction zoomInAction;
@@ -41,6 +42,7 @@ public class ActionManager {
         newConnectionAction = new NewConnectionAction();
         deleteRightAction = new DeleteRightAction();
         selectAction = new SelectAction();
+        moveAction = new MoveAction();
         addClassContentAction = new AddClassContentAction();
         zoomInAction = new ZoomInAction();
         zoomOutAction = new ZoomOutAction();

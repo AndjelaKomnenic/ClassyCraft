@@ -43,9 +43,9 @@ public abstract class InterClass extends DiagramElement{
         cl.add(cc);
     }
 
-    public void addToListE(ClanEnuma ce){
+    public void addToListE(ClanEnuma ce) {
         nEnum.add(ce);
-
+    }
     public List<ClassContent> getList(){return cl;}
 
     public void setVidljivost(String vidljivost) {

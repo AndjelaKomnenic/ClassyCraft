@@ -15,11 +15,11 @@ public class Diagram extends ClassyNodeComposite {
 
     @Override
     public void addChild(ClassyNode child) {
-
-        children.add(child);
-
-        this.notifySubscriber("NEW");
+        if(!children.contains(child))
+        {
+            children.add(child);
+            this.notifySubscriber("NEW");
+        }
         this.notifySubscriber("REPAINT");
-
     }
 }

@@ -69,8 +69,15 @@ public class ClassPainter extends ElementPainter{
             g2D.fillRect((int) selectedElement.getX(), (int) selectedElement.getY(), requiredWidth, requiredHeight);
 
 
-            g2D.setColor(Color.BLACK);
+            if (this.getDgElement().isSelected())
+            {
+                g2D.setColor(Color.RED);
 
+            }
+            else
+            {
+                g2D.setColor(Color.BLACK);
+            }
             int xOffset = (int) selectedElement.getX() + 10;
 
             g2D.drawString("(C)" + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName(), xOffset, yOffset);

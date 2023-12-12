@@ -14,9 +14,12 @@ public class Package extends ClassyNodeComposite {
 
     @Override
     public void addChild(ClassyNode child) {
-        this.setCounter();
-        children.add(child);
-        this.notifySubscriber("NEW");
+        if(!children.contains(child))
+        {
+            this.setCounter();
+            children.add(child);
+            this.notifySubscriber("NEW");
+        }
     }
 
     @Override
