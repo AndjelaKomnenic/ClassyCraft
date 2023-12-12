@@ -17,6 +17,7 @@ public abstract class InterClass extends DiagramElement{
     private double width, height;
 
     private List<ClassContent> cl = new ArrayList<>();
+    private List<ClanEnuma> nEnum = new ArrayList<>();
 
     public InterClass(String name, ClassyNode parent, double x, double y) {
         super(name, parent);
@@ -41,9 +42,14 @@ public abstract class InterClass extends DiagramElement{
     public void addToList(ClassContent cc){
         cl.add(cc);
     }
+
+    public void addToListE(ClanEnuma ce){
+        nEnum.add(ce);
+
     public List<ClassContent> getList(){return cl;}
 
     public void setVidljivost(String vidljivost) {
         this.vidljivost = vidljivost;
+
     }
 }

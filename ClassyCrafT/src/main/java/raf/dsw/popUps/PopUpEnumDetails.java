@@ -71,12 +71,13 @@ public class PopUpEnumDetails extends JDialog {
     }
     public void handleButtonClick1(){
         //dispose();
-        String name = JOptionPane.showInputDialog("Novi clan:");
-        ClanEnuma ce = new ClanEnuma(name);
-        addToList(ce);
+        String value = JOptionPane.showInputDialog("Novi clan:");
+        ClanEnuma ce = new ClanEnuma(value);
+        addToListE(ce);
+        //System.out.println(ce.toString());
     }
-    public void addToList(ClassContent cc){
-        noviElement.addToList(cc);
+    public void addToListE(ClanEnuma cc){
+        noviElement.addToListE(cc);
     }
     public void napraviEnum(){
         noviElement.setName(naziv.getText());

@@ -80,6 +80,6 @@ public class PopUpChooseIC extends JDialog {
         else {
             PopUpSetUpParameters popSet = new PopUpSetUpParameters(rbResult, this, selectedElement);
         }
-        s.zavrsenaSelekcija(selectedElement, packageView);
+        s.zavrsenaSelekcija(selectedElement, packageView); //  <- ovaj ovde deo pravi error
     }
 }
