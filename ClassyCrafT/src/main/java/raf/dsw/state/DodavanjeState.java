@@ -48,11 +48,11 @@ public class DodavanjeState implements State{
         }else if (popUp.getSelectedElement() instanceof Interfejs){
             elementPainter = new InterfacePainter(popUp.getSelectedElement(), popUp);
             pkg.addPainterForCurrent(elementPainter);
-            System.out.println("Usao");
-        }/*else if (popUp.getSelectedElement() instanceof Enum){
+            //System.out.println("Usao");
+        }else if (popUp.getSelectedElement() instanceof Enum){
             elementPainter = new EnumPainter(popUp.getSelectedElement(), popUp);
             pkg.addPainterForCurrent(elementPainter);
-        }*/
+        }
 
         //ClassPainter classPainter = new ClassPainter(diagramElementInstance, popUp.getSelectedElement());
 
