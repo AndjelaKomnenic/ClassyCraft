@@ -46,6 +46,17 @@ public class InterfacePainter extends ElementPainter{
                 }
             }
 
+            if (this.getDgElement().isSelected())
+            {
+                selectedElement.setColourOutline("0x00FFFF");
+            }
+            else
+            {
+                selectedElement.setColourOutline("0x000000");
+            }
+
+            g2D.setColor(Color.BLACK); // boja za text
+
             requiredWidth = Math.max(selectedElementNameWidth, maxMethodWidth) + 20;
 
             selectedElement.setWidthAndHeight(requiredWidth, requiredHeight);

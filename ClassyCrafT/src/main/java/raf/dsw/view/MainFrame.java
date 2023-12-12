@@ -53,6 +53,8 @@ public class MainFrame extends JFrame implements ISubscriber {
         add(toolBar, BorderLayout.NORTH);
 
         JPanel rightPanel = workspace.generateWorkspace();
+        //JScrollPane scrollPaneRight = new JScrollPane(rightPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+
 
         ProjectExplorer pe = ApplicationFramework.getInstance().getClassyRepository().getProjectExplorer();
         ClassyTreeView jTreeProjectExplorer = classyTree.generateTree(pe);
@@ -61,7 +63,7 @@ public class MainFrame extends JFrame implements ISubscriber {
 
         JScrollPane scroll=new JScrollPane(jTreeProjectExplorer);
         scroll.setMinimumSize(new Dimension(200,150));
-        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scroll, rightPanel);
+        JSplitPane split=new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scroll, rightPanel); //scrollPaneRight
         getContentPane().add(split,BorderLayout.CENTER);
         split.setDividerLocation(250);
         split.setOneTouchExpandable(true);
