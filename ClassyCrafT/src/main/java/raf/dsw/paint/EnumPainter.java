@@ -55,7 +55,16 @@ public class EnumPainter extends ElementPainter{
 
             requiredWidth = Math.max(selectedElementNameWidth,  maxMethodWidth) + 20;
 
+            if (this.getDgElement().isSelected())
+            {
+                selectedElement.setColourOutline("0x00FFFF");
+            }
+            else
+            {
+                selectedElement.setColourOutline("0x000000");
+            }
 
+            g2D.setColor(Color.BLACK); // boja za text
 
             selectedElement.setWidthAndHeight(requiredWidth, requiredHeight);
             setShape(new Rectangle2D.Double(selectedElement.getX(), selectedElement.getY(), requiredWidth, requiredHeight));
