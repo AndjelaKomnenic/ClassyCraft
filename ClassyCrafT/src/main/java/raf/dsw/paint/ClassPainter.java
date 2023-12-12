@@ -23,7 +23,7 @@ public class ClassPainter extends ElementPainter{
         selectedElement = popUpChooseICInstance.getSelectedElement();
         if (selectedElement != null) {
             List<ClassContent> ccc = selectedElement.getCl();
-
+            System.out.println("Size of ccc: " + ccc.size());
             Graphics2D g2D = (Graphics2D) g;
             FontMetrics fm = g2D.getFontMetrics();
             BasicStroke basicStroke = new BasicStroke(1);
@@ -69,7 +69,7 @@ public class ClassPainter extends ElementPainter{
             g2D.fillRect((int) selectedElement.getX(), (int) selectedElement.getY(), requiredWidth, requiredHeight);
 
 
-            if (this.getDgElement().isSelected())
+            if (((InterClass)this.getDgElement()).isSelected())
             {
                 g2D.setColor(Color.RED);
 
