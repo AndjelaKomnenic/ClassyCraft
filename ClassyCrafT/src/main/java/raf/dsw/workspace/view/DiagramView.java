@@ -86,8 +86,6 @@ public class DiagramView extends JPanel implements ISubscriber {
                 p.draw(g2D);
             else if(p instanceof InterfacePainter)
                 p.draw(g2D);
-            else if(p instanceof EnumPainter)
-                p.draw(g2D);
         }
         g2D.dispose();
     }
