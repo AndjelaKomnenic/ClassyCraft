@@ -42,7 +42,14 @@ public abstract class InterClass extends DiagramElement{
     public void addToList(ClassContent cc){
         cl.add(cc);
     }
+
     public void addToListE(ClanEnuma ce){
         nEnum.add(ce);
+
+    public List<ClassContent> getList(){return cl;}
+
+    public void setVidljivost(String vidljivost) {
+        this.vidljivost = vidljivost;
+
     }
 }

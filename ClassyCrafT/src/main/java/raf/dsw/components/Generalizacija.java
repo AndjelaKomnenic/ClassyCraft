@@ -6,4 +6,6 @@ public class Generalizacija extends Connection{
     public Generalizacija(String name, ClassyNode parent, InterClass from) {
         super(name, parent, from);
     }
+    @Override
+    public String getClassName(){return "Generalizacija";}
 }

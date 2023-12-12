@@ -26,6 +26,8 @@ public class ClassPainter extends ElementPainter{
 
             Graphics2D g2D = (Graphics2D) g;
             FontMetrics fm = g2D.getFontMetrics();
+            BasicStroke basicStroke = new BasicStroke(1);
+            g2D.setStroke(basicStroke);
 
             int maxWidth = fm.stringWidth("(C) " + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName()) + 20;
 
@@ -103,7 +105,7 @@ public class ClassPainter extends ElementPainter{
             g2D.drawRect((int) selectedElement.getX(), (int) selectedElement.getY(), requiredWidth, requiredHeight);
         }
 
-        System.out.println(getRectangleCoordinates());
+        //System.out.println(getRectangleCoordinates());
     }
 
     public List<Point2D.Double> getRectangleCoordinates() {
