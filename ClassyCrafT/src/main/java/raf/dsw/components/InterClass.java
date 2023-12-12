@@ -15,6 +15,7 @@ public abstract class InterClass extends DiagramElement{
     private String vidljivost;
     private double x, y;
     private double width, height;
+    private boolean selected = false;
 
     private List<ClassContent> cl = new ArrayList<>();
     private List<ClanEnuma> nEnum = new ArrayList<>();
@@ -51,5 +52,11 @@ public abstract class InterClass extends DiagramElement{
     public void setVidljivost(String vidljivost) {
         this.vidljivost = vidljivost;
 
+    }
+
+    @Override
+    public void setSelected(boolean selected){
+        this.selected = selected;
+        getParent().notifySubscriber("REPAINT");
     }
 }

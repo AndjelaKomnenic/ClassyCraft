@@ -28,7 +28,7 @@ public class PopUpChooseIC extends JDialog {
     private State s;
     public PopUpChooseIC(State s){
         super(MainFrame.getInstance(), "Dodavanje novog elementa", true);
-        //this.s = s;
+        this.s = s;
         setUp();
 
     }
@@ -80,6 +80,7 @@ public class PopUpChooseIC extends JDialog {
         else {
             PopUpSetUpParameters popSet = new PopUpSetUpParameters(rbResult, this, selectedElement);
         }
-        s.zavrsenaSelekcija(selectedElement, packageView); //  <- ovaj ovde deo pravi error
+        if (s != null)
+            s.zavrsenaSelekcija(selectedElement, packageView); //  <- ovaj ovde deo pravi error
     }
 }

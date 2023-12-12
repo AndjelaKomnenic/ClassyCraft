@@ -28,7 +28,7 @@ public class EnumPainter extends ElementPainter{
             for (ClanEnuma c : ccc) {
                 System.out.println(c.getValue());
             }*/
-            System.out.println("Size of ccc: " + ccc.size());
+            //System.out.println("Size of ccc: " + ccc.size());
             Graphics2D g2D = (Graphics2D) g;
             FontMetrics fm = g2D.getFontMetrics();
 
