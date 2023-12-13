@@ -9,6 +9,8 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.awt.Color.cyan;
+
 public class ClassPainter extends ElementPainter{
     private PopUpChooseIC popUpChooseICInstance;
     private InterClass selectedElement;
@@ -23,7 +25,7 @@ public class ClassPainter extends ElementPainter{
         selectedElement = popUpChooseICInstance.getSelectedElement();
         if (selectedElement != null) {
             List<ClassContent> ccc = selectedElement.getCl();
-            System.out.println("Size of ccc: " + ccc.size());
+            //System.out.println("Size of ccc: " + ccc.size());
             Graphics2D g2D = (Graphics2D) g;
             FontMetrics fm = g2D.getFontMetrics();
             BasicStroke basicStroke = new BasicStroke(1);
@@ -69,17 +71,17 @@ public class ClassPainter extends ElementPainter{
             g2D.fillRect((int) selectedElement.getX(), (int) selectedElement.getY(), requiredWidth, requiredHeight);
 
 
-            if (((InterClass)this.getDgElement()).isSelected())
+            if (this.getDgElement().isSelected())
             {
-                g2D.setColor(Color.RED);
-
+                selectedElement.setColourOutline("0x00FFFF");
             }
             else
             {
-                g2D.setColor(Color.BLACK);
+                selectedElement.setColourOutline("0x000000");
             }
             int xOffset = (int) selectedElement.getX() + 10;
 
+            g2D.setColor(Color.BLACK); // boja za text
             g2D.drawString("(C)" + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName(), xOffset, yOffset);
             yOffset += height + 5;
 
