@@ -1,8 +1,13 @@
 package raf.dsw.state;
 
-import lombok.var;
+//import lombok.var;
+import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
+import raf.dsw.paint.ElementPainter;
+import raf.dsw.view.MainFrame;
+import raf.dsw.workspace.WorkSpaceImplementation;
 import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
@@ -29,6 +34,12 @@ public class SelekcijaState implements State{
     public void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg) {
         startX = -1;
         startY = -1;
+        pkg.getSelectedComponents().clear();
+        for(ClassyNode cn: currDiagram.getDiagram().getChildren()){
+            InterClass inter = (InterClass) cn;
+            if(inter.isSelected())
+                pkg.getSelectedComponents().add(inter);
+        }
     }
 
     @Override
@@ -59,15 +70,17 @@ public class SelekcijaState implements State{
                 var classRightX = (int)interClass.getX() + (int)interClass.getWidth();
                 var classTopY = (int)interClass.getY();
                 var classBotY = (int)interClass.getY() + (int)interClass.getHeight();
-
+                //PackageView pkg = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
                 if (click && !anySelected && x >= classLeftX && x <= classRightX && y >= classTopY && y <= classBotY)
                 {
                     interClass.setSelected(true);
+                    //pkg.getSelectedComponents().add(interClass);
                     anySelected = true;
                 }
                 else if(!click && checkCollision(leftX,  topY,rightX, botY, classLeftX, classTopY, classRightX, classBotY))
                 {
                     interClass.setSelected(true);
+                    //pkg.getSelectedComponents().add(interClass);
                 }
                 else
                 {

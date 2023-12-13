@@ -7,6 +7,7 @@ import raf.dsw.classyrepository.implementation.Package;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Project;
+import raf.dsw.components.DiagramElement;
 import raf.dsw.observer.ISubscriber;
 import raf.dsw.paint.ElementPainter;
 import raf.dsw.state.StateManager;
@@ -32,7 +33,7 @@ public class PackageView extends JPanel implements ISubscriber{
     private List<DiagramView> tabs = new ArrayList<>();
 
     Map<Diagram, List<ElementPainter>> paintersForDiagram = new HashMap<>();
-    List<ElementPainter> selectedComponents = new ArrayList<>();
+    List<DiagramElement> selectedComponents = new ArrayList<>();
 
     private StateManager stateManager;
 
@@ -170,5 +171,13 @@ public class PackageView extends JPanel implements ISubscriber{
         currDiagram.removeChild(painter.getDgElement());
         //dodati u stablo
         repaint();
+    }
+    public ElementPainter getPainter(DiagramElement de){
+        Diagram currDiagram = ((DiagramView)tabbedPane.getSelectedComponent()).getDiagram();
+        for(ElementPainter ep: paintersForDiagram.get(currDiagram)){
+            if(ep.getDgElement().equals(de))
+                return ep;
+        }
+        return null;
     }
 }

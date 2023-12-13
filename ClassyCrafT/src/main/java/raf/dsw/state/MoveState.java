@@ -1,6 +1,6 @@
 package raf.dsw.state;
 
-import lombok.var;
+//import lombok.var;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
 import raf.dsw.workspace.view.DiagramView;
