@@ -9,9 +9,9 @@ import raf.dsw.workspace.view.PackageView;
 import java.awt.*;
 
 public interface  State {
-    public abstract void misKliknut(int x, int y, DiagramView currDiagramView, PackageView pkg);
-    public abstract void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg);
-    public abstract void misPrevucen(int x, int y, DiagramView currDiagram, PackageView pkg);
-    public abstract void zavrsenaSelekcija(DiagramElement inter, PackageView pkg);
-    public abstract void neispravnoCrtanje();
+     void misKliknut(int x, int y, DiagramView currDiagramView, PackageView pkg);
+     void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg);
+     void misPrevucen(int x, int y, DiagramView currDiagram, PackageView pkg);
+     void zavrsenaSelekcija(DiagramElement inter, PackageView pkg);
+     void neispravnoCrtanje();
 }

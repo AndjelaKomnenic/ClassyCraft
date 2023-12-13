@@ -81,7 +81,7 @@ public class ClassPainter extends ElementPainter{
             }
             int xOffset = (int) selectedElement.getX() + 10;
 
-            g2D.setColor(Color.BLACK); // boja za text
+            g2D.setColor(Color.BLACK); // boja za text``````
             g2D.drawString("(C)" + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName(), xOffset, yOffset);
             yOffset += height + 5;
 

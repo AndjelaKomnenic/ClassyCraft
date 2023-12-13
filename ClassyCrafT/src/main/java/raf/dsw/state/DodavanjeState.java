@@ -57,7 +57,7 @@ public class DodavanjeState implements State{
         //ClassPainter classPainter = new ClassPainter(diagramElementInstance, popUp.getSelectedElement());
 
 
-        System.out.println("Radi state");
+        //System.out.println("Radi state");
 
         /*PopUpChooseIC popUp = new PopUpChooseIC(this);
         this.x = x;
