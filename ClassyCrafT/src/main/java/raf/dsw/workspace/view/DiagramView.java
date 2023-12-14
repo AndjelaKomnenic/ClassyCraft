@@ -92,17 +92,30 @@ public class DiagramView extends JPanel implements ISubscriber {
         g2D.dispose();
     }
 
-    public void zoomIn(){
-        double newScaling = scaling * 1.2;
+    /*public void zoomIn(int x, int y){
+        double zoomFactor = 1.2;
+        double prevScaling = scaling;
+        double newScaling = scaling * zoomFactor;
         if (newScaling >= 5) {
             newScaling = 5;
         }
 
-        this.scaling = newScaling;
-        setupTransformation(newScaling);
-    }
+        scaling = newScaling;
 
-    public void zoomOut(){
+
+        translateX = x - (x - translateX) * (newScaling / prevScaling);
+        translateY = y - (y - translateY) * (newScaling / prevScaling);
+
+        setupTransformation(scaling);
+    }*/
+
+    /*public void scroll(double translateX, double translateY){
+        this.translateX += translateX;
+        this.translateY += translateY;
+        setupTransformation(scaling);
+    }*/
+
+    /*public void zoomOut(){
         double newScaling = scaling * 0.8;
         if (newScaling <= 0.2) {
             newScaling = 0.2;
@@ -117,5 +130,5 @@ public class DiagramView extends JPanel implements ISubscriber {
         affineTransform.translate(translateX, translateY);
         affineTransform.scale(scaling, scaling);
         repaint();
-    }
+    }*/
 }

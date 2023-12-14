@@ -158,6 +158,12 @@ public class PackageView extends JPanel implements ISubscriber{
     public void startMoveState(){
         this.stateManager.setNewMoveState();
     }
+    public void startZoomInState(){
+        this.stateManager.setNewZoomInState();
+    }
+    public void startZoomOutState(){
+        this.stateManager.setNewZoomOutState();
+    }
     public void addPainterForCurrent(ElementPainter painter){
         Diagram currDiagram = ((DiagramView)tabbedPane.getSelectedComponent()).getDiagram();
         paintersForDiagram.get(currDiagram).add(painter);

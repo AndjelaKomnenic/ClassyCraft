@@ -1,34 +1,21 @@
 package raf.dsw.state;
 
-import lombok.Getter;
-import lombok.Setter;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
 import java.awt.geom.AffineTransform;
 
-@Getter
-@Setter
-public class ZoomInState implements State{
-    /*private AffineTransform affineTransform = new AffineTransform();
-    private double scaling = 1.0;
-    private double translateX = 0.0;
-    private double translateY = 0.0;*/
-
-    private AffineTransform affineTransform = new AffineTransform();
-    private double scaling = 1.0;
-    private double translateX = 0.0;
-    private double translateY = 0.0;
-
+public class ZoomOutState implements State{
     @Override
     public void misKliknut(int x, int y, DiagramView currDiagramView, PackageView pkg) {
 
-        double zoomFactor = 1.2;
+        double zoomFactor = 0.8;
         double prevScaling = currDiagramView.getScaling();
         double newScaling = currDiagramView.getScaling() * zoomFactor;
-        if (newScaling >= 5) {
-            newScaling = 5;
+
+        if (newScaling <= 0.2) {
+            newScaling = 0.2;
         }
 
         currDiagramView.setScaling(newScaling);
@@ -43,7 +30,6 @@ public class ZoomInState implements State{
         currDiagramView.getAffineTransform().translate(currDiagramView.getTranslateX(), currDiagramView.getTranslateY());
         currDiagramView.getAffineTransform().scale(currDiagramView.getScaling(), currDiagramView.getScaling());
         currDiagramView.repaint();
-
     }
 
     @Override
@@ -65,22 +51,4 @@ public class ZoomInState implements State{
     public void neispravnoCrtanje() {
 
     }
-
-    /*private void zoomIn(PackageView pkg) {
-        double newScaling = scaling * 1.2;
-        if (newScaling >= 5) {
-            newScaling = 5;
-        }
-
-        scaling = newScaling;
-        setupTransformation(pkg, newScaling);
-    }
-
-    public void setupTransformation(double scaling){
-        affineTransform.setToIdentity();
-        affineTransform.translate(translateX, translateY);
-        affineTransform.scale(scaling, scaling);
-        repaint();
-    }
-    }*/
 }
