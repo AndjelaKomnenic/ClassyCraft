@@ -4,7 +4,9 @@ import raf.dsw.components.DiagramElement;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.util.List;
 
 public class BoxSelectPainter extends ElementPainter {
     private double x1, y1;
@@ -29,6 +31,11 @@ public class BoxSelectPainter extends ElementPainter {
     @Override
     public boolean elementAt(int x, int y) {
         return getShape().contains(x, y);
+    }
+
+    @Override
+    public List<Point2D.Double> getRectangleCoordinates() {
+        return null;
     }
 
     public void updateCoordinates(double x1, double y1, double x2, double y2){

@@ -66,6 +66,11 @@ public class ZoomInState implements State{
 
     }
 
+    @Override
+    public void duplikacija(DiagramElement de, int x, int y, int w, int h, PackageView pkg) {
+
+    }
+
     /*private void zoomIn(PackageView pkg) {
         double newScaling = scaling * 1.2;
         if (newScaling >= 5) {
