@@ -20,9 +20,10 @@ public class ZoomInAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        /*PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         int selectedDiagramIndex = packageView.getTabbedPane().getSelectedIndex();
         DiagramView currDiagramView = packageView.getTabs().get(selectedDiagramIndex);
-        currDiagramView.zoomIn();
+        currDiagramView.zoomIn();*/
+        MainFrame.getInstance().getWorkspace().getPackageView().startZoomInState();
     }
 }

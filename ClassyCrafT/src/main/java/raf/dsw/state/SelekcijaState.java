@@ -1,6 +1,7 @@
 package raf.dsw.state;
 
 //import lombok.var;
+import lombok.var;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.DiagramElement;

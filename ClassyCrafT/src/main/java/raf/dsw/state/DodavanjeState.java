@@ -36,9 +36,13 @@ public class DodavanjeState implements State{
         pkg.addPainterForCurrent(elementPainter);*/
 
         PopUpChooseIC popUp = new PopUpChooseIC();
+        double scaledX = (x - currDiagramView.getTranslateX()) / currDiagramView.getScaling();
+        double scaledY = (y - currDiagramView.getTranslateY()) / currDiagramView.getScaling();
 
-        popUp.getSelectedElement().setX(x);   // ovo radi ovde al mora da se sredi nije lepo...
-        popUp.getSelectedElement().setY(y);   // neka ideja sa clickcoordinates tracker?   --> cuva poslednje klik na dijagramview i njega onda koristimo u absfact
+        popUp.getSelectedElement().setX(scaledX);
+        popUp.getSelectedElement().setY(scaledY);
+        //popUp.getSelectedElement().setX((x - currDiagramView.getTranslateY()) / currDiagramView.getScaling());   // ovo radi ovde al mora da se sredi nije lepo...
+        //popUp.getSelectedElement().setY((y - currDiagramView.getTranslateY()) / currDiagramView.getScaling());   // neka ideja sa clickcoordinates tracker?   --> cuva poslednje klik na dijagramview i njega onda koristimo u absfact
         currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
 
         ElementPainter elementPainter;
@@ -57,7 +61,7 @@ public class DodavanjeState implements State{
         //ClassPainter classPainter = new ClassPainter(diagramElementInstance, popUp.getSelectedElement());
 
 
-        System.out.println("Radi state");
+        //System.out.println("Radi state");
 
         /*PopUpChooseIC popUp = new PopUpChooseIC(this);
         this.x = x;

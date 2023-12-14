@@ -17,7 +17,6 @@ public class MoveAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        StateManager stateManager = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView().getStateManager();
-        stateManager.setNewMoveState();
+        MainFrame.getInstance().getWorkspace().getPackageView().startZoomInState();
     }
 }
