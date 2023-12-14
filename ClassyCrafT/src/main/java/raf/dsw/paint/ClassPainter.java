@@ -14,15 +14,21 @@ import static java.awt.Color.cyan;
 public class ClassPainter extends ElementPainter{
     private PopUpChooseIC popUpChooseICInstance;
     private InterClass selectedElement;
+    private int requiredWidth, requiredHeight;
     public ClassPainter(DiagramElement dgElement, PopUpChooseIC popUpChooseICInstance) {
         super(dgElement);
         this.popUpChooseICInstance = popUpChooseICInstance;
     }
-
+    public ClassPainter(InterClass selectedElement, int w, int h, int x, int y){
+        super(selectedElement);
+        requiredHeight = h;
+        requiredWidth = w;
+    }
     @Override
     public void draw(Graphics g) {
-
         selectedElement = popUpChooseICInstance.getSelectedElement();
+        int startX = (int)selectedElement.getX();
+        int startY = (int)selectedElement.getY();
         if (selectedElement != null) {
             List<ClassContent> ccc = selectedElement.getCl();
             //System.out.println("Size of ccc: " + ccc.size());
@@ -32,12 +38,11 @@ public class ClassPainter extends ElementPainter{
             g2D.setStroke(basicStroke);
 
             int maxWidth = fm.stringWidth("(C) " + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName()) + 20;
-
             int height = fm.getHeight();
             int yOffset = (int) selectedElement.getY() + fm.getHeight();
 
-            int requiredWidth = maxWidth;
-            int requiredHeight = ((ccc.size() + 1) * (height + 5)) + height * 3;
+            requiredWidth = maxWidth;
+            requiredHeight = ((ccc.size() + 1) * (height + 5)) + height * 3;
 
             int selectedElementNameWidth = fm.stringWidth("(C) " + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName());
 
@@ -173,6 +178,10 @@ public class ClassPainter extends ElementPainter{
     public boolean elementAt(int x, int y) {
         return getShape().contains(x, y);
     }
+    public int getRequiredWidth(){return requiredWidth;}
+    public int getRequiredHeight(){return  requiredHeight;}
+    public int getXCoord(){return (int)selectedElement.getX();}
+    public int getYCoord(){return (int)selectedElement.getY();}
 
 
 }

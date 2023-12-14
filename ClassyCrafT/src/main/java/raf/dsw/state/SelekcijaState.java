@@ -100,4 +100,9 @@ public class SelekcijaState implements State{
     public void zavrsenaSelekcija(DiagramElement noviElement, PackageView pkg){}
     @Override
     public void neispravnoCrtanje() {}
+
+    @Override
+    public void duplikacija(DiagramElement de, int x, int y, int w, int h, PackageView pkg) {
+
+    }
 }

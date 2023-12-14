@@ -155,6 +155,7 @@ public class PackageView extends JPanel implements ISubscriber{
     public void startBrisanjeState(){
         this.stateManager.setNewBrisanjeState();
     }
+    public void startDuplicateState(){this.stateManager.setDupliranjeState();}
     public void startMoveState(){
         this.stateManager.setNewMoveState();
     }

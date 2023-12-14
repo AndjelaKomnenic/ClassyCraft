@@ -12,6 +12,7 @@ import java.util.List;
 public class InterfacePainter extends ElementPainter{
     private PopUpChooseIC popUpChooseICInstance;
     private InterClass selectedElement;
+    private int requiredWidth, requiredHeight;
     public InterfacePainter(DiagramElement dgElement, PopUpChooseIC popUpChooseICInstance) {
         super(dgElement);
         this.popUpChooseICInstance = popUpChooseICInstance;
@@ -32,8 +33,8 @@ public class InterfacePainter extends ElementPainter{
             int height = fm.getHeight();
             int yOffset = (int) selectedElement.getY() + fm.getHeight();
 
-            int requiredWidth = maxWidth;
-            int requiredHeight = ((ccc.size() + 1) * (height + 5)) + height * 3;
+            requiredWidth = maxWidth;
+            requiredHeight = ((ccc.size() + 1) * (height + 5)) + height * 3;
 
             int selectedElementNameWidth = fm.stringWidth("(I)" + selectedElement.getName());
 
@@ -149,6 +150,8 @@ public class InterfacePainter extends ElementPainter{
     public boolean elementAt(int x, int y) {
         return getShape().contains(x, y);
     }
-
-
+    public int getRequiredWidth(){return requiredWidth;}
+    public int getRequiredHeight(){return  requiredHeight;}
+    public int getXCoord(){return (int)selectedElement.getX();}
+    public int getYCoord(){return (int)selectedElement.getY();}
 }

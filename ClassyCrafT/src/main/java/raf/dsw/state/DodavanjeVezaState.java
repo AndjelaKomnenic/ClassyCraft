@@ -67,4 +67,9 @@ public class DodavanjeVezaState implements State{
         pkg.repaint();
     }
 
+    @Override
+    public void duplikacija(DiagramElement de, int x, int y, int w, int h, PackageView pkg) {
+
+    }
+
 }

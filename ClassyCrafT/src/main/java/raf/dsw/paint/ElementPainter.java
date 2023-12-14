@@ -19,4 +19,9 @@ public abstract class ElementPainter {
 
     public abstract void draw(Graphics g);
     public abstract boolean elementAt(int x, int y);
+    public int getRequiredWidth(){return 0;}
+    public int getRequiredHeight(){return 0;}
+    public int getXCoord(){return 0;}
+    public int getYCoord(){return 0;}
+    public int getWidthForDuplicate(){return 0;}
 }
