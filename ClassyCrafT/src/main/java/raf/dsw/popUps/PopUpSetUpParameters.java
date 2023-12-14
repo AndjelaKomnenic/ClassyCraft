@@ -6,6 +6,7 @@ import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.ClassContent;
 import raf.dsw.components.InterClass;
+import raf.dsw.components.Klasa;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.WorkSpaceImplementation;
@@ -22,10 +23,11 @@ public class PopUpSetUpParameters extends JDialog {
     String s;
     private InterClass noviElement;
     JTextField naziv = new JTextField();
-    JTextField vidljivost = new JTextField();
+    JComboBox<String> vidljivost = new JComboBox<>();
     JButton addAtribut = new JButton("Dodaj atribut");
     JButton addMetodu = new JButton("Dodaj metodu");
     JButton napravi = new JButton("Napravi");
+    JCheckBox isAbstract = new JCheckBox("Apstraktna klasa");
     public PopUpSetUpParameters(String s, PopUpChooseIC parent, InterClass noviElement){
         super(MainFrame.getInstance(), "Podesavanje izgleda elementa", true);
         this.s = s;
@@ -33,6 +35,10 @@ public class PopUpSetUpParameters extends JDialog {
         setUp();
     }
     public void setUp(){
+        vidljivost.addItem("private");
+        vidljivost.addItem("public");
+        vidljivost.addItem("protected");
+        vidljivost.addItem("package");
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);
@@ -58,6 +64,15 @@ public class PopUpSetUpParameters extends JDialog {
             c.gridy = 0;
             gridbag.setConstraints(vidljivost, c);
             add(vidljivost);
+            c.gridx = 0;
+            c.gridy = 1;
+            c.gridwidth = 2;
+            gridbag.setConstraints(isAbstract, c);
+            add(isAbstract);
+            c.gridx = 2;
+            c.gridy = 2;
+            gridbag.setConstraints(addAtribut, c);
+            add(addAtribut);
         }
         else{
             Label lb2 = new Label("");
@@ -71,20 +86,18 @@ public class PopUpSetUpParameters extends JDialog {
             gridbag.setConstraints(lb3, c);
             add(lb3);
         }
+        /////
         c.gridx = 0;
-        c.gridy = 1;
+        c.gridy = 2;
         c.gridwidth = 2;
         Dimension d = new Dimension(120, 20);
         addAtribut.setPreferredSize(d);
         addMetodu.setPreferredSize(d);
-        gridbag.setConstraints(addAtribut, c);
-        add(addAtribut);
-        c.gridx = 2;
-        c.gridy = 1;
         gridbag.setConstraints(addMetodu, c);
         add(addMetodu);
+
         c.gridx = 0;
-        c.gridy = 2;
+        c.gridy = 3;
         c.gridwidth = 1;
         gridbag.setConstraints(napravi, c);
         add(napravi);
@@ -118,7 +131,11 @@ public class PopUpSetUpParameters extends JDialog {
     }
     public void handleButtonClick3(){
         noviElement.setName(naziv.getText());
-        noviElement.setVidljivost(vidljivost.getText());
+        String odabranaVidljivost = (String)vidljivost.getSelectedItem();
+        if(noviElement instanceof Klasa){
+            ((Klasa) noviElement).setApstraktna(isAbstract.isSelected());
+        }
+        noviElement.setVidljivost(odabranaVidljivost);
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
         ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);

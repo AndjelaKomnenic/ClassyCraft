@@ -3,6 +3,7 @@ package raf.dsw.paint;
 import raf.dsw.components.*;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.List;
 
@@ -225,6 +226,8 @@ public class InterClassPainter extends ElementPainter{
             return "+";
         if (str.equals("protected"))
             return "#";
+        if(str.equals("package"))
+            return "~";
         return "";
 
     }
@@ -244,6 +247,11 @@ public class InterClassPainter extends ElementPainter{
     public int getRequiredHeight(){return  requiredHeight;}
     public int getXCoord(){return (int)selectedElement.getX();}
     public int getYCoord(){return (int)selectedElement.getY();}
+
+    @Override
+    public List<Point2D.Double> getRectangleCoordinates() {
+        return null;
+    }
 
     //neki stari draw
     /*@Override

@@ -7,9 +7,7 @@ import raf.dsw.components.AbstractFactory;
 import raf.dsw.components.Connection;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
-import raf.dsw.paint.ClassPainter;
-import raf.dsw.paint.ElementPainter;
-import raf.dsw.paint.InterClassPainter;
+import raf.dsw.paint.*;
 import raf.dsw.state.State;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
@@ -129,14 +127,14 @@ public class PopUpChooseCon extends JDialog {
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         DiagramView currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
         for(ElementPainter ep: currDiagram.getPainters()){
-            if(ep.elementAt(sx, sy) && ep instanceof ClassPainter){
+            if(ep.elementAt(sx, sy) && (ep instanceof ClassPainter || ep instanceof InterfacePainter || ep instanceof EnumPainter)){
                 el1 = ep.getDgElement();
                 painter1 = ep;
                 break;
             }
         }
         for(ElementPainter ep: currDiagram.getPainters()){
-            if(ep.elementAt(fx, fy) && ep instanceof ClassPainter){
+            if(ep.elementAt(fx, fy)  && (ep instanceof ClassPainter || ep instanceof InterfacePainter || ep instanceof EnumPainter)){
                 el2 = ep.getDgElement();
                 painter2 = ep;
                 break;
@@ -151,8 +149,8 @@ public class PopUpChooseCon extends JDialog {
 
     public void twoClosestDots(){
         double curr = 0, max = Integer.MAX_VALUE;
-        for(Point2D point1 :((ClassPainter)painter1).getRectangleCoordinates()){
-            for(Point2D point2: ((ClassPainter)painter2).getRectangleCoordinates()){
+        for(Point2D point1 : painter1.getRectangleCoordinates()){
+            for(Point2D point2: painter2.getRectangleCoordinates()){
                 curr = Math.sqrt((point1.getX() - point2.getX())*(point1.getX() - point2.getX())
                         + (point1.getY() - point2.getY())*(point1.getY() - point2.getY()));
                 if(curr < max) {

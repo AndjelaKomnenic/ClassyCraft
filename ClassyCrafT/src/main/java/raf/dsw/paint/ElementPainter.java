@@ -5,6 +5,8 @@ import lombok.Setter;
 import raf.dsw.components.DiagramElement;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,5 +25,5 @@ public abstract class ElementPainter {
     public int getRequiredHeight(){return 0;}
     public int getXCoord(){return 0;}
     public int getYCoord(){return 0;}
-    public int getWidthForDuplicate(){return 0;}
+    public abstract List<Point2D.Double> getRectangleCoordinates();
 }

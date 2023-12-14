@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 @Getter
 public class PopUpAtributAfter extends JDialog {
-    private JTextField vidljivost = new JTextField();
+    private JComboBox<String> vidljivost = new JComboBox<>();
     private JTextField tip = new JTextField();
     private JTextField naziv = new JTextField();
     private JButton dodaj = new JButton("Dodaj");
@@ -21,6 +21,10 @@ public class PopUpAtributAfter extends JDialog {
         setUp();
     }
     public void setUp(){
+        vidljivost.addItem("private");
+        vidljivost.addItem("public");
+        vidljivost.addItem("protected");
+        vidljivost.addItem("package");
         setLayout(new GridLayout(4, 1));
         JPanel firstRow = new JPanel(new GridLayout(1, 2));
         JPanel secondRow = new JPanel(new GridLayout(1, 2));
@@ -48,7 +52,7 @@ public class PopUpAtributAfter extends JDialog {
         setVisible(true);
     }
     public void handleButtonClick(){
-        String v = vidljivost.getText();
+        String v = (String)vidljivost.getSelectedItem();
         String t = tip.getText();
         String n = naziv.getText();
         Atribut a = new Atribut(v, t, n);

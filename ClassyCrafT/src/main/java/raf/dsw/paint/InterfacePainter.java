@@ -101,6 +101,8 @@ public class InterfacePainter extends ElementPainter{
             return "+";
         if (str.equals("protected"))
             return "#";
+        if(str.equals("package"))
+            return "~";
         return "";
 
     }

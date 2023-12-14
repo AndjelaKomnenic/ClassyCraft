@@ -13,6 +13,7 @@ public class Klasa extends InterClass{
 
     private List<ClassContent> listaClassCont = new ArrayList<>();
     private InterClass itemFrom, itemTo;
+    private boolean apstraktna;
 
     public Klasa(String name, ClassyNode parent, double x, double y) {
         super(name, parent, x, y);

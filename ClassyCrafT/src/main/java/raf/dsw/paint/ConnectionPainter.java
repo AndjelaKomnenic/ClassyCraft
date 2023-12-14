@@ -4,6 +4,8 @@ import raf.dsw.components.*;
 import raf.dsw.workspace.view.PackageView;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
+import java.util.List;
 
 public class ConnectionPainter extends ElementPainter{
     private Connection dgElement;
@@ -115,5 +117,10 @@ public class ConnectionPainter extends ElementPainter{
         double d = Math.sqrt(Math.pow(finishX - startX, 2) + Math.pow(finishY - startY, 2));
         double pointToLineDistance = n/d;
         return pointToLineDistance <= 5;
+    }
+
+    @Override
+    public List<Point2D.Double> getRectangleCoordinates() {
+        return null;
     }
 }
