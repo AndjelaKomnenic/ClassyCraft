@@ -3,6 +3,7 @@ package raf.dsw.components;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.state.Tacka;
 
 @Getter
 @Setter
@@ -14,33 +15,45 @@ public abstract class Connection extends DiagramElement{
     private int fromX, fromY;
     private int toX, toY;
 
-    public Connection(String name, ClassyNode parent, InterClass from) {
+    public Connection(String name, ClassyNode parent, InterClass from, InterClass to) {
         super(name, parent);
         setFrom(from);
+        setTo(to);
     }
 
     public void setFrom(InterClass fromInter){
         if(fromInter != null) {
             this.from = fromInter;
-            fromX = (int)(from.getX() + (from.getWidth() / 2));
-            fromY = (int)(from.getY() + (from.getHeight() / 2));
+            recalculateCoordinates();
         }
     }
 
     public void setTo(InterClass toInter){
-        this.to = toInter;
-        toX = (int)(to.getX() + (to.getWidth() / 2));
-        toY = (int)(to.getY() + (to.getHeight() / 2));
+        if(toInter != null)
+        {
+            this.to = toInter;
+            recalculateCoordinates();
+        }
     }
 
     public void recalculateCoordinates(){
-        if (to == null)
+        if (to == null || from == null)
             return;
 
-        fromX = (int)(from.getX() + (from.getWidth() / 2));
-        fromY = (int)(from.getY() + (from.getHeight() / 2));
-        toX = (int)(to.getX() + (to.getWidth() / 2));
-        toY = (int)(to.getY() + (to.getHeight() / 2));
+        double curr = 0, max = Integer.MAX_VALUE;
+        for(Tacka point1 : from.getRectangleCoordinates()){
+            for(Tacka point2: to.getRectangleCoordinates()){
+                curr = Math.sqrt((point1.getX() - point2.getX())*(point1.getX() - point2.getX())
+                        + (point1.getY() - point2.getY())*(point1.getY() - point2.getY()));
+                if(curr < max) {
+                    max = curr;
+                    fromX = point1.getX();
+                    fromY = point1.getY();
+                    toX = point2.getX();
+                    toY = point2.getY();
+                }
+            }
+        }
     }
 
     @Override

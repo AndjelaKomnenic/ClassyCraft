@@ -3,7 +3,9 @@ package raf.dsw.components;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.state.Tacka;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,12 +53,15 @@ public abstract class InterClass extends DiagramElement{
 
     public void setVidljivost(String vidljivost) {
         this.vidljivost = vidljivost;
-
     }
 
-    @Override
-    public void setSelected(boolean selected){
-        this.selected = selected;
-        getParent().notifySubscriber("REPAINT");
+    public ArrayList<Tacka> getRectangleCoordinates()
+    {
+        ArrayList<Tacka> tacke = new ArrayList<>();
+        tacke.add(new Tacka((int)x,(int)y));
+        tacke.add(new Tacka((int)x + (int)width,(int)y));
+        tacke.add(new Tacka((int)x + (int)width,(int)y + (int)height));
+        tacke.add(new Tacka((int)x,(int)y + (int)height));
+        return tacke;
     }
 }

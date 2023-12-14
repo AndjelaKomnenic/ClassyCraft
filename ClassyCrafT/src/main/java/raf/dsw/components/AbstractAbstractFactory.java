@@ -5,5 +5,5 @@ import raf.dsw.classyrepository.implementation.Diagram;
 
 public abstract class AbstractAbstractFactory {
     abstract public InterClass newInterClass(String type, ClassyNode parent);
-    abstract public Connection newConnection(String type, Diagram parent, String name);
+    abstract public Connection newConnection(String type, Diagram parent, String name, InterClass from, InterClass to);
 }

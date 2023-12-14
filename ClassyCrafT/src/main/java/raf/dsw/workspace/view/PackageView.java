@@ -11,6 +11,7 @@ import raf.dsw.components.DiagramElement;
 import raf.dsw.observer.ISubscriber;
 import raf.dsw.paint.ElementPainter;
 import raf.dsw.state.StateManager;
+import raf.dsw.components.Connection;
 
 import javax.swing.*;
 import java.awt.*;

@@ -9,6 +9,9 @@ import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.IWorkspace;
 import raf.dsw.workspace.controller.MouseGraphicsEvent;
 import raf.dsw.workspace.WorkSpaceImplementation;
+import raf.dsw.components.Connection;
+import raf.dsw.classyrepository.composite.ClassyNode;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,6 +50,16 @@ public class DiagramView extends JPanel implements ISubscriber {
                 ourPackageView.getTabbedPane().remove(indexOfOurDiagram);
             } else if (notification.equals("RENAME")) {
                 ourPackageView.getTabbedPane().setTitleAt(indexOfOurDiagram, diagram.getName());
+            } else if (notification.equals("REPAINT")) {
+                for (ClassyNode dete: diagram.getChildren())
+                {
+                    if (dete instanceof Connection)
+                    {
+                        Connection connection = (Connection)dete;
+                        connection.recalculateCoordinates();
+                    }
+                }
+                //this.setPainters(painters.get(this.getDiagram()));
             }
         }
 

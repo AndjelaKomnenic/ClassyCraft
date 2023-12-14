@@ -1,6 +1,6 @@
 package raf.dsw.state;
 
-//import lombok.var;
+
 
 import lombok.var;
 import raf.dsw.components.DiagramElement;
@@ -71,4 +71,5 @@ public class MoveState implements State{
     public void duplikacija(DiagramElement de, int x, int y, int w, int h, PackageView pkg) {
 
     }
+
 }

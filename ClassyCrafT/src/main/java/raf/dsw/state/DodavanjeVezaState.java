@@ -2,10 +2,13 @@ package raf.dsw.state;
 
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.*;
+import raf.dsw.paint.ClassPainter;
 import raf.dsw.paint.ConnectionPainter;
 import raf.dsw.paint.ElementPainter;
 import raf.dsw.paint.InterClassPainter;
 import raf.dsw.popUps.PopUpChooseCon;
+import raf.dsw.view.MainFrame;
+import raf.dsw.workspace.WorkSpaceImplementation;
 import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
@@ -13,48 +16,56 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DodavanjeVezaState implements State{
-
-    private int pocetnaTackaX;
-    private int pocetnaTackaY;
-    private int zavrsnaTackaX;
-    private int zavrsnaTackaY;
     private Connection connection;
-    private PackageView pkg;
-    private DiagramView diag;
+    private ElementPainter painter;
+    InterClass from;
 
     @Override
     public void misKliknut(int x, int y, DiagramView currDiagram, PackageView pkg) {
-        pocetnaTackaY = y;
-        pocetnaTackaX = x;
-        this.pkg = pkg;
-        this.diag = diag;
-        connection = new TemporaryConnection("temp", currDiagram.getDiagram(), null);
-        connection.tempSetFrom(pocetnaTackaX, pocetnaTackaY);
-        connection.tempSetTo(pocetnaTackaX, pocetnaTackaY);
-        ElementPainter elementPainter = new ConnectionPainter(connection);
-        pkg.addPainterForCurrent(elementPainter);
+        from = nadjiInterClass(x,y, currDiagram);
+        if(from == null)
+        {
+            return;
+        }
+
+        connection = new TemporaryConnection("temp", currDiagram.getDiagram());
+        connection.tempSetFrom(x, y);
+        connection.tempSetTo(x, y);
+        painter = new ConnectionPainter(connection);
+        pkg.addPainterForCurrent(painter);
     }
 
     @Override
     public void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg) {
-        PopUpChooseCon popCon = new PopUpChooseCon(pocetnaTackaX, pocetnaTackaY, zavrsnaTackaX, zavrsnaTackaY, this);
+        connection.setFromX(0);
+        connection.setFromY(0);
+        connection.setToY(0);
+        connection.setToX(0);
+        pkg.repaint();
+        pkg.removePainter(painter);
+        connection = null;
+        painter = null;
+
+        InterClass to = nadjiInterClass(x,y, currDiagram);
+        if(to == null)
+        {
+            return;
+        }
+
+        PopUpChooseCon popCon = new PopUpChooseCon(from, to, this);
+        from = null;
     }
 
     @Override
     public void misPrevucen(int x, int y, DiagramView currDiagram, PackageView pkg) {
-        zavrsnaTackaX = x;
-        zavrsnaTackaY = y;
-        connection.tempSetTo(zavrsnaTackaX, zavrsnaTackaY);
+        connection.tempSetTo(x, y);
         pkg.repaint();
     }
 
 
     @Override
     public void zavrsenaSelekcija(DiagramElement inter, PackageView pkg) {
-        connection.setFromX(0);
-        connection.setFromY(0);
-        connection.setToY(0);
-        connection.setToX(0);
+
         Connection c = (Connection) inter;
         ElementPainter conPain = new ConnectionPainter(c);
         pkg.addPainterForCurrent(conPain);
@@ -64,12 +75,27 @@ public class DodavanjeVezaState implements State{
         connection.setFromY(0);
         connection.setToY(0);
         connection.setToX(0);
-        pkg.repaint();
+
     }
 
     @Override
     public void duplikacija(DiagramElement de, int x, int y, int w, int h, PackageView pkg) {
 
     }
+
+    InterClass nadjiInterClass(int x, int y, DiagramView currentDiagram)
+    {
+        for(ElementPainter ep: currentDiagram.getPainters()){
+            if(ep.elementAt(x, y) && ep instanceof ClassPainter){
+                DiagramElement el = ep.getDgElement();
+                if(el instanceof InterClass)
+                {
+                    return (InterClass) el;
+                }
+            }
+        }
+        return null;
+    }
+
 
 }
