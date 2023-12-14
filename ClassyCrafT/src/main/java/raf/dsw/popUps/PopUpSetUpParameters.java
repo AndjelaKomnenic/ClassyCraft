@@ -88,23 +88,6 @@ public class PopUpSetUpParameters extends JDialog {
         c.gridwidth = 1;
         gridbag.setConstraints(napravi, c);
         add(napravi);
-        /*
-        //bez gridBag
-        setLayout(new GridLayout(3, 1));
-        JPanel firstRow = new JPanel(new GridLayout(1, 4));
-        JPanel secondRow = new JPanel(new GridLayout(1, 2));
-        firstRow.add(new Label("Naziv: "), 0);
-        firstRow.add(naziv, 1);
-        if(s.equalsIgnoreCase("klasa")) {
-            firstRow.add(new Label("Vidljivost: "), 2);
-            firstRow.add(vidljivost, 3);
-        }
-        secondRow.add(addAtribut, 0);
-        secondRow.add(addMetodu, 1);
-        add(firstRow, 0);
-        add(secondRow, 1);
-        add(napravi, 2);
-        */
         addMetodu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
