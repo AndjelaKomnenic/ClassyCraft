@@ -1,5 +1,6 @@
 package raf.dsw.tree;
 
+import lombok.var;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.ProjectExplorer;
@@ -54,6 +55,41 @@ public class ClassyTreeImplementation implements ClassyTree{
             System.out.println("nema parent");
         update();
     }
+
+    @Override
+    public void deleteNode(ClassyNode child){
+        ClassyTreeItem parent  = findTreeItemByNode(child, root);
+        if(parent == null)
+        {
+            return;
+        }
+        ClassyNodeComposite composite = (ClassyNodeComposite) parent.getClassyNode();
+        composite.removeChild(child);
+        treeModel.nodeStructureChanged(parent);
+        update();
+    }
+
+    public ClassyTreeItem findTreeItemByNode(ClassyNode node, ClassyTreeItem parent){
+        if(parent == null || !(parent.getClassyNode() instanceof ClassyNodeComposite))
+            return null;
+        ClassyNodeComposite composite = (ClassyNodeComposite) parent.getClassyNode();
+        if(composite.getChildren().contains(node))
+        {
+            return parent;
+        }
+        for(var childItem: parent.getChildren())
+        {
+            ClassyTreeItem found = findTreeItemByNode(node, childItem);
+            if (found == null)
+            {
+                continue;
+            }
+            return found;
+        }
+        return null;
+    }
+
+
     public void update(){
         SwingUtilities.updateComponentTreeUI(treeView);
     }

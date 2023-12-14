@@ -15,4 +15,5 @@ public interface ClassyTree {
     ClassyTreeItem getRoot();
     void update();
     void addPP(ClassyTreeItem parent);
+    void deleteNode(ClassyNode child);
 }

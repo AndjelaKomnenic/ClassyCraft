@@ -37,7 +37,6 @@ public class EditPopUpConnection extends JDialog {
     private int sx, sy, fx, fy;
     private int noviStartx, noviStarty, noviFinishx, noviFinishy;
     private State calledFrom;
-    private ElementPainter painter1, painter2;
     private Point2D startingPoint, endingPoint;
     ////////////////////
     private Connection trenutnaVeza;
@@ -82,8 +81,6 @@ public class EditPopUpConnection extends JDialog {
         setVisible(true);
     }
     public void handleButtonClick(){
-        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
-        Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
         if(radioButton1.isSelected())
             rbResult = "Agregacija";
         else if(radioButton2.isSelected())
@@ -93,38 +90,18 @@ public class EditPopUpConnection extends JDialog {
         else if(radioButton4.isSelected())
             rbResult = "Generalizacija";
         AbstractFactory factory = new AbstractFactory();
-        boolean flag = true;
-        if(naziv.getText().length() > 0) {
-            for (ClassyNode cn : currDiagram.getChildren()) {
-                if (cn.getName().equalsIgnoreCase(naziv.getText())) {
-                    flag = false;
-                    break;
-                }
-            }
-            if (flag) {
-                trenutnaVeza.setName(naziv.getText());
-                MainFrame.getInstance().getClassyTree().update();
-            } else {
-                ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_ALREADY_EXISTS);
-            }
+        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
+        Connection noviElement = factory.newConnection(rbResult, currDiagram, naziv.getText(), trenutnaVeza.getFrom(), trenutnaVeza.getTo());
+        ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
+        if(myParent != null) {
+            MainFrame.getInstance().getClassyTree().deleteNode(trenutnaVeza);
+            MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
+
         }
-        Connection proba = factory.newConnection(rbResult, currDiagram, trenutnaVeza.getName());
-        if(proba.getClass()!=(trenutnaVeza.getClass())){
-            proba.setToX(trenutnaVeza.getToX());
-            proba.setToY(trenutnaVeza.getToY());
-            proba.setFromX(trenutnaVeza.getFromX());
-            proba.setFromY(trenutnaVeza.getFromY());
-            ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
-            ClassyTreeItem trenutnaVezaTreeItem =  findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), trenutnaVeza);
-            if(myParent != null) {
-                ((ClassyNodeComposite)(trenutnaVeza.getParent())).removeChild(trenutnaVeza);
-                MainFrame.getInstance().getClassyTree().deleteChild(trenutnaVezaTreeItem);
-                MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, proba);
-            }
-            else
-                System.out.println(currDiagram.getName() + " nije nadjen");
-            calledFrom.zavrsenaSelekcija(proba, packageView);
-        }
+        else
+            System.out.println(currDiagram.getName() + " nije nadjen");
+        calledFrom.zavrsenaSelekcija(noviElement, packageView);
         dispose();
     }
     public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
@@ -139,30 +116,5 @@ public class EditPopUpConnection extends JDialog {
             }
         }
         return null;
-    }
-    public boolean connectsTwoItems(){
-        DiagramElement el1 = null;
-        DiagramElement el2 = null;
-        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
-        DiagramView currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
-        for(ElementPainter ep: currDiagram.getPainters()){
-            if(ep.elementAt(sx, sy) && ep instanceof ClassPainter){
-                el1 = ep.getDgElement();
-                painter1 = ep;
-                break;
-            }
-        }
-        for(ElementPainter ep: currDiagram.getPainters()){
-            if(ep.elementAt(fx, fy) && ep instanceof ClassPainter){
-                el2 = ep.getDgElement();
-                painter2 = ep;
-                break;
-            }
-        }
-        if(el1 == null || el2 == null)
-            return false;
-        if(el1 == el2)
-            return false;
-        return true;
     }
 }

@@ -63,7 +63,6 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         DiagramView currDiagramView = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
         packageView.getStateManager().getCurrState().misPrevucen(e.getX(), e.getY(), currDiagramView, packageView);
-
     }
 
     @Override

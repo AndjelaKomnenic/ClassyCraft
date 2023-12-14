@@ -7,7 +7,9 @@ import raf.dsw.components.AbstractFactory;
 import raf.dsw.components.Connection;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
-import raf.dsw.paint.*;
+import raf.dsw.paint.ClassPainter;
+import raf.dsw.paint.ElementPainter;
+import raf.dsw.paint.InterClassPainter;
 import raf.dsw.state.State;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
@@ -30,22 +32,16 @@ public class PopUpChooseCon extends JDialog {
     JRadioButton radioButton2 = new JRadioButton("Kompozicija");
     JRadioButton radioButton3 = new JRadioButton("Zavisnost");
     JRadioButton radioButton4 = new JRadioButton("Generalizacija");
-    private int sx, sy, fx, fy;
     private int noviStartx, noviStarty, noviFinishx, noviFinishy;
     private State calledFrom;
-    private ElementPainter painter1, painter2;
+    private InterClass from, to;
     private Point2D startingPoint, endingPoint;
-    public PopUpChooseCon(int sx, int sy, int fx, int fy, State calledFrom){
+    public PopUpChooseCon(InterClass from, InterClass to, State calledFrom){
         super(MainFrame.getInstance(), "Dodavanje nove veze", true);
-        this.fx = fx;
-        this.fy = fy;
-        this.sx = sx;
-        this.sy = sy;
+        this.from = from;
+        this.to = to;
         this.calledFrom = calledFrom;
-        if(connectsTwoItems())
-            setUp();
-        else
-            calledFrom.neispravnoCrtanje();
+        setUp();
     }
     public void setUp(){
         setLayout(new GridLayout(4, 1));
@@ -93,12 +89,7 @@ public class PopUpChooseCon extends JDialog {
         AbstractFactory factory = new AbstractFactory();
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        Connection noviElement = factory.newConnection(rbResult, currDiagram, naziv.getText());
-        twoClosestDots();
-        noviElement.setToX((int)endingPoint.getX());
-        noviElement.setToY((int)endingPoint.getY());
-        noviElement.setFromX((int)startingPoint.getX());
-        noviElement.setFromY((int)startingPoint.getY());
+        Connection noviElement = factory.newConnection(rbResult, currDiagram, naziv.getText(), from, to);
         ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
         if(myParent != null) {
             MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
@@ -121,36 +112,11 @@ public class PopUpChooseCon extends JDialog {
         }
         return null;
     }
-    public boolean connectsTwoItems(){
-        DiagramElement el1 = null;
-        DiagramElement el2 = null;
-        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
-        DiagramView currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
-        for(ElementPainter ep: currDiagram.getPainters()){
-            if(ep.elementAt(sx, sy) && (ep instanceof ClassPainter || ep instanceof InterfacePainter || ep instanceof EnumPainter)){
-                el1 = ep.getDgElement();
-                painter1 = ep;
-                break;
-            }
-        }
-        for(ElementPainter ep: currDiagram.getPainters()){
-            if(ep.elementAt(fx, fy)  && (ep instanceof ClassPainter || ep instanceof InterfacePainter || ep instanceof EnumPainter)){
-                el2 = ep.getDgElement();
-                painter2 = ep;
-                break;
-            }
-        }
-        if(el1 == null || el2 == null)
-            return false;
-        if(el1 == el2)
-            return false;
-        return true;
-    }
 
-    public void twoClosestDots(){
+   /* public void twoClosestDots(){
         double curr = 0, max = Integer.MAX_VALUE;
-        for(Point2D point1 : painter1.getRectangleCoordinates()){
-            for(Point2D point2: painter2.getRectangleCoordinates()){
+        for(Point2D point1 :((ClassPainter)painter1).getRectangleCoordinates()){
+            for(Point2D point2: ((ClassPainter)painter2).getRectangleCoordinates()){
                 curr = Math.sqrt((point1.getX() - point2.getX())*(point1.getX() - point2.getX())
                         + (point1.getY() - point2.getY())*(point1.getY() - point2.getY()));
                 if(curr < max) {
@@ -160,5 +126,5 @@ public class PopUpChooseCon extends JDialog {
                 }
             }
         }
-    }
+    }*/
 }
