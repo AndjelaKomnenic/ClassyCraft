@@ -1,6 +1,8 @@
 package raf.dsw.state;
 
 
+import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.DiagramElement;
 
 import raf.dsw.components.Enum;
@@ -34,24 +36,42 @@ public class DodavanjeState implements State{
             popUp.getSelectedElement().setX(scaledX);
             popUp.getSelectedElement().setY(scaledY);
             currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
-            ElementPainter elementPainter;
+
+
+            ElementPainter elementPainter = null;
+
             if (popUp.getSelectedElement() instanceof Klasa) {
                 elementPainter = new ClassPainter(popUp.getSelectedElement(), popUp);
-                pkg.addPainterForCurrent(elementPainter);
             } else if (popUp.getSelectedElement() instanceof Interfejs) {
                 elementPainter = new InterfacePainter(popUp.getSelectedElement(), popUp);
-                pkg.addPainterForCurrent(elementPainter);
-                //System.out.println("Usao");
+
             } else if (popUp.getSelectedElement() instanceof Enum) {
                 elementPainter = new EnumPainter(popUp.getSelectedElement(), popUp);
-                pkg.addPainterForCurrent(elementPainter);
             }
+
+            /*for (ClassyNode i : currDiagramView.getDiagram().getChildren()){
+                if (i instanceof InterClass){
+                    if (overlap(elementPainter.getXCoord(), elementPainter.getYCoord(), ((InterClass) i).getX(), ((InterClass) i).getY(), elementPainter.getRequiredWidth(), ((InterClass) i).getWidth(), elementPainter.getRequiredHeight(), ((InterClass) i).getHeight())){
+                        currDiagramView.getDiagram().removeChild(popUp.getSelectedElement());
+                        System.out.println("desilo se");
+                        return;
+                    }
+                }
+
+            }*/
+
+
+            pkg.addPainterForCurrent(elementPainter);
         }
-        else{
 
+    }
 
-        }
-
+    public boolean overlap(int x1, int y1, int x2, int y2, int w1, int w2, int h1, int h2){
+        if((x2 >= x1 && x2<=(x1+w1) && (y2+h2) >= y1 && (y2+h2) <= (y1+h1)))
+            return true;
+        if(x2 >= x1 && x2 <= x1 + w1 && y2 >= y1 && y2 <= (y1+h1))
+            return true;
+        return false;
     }
 
     @Override

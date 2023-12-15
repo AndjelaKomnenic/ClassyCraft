@@ -1,6 +1,9 @@
 package raf.dsw.state;
 
 //import lombok.var;
+
+import lombok.var;
+import raf.dsw.components.Connection;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
 import raf.dsw.state.State;
@@ -11,6 +14,7 @@ import raf.dsw.workspace.view.PackageView;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Collections;
 
 public class SelectionState implements State {
@@ -42,6 +46,7 @@ public class SelectionState implements State {
         startY = -1;
         endX = -1;
         endY = -1;
+        printSelectedElements();
     }
 
     @Override
@@ -80,6 +85,9 @@ public class SelectionState implements State {
                 var classBotY = (int) interClass.getY() + (int) interClass.getHeight();
 
                 PackageView pkg = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+
+                //System.out.println(pkg.getSelectedComponents().size());
+
                 if (click && !anySelected && x >= classLeftX && x <= classRightX && y >= classTopY && y <= classBotY) {
                     interClass.setSelected(true);
                     pkg.getSelectedComponents().add(interClass);
@@ -91,6 +99,79 @@ public class SelectionState implements State {
                 } else {
                     interClass.setSelected(false);
                 }
+
+                //System.out.println(pkg.getSelectedComponents().size());
+            }
+            else if (child instanceof Connection) {
+                var connection = (Connection) child;
+                PackageView pkg = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+                int connStartX = (int) connection.getFromX();
+                int connEndX = (int) connection.getToX();
+                int connStartY = (int) connection.getFromY();
+                int connEndY = (int) connection.getToY();
+
+
+                int clickThreshold = 5;
+
+                if (isLineInsideRectangle(leftX, topY, rightX, botY, connStartX, connStartY, connEndX, connEndY)) {
+                    connection.setSelected(true);
+                    pkg.getSelectedComponents().add(connection);
+                }
+
+                else if (isClickNearLine(x, y, connStartX, connStartY, connEndX, connEndY, clickThreshold)) {
+                    connection.setSelected(true);
+                    pkg.getSelectedComponents().add(connection);
+                } else {
+                    connection.setSelected(false);
+                }
+            }
+        }
+    }
+
+    boolean isLineInsideRectangle(int rectStartX, int rectStartY, int rectEndX, int rectEndY,
+                                  int lineStartX, int lineStartY, int lineEndX, int lineEndY) {
+
+        return isPointInsideRectangle(rectStartX, rectStartY, rectEndX, rectEndY, lineStartX, lineStartY)
+                && isPointInsideRectangle(rectStartX, rectStartY, rectEndX, rectEndY, lineEndX, lineEndY);
+    }
+
+    boolean isPointInsideRectangle(int rectStartX, int rectStartY, int rectEndX, int rectEndY,
+                                   int pointX, int pointY) {
+        return pointX >= Math.min(rectStartX, rectEndX)
+                && pointX <= Math.max(rectStartX, rectEndX)
+                && pointY >= Math.min(rectStartY, rectEndY)
+                && pointY <= Math.max(rectStartY, rectEndY);
+    }
+    boolean isClickNearLine(int x, int y, int startX, int startY, int endX, int endY, int threshold) {
+       
+        double segmentLength = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+        double dotProduct = ((x - startX) * (endX - startX)) + ((y - startY) * (endY - startY));
+
+        
+        double closestX = startX + (dotProduct / Math.pow(segmentLength, 2)) * (endX - startX);
+        double closestY = startY + (dotProduct / Math.pow(segmentLength, 2)) * (endY - startY);
+
+
+        double distance = Math.sqrt(Math.pow(closestX - x, 2) + Math.pow(closestY - y, 2));
+
+
+        return distance <= threshold;
+    }
+    public void printSelectedElements() {
+        PackageView pkg = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        List<DiagramElement> selectedComponents = pkg.getSelectedComponents();
+
+        System.out.println("Selected Elements:");
+        for (DiagramElement element : selectedComponents) {
+            if (element instanceof InterClass) {
+                InterClass interClass = (InterClass) element;
+
+                System.out.println("InterClass selected: " + interClass.getName());
+
+            }if (element instanceof Connection){
+                Connection connection = (Connection) element;
+                System.out.println("Connection selected: " + connection.getName());
+
             }
         }
     }

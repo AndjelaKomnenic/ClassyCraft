@@ -20,8 +20,8 @@ public class MoveState implements State {
 
     @Override
     public void misKliknut(int x, int y, DiagramView currDiagram, PackageView pkg) {
-        startX = x;
-        startY = y;
+        startX = (int)unscaleX(x, currDiagram);
+        startY = (int)unscaleY(y, currDiagram);
         originalneTacke.clear();
         movingView = false;
 
@@ -53,8 +53,8 @@ public class MoveState implements State {
     @Override
     public void misPrevucen(int x, int y, DiagramView currDiagram, PackageView pkg) {
         if (movingView) {
-            int deltaX = x - startX;
-            int deltaY = y - startY;
+            double deltaX = unscaleX(x, currDiagram) - startX;
+            double deltaY = unscaleY(y, currDiagram) - startY;
 
             // Update the view's translation
             currDiagram.setTranslateX(viewStartX + deltaX);
@@ -94,6 +94,13 @@ public class MoveState implements State {
     public void duplikacija(DiagramElement de, int x, int y, int w, int h, PackageView pkg) {
     }
 
+    private double unscaleX(double x, DiagramView currDiagramView){
+        return (x * currDiagramView.getScaling()) + currDiagramView.getTranslateX();
+    }
+
+    private double unscaleY(double y, DiagramView currDiagramView){
+        return (y * currDiagramView.getScaling()) + currDiagramView.getTranslateY();
+    }
 
     // ovaj radi
     /*int startX = -1;
