@@ -51,7 +51,9 @@ public class DodavanjeState implements State{
 
             /*for (ClassyNode i : currDiagramView.getDiagram().getChildren()){
                 if (i instanceof InterClass){
-                    if (overlap(elementPainter.getXCoord(), elementPainter.getYCoord(), ((InterClass) i).getX(), ((InterClass) i).getY(), elementPainter.getRequiredWidth(), ((InterClass) i).getWidth(), elementPainter.getRequiredHeight(), ((InterClass) i).getHeight())){
+                    if (isWithinBounds(popUp.getSelectedElement().getX(), popUp.getSelectedElement().getY(),
+                            (int)((InterClass) i).getX(), (int)((InterClass) i).getY(),
+                            (int)((InterClass) i).getWidth(),  (int)((InterClass) i).getHeight())){
                         currDiagramView.getDiagram().removeChild(popUp.getSelectedElement());
                         System.out.println("desilo se");
                         return;
@@ -63,16 +65,28 @@ public class DodavanjeState implements State{
 
             pkg.addPainterForCurrent(elementPainter);
         }
-
     }
 
-    public boolean overlap(int x1, int y1, int x2, int y2, int w1, int w2, int h1, int h2){
-        if((x2 >= x1 && x2<=(x1+w1) && (y2+h2) >= y1 && (y2+h2) <= (y1+h1)))
-            return true;
-        if(x2 >= x1 && x2 <= x1 + w1 && y2 >= y1 && y2 <= (y1+h1))
-            return true;
-        return false;
+    private boolean isWithinBounds(double clickX, double clickY, int elementX, int elementY, int elementWidth, int elementHeight) {
+        return clickX >= elementX && clickX <= elementX + elementWidth &&
+                clickY >= elementY && clickY <= elementY + elementHeight;
     }
+
+    public boolean overlap(int x1, int y1, int x2, int y2, int w1, int w2, int h1, int h2) {
+        // Calculate the right and bottom coordinates of each rectangle
+        int right1 = x1 + w1;
+        int bottom1 = y1 + h1;
+        int right2 = x2 + w2;
+        int bottom2 = y2 + h2;
+
+        // Check for no overlap conditions
+        if (x1 >= right2 || right1 <= x2 || y1 >= bottom2 || bottom1 <= y2) {
+            return false; // No overlap
+        }
+
+        return true; // Overlapping
+    }
+
 
     @Override
     public void misOtpusten(int x, int y, DiagramView currDiagramView, PackageView pkg) {
