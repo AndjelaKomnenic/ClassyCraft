@@ -91,7 +91,10 @@ public class ClassPainter extends ElementPainter{
             int xOffset = (int) selectedElement.getX() + 10;
 
             g2D.setColor(Color.BLACK); // boja za text``````
-            g2D.drawString("(C)" + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName(), xOffset, yOffset);
+            if(((Klasa)this.getDgElement()).isApstraktna())
+                g2D.drawString("(A)" + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName(), xOffset, yOffset);
+            else
+                g2D.drawString("(C)" + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName(), xOffset, yOffset);
             yOffset += height + 5;
 
             g2D.drawLine((int) selectedElement.getX(), yOffset, (int) (selectedElement.getX() + requiredWidth), yOffset);

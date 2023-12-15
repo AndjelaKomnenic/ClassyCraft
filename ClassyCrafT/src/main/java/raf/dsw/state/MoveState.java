@@ -1,6 +1,7 @@
 package raf.dsw.state;
 
 //import lombok.var;
+//import lombok.var;
 import lombok.var;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
@@ -21,8 +22,8 @@ public class MoveState implements State {
 
     @Override
     public void misKliknut(int x, int y, DiagramView currDiagram, PackageView pkg) {
-        startX = (int)unscaleX(x, currDiagram);
-        startY = (int)unscaleY(y, currDiagram);
+        startX = x;
+        startY = y;
         originalneTacke.clear();
         movingView = false;
 
@@ -45,6 +46,43 @@ public class MoveState implements State {
 
     @Override
     public void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg) {
+
+        if(!movingView)
+        {
+            for (InterClass interClass : originalneTacke.keySet()) {
+                var orig = originalneTacke.get(interClass);
+
+                var classLeftX = (int) interClass.getX();
+                var classRightX = (int) interClass.getX() + (int) interClass.getWidth();
+                var classTopY = (int) interClass.getY();
+                var classBotY = (int) interClass.getY() + (int) interClass.getHeight();
+
+                for (var drugi : currDiagram.getDiagram().getChildren()) {
+                    if(drugi == interClass)
+                    {
+                        continue;
+                    }
+                    if (drugi instanceof InterClass) {
+                        var drugiClass = (InterClass) drugi;
+                        if (interClass.isSelected()) {
+                            var class2LeftX2 = (int) drugiClass.getX();
+                            var class2RightX = (int) drugiClass.getX() + (int) drugiClass.getWidth();
+                            var class2TopY = (int) drugiClass.getY();
+                            var class2BotY = (int) drugiClass.getY() + (int) drugiClass.getHeight();
+                            if(checkCollision(classLeftX, classTopY, classRightX, classBotY, class2LeftX2, class2TopY, class2RightX, class2BotY))
+                            {
+                                interClass.setX(orig.getX());
+                                interClass.setY(orig.getY());
+                            }
+                        }
+                    }
+                }
+
+            }
+
+
+        }
+
         startX = -1;
         startY = -1;
         originalneTacke.clear();
@@ -54,8 +92,8 @@ public class MoveState implements State {
     @Override
     public void misPrevucen(int x, int y, DiagramView currDiagram, PackageView pkg) {
         if (movingView) {
-            double deltaX = unscaleX(x, currDiagram) - startX;
-            double deltaY = unscaleY(y, currDiagram) - startY;
+            int deltaX = x - startX;
+            int deltaY = y - startY;
 
             // Update the view's translation
             currDiagram.setTranslateX(viewStartX + deltaX);
@@ -84,6 +122,11 @@ public class MoveState implements State {
         }
     }
 
+    static boolean checkCollision(int leftX1, int topY1, int rightX1, int bottomY1,
+                                  int leftX2, int topY2, int rightX2, int bottomY2) {
+        return !(leftX1 > rightX2 || leftX2 > rightX1 || topY1 > bottomY2 || topY2 > bottomY1);
+    }
+
     public void zavrsenaSelekcija(DiagramElement noviElement, PackageView pkg) {
     }
 
@@ -95,13 +138,6 @@ public class MoveState implements State {
     public void duplikacija(DiagramElement de, int x, int y, int w, int h, PackageView pkg) {
     }
 
-    private double unscaleX(double x, DiagramView currDiagramView){
-        return (x * currDiagramView.getScaling()) + currDiagramView.getTranslateX();
-    }
-
-    private double unscaleY(double y, DiagramView currDiagramView){
-        return (y * currDiagramView.getScaling()) + currDiagramView.getTranslateY();
-    }
 
     // ovaj radi
     /*int startX = -1;
