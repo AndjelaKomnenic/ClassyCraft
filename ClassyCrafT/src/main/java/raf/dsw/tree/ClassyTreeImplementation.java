@@ -50,6 +50,7 @@ public class ClassyTreeImplementation implements ClassyTree{
             ((ClassyNodeComposite) parent.getClassyNode()).removeChild(child.getClassyNode());
             parent.remove(child);
             treeModel.nodeStructureChanged(parent);
+            //if()
         }
         else
             System.out.println("nema parent");
