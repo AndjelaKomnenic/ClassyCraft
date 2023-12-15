@@ -100,11 +100,6 @@ public class PopUpEnumDetails extends JDialog {
         }
         if(flag) {
             noviElement.setName(naziv.getText());
-            ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
-            if (myParent != null)
-                MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
-            else
-                System.out.println(currDiagram.getName() + " nije nadjen");
         }
         else{
             noviElement.setName("");

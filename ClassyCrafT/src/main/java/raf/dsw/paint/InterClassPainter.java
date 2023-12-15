@@ -37,7 +37,8 @@ public class InterClassPainter extends ElementPainter{
         List<ClanEnuma> ccc = selectedElement.getNEnum();
         Graphics2D g2D = (Graphics2D) g;
         FontMetrics fm = g2D.getFontMetrics();
-
+        BasicStroke basicStroke = new BasicStroke(1);
+        g2D.setStroke(basicStroke);
         int maxWidth = fm.stringWidth("(E)" + selectedElement.getName()) + 20;
 
         int height = fm.getHeight();

@@ -17,8 +17,8 @@ public class ConnectionPainter extends ElementPainter{
 
     @Override
     public void draw(Graphics gr) {
-        BasicStroke basicStroke = new BasicStroke(2);
         Graphics2D g = (Graphics2D) gr;
+        BasicStroke basicStroke = new BasicStroke(2);
         g.setStroke(basicStroke);
         Color color;
         if (this.getDgElement().isSelected())

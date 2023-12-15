@@ -10,9 +10,13 @@ import raf.dsw.components.Enum;
 import raf.dsw.components.InterClass;
 import raf.dsw.components.Interfejs;
 import raf.dsw.components.Klasa;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.message.PossibleErrors;
 import raf.dsw.paint.*;
 
 import raf.dsw.popUps.PopUpChooseIC;
+import raf.dsw.tree.model.ClassyTreeItem;
+import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
@@ -44,9 +48,7 @@ public class DodavanjeState implements State{
                             (int) popUp.getSelectedElement().getWidth(), (int) ((InterClass) i).getWidth(),
                             (int) popUp.getSelectedElement().getHeight(), (int) ((InterClass) i).getHeight())) {
                         collisionDetected = true;
-                        System.out.println("Collision detected");
-                        JOptionPane.showMessageDialog(null, "Overlap detected! Cannot add the element.");
-                        currDiagramView.getDiagram().removeChild(popUp.getSelectedElement());
+                        ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.OVERLAP);
                         break;
                     }
                 }
@@ -64,7 +66,11 @@ public class DodavanjeState implements State{
                 } else if (popUp.getSelectedElement() instanceof Enum) {
                     elementPainter = new EnumPainter(popUp.getSelectedElement(), popUp);
                 }
-
+                ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagramView.getDiagram());
+                if(myParent != null)
+                    MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, popUp.getSelectedElement());
+                else
+                    System.out.println(popUp.getSelectedElement().getName() + " nije nadjen");
                 pkg.addPainterForCurrent(elementPainter);
             }
 
@@ -121,6 +127,19 @@ public class DodavanjeState implements State{
     @Override
     public void duplikacija(DiagramElement de, int x, int y, int w, int h, PackageView pkg) {
 
+    }
+    public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
+        if (root.getClassyNode().getName().equalsIgnoreCase(targetNode.getName())) {
+            return root;
+        } else {
+            for (ClassyTreeItem child : root.getChildren()) {
+                ClassyTreeItem result = findClassyTreeItem(child, targetNode);
+                if (result != null) {
+                    return result;
+                }
+            }
+        }
+        return null;
     }
 
 }

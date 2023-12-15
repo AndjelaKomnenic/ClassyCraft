@@ -56,6 +56,9 @@ public class MessageGeneratorImplementation extends CPublisher implements Messag
             case WRONG_SELECTION_FOR_DUPLICATE:
                 message = new Message("It is only possible to duplicate one InterClass item", "WARNING", timestamp);
                 break;
+            case OVERLAP:
+                message = new Message("Overlap", "ERROR", timestamp);
+                break;
         }
 
         notifySubscriber(message);

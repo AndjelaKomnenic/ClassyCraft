@@ -154,12 +154,6 @@ public class PopUpSetUpParameters extends JDialog {
                 ((Klasa) noviElement).setApstraktna(isAbstract.isSelected());
             }
             noviElement.setVidljivost(odabranaVidljivost);
-
-            ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
-            if(myParent != null)
-                MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
-            else
-                System.out.println(currDiagram.getName() + " nije nadjen");
         }
         else{
             noviElement.setName("");
@@ -167,19 +161,7 @@ public class PopUpSetUpParameters extends JDialog {
         }
         dispose();
     }
-    public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
-        if (root.getClassyNode().getName().equalsIgnoreCase(targetNode.getName())) {
-            return root;
-        } else {
-            for (ClassyTreeItem child : root.getChildren()) {
-                ClassyTreeItem result = findClassyTreeItem(child, targetNode);
-                if (result != null) {
-                    return result;
-                }
-            }
-        }
-        return null;
-    }
+
     public void addToList(ClassContent c){
         noviElement.addToList(c);
     }
