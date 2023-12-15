@@ -1,6 +1,6 @@
 package raf.dsw.state;
 
-import lombok.var;
+//import lombok.var;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.*;
 import raf.dsw.paint.ClassPainter;

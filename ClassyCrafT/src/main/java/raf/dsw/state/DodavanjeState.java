@@ -26,22 +26,31 @@ public class DodavanjeState implements State{
 
         PopUpChooseIC popUp = new PopUpChooseIC();
 
-        popUp.getSelectedElement().setX(x);
-        popUp.getSelectedElement().setY(y);
-
         currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
 
-        ElementPainter elementPainter;
-        if (popUp.getSelectedElement() instanceof Klasa){
-            elementPainter = new ClassPainter(popUp.getSelectedElement(), popUp);
-            pkg.addPainterForCurrent(elementPainter);
-        }else if (popUp.getSelectedElement() instanceof Interfejs){
-            elementPainter = new InterfacePainter(popUp.getSelectedElement(), popUp);
-            pkg.addPainterForCurrent(elementPainter);
-            //System.out.println("Usao");
-        }else if (popUp.getSelectedElement() instanceof Enum){
-            elementPainter = new EnumPainter(popUp.getSelectedElement(), popUp);
-            pkg.addPainterForCurrent(elementPainter);
+        if(popUp.getSelectedElement().getName() != "") {
+            
+            popUp.getSelectedElement().setX(x);
+            popUp.getSelectedElement().setY(y);
+          
+            currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
+
+            ElementPainter elementPainter;
+            if (popUp.getSelectedElement() instanceof Klasa) {
+                elementPainter = new ClassPainter(popUp.getSelectedElement(), popUp);
+                pkg.addPainterForCurrent(elementPainter);
+            } else if (popUp.getSelectedElement() instanceof Interfejs) {
+                elementPainter = new InterfacePainter(popUp.getSelectedElement(), popUp);
+                pkg.addPainterForCurrent(elementPainter);
+                //System.out.println("Usao");
+            } else if (popUp.getSelectedElement() instanceof Enum) {
+                elementPainter = new EnumPainter(popUp.getSelectedElement(), popUp);
+                pkg.addPainterForCurrent(elementPainter);
+            }
+        }
+        else{
+
+
         }
 
     }
@@ -54,12 +63,16 @@ public class DodavanjeState implements State{
     public void misPrevucen(int x, int y, DiagramView currDiagramView, PackageView pkg) {
     }
     public void zavrsenaSelekcija(DiagramElement novi, PackageView pkg){
-        InterClass noviElement = (InterClass) novi;
-        noviElement.setX(x);
-        noviElement.setY(y);
-        ElementPainter elementPainter = new InterClassPainter(noviElement);
-        pkg.addPainterForCurrent(elementPainter);
-        //currDiagramView.getParent().addPainterForCurrent(elementPainter);
+        if(novi.getName() != "") {
+            InterClass noviElement = (InterClass) novi;
+            noviElement.setX(x);
+            noviElement.setY(y);
+            ElementPainter elementPainter = new InterClassPainter(noviElement);
+            pkg.addPainterForCurrent(elementPainter);
+        }
+        else{
+
+        }
     }
     @Override
     public void neispravnoCrtanje() {}

@@ -22,3 +22,36 @@
 [ERROR][2023-12-11 15:01:14.382] Node with this name already exists
 [ERROR][2023-12-11 15:19:06.141] Cannot delete ProjectExplorer
 [ERROR][2023-12-11 16:53:23.863] Node with this name already exists
+[ERROR][2023-12-15 11:21:18.291] Node with this name already exists
+[ERROR][2023-12-15 11:24:40.603] Node with this name already exists
+[ERROR][2023-12-15 11:26:33.495] Node with this name already exists
+[ERROR][2023-12-15 11:28:08.953] Node with this name already exists
+[ERROR][2023-12-15 11:34:16.376] Node with this name already exists
+[ERROR][2023-12-15 11:35:02.971] Node with this name already exists
+[ERROR][2023-12-15 11:35:53.931] Node with this name already exists
+[ERROR][2023-12-15 11:37:12.107] Node with this name already exists
+[ERROR][2023-12-15 11:39:05.108] Node with this name already exists
+[ERROR][2023-12-15 11:39:46.297] Node with this name already exists
+[ERROR][2023-12-15 11:40:52.014] Node with this name already exists
+[ERROR][2023-12-15 11:41:03.35] Node with this name already exists
+[ERROR][2023-12-15 11:43:32.967] Node with this name already exists
+[ERROR][2023-12-15 11:44:26.215] Node with this name already exists
+[ERROR][2023-12-15 11:45:17.976] Node with this name already exists
+[ERROR][2023-12-15 11:49:10.046] Type of interClass was not selected
+[ERROR][2023-12-15 11:49:20.483] Type of interClass was not selected
+[ERROR][2023-12-15 11:51:26.216] Node with this name already exists
+[ERROR][2023-12-15 11:51:56.648] Node with this name already exists
+[ERROR][2023-12-15 11:52:18.005] Node with this name already exists
+[ERROR][2023-12-15 11:52:25.463] Node with this name already exists
+[ERROR][2023-12-15 11:52:33.109] Node with this name already exists
+[ERROR][2023-12-15 12:00:28.418] Name cannot be empty
+[ERROR][2023-12-15 12:00:35.174] Name cannot be empty
+[ERROR][2023-12-15 12:00:36.082] Node with this name already exists
+[ERROR][2023-12-15 12:01:52.377] Name cannot be empty
+[ERROR][2023-12-15 12:01:56.923] Name cannot be empty
+[ERROR][2023-12-15 12:01:57.626] Node with this name already exists
+[ERROR][2023-12-15 12:02:49.562] Name cannot be empty
+[ERROR][2023-12-15 12:02:56.048] Name cannot be empty
+[ERROR][2023-12-15 12:03:21.042] Name cannot be empty
+[ERROR][2023-12-15 12:03:24.912] Name cannot be empty
+[ERROR][2023-12-15 12:03:28.985] Name cannot be empty

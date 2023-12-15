@@ -42,7 +42,13 @@ public class MessageGeneratorImplementation extends CPublisher implements Messag
                 message = new Message("Cannot have same name on the same level", "ERROR", timestamp);
                 break;
             case CANNOT_DELETE_PROJECTEXPLORER:
-            message = new Message("Cannot delete ProjectExplorer", "ERROR", timestamp);
+                message = new Message("Cannot delete ProjectExplorer", "ERROR", timestamp);
+                break;
+            case TYPE_OF_IC_NOT_SELECTED:
+                message = new Message("Type of interClass was not selected", "ERROR", timestamp);
+                break;
+            case NO_NAME_FOR_DIAGRAM_ELEMENT:
+                message = new Message("Name cannot be null", "ERROR", timestamp);
                 break;
         }
 

@@ -4,6 +4,8 @@ import lombok.Getter;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.AbstractFactory;
 import raf.dsw.components.InterClass;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.message.PossibleErrors;
 import raf.dsw.state.State;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.WorkSpaceImplementation;
@@ -69,6 +71,10 @@ public class PopUpChooseIC extends JDialog {
             rbResult = "Klasa";
         else if(radioButton3.isSelected())
             rbResult = "Enum";
+        else{
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.TYPE_OF_IC_NOT_SELECTED);
+            return;
+        }
         AbstractFactory factory = new AbstractFactory();
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
@@ -80,7 +86,10 @@ public class PopUpChooseIC extends JDialog {
         else {
             PopUpSetUpParameters popSet = new PopUpSetUpParameters(rbResult, this, selectedElement);
         }
-        if (s != null)
-            s.zavrsenaSelekcija(selectedElement, packageView); //  <- ovaj ovde deo pravi error
+
+        if (s != null && selectedElement.getName() == "") {
+            selectedElement = null;
+            System.out.println("nije napravljen novi IC");
+        }//  <- ovaj ovde deo pravi error
     }
 }
