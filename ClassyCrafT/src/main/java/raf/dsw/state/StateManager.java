@@ -1,14 +1,12 @@
 package raf.dsw.state;
 
-import lombok.Getter;
-
 
 public class StateManager {
     private DodavanjeState newDodavanjeState;
     private DodavanjeSadrzajaState newDodavanjeSadrzajaState;
     private DodavanjeVezaState newDodavanjeVezeState;
     private BrisanjeState newBrisanjeState;
-    private SelekcijaState newSelekcijaState;
+    private SelectionState newSelectionState;
     private MoveState newMoveState;
     private ZoomInState newZoomInState;
     private ZoomOutState newZoomOutState;
@@ -21,7 +19,7 @@ public class StateManager {
         newDodavanjeSadrzajaState = new DodavanjeSadrzajaState();
         newDodavanjeVezeState = new DodavanjeVezaState();
         newBrisanjeState = new BrisanjeState();
-        newSelekcijaState = new SelekcijaState();
+        newSelectionState = new SelectionState();
         newMoveState = new MoveState();
         newZoomInState = new ZoomInState();
         newZoomOutState = new ZoomOutState();
@@ -37,7 +35,7 @@ public class StateManager {
     public void setNewDodavanjeVezeState(){currState = newDodavanjeVezeState;}
     public void setNewBrisanjeState(){ currState = newBrisanjeState;}
     public void setDupliranjeState(){currState = newDupliranjeState;}
-    public void setNewSelekcijaState(){currState = newSelekcijaState;}
+    public void setNewSelekcijaState(){currState = newSelectionState;}
     public void setNewMoveState(){ currState = newMoveState;}
     public void setNewZoomInState(){ currState = newZoomInState;}
     public void setNewZoomOutState(){ currState = newZoomOutState; }

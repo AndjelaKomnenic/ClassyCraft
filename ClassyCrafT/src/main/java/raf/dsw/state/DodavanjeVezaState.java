@@ -1,5 +1,6 @@
 package raf.dsw.state;
 
+import lombok.var;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.*;
 import raf.dsw.paint.ClassPainter;
@@ -37,6 +38,9 @@ public class DodavanjeVezaState implements State{
 
     @Override
     public void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg) {
+        if (connection == null){
+            return;
+        }
         connection.setFromX(0);
         connection.setFromY(0);
         connection.setToY(0);
@@ -58,6 +62,8 @@ public class DodavanjeVezaState implements State{
 
     @Override
     public void misPrevucen(int x, int y, DiagramView currDiagram, PackageView pkg) {
+        if (connection == null)
+            return;
         connection.tempSetTo(x, y);
         pkg.repaint();
     }
@@ -85,13 +91,18 @@ public class DodavanjeVezaState implements State{
 
     InterClass nadjiInterClass(int x, int y, DiagramView currentDiagram)
     {
-        for(ElementPainter ep: currentDiagram.getPainters()){
-            if(ep.elementAt(x, y) && ep instanceof ClassPainter){
-                DiagramElement el = ep.getDgElement();
-                if(el instanceof InterClass)
-                {
-                    return (InterClass) el;
-                }
+        for(var ep: currentDiagram.getDiagram().getChildren()){
+            if(ep instanceof InterClass){
+                InterClass interClass = (InterClass) ep;
+
+                    var classLeftX = (int) interClass.getX();
+                    var classRightX = (int) interClass.getX() + (int) interClass.getWidth();
+                    var classTopY = (int) interClass.getY();
+                    var classBotY = (int) interClass.getY() + (int) interClass.getHeight();
+
+                    if (x >= classLeftX && x <= classRightX && y >= classTopY && y <= classBotY)
+                        return interClass;
+
             }
         }
         return null;

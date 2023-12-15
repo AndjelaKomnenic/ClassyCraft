@@ -15,6 +15,7 @@ import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
 import javax.swing.*;
+import java.util.List;
 
 //klase, interfejsa, enuma
 public class DodavanjeState implements State{
@@ -23,26 +24,13 @@ public class DodavanjeState implements State{
     @Override
     public void misKliknut(int x, int y, DiagramView currDiagramView, PackageView pkg) {
 
-        /*String nameString = JOptionPane.showInputDialog(new JFrame(), "Unesite pojam", "Pojam", JOptionPane.PLAIN_MESSAGE);
-
-        //PopUpChooseIC popUp = new PopUpChooseIC();
-
-        Klasa newKlasa = new Klasa(nameString, currDiagramView.getDiagram(),x, y);
-        currDiagramView.getDiagram().addChild(newKlasa);
-
-        ElementPainter elementPainter = new InterClassPainter(newKlasa);
-        //currDiagramView.getParent().addPainterForCurrent(elementPainter);
-
-        pkg.addPainterForCurrent(elementPainter);*/
-
         PopUpChooseIC popUp = new PopUpChooseIC();
         double scaledX = (x - currDiagramView.getTranslateX()) / currDiagramView.getScaling();
         double scaledY = (y - currDiagramView.getTranslateY()) / currDiagramView.getScaling();
 
         popUp.getSelectedElement().setX(scaledX);
         popUp.getSelectedElement().setY(scaledY);
-        //popUp.getSelectedElement().setX((x - currDiagramView.getTranslateY()) / currDiagramView.getScaling());   // ovo radi ovde al mora da se sredi nije lepo...
-        //popUp.getSelectedElement().setY((y - currDiagramView.getTranslateY()) / currDiagramView.getScaling());   // neka ideja sa clickcoordinates tracker?   --> cuva poslednje klik na dijagramview i njega onda koristimo u absfact
+
         currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
 
         ElementPainter elementPainter;
@@ -57,17 +45,6 @@ public class DodavanjeState implements State{
             elementPainter = new EnumPainter(popUp.getSelectedElement(), popUp);
             pkg.addPainterForCurrent(elementPainter);
         }
-
-        //ClassPainter classPainter = new ClassPainter(diagramElementInstance, popUp.getSelectedElement());
-
-
-        //System.out.println("Radi state");
-
-        /*PopUpChooseIC popUp = new PopUpChooseIC(this);
-        this.x = x;
-        this.y = y;
-        //String nameString = JOptionPane.showInputDialog(new JFrame(), "Unesite pojam", "Pojam", JOptionPane.PLAIN_MESSAGE);
-        System.out.println("da");*/
 
     }
 
@@ -93,4 +70,5 @@ public class DodavanjeState implements State{
     public void duplikacija(DiagramElement de, int x, int y, int w, int h, PackageView pkg) {
 
     }
+
 }

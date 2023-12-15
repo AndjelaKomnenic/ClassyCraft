@@ -33,10 +33,10 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
         /*PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
         Point worldP = getWorldCoordinates(e);*/
-
+        //startX = (int) ((x - currDiagram.getTranslateX()) / currDiagram.getScaling());
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         DiagramView currDiagramView = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
-        packageView.getStateManager().getCurrState().misKliknut(e.getX(), e.getY(), currDiagramView, packageView);
+        packageView.getStateManager().getCurrState().misKliknut(scaleX(e, currDiagramView), scaleY(e, currDiagramView), currDiagramView, packageView);
 
 
     }
@@ -45,7 +45,7 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
     public void mouseReleased(MouseEvent e) {
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         DiagramView currDiagramView = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
-        packageView.getStateManager().getCurrState().misOtpusten(e.getX(), e.getY(), currDiagramView, packageView);
+        packageView.getStateManager().getCurrState().misOtpusten(scaleX(e, currDiagramView), scaleY(e, currDiagramView), currDiagramView, packageView);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
     public void mouseDragged(MouseEvent e) {
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         DiagramView currDiagramView = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
-        packageView.getStateManager().getCurrState().misPrevucen(e.getX(), e.getY(), currDiagramView, packageView);
+        packageView.getStateManager().getCurrState().misPrevucen(scaleX(e, currDiagramView), scaleY(e, currDiagramView), currDiagramView, packageView);
     }
 
     @Override
@@ -70,6 +70,14 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
 
     }
 
+
+    private int scaleX(MouseEvent e, DiagramView currDiagramView){
+        return (int)((e.getX() - currDiagramView.getTranslateX()) / currDiagramView.getScaling());
+    }
+
+    private int scaleY(MouseEvent e, DiagramView currDiagramView){
+        return (int)((e.getY() - currDiagramView.getTranslateY()) / currDiagramView.getScaling());
+    }
     private Point getWorldCoordinates(MouseEvent me){
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         DiagramView currDiagramView = (DiagramView) packageView.getTabbedPane().getSelectedComponent();

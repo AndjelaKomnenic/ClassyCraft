@@ -32,6 +32,8 @@ public class DiagramView extends JPanel implements ISubscriber {
     private double translateX = 0.0;
     private double translateY = 0.0;
 
+    private Rectangle selectionRect; // ovo dodato
+
     public DiagramView(Diagram diagram){
         this.diagram = diagram;
         this.addMouseListener(new MouseGraphicsEvent(this));
@@ -84,14 +86,18 @@ public class DiagramView extends JPanel implements ISubscriber {
         return Objects.hash(diagram);
     }
 
+    // da trigeruje repaintovanje
+    public void setSelectionRect(Rectangle rect) {
+        this.selectionRect = rect;
+        repaint();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g.create();
         g2D.transform(affineTransform);
-       /* for(Painter p : painters){                                                                              //1. crtamo asocijacije da bi bile ispod pojmova
-            if(p instanceof AssociationPainter) p.draw(g2D);
-        }*/
+
         for(ElementPainter p : painters){
             if(p instanceof ClassPainter)
                 p.draw(g2D);
@@ -104,6 +110,15 @@ public class DiagramView extends JPanel implements ISubscriber {
             else if(p instanceof InterClassPainter)
                 p.draw(g2D);
         }
+
+        // crtaj pravougaonik ako postoji
+        if (selectionRect != null) {
+            g2D.setColor(Color.CYAN);
+            g2D.setStroke(new BasicStroke(1.5f));
+
+            g2D.drawRect(selectionRect.x, selectionRect.y, selectionRect.width, selectionRect.height);
+        }
+
         g2D.dispose();
     }
 
@@ -139,8 +154,8 @@ public class DiagramView extends JPanel implements ISubscriber {
         this.scaling = newScaling;
         setupTransformation(newScaling);
     }
-
-    public void setupTransformation(double scaling){
+*/
+    /*public void setupTransformation(double scaling){
         affineTransform.setToIdentity();
         affineTransform.translate(translateX, translateY);
         affineTransform.scale(scaling, scaling);
