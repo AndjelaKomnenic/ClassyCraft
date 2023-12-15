@@ -1,5 +1,7 @@
 package raf.dsw.paint;
 
+import lombok.Getter;
+import lombok.Setter;
 import raf.dsw.components.*;
 import raf.dsw.popUps.PopUpChooseIC;
 
@@ -11,6 +13,8 @@ import java.util.List;
 
 import static java.awt.Color.cyan;
 
+@Getter
+@Setter
 public class ClassPainter extends ElementPainter{
     private PopUpChooseIC popUpChooseICInstance;
     private InterClass selectedElement;
