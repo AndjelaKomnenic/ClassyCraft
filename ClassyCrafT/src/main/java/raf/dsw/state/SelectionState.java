@@ -1,7 +1,6 @@
 package raf.dsw.state;
 
 //import lombok.var;
-import lombok.var;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
 import raf.dsw.state.State;
@@ -81,7 +80,6 @@ public class SelectionState implements State {
                 var classBotY = (int) interClass.getY() + (int) interClass.getHeight();
 
                 PackageView pkg = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
-                System.out.println(pkg.getSelectedComponents().size());
                 if (click && !anySelected && x >= classLeftX && x <= classRightX && y >= classTopY && y <= classBotY) {
                     interClass.setSelected(true);
                     pkg.getSelectedComponents().add(interClass);
@@ -93,7 +91,6 @@ public class SelectionState implements State {
                 } else {
                     interClass.setSelected(false);
                 }
-                System.out.println(pkg.getSelectedComponents().size());
             }
         }
     }

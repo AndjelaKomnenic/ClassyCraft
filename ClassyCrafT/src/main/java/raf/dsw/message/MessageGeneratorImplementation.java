@@ -50,6 +50,12 @@ public class MessageGeneratorImplementation extends CPublisher implements Messag
             case NO_NAME_FOR_DIAGRAM_ELEMENT:
                 message = new Message("Name cannot be null", "ERROR", timestamp);
                 break;
+            case TYPE_OF_CON_NOT_SELECTED:
+                message = new Message("Type of connection not selected", "ERROR", timestamp);
+                break;
+            case WRONG_SELECTION_FOR_DUPLICATE:
+                message = new Message("It is only possible to duplicate one InterClass item", "WARNING", timestamp);
+                break;
         }
 
         notifySubscriber(message);

@@ -1,7 +1,7 @@
 package raf.dsw.state;
 
 //import lombok.var;
-import lombok.var;
+//import lombok.var;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.*;
 import raf.dsw.paint.ClassPainter;
@@ -9,6 +9,7 @@ import raf.dsw.paint.ConnectionPainter;
 import raf.dsw.paint.ElementPainter;
 import raf.dsw.paint.InterClassPainter;
 import raf.dsw.popUps.PopUpChooseCon;
+import raf.dsw.popUps.PopUpChooseIC;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.WorkSpaceImplementation;
 import raf.dsw.workspace.view.DiagramView;
@@ -72,10 +73,11 @@ public class DodavanjeVezaState implements State{
 
     @Override
     public void zavrsenaSelekcija(DiagramElement inter, PackageView pkg) {
-
-        Connection c = (Connection) inter;
-        ElementPainter conPain = new ConnectionPainter(c);
-        pkg.addPainterForCurrent(conPain);
+        if(inter.getName().length() != 0) {
+            Connection c = (Connection) inter;
+            ElementPainter conPain = new ConnectionPainter(c);
+            pkg.addPainterForCurrent(conPain);
+        }
     }
     public void neispravnoCrtanje(){
         connection.setFromX(0);
