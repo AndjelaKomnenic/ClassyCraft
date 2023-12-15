@@ -35,35 +35,43 @@ public class DodavanjeState implements State{
             double scaledY = (y - currDiagramView.getTranslateY()) / currDiagramView.getScaling();
             popUp.getSelectedElement().setX(scaledX);
             popUp.getSelectedElement().setY(scaledY);
-            currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
 
-
-            ElementPainter elementPainter = null;
-
-            if (popUp.getSelectedElement() instanceof Klasa) {
-                elementPainter = new ClassPainter(popUp.getSelectedElement(), popUp);
-            } else if (popUp.getSelectedElement() instanceof Interfejs) {
-                elementPainter = new InterfacePainter(popUp.getSelectedElement(), popUp);
-
-            } else if (popUp.getSelectedElement() instanceof Enum) {
-                elementPainter = new EnumPainter(popUp.getSelectedElement(), popUp);
-            }
-
-            /*for (ClassyNode i : currDiagramView.getDiagram().getChildren()){
-                if (i instanceof InterClass){
-                    if (isWithinBounds(popUp.getSelectedElement().getX(), popUp.getSelectedElement().getY(),
-                            (int)((InterClass) i).getX(), (int)((InterClass) i).getY(),
-                            (int)((InterClass) i).getWidth(),  (int)((InterClass) i).getHeight())){
+            boolean collisionDetected = false;
+            for (ClassyNode i : currDiagramView.getDiagram().getChildren()) {
+                if (i instanceof InterClass) {
+                    if (overlap((int) scaledX, (int) scaledY,
+                            (int) ((InterClass) i).getX(), (int) ((InterClass) i).getY(),
+                            (int) popUp.getSelectedElement().getWidth(), (int) ((InterClass) i).getWidth(),
+                            (int) popUp.getSelectedElement().getHeight(), (int) ((InterClass) i).getHeight())) {
+                        collisionDetected = true;
+                        System.out.println("Collision detected");
+                        JOptionPane.showMessageDialog(null, "Overlap detected! Cannot add the element.");
                         currDiagramView.getDiagram().removeChild(popUp.getSelectedElement());
-                        System.out.println("desilo se");
-                        return;
+                        break;
                     }
                 }
+            }
 
-            }*/
 
+            if (!collisionDetected) {
+                ElementPainter elementPainter = null;
+                currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
 
-            pkg.addPainterForCurrent(elementPainter);
+                if (popUp.getSelectedElement() instanceof Klasa) {
+                    elementPainter = new ClassPainter(popUp.getSelectedElement(), popUp);
+                } else if (popUp.getSelectedElement() instanceof Interfejs) {
+                    elementPainter = new InterfacePainter(popUp.getSelectedElement(), popUp);
+                } else if (popUp.getSelectedElement() instanceof Enum) {
+                    elementPainter = new EnumPainter(popUp.getSelectedElement(), popUp);
+                }
+
+                pkg.addPainterForCurrent(elementPainter);
+            }
+
+            /*if (elementPainter == null)
+                System.out.println("prazno");
+            else
+                System.out.println(elementPainter.getDgElement().getName());*/
         }
     }
 
