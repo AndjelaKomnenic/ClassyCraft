@@ -20,14 +20,14 @@ public class ConnectionPainter extends ElementPainter{
         BasicStroke basicStroke = new BasicStroke(2);
         Graphics2D g = (Graphics2D) gr;
         g.setStroke(basicStroke);
-        if (this.getDgElement().isSelected())
+        /*if (this.getDgElement().isSelected())
         {
             dgElement.setColourOutline("0x00FFFF");
         }
         else
         {
             dgElement.setColourOutline("0x000000");
-        }
+        }*/
         startX = dgElement.getFromX();
         startY = dgElement.getFromY();
         finishX = dgElement.getToX();
