@@ -25,12 +25,14 @@ public class DodavanjeState implements State{
     public void misKliknut(int x, int y, DiagramView currDiagramView, PackageView pkg) {
 
         PopUpChooseIC popUp = new PopUpChooseIC();
-        if(popUp.getSelectedElement().getName() != "") {
-            double scaledX = (x - currDiagramView.getTranslateX()) / currDiagramView.getScaling();
-            double scaledY = (y - currDiagramView.getTranslateY()) / currDiagramView.getScaling();
-            popUp.getSelectedElement().setX(scaledX);
-            popUp.getSelectedElement().setY(scaledY);
 
+        currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
+
+        if(popUp.getSelectedElement().getName() != "") {
+            
+            popUp.getSelectedElement().setX(x);
+            popUp.getSelectedElement().setY(y);
+          
             currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
 
             ElementPainter elementPainter;
@@ -47,6 +49,7 @@ public class DodavanjeState implements State{
             }
         }
         else{
+
 
         }
 
