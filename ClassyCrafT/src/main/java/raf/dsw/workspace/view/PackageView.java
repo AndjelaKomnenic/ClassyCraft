@@ -135,7 +135,6 @@ public class PackageView extends JPanel implements ISubscriber{
         }
         this.revalidate();
         this.repaint();
-
     }
 
     @Override

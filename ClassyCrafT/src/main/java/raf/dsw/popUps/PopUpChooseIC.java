@@ -78,7 +78,7 @@ public class PopUpChooseIC extends JDialog {
         AbstractFactory factory = new AbstractFactory();
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        selectedElement = factory.newInterClass(rbResult, currDiagram); // ovaj bato
+        selectedElement = factory.newInterClass(rbResult, currDiagram);
         dispose();
         if(rbResult.equalsIgnoreCase("Enum")){
             PopUpEnumDetails popEnum = new PopUpEnumDetails(this, selectedElement);
