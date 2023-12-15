@@ -3,6 +3,7 @@ package raf.dsw.state;
 //import lombok.var;
 
 //import lombok.var;
+import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.components.Connection;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
@@ -46,7 +47,7 @@ public class SelectionState implements State {
         startY = -1;
         endX = -1;
         endY = -1;
-        printSelectedElements();
+        //printSelectedElements();
     }
 
     @Override
@@ -116,11 +117,12 @@ public class SelectionState implements State {
                 if (isLineInsideRectangle(leftX, topY, rightX, botY, connStartX, connStartY, connEndX, connEndY)) {
                     connection.setSelected(true);
                     pkg.getSelectedComponents().add(connection);
+                    //anySelected = true;
                 }
-
                 else if (isClickNearLine(x, y, connStartX, connStartY, connEndX, connEndY, clickThreshold)) {
                     connection.setSelected(true);
                     pkg.getSelectedComponents().add(connection);
+                    //anySelected = true;
                 } else {
                     connection.setSelected(false);
                 }
@@ -171,7 +173,6 @@ public class SelectionState implements State {
             }if (element instanceof Connection){
                 Connection connection = (Connection) element;
                 System.out.println("Connection selected: " + connection.getName());
-
             }
         }
     }
