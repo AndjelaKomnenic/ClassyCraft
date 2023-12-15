@@ -4,6 +4,7 @@ package raf.dsw.state;
 
 //import lombok.var;
 import raf.dsw.classyrepository.composite.ClassyNode;
+
 import raf.dsw.components.Connection;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
