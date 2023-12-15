@@ -35,6 +35,8 @@ public class DuplicateAction extends AbstractClassyAction {
         MainFrame.getInstance().getWorkspace().getPackageView().startDuplicateState();
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
+        System.out.println("Selected Components: " + packageView.getSelectedComponents().size());
+
         if(packageView.getSelectedComponents().size() != 1)
             System.out.println("Moguce je duplirati samo jedan element");
         else {
