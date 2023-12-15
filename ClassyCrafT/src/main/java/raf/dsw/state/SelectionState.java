@@ -3,6 +3,7 @@ package raf.dsw.state;
 //import lombok.var;
 
 //import lombok.var;
+import lombok.var;
 import raf.dsw.classyrepository.composite.ClassyNode;
 
 import raf.dsw.components.Connection;

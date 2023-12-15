@@ -99,9 +99,9 @@ public class DiagramView extends JPanel implements ISubscriber {
         g2D.transform(affineTransform);
 
         for(ElementPainter p : painters){
-            if(p instanceof ClassPainter)
+            if(p instanceof ConnectionPainter)
                 p.draw(g2D);
-            else if(p instanceof ConnectionPainter)
+            else if(p instanceof ClassPainter)
                 p.draw(g2D);
             else if(p instanceof InterfacePainter)
                 p.draw(g2D);
