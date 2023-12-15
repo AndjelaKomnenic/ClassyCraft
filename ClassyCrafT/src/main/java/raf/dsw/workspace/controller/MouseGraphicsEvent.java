@@ -37,7 +37,7 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         DiagramView currDiagramView = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
         packageView.getStateManager().getCurrState().misKliknut(scaleX(e, currDiagramView), scaleY(e, currDiagramView), currDiagramView, packageView);
-
+        //packageView.getStateManager().getCurrState().misKliknut(e.getX(), e.getY(), currDiagramView, packageView);
 
     }
 
@@ -46,6 +46,7 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         DiagramView currDiagramView = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
         packageView.getStateManager().getCurrState().misOtpusten(scaleX(e, currDiagramView), scaleY(e, currDiagramView), currDiagramView, packageView);
+        //packageView.getStateManager().getCurrState().misOtpusten(e.getX(), e.getY(), currDiagramView, packageView);
     }
 
     @Override
@@ -63,6 +64,7 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         DiagramView currDiagramView = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
         packageView.getStateManager().getCurrState().misPrevucen(scaleX(e, currDiagramView), scaleY(e, currDiagramView), currDiagramView, packageView);
+        //packageView.getStateManager().getCurrState().misPrevucen(e.getX(), e.getY(), currDiagramView, packageView);
     }
 
     @Override
