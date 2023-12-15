@@ -7,6 +7,8 @@ import raf.dsw.components.AbstractFactory;
 import raf.dsw.components.Connection;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.message.PossibleErrors;
 import raf.dsw.paint.ClassPainter;
 import raf.dsw.paint.ElementPainter;
 import raf.dsw.paint.InterClassPainter;
@@ -86,17 +88,39 @@ public class PopUpChooseCon extends JDialog {
             rbResult = "Zavisnost";
         else if(radioButton4.isSelected())
             rbResult = "Generalizacija";
+        else{
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.TYPE_OF_CON_NOT_SELECTED);
+            return;
+        }
         AbstractFactory factory = new AbstractFactory();
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
         Connection noviElement = factory.newConnection(rbResult, currDiagram, naziv.getText(), from, to);
-        ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
-        if(myParent != null) {
-            MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
+        boolean flag = true;
+        if(naziv.getText().length() == 0){
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_CANNOT_BE_EMPTY);
+            noviElement.setName("");
+            dispose();
+            return;
         }
-        else
-            System.out.println(currDiagram.getName() + " nije nadjen");
-        calledFrom.zavrsenaSelekcija(noviElement, packageView);
+        for(ClassyNode cn: ((ClassyNodeComposite)currDiagram).getChildren()){
+            if(cn.getName().equalsIgnoreCase(naziv.getText())){
+                flag = false;
+                break;
+            }
+        }
+        if(flag) {
+            ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
+            if (myParent != null) {
+                MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
+            } else
+                System.out.println(currDiagram.getName() + " nije nadjen");
+            calledFrom.zavrsenaSelekcija(noviElement, packageView);
+        }
+        else{
+            noviElement.setName("");
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_ALREADY_EXISTS);
+        }
         dispose();
     }
     public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {

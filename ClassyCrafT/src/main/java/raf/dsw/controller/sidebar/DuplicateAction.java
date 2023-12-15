@@ -4,6 +4,8 @@ import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.*;
 import raf.dsw.components.Enum;
 import raf.dsw.controller.AbstractClassyAction;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.message.PossibleErrors;
 import raf.dsw.paint.ElementPainter;
 import raf.dsw.paint.InterClassPainter;
 import raf.dsw.tree.model.ClassyTreeItem;
@@ -35,10 +37,10 @@ public class DuplicateAction extends AbstractClassyAction {
         MainFrame.getInstance().getWorkspace().getPackageView().startDuplicateState();
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        System.out.println("Selected Components: " + packageView.getSelectedComponents().size());
+        //System.out.println("Selected Components: " + packageView.getSelectedComponents().size());
 
         if(packageView.getSelectedComponents().size() != 1)
-            System.out.println("Moguce je duplirati samo jedan element");
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.WRONG_SELECTION_FOR_DUPLICATE);
         else {
             selectedForDupl = packageView.getSelectedComponents().get(0);
             ElementPainter ep = packageView.getPainter(selectedForDupl);

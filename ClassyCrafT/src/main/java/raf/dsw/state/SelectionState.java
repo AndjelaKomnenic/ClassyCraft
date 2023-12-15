@@ -1,6 +1,7 @@
 package raf.dsw.state;
 
 //import lombok.var;
+
 import lombok.var;
 import raf.dsw.components.Connection;
 import raf.dsw.components.DiagramElement;
@@ -84,7 +85,9 @@ public class SelectionState implements State {
                 var classBotY = (int) interClass.getY() + (int) interClass.getHeight();
 
                 PackageView pkg = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+
                 //System.out.println(pkg.getSelectedComponents().size());
+
                 if (click && !anySelected && x >= classLeftX && x <= classRightX && y >= classTopY && y <= classBotY) {
                     interClass.setSelected(true);
                     pkg.getSelectedComponents().add(interClass);
@@ -96,6 +99,7 @@ public class SelectionState implements State {
                 } else {
                     interClass.setSelected(false);
                 }
+
                 //System.out.println(pkg.getSelectedComponents().size());
             }
             else if (child instanceof Connection) {
@@ -126,7 +130,7 @@ public class SelectionState implements State {
 
     boolean isLineInsideRectangle(int rectStartX, int rectStartY, int rectEndX, int rectEndY,
                                   int lineStartX, int lineStartY, int lineEndX, int lineEndY) {
-        // Check if both endpoints of the line are inside the rectangle bounds
+
         return isPointInsideRectangle(rectStartX, rectStartY, rectEndX, rectEndY, lineStartX, lineStartY)
                 && isPointInsideRectangle(rectStartX, rectStartY, rectEndX, rectEndY, lineEndX, lineEndY);
     }
@@ -139,11 +143,11 @@ public class SelectionState implements State {
                 && pointY <= Math.max(rectStartY, rectEndY);
     }
     boolean isClickNearLine(int x, int y, int startX, int startY, int endX, int endY, int threshold) {
-        // Calculate the distance from the click to the line segment formed by (startX, startY) and (endX, endY)
+       
         double segmentLength = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
         double dotProduct = ((x - startX) * (endX - startX)) + ((y - startY) * (endY - startY));
 
-        // Calculate the closest point on the line
+        
         double closestX = startX + (dotProduct / Math.pow(segmentLength, 2)) * (endX - startX);
         double closestY = startY + (dotProduct / Math.pow(segmentLength, 2)) * (endY - startY);
 
@@ -167,6 +171,7 @@ public class SelectionState implements State {
             }if (element instanceof Connection){
                 Connection connection = (Connection) element;
                 System.out.println("Connection selected: " + connection.getName());
+
             }
         }
     }

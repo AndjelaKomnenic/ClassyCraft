@@ -7,6 +7,8 @@ import raf.dsw.components.Enum;
 import raf.dsw.components.InterClass;
 import raf.dsw.components.Interfejs;
 import raf.dsw.components.Klasa;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.message.PossibleErrors;
 import raf.dsw.paint.*;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
@@ -37,7 +39,6 @@ public class DupliranjeState implements State{
     public void neispravnoCrtanje() {}
     public void duplikacija(DiagramElement de, int x, int y, int w, int h, PackageView pkg){
         if(de instanceof InterClass){
-            System.out.println("usao u duplikaciju");
             InterClass ic = (InterClass) de;
             ic.setY(y);
             ic.setX(x);
@@ -51,6 +52,8 @@ public class DupliranjeState implements State{
             elementPainter = new InterClassPainter(ic, w, h, x, y);
             pkg.addPainterForCurrent(elementPainter);
 
+        }else{
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.WRONG_SELECTION_FOR_DUPLICATE);
         }
     }
     public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {

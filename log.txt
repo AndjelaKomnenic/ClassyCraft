@@ -55,3 +55,13 @@
 [ERROR][2023-12-15 12:03:21.042] Name cannot be empty
 [ERROR][2023-12-15 12:03:24.912] Name cannot be empty
 [ERROR][2023-12-15 12:03:28.985] Name cannot be empty
+[ERROR][2023-12-15 15:26:07.206] Name cannot be empty
+[ERROR][2023-12-15 15:26:13.19] Node with this name already exists
+[ERROR][2023-12-15 16:12:05.758] Node with this name already exists
+[ERROR][2023-12-15 16:12:11.955] Name cannot be empty
+[ERROR][2023-12-15 16:13:37.237] Name cannot be empty
+[ERROR][2023-12-15 16:16:44.912] Type of connection not selected
+[ERROR][2023-12-15 17:00:24.926] Node with this name already exists
+[ERROR][2023-12-15 17:02:08.972] Name cannot be empty
+[WARNING][2023-12-15 17:07:02.621] It is only possible to duplicate one InterClass item
+[WARNING][2023-12-15 17:07:07.327] It is only possible to duplicate one InterClass item

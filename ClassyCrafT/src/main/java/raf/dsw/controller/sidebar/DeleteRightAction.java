@@ -31,6 +31,7 @@ public class DeleteRightAction extends AbstractClassyAction {
         MainFrame.getInstance().getWorkspace().getPackageView().startBrisanjeState();
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
+        //System.out.println("broj selektovanih")
         for(DiagramElement ep: packageView.getSelectedComponents()){
             ep.setSelected(false);
             packageView.removePainter(packageView.getPainter(ep));

@@ -145,14 +145,18 @@ public class EditPopUpClass extends Frame {
                 break;
             }
         }
-        if(flag) {
-            lb.setText(tf.getText());
-            diagramElement.setName(tf.getText());
-            packageView.repaint();
-            MainFrame.getInstance().getClassyTree().update();
+        if(tf.getText().length() > 0) {
+            if (flag) {
+                lb.setText(tf.getText());
+                diagramElement.setName(tf.getText());
+                packageView.repaint();
+                MainFrame.getInstance().getClassyTree().update();
+            } else {
+                ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_ALREADY_EXISTS);
+            }
         }
         else{
-            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_ALREADY_EXISTS);
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_CANNOT_BE_EMPTY);
         }
         add(lb, index);
         revalidate();

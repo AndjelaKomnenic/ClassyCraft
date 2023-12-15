@@ -27,20 +27,19 @@ public class DodavanjeState implements State{
     public void misKliknut(int x, int y, DiagramView currDiagramView, PackageView pkg) {
 
         PopUpChooseIC popUp = new PopUpChooseIC();
-
-        currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
-
-        if (popUp.getSelectedElement() == null)
+        if(popUp.getSelectedElement() == null) {
             return;
-
+        }
         if(popUp.getSelectedElement().getName() != "") {
-            
-            popUp.getSelectedElement().setX(x);
-            popUp.getSelectedElement().setY(y);
-          
+            double scaledX = (x - currDiagramView.getTranslateX()) / currDiagramView.getScaling();
+            double scaledY = (y - currDiagramView.getTranslateY()) / currDiagramView.getScaling();
+            popUp.getSelectedElement().setX(scaledX);
+            popUp.getSelectedElement().setY(scaledY);
             currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
 
+
             ElementPainter elementPainter = null;
+
             if (popUp.getSelectedElement() instanceof Klasa) {
                 elementPainter = new ClassPainter(popUp.getSelectedElement(), popUp);
             } else if (popUp.getSelectedElement() instanceof Interfejs) {
