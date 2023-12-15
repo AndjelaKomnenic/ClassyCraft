@@ -7,6 +7,8 @@ import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.ClassContent;
 import raf.dsw.components.InterClass;
 import raf.dsw.components.Klasa;
+import raf.dsw.core.ApplicationFramework;
+import raf.dsw.message.PossibleErrors;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.WorkSpaceImplementation;
@@ -130,19 +132,39 @@ public class PopUpSetUpParameters extends JDialog {
         PopUpAtribut popMet = new PopUpAtribut(this);
     }
     public void handleButtonClick3(){
-        noviElement.setName(naziv.getText());
-        String odabranaVidljivost = (String)vidljivost.getSelectedItem();
-        if(noviElement instanceof Klasa){
-            ((Klasa) noviElement).setApstraktna(isAbstract.isSelected());
-        }
-        noviElement.setVidljivost(odabranaVidljivost);
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
-        if(myParent != null)
-            MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
-        else
-            System.out.println(currDiagram.getName() + " nije nadjen");
+        boolean flag = true;
+        if(naziv.getText().length() == 0){
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_CANNOT_BE_EMPTY);
+            noviElement.setName("");
+            dispose();
+            return;
+        }
+        for(ClassyNode cn: ((ClassyNodeComposite)currDiagram).getChildren()){
+            if(cn.getName().equalsIgnoreCase(naziv.getText())){
+                flag = false;
+                break;
+            }
+        }
+        if(flag) {
+            noviElement.setName(naziv.getText());
+            String odabranaVidljivost = (String)vidljivost.getSelectedItem();
+            if(noviElement instanceof Klasa){
+                ((Klasa) noviElement).setApstraktna(isAbstract.isSelected());
+            }
+            noviElement.setVidljivost(odabranaVidljivost);
+
+            ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
+            if(myParent != null)
+                MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
+            else
+                System.out.println(currDiagram.getName() + " nije nadjen");
+        }
+        else{
+            noviElement.setName("");
+            ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_ALREADY_EXISTS);
+        }
         dispose();
     }
     public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
