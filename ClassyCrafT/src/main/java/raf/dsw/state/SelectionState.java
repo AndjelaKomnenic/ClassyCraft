@@ -1,9 +1,12 @@
 package raf.dsw.state;
 
 //import lombok.var;
+import lombok.var;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
 import raf.dsw.state.State;
+import raf.dsw.view.MainFrame;
+import raf.dsw.workspace.WorkSpaceImplementation;
 import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
@@ -34,6 +37,7 @@ public class SelectionState implements State {
         endY = y;
         isDrawing = false;
         currDiagram.setSelectionRect(null);
+        pkg.getSelectedComponents().clear();
         selectItems(endX, endY, currDiagram, false);
         startX = -1;
         startY = -1;
@@ -76,14 +80,20 @@ public class SelectionState implements State {
                 var classTopY = (int) interClass.getY();
                 var classBotY = (int) interClass.getY() + (int) interClass.getHeight();
 
+                PackageView pkg = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+                System.out.println(pkg.getSelectedComponents().size());
                 if (click && !anySelected && x >= classLeftX && x <= classRightX && y >= classTopY && y <= classBotY) {
                     interClass.setSelected(true);
+                    pkg.getSelectedComponents().add(interClass);
                     anySelected = true;
+
                 } else if (!click && checkCollision(leftX, topY, rightX, botY, classLeftX, classTopY, classRightX, classBotY)) {
                     interClass.setSelected(true);
+                    pkg.getSelectedComponents().add(interClass);
                 } else {
                     interClass.setSelected(false);
                 }
+                System.out.println(pkg.getSelectedComponents().size());
             }
         }
     }

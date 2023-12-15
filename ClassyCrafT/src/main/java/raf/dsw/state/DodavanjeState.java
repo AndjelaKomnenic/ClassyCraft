@@ -28,6 +28,9 @@ public class DodavanjeState implements State{
 
         currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
 
+        if (popUp.getSelectedElement() == null)
+            return;
+
         if(popUp.getSelectedElement().getName() != "") {
             
             popUp.getSelectedElement().setX(x);
