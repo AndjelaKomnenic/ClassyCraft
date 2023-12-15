@@ -32,6 +32,8 @@ public class EnumPainter extends ElementPainter{
             //System.out.println("Size of ccc: " + ccc.size());
             Graphics2D g2D = (Graphics2D) g;
             FontMetrics fm = g2D.getFontMetrics();
+            BasicStroke basicStroke = new BasicStroke(1);
+            g2D.setStroke(basicStroke);
 
             int maxWidth = fm.stringWidth("(E)" + selectedElement.getName()) + 20;
 

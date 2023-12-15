@@ -30,7 +30,6 @@ public class DodavanjeVezaState implements State{
         {
             return;
         }
-
         connection = new TemporaryConnection("temp", currDiagram.getDiagram());
         connection.tempSetFrom(x, y);
         connection.tempSetTo(x, y);
@@ -57,9 +56,10 @@ public class DodavanjeVezaState implements State{
         {
             return;
         }
-
-        PopUpChooseCon popCon = new PopUpChooseCon(from, to, this);
-        from = null;
+        if(to != from) {
+            PopUpChooseCon popCon = new PopUpChooseCon(from, to, this);
+            from = null;
+        }
     }
 
     @Override
@@ -74,9 +74,13 @@ public class DodavanjeVezaState implements State{
     @Override
     public void zavrsenaSelekcija(DiagramElement inter, PackageView pkg) {
         if(inter.getName().length() != 0) {
-            Connection c = (Connection) inter;
-            ElementPainter conPain = new ConnectionPainter(c);
-            pkg.addPainterForCurrent(conPain);
+            if( ((Connection) inter).getTo() !=  ((Connection) inter).getFrom()) {
+                Connection c = (Connection) inter;
+                ElementPainter conPain = new ConnectionPainter(c);
+                pkg.addPainterForCurrent(conPain);
+                ((Connection) inter).getTo().addToListVeza(c);
+                ((Connection) inter).getFrom().addToListVeza(c);
+            }
         }
     }
     public void neispravnoCrtanje(){

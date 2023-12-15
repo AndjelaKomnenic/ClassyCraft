@@ -21,6 +21,7 @@ public abstract class InterClass extends DiagramElement{
 
     private List<ClassContent> cl = new ArrayList<>();
     private List<ClanEnuma> nEnum = new ArrayList<>();
+    private List<Connection> listaVeza = new ArrayList<>();
 
     public InterClass(String name, ClassyNode parent, double x, double y) {
         super(name, parent);
@@ -63,5 +64,11 @@ public abstract class InterClass extends DiagramElement{
         tacke.add(new Tacka((int)x + (int)width,(int)y + (int)height));
         tacke.add(new Tacka((int)x,(int)y + (int)height));
         return tacke;
+    }
+    public void addToListVeza(Connection c){
+        listaVeza.add(c);
+    }
+    public List<Connection> getListVeza(){
+        return listaVeza;
     }
 }

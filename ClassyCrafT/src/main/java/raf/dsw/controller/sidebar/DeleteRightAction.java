@@ -2,7 +2,9 @@ package raf.dsw.controller.sidebar;
 
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.implementation.Diagram;
+import raf.dsw.components.Connection;
 import raf.dsw.components.DiagramElement;
+import raf.dsw.components.InterClass;
 import raf.dsw.controller.AbstractClassyAction;
 import raf.dsw.paint.ElementPainter;
 import raf.dsw.popUps.PopUpChooseCon;
@@ -28,13 +30,34 @@ public class DeleteRightAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        MainFrame.getInstance().getWorkspace().getPackageView().startBrisanjeState();
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        if(packageView == null)
+            return;
+        if(packageView.getTabbedPane() == null)
+            return;
+        if(packageView.getTabbedPane().getSelectedComponent() == null)
+            return;
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        //System.out.println("broj selektovanih")
+        if(currDiagram == null)
+            return;
+        MainFrame.getInstance().getWorkspace().getPackageView().startBrisanjeState();
         for(DiagramElement ep: packageView.getSelectedComponents()){
             ep.setSelected(false);
             packageView.removePainter(packageView.getPainter(ep));
+            if(ep instanceof InterClass) {
+                for (Connection c : ((InterClass)ep).getListVeza()) {
+                    if (packageView.getPainter(c) != null) {
+                        packageView.removePainter(packageView.getPainter(c));
+                        ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), c);
+                        if (treeItemZaBrsianje != null)
+                            MainFrame.getInstance().getClassyTree().deleteChild(treeItemZaBrsianje);
+                        else
+                            System.out.println("Nije nadjen");
+                    }
+                    else{
+                    }
+                }
+            }
             ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), ep);
             if(treeItemZaBrsianje != null)
                 MainFrame.getInstance().getClassyTree().deleteChild(treeItemZaBrsianje);

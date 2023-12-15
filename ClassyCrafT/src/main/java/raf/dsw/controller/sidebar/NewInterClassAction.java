@@ -28,7 +28,16 @@ public class NewInterClassAction extends AbstractClassyAction {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
+        if(packageView == null)
+            return;
+        if(packageView.getTabbedPane() == null)
+            return;
+        if(packageView.getTabbedPane().getSelectedComponent() == null)
+            return;
+        Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
+        if(currDiagram == null)
+            return;
         MainFrame.getInstance().getWorkspace().getPackageView().startDodavanjeState();
 
     }
