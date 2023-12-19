@@ -3,6 +3,7 @@ package raf.dsw.workspace.view;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.implementation.Diagram;
+import raf.dsw.commands.CommandManager;
 import raf.dsw.observer.ISubscriber;
 import raf.dsw.paint.*;
 import raf.dsw.view.MainFrame;
@@ -25,6 +26,7 @@ import java.util.Objects;
 public class DiagramView extends JPanel implements ISubscriber {
 
     private Diagram diagram;
+    private CommandManager commandManager;
     private List<ElementPainter> painters = new ArrayList<>();
     private List<ElementPainter> selectedElements = new ArrayList<>();
     private AffineTransform affineTransform = new AffineTransform();
@@ -36,6 +38,7 @@ public class DiagramView extends JPanel implements ISubscriber {
 
     public DiagramView(Diagram diagram){
         this.diagram = diagram;
+        commandManager = new CommandManager();
         this.addMouseListener(new MouseGraphicsEvent(this));
         this.addMouseMotionListener(new MouseGraphicsEvent(this));
     }
