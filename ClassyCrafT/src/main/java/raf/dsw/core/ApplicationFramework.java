@@ -1,5 +1,7 @@
 package raf.dsw.core;
 
+import lombok.Getter;
+import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyRepository;
 import raf.dsw.classyrepository.ClassyRepositoryImplementation;
 import raf.dsw.factory.Logger;
@@ -8,6 +10,8 @@ import raf.dsw.message.MessageGenerator;
 import raf.dsw.message.MessageGeneratorImplementation;
 import raf.dsw.view.MainFrame;
 
+@Getter
+@Setter
 public class ApplicationFramework {
 
     protected Gui gui;
