@@ -47,10 +47,10 @@ public abstract class Connection extends DiagramElement{
                         + (point1.getY() - point2.getY())*(point1.getY() - point2.getY()));
                 if(curr < max) {
                     max = curr;
-                    fromX = point1.getX();
-                    fromY = point1.getY();
-                    toX = point2.getX();
-                    toY = point2.getY();
+                    fromX = (int)point1.getX();
+                    fromY = (int)point1.getY();
+                    toX = (int)point2.getX();
+                    toY = (int)point2.getY();
                 }
             }
         }

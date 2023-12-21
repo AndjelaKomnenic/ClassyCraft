@@ -30,6 +30,8 @@ public class ActionManager {
     private UndoAction undoAction;
     private RedoAction redoAction;
 
+    private ScreenshotAction screenshotAction;
+
     public ActionManager() {
         initialiseActions();
     }
@@ -53,6 +55,7 @@ public class ActionManager {
         zoomOutAction = new ZoomOutAction();
         undoAction = new UndoAction();
         redoAction = new RedoAction();
+        screenshotAction = new ScreenshotAction();
     }
 
 }
