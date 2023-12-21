@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.commands.CommandManager;
+import raf.dsw.components.DiagramElement;
+import raf.dsw.components.InterClass;
 import raf.dsw.observer.ISubscriber;
 import raf.dsw.paint.*;
 import raf.dsw.view.MainFrame;
@@ -17,6 +19,7 @@ import raf.dsw.classyrepository.composite.ClassyNode;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -123,6 +126,14 @@ public class DiagramView extends JPanel implements ISubscriber {
         }
 
         g2D.dispose();
+    }
+
+    public BufferedImage createImage(int desiredWidth, int desiredHeight) {
+
+        BufferedImage bufferedImage = new BufferedImage(desiredWidth, desiredHeight, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = bufferedImage.createGraphics();
+        this.paint(g);
+        return bufferedImage;
     }
 
     /*public void zoomIn(int x, int y){

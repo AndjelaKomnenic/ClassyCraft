@@ -27,6 +27,6 @@ public class NewClassCommand extends AbstractCommand{
 
     @Override
     public void undoCommand() {
-        
+
     }
 }

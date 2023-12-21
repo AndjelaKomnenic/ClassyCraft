@@ -36,7 +36,6 @@ public class MoveState implements State {
             }
         }
 
-        // If no elements are selected, start moving the view
         if (originalneTacke.isEmpty()) {
             movingView = true;
             viewStartX = (int)currDiagram.getTranslateX();
@@ -92,18 +91,16 @@ public class MoveState implements State {
     @Override
     public void misPrevucen(int x, int y, DiagramView currDiagram, PackageView pkg) {
         if (movingView) {
-            double deltaX =  unscaleX(x, currDiagram) - startX;
+            double deltaX = unscaleX(x, currDiagram) - startX;
             double deltaY = unscaleY(y, currDiagram) - startY;
 
-            // Update the view's translation
             currDiagram.setTranslateX(viewStartX + deltaX);
             currDiagram.setTranslateY(viewStartY + deltaY);
 
-            // Apply transformations to the view
             currDiagram.getAffineTransform().setToIdentity();
             currDiagram.getAffineTransform().translate(currDiagram.getTranslateX(), currDiagram.getTranslateY());
             currDiagram.getAffineTransform().scale(currDiagram.getScaling(), currDiagram.getScaling());
-            // Repaint the view
+
             currDiagram.repaint();
         } else {
             moveItems(x, y, currDiagram);
