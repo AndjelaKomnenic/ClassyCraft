@@ -1,9 +1,8 @@
 package raf.dsw.tree;
 
-//import lombok.var;
+
 import lombok.Getter;
 import lombok.Setter;
-import lombok.var;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Project;
@@ -94,7 +93,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         {
             return parent;
         }
-        for(var childItem: parent.getChildren())
+        for(ClassyTreeItem  childItem: parent.getChildren())
         {
             ClassyTreeItem found = findTreeItemByNode(node, childItem);
             if (found == null)

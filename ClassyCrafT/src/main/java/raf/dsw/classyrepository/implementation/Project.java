@@ -7,15 +7,32 @@ import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class Project extends ClassyNodeComposite {
     protected String filePath;
     private String author;
-    @JsonCreator
-    public Project(@JsonProperty("name")String name, ClassyNode parent, String author) {
+
+    public Project(String name, ClassyNode parent, String author) {
         super(name, parent);
         this.author = author;
+    }
+
+    @JsonCreator
+    public Project(@JsonProperty("name")String name
+            , @JsonProperty("author")String author
+            , @JsonProperty("children") List<ClassyNode> children
+            , @JsonProperty("counter") int counter
+            , @JsonProperty("filePath") String filePath) {
+        super(name, null);
+        this.author = author;
+        this.setName(name);
+        this.filePath = filePath;
+        for(ClassyNode child: children)
+            this.addChild(child);
+        //this.setCounterVal(counter);
     }
 
     @Override
@@ -43,4 +60,7 @@ public class Project extends ClassyNodeComposite {
     public void setName(String name) {
         super.setName(name);
     }
+    /*public void setCounterVal(int counter) {
+        this.counter = counter;
+    }*/
 }

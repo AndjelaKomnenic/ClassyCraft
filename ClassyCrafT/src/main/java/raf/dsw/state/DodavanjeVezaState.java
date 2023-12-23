@@ -1,7 +1,6 @@
 package raf.dsw.state;
 
-//import lombok.var;
-import lombok.var;
+import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.*;
 import raf.dsw.paint.ClassPainter;
@@ -98,17 +97,17 @@ public class DodavanjeVezaState implements State{
 
     InterClass nadjiInterClass(int x, int y, DiagramView currentDiagram)
     {
-        for(var ep: currentDiagram.getDiagram().getChildren()){
+        for(ClassyNode ep: currentDiagram.getDiagram().getChildren()){
             if(ep instanceof InterClass){
                 InterClass interClass = (InterClass) ep;
 
-                    var classLeftX = (int) interClass.getX();
-                    var classRightX = (int) interClass.getX() + (int) interClass.getWidth();
-                    var classTopY = (int) interClass.getY();
-                    var classBotY = (int) interClass.getY() + (int) interClass.getHeight();
+                int classLeftX = (int) interClass.getX();
+                int classRightX = (int) interClass.getX() + (int) interClass.getWidth();
+                int classTopY = (int) interClass.getY();
+                int classBotY = (int) interClass.getY() + (int) interClass.getHeight();
 
-                    if (x >= classLeftX && x <= classRightX && y >= classTopY && y <= classBotY)
-                        return interClass;
+                if (x >= classLeftX && x <= classRightX && y >= classTopY && y <= classBotY)
+                    return interClass;
 
             }
         }
