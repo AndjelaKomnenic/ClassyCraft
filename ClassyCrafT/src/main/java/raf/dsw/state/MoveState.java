@@ -1,8 +1,6 @@
 package raf.dsw.state;
 
-//import lombok.var;
-//import lombok.var;
-import lombok.var;
+import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
 import raf.dsw.workspace.view.DiagramView;
@@ -27,14 +25,15 @@ public class MoveState implements State {
         originalneTacke.clear();
         movingView = false;
 
-        for (var child : currDiagram.getDiagram().getChildren()) {
+        for (ClassyNode child : currDiagram.getDiagram().getChildren()) {
             if (child instanceof InterClass) {
-                var interClass = (InterClass) child;
+                InterClass interClass = (InterClass) child;
                 if (interClass.isSelected()) {
                     originalneTacke.put(interClass, new Tacka((int) interClass.getX(), (int) interClass.getY()));
                 }
             }
         }
+
 
         if (originalneTacke.isEmpty()) {
             movingView = true;
@@ -46,28 +45,29 @@ public class MoveState implements State {
     @Override
     public void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg) {
 
+
         if(!movingView)
         {
             for (InterClass interClass : originalneTacke.keySet()) {
-                var orig = originalneTacke.get(interClass);
+                Tacka orig = originalneTacke.get(interClass);
 
-                var classLeftX = (int) interClass.getX();
-                var classRightX = (int) interClass.getX() + (int) interClass.getWidth();
-                var classTopY = (int) interClass.getY();
-                var classBotY = (int) interClass.getY() + (int) interClass.getHeight();
+                int classLeftX = (int) interClass.getX();
+                int classRightX = (int) interClass.getX() + (int) interClass.getWidth();
+                int classTopY = (int) interClass.getY();
+                int classBotY = (int) interClass.getY() + (int) interClass.getHeight();
 
-                for (var drugi : currDiagram.getDiagram().getChildren()) {
+                for (ClassyNode drugi : currDiagram.getDiagram().getChildren()) {
                     if(drugi == interClass)
                     {
                         continue;
                     }
                     if (drugi instanceof InterClass) {
-                        var drugiClass = (InterClass) drugi;
+                        InterClass drugiClass = (InterClass) drugi;
                         if (interClass.isSelected()) {
-                            var class2LeftX2 = (int) drugiClass.getX();
-                            var class2RightX = (int) drugiClass.getX() + (int) drugiClass.getWidth();
-                            var class2TopY = (int) drugiClass.getY();
-                            var class2BotY = (int) drugiClass.getY() + (int) drugiClass.getHeight();
+                            int class2LeftX2 = (int) drugiClass.getX();
+                            int class2RightX = (int) drugiClass.getX() + (int) drugiClass.getWidth();
+                            int class2TopY = (int) drugiClass.getY();
+                            int class2BotY = (int) drugiClass.getY() + (int) drugiClass.getHeight();
                             if(checkCollision(classLeftX, classTopY, classRightX, classBotY, class2LeftX2, class2TopY, class2RightX, class2BotY))
                             {
                                 interClass.setX(orig.getX());
@@ -81,6 +81,7 @@ public class MoveState implements State {
 
 
         }
+
 
         startX = -1;
         startY = -1;
@@ -108,21 +109,23 @@ public class MoveState implements State {
     }
 
     void moveItems(int x, int y, DiagramView currDiagram) {
-        var vektorX = x - startX;
-        var vektorY = y - startY;
+        int vektorX = x - startX;
+        int vektorY = y - startY;
 
-        for (var interClass : originalneTacke.keySet()) {
-            var orig = originalneTacke.get(interClass);
-            var novaTacka = orig.dodajVektor(vektorX, vektorY);
+        for (InterClass interClass : originalneTacke.keySet()) {
+            Tacka orig = originalneTacke.get(interClass);
+            Tacka novaTacka = orig.dodajVektor(vektorX, vektorY);
             interClass.setX(novaTacka.getX());
             interClass.setY(novaTacka.getY());
         }
     }
 
+
     static boolean checkCollision(int leftX1, int topY1, int rightX1, int bottomY1,
                                   int leftX2, int topY2, int rightX2, int bottomY2) {
         return !(leftX1 > rightX2 || leftX2 > rightX1 || topY1 > bottomY2 || topY2 > bottomY1);
     }
+
 
     public void zavrsenaSelekcija(DiagramElement noviElement, PackageView pkg) {
     }
@@ -200,4 +203,5 @@ public class MoveState implements State {
     public void duplikacija(DiagramElement de, int x, int y, int w, int h, PackageView pkg) {
 
     }*/
+
 }

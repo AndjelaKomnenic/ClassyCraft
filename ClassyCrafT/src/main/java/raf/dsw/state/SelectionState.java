@@ -1,9 +1,5 @@
 package raf.dsw.state;
 
-//import lombok.var;
-
-//import lombok.var;
-import lombok.var;
 import raf.dsw.classyrepository.composite.ClassyNode;
 
 import raf.dsw.components.Connection;
@@ -68,24 +64,24 @@ public class SelectionState implements State {
     }
 
     void selectItems(int x, int y, DiagramView currDiagram, boolean click) {
-        var leftX = Math.min(startX, x);
-        var rightX = Math.max(startX, x);
-        var topY = Math.min(startY, y);
-        var botY = Math.max(startY, y);
+        int leftX = Math.min(startX, x);
+        int rightX = Math.max(startX, x);
+        int topY = Math.min(startY, y);
+        int botY = Math.max(startY, y);
 
-        var anySelected = false;
+        boolean anySelected = false;
 
-        var children = new ArrayList<>(currDiagram.getDiagram().getChildren());
+        List<ClassyNode> children = new ArrayList<>(currDiagram.getDiagram().getChildren());
         Collections.reverse(children);
 
-        for (var child : children) {
+        for (ClassyNode child : children) {
             if (child instanceof InterClass) {
-                var interClass = (InterClass) child;
+                InterClass  interClass = (InterClass) child;
 
-                var classLeftX = (int) interClass.getX();
-                var classRightX = (int) interClass.getX() + (int) interClass.getWidth();
-                var classTopY = (int) interClass.getY();
-                var classBotY = (int) interClass.getY() + (int) interClass.getHeight();
+                int classLeftX = (int) interClass.getX();
+                int classRightX = (int) interClass.getX() + (int) interClass.getWidth();
+                int classTopY = (int) interClass.getY();
+                int classBotY = (int) interClass.getY() + (int) interClass.getHeight();
 
                 PackageView pkg = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
 
@@ -106,7 +102,7 @@ public class SelectionState implements State {
                 //System.out.println(pkg.getSelectedComponents().size());
             }
             else if (child instanceof Connection) {
-                var connection = (Connection) child;
+                Connection connection = (Connection) child;
                 PackageView pkg = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
                 int connStartX = (int) connection.getFromX();
                 int connEndX = (int) connection.getToX();
