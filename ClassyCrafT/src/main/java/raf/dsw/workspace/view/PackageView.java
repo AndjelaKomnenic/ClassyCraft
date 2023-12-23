@@ -187,4 +187,12 @@ public class PackageView extends JPanel implements ISubscriber{
         }
         return null;
     }
+
+    public void repaintAll(){
+        for(DiagramView diagramView : tabs){
+            tabbedPane.setSelectedComponent(diagramView);
+            diagramView.getPainters().addAll(paintersForDiagram.get(diagramView.getDiagram()));
+            diagramView.repaint();
+        }
+    }
 }

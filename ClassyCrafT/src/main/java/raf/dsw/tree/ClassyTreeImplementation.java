@@ -1,9 +1,12 @@
 package raf.dsw.tree;
 
 //import lombok.var;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.var;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
+import raf.dsw.classyrepository.implementation.Project;
 import raf.dsw.classyrepository.implementation.ProjectExplorer;
 import raf.dsw.classyrepository.factoryMethod.FactoryUtils;
 import raf.dsw.classyrepository.factoryMethod.NodeFactory;
@@ -16,6 +19,8 @@ import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
+@Getter
+@Setter
 public class ClassyTreeImplementation implements ClassyTree{
     private ClassyTreeView treeView;
     private DefaultTreeModel treeModel;
@@ -69,6 +74,16 @@ public class ClassyTreeImplementation implements ClassyTree{
         composite.removeChild(child);
         treeModel.nodeStructureChanged(parent);
         update();
+    }
+
+    @Override
+    public void loadProject(Project node) {
+        ClassyTreeItem loadProject = new ClassyTreeItem(node);
+        root.add(loadProject);
+
+        ((ClassyNodeComposite) root.getClassyNode()).addChild(node);
+        treeView.expandPath(treeView.getSelectionPath());
+        SwingUtilities.updateComponentTreeUI(treeView);
     }
 
     public ClassyTreeItem findTreeItemByNode(ClassyNode node, ClassyTreeItem parent){

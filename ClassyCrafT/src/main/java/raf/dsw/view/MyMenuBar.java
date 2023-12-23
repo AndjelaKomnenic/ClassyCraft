@@ -16,12 +16,16 @@ public class MyMenuBar extends JMenuBar {
         RenameAction ra = new RenameAction();
         AddAuthorAction aa = new AddAuthorAction();
         PackagePackageAction pp = new PackagePackageAction();
+        SaveProjectAction sv = new SaveProjectAction();
+        OpenProjectAction op = new OpenProjectAction();
         fileMenu.add(ea);
         fileMenu.add(an);
         fileMenu.add(dn);
         fileMenu.add(ra);
         fileMenu.add(aa);
         fileMenu.add(pp);
+        fileMenu.add(sv);
+        fileMenu.add(op);
         add(fileMenu);
     }
 

@@ -31,7 +31,8 @@ public class ActionManager {
     private RedoAction redoAction;
 
     private ScreenshotAction screenshotAction;
-
+    private SaveProjectAction saveProjectAction;
+    private OpenProjectAction openProjectAction;
     public ActionManager() {
         initialiseActions();
     }
@@ -56,6 +57,8 @@ public class ActionManager {
         undoAction = new UndoAction();
         redoAction = new RedoAction();
         screenshotAction = new ScreenshotAction();
+        saveProjectAction = new SaveProjectAction();
+        openProjectAction = new OpenProjectAction();
     }
 
 }
