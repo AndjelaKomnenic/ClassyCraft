@@ -2,6 +2,7 @@ package raf.dsw.tree;
 
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
+import raf.dsw.classyrepository.implementation.Project;
 import raf.dsw.classyrepository.implementation.ProjectExplorer;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.tree.view.ClassyTreeView;
@@ -16,4 +17,5 @@ public interface ClassyTree {
     void update();
     void addPP(ClassyTreeItem parent);
     void deleteNode(ClassyNode child);
+    void loadProject (Project node);
 }

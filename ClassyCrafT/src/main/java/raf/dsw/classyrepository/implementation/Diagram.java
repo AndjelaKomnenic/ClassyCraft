@@ -1,5 +1,7 @@
 package raf.dsw.classyrepository.implementation;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
@@ -9,7 +11,8 @@ import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 @Setter
 
 public class Diagram extends ClassyNodeComposite {
-    public Diagram(String name, ClassyNode parent) {
+    @JsonCreator
+    public Diagram(@JsonProperty("name")String name, ClassyNode parent) {
         super(name, parent);
     }
 

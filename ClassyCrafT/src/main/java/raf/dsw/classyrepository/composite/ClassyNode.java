@@ -1,14 +1,16 @@
 package raf.dsw.classyrepository.composite;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.observer.CPublisher;
 
 @Getter
 @Setter
+@JsonIgnoreProperties({ "parent" })
 public abstract class ClassyNode extends CPublisher {
     private String name;
-    private ClassyNode parent;
+    private  ClassyNode parent;
 
     public ClassyNode(String name, ClassyNode parent) {
         this.name = name;

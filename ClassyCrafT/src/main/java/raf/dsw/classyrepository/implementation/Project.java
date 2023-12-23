@@ -1,5 +1,7 @@
 package raf.dsw.classyrepository.implementation;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
@@ -10,8 +12,8 @@ import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 public class Project extends ClassyNodeComposite {
     protected String filePath;
     private String author;
-
-    public Project(String name, ClassyNode parent, String author) {
+    @JsonCreator
+    public Project(@JsonProperty("name")String name, ClassyNode parent, String author) {
         super(name, parent);
         this.author = author;
     }

@@ -8,6 +8,8 @@ import raf.dsw.factory.Logger;
 import raf.dsw.factory.LoggerFactory;
 import raf.dsw.message.MessageGenerator;
 import raf.dsw.message.MessageGeneratorImplementation;
+import raf.dsw.serializer.JacksonSerializer;
+import raf.dsw.serializer.Serializer;
 import raf.dsw.view.MainFrame;
 
 @Getter
@@ -17,12 +19,13 @@ public class ApplicationFramework {
     protected Gui gui;
     protected ClassyRepository classyRepository;
     protected MessageGeneratorImplementation messageGenerator;
+    protected Serializer serializer;
 
     public void run(){
         this.gui.start();
     }
 
-    public void initialise(Gui gui, ClassyRepository classyRepository)
+    public void initialise(Gui gui, ClassyRepository classyRepository, Serializer serializer)
     {
         this.gui = gui;
         this.classyRepository = classyRepository;
@@ -32,6 +35,7 @@ public class ApplicationFramework {
         Logger log2 = loggerFactory.createLogger("fileLogger");
         messageGenerator.addSubscriber(log1);
         messageGenerator.addSubscriber(log2);
+        this.serializer = serializer;
     }
 
     private static ApplicationFramework instance;
