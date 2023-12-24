@@ -2,8 +2,6 @@ package raf.dsw.serializer;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
@@ -25,7 +23,6 @@ import raf.dsw.workspace.view.PackageView;
 
 import javax.swing.*;
 import javax.swing.tree.TreePath;
-import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
