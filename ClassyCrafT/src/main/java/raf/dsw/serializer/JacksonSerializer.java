@@ -24,9 +24,8 @@ import raf.dsw.workspace.view.PackageView;
 
 import javax.swing.*;
 import javax.swing.tree.TreePath;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,6 +114,60 @@ public class JacksonSerializer implements Serializer {
         }
     }
 
+    @Override
+    public void loadTemplate(File file) {
+        PackageView pkgView = MainFrame.getInstance().getWorkspace().getPackageView();
+
+        try {
+            Diagram diagram = objectMapper.readValue(file, Diagram.class);
+
+            //add diagram to currently opened package
+            Package currPackage = (Package) pkgView.getPackageP();
+            if(currPackage == null) return;
+            diagram.setParent(currPackage);
+            pkgView.updateWorkspace(currPackage);
+
+            
+            //add to tree
+            ClassyTreeImplementation mti = (ClassyTreeImplementation)MainFrame.getInstance().getClassyTree();
+            mti.addChildToDiag(mti.getRoot(), diagram);
+
+
+            for(ClassyNode element : diagram.getChildren())
+                element.setParent(diagram);
+
+            repaintTheDiagram(pkgView, diagram);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void saveTemplate(Diagram diagram, String templateName) {
+        diagram.setTemplate(true);
+        diagram.setName(templateName);
+        try {
+            //String json = objectMapper.writeValueAsString(diagram); // Serialize the Diagram object to JSON
+
+            // Write JSON to file
+            File directory = new File("src/main/resources/templates/");
+            if (!directory.exists()) {
+                if (directory.mkdirs()) {
+                    System.out.println("Directory created successfully.");
+                } else {
+                    System.out.println("Failed to create directory.");
+                }
+            }
+            //File file = new File(getClass().getClassLoader().getResource("templates/" + templateName + ".json").getFile());
+            File file = new File("src/main/resources/templates/" + templateName + ".json");
+            //Path absolutePath = Paths.get(relativePath).toAbsolutePath();
+            /*Path absolutePath = Paths.get("src/main/resources/templates/" + templateName + ".json").toAbsolutePath();
+            System.out.println(absolutePath);*/
+            objectMapper.writeValue(file, diagram);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void repaintTheDiagram(PackageView pkgView, Diagram diagram){
         List<DiagramElement> elements = new ArrayList<>();

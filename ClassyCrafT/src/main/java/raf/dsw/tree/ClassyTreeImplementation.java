@@ -16,7 +16,9 @@ import raf.dsw.view.MainFrame;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+import java.util.Enumeration;
 
 @Getter
 @Setter
@@ -127,6 +129,8 @@ public class ClassyTreeImplementation implements ClassyTree{
         treeView.expandPath(new TreePath(p.getPath()));
         update();
     }
+
+
     public ClassyTreeItem getRoot(){
         return root;
     }

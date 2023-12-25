@@ -11,8 +11,8 @@ import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 @Setter
 public class Package extends ClassyNodeComposite {
     protected String filePath;
-    @JsonCreator
-    public Package(@JsonProperty("name")String name, ClassyNode parent) {
+
+    public Package(String name, ClassyNode parent) {
         super(name, parent);
     }
 
