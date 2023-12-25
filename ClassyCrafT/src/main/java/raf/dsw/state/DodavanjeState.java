@@ -3,6 +3,7 @@ package raf.dsw.state;
 
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.implementation.Diagram;
+import raf.dsw.commands.NewClassCommand;
 import raf.dsw.components.DiagramElement;
 
 import raf.dsw.components.Enum;
@@ -17,6 +18,7 @@ import raf.dsw.paint.*;
 import raf.dsw.popUps.PopUpChooseIC;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
+import raf.dsw.workspace.WorkSpaceImplementation;
 import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
@@ -57,7 +59,7 @@ public class DodavanjeState implements State{
 
             if (!collisionDetected) {
                 ElementPainter elementPainter = null;
-                currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
+                //currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
 
                 if (popUp.getSelectedElement() instanceof Klasa) {
                     elementPainter = new ClassPainter(popUp.getSelectedElement(), popUp);
@@ -66,12 +68,13 @@ public class DodavanjeState implements State{
                 } else if (popUp.getSelectedElement() instanceof Enum) {
                     elementPainter = new EnumPainter(popUp.getSelectedElement(), popUp);
                 }
-                ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagramView.getDiagram());
+                /*ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagramView.getDiagram());
                 if(myParent != null)
                     MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, popUp.getSelectedElement());
                 else
-                    System.out.println(popUp.getSelectedElement().getName() + " nije nadjen");
-                pkg.addPainterForCurrent(elementPainter);
+                    System.out.println(popUp.getSelectedElement().getName() + " nije nadjen");*/
+                //pkg.addPainterForCurrent(elementPainter);
+                currDiagramView.getCommandManager().addCommand(new NewClassCommand(pkg, currDiagramView, popUp.getSelectedElement(), elementPainter));
             }
 
             /*if (elementPainter == null)
@@ -104,18 +107,20 @@ public class DodavanjeState implements State{
 
     @Override
     public void misOtpusten(int x, int y, DiagramView currDiagramView, PackageView pkg) {
-
     }
     @Override
     public void misPrevucen(int x, int y, DiagramView currDiagramView, PackageView pkg) {
     }
     public void zavrsenaSelekcija(DiagramElement novi, PackageView pkg){
+        System.out.println("usao u zavrsena selekcija");
         if(novi.getName() != "") {
             InterClass noviElement = (InterClass) novi;
             noviElement.setX(x);
             noviElement.setY(y);
             ElementPainter elementPainter = new InterClassPainter(noviElement);
-            pkg.addPainterForCurrent(elementPainter);
+            //pkg.addPainterForCurrent(elementPainter);
+            DiagramView currDiagram = ((DiagramView) pkg.getTabbedPane().getSelectedComponent());
+            currDiagram.getCommandManager().addCommand(new NewClassCommand(pkg, currDiagram, noviElement, elementPainter));
         }
         else{
 

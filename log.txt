@@ -78,3 +78,4 @@
 [ERROR][2023-12-15 21:33:32.848] Overlap
 [ERROR][2023-12-15 21:33:36.179] Overlap
 [ERROR][2023-12-15 21:37:38.587] Node with this name already exists
+[ERROR][2023-12-25 14:07:39.783] Name cannot be empty
