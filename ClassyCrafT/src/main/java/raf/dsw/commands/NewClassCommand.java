@@ -1,5 +1,6 @@
 package raf.dsw.commands;
 
+import raf.dsw.Main;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.components.Connection;
 import raf.dsw.components.InterClass;
@@ -49,6 +50,7 @@ public class NewClassCommand extends AbstractCommand{
             if (pkgView.getPainter(c) != null) {
                 pkgView.removePainter(pkgView.getPainter(c));
                 ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), c);
+
                 if (treeItemZaBrsianje != null)
                     MainFrame.getInstance().getClassyTree().deleteChild(treeItemZaBrsianje);
                 else
@@ -58,14 +60,16 @@ public class NewClassCommand extends AbstractCommand{
             }
         }
         ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), addedInterClass);
-        if(treeItemZaBrsianje != null)
+        if(treeItemZaBrsianje != null) {
             MainFrame.getInstance().getClassyTree().deleteChild(treeItemZaBrsianje);
+        }
         else
             System.out.println("Nije nadjen");
-        //dgView.getDiagram().getChildren().remove(addedInterClass);
+        dgView.getDiagram().getChildren().remove(addedInterClass);
+        //MainFrame.getInstance().getClassyTree().deleteNode(addedInterClass);
     }
     public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
-        if (root.getClassyNode().getName().equalsIgnoreCase(targetNode.getName())) {
+        if (root.getClassyNode().equals(targetNode)) {
             return root;
         } else {
             for (ClassyTreeItem child : root.getChildren()) {

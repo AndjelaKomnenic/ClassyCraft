@@ -55,13 +55,11 @@ public class ClassyTreeImplementation implements ClassyTree{
             ((ClassyNodeComposite) parent.getClassyNode()).removeChild(child.getClassyNode());
             parent.remove(child);
             treeModel.nodeStructureChanged(parent);
-            //if()
         }
         else
             System.out.println("nema parent");
         update();
     }
-
     @Override
     public void deleteNode(ClassyNode child){
         ClassyTreeItem parent  = findTreeItemByNode(child, root);
@@ -125,6 +123,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         ((ClassyNodeComposite) p.getClassyNode()).addChild(child.getClassyNode());
         treeModel.nodeStructureChanged(p);
         treeView.expandPath(new TreePath(p.getPath()));
+        //System.out.println("a getParent(): " + child.getParent());
         update();
     }
     public ClassyTreeItem getRoot(){
