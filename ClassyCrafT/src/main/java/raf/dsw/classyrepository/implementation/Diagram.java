@@ -11,9 +11,11 @@ import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 @Setter
 
 public class Diagram extends ClassyNodeComposite {
-    @JsonCreator
-    public Diagram(@JsonProperty("name")String name, ClassyNode parent) {
+
+    private boolean template;
+    public Diagram(String name, ClassyNode parent) {
         super(name, parent);
+        this.template = false;
     }
 
     @Override
@@ -24,5 +26,10 @@ public class Diagram extends ClassyNodeComposite {
             this.notifySubscriber("NEW");
         }
         this.notifySubscriber("REPAINT");
+    }
+
+    @Override
+    public void setName(String name){
+        super.setName(name);
     }
 }

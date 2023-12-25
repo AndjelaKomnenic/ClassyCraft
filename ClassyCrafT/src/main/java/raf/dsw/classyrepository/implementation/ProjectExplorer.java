@@ -6,7 +6,7 @@ import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 
 public class ProjectExplorer extends ClassyNodeComposite {
-    @JsonCreator
+
     public ProjectExplorer(String name) {
         super(name, null);
     }

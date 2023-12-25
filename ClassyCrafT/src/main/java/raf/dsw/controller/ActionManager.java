@@ -33,6 +33,9 @@ public class ActionManager {
     private ScreenshotAction screenshotAction;
     private SaveProjectAction saveProjectAction;
     private OpenProjectAction openProjectAction;
+
+    private SaveTemplateAction saveTemplateAction;
+    private OpenTemplateAction openTemplateAction;
     public ActionManager() {
         initialiseActions();
     }
@@ -59,6 +62,8 @@ public class ActionManager {
         screenshotAction = new ScreenshotAction();
         saveProjectAction = new SaveProjectAction();
         openProjectAction = new OpenProjectAction();
+        saveTemplateAction = new SaveTemplateAction();
+        openTemplateAction = new OpenTemplateAction();
     }
 
 }
