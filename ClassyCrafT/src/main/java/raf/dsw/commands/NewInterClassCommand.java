@@ -1,6 +1,5 @@
 package raf.dsw.commands;
 
-import raf.dsw.Main;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.components.Connection;
 import raf.dsw.components.InterClass;
@@ -10,22 +9,20 @@ import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
 
-import javax.swing.*;
-
-public class NewClassCommand extends AbstractCommand{
+public class NewInterClassCommand extends AbstractCommand{
     private PackageView pkgView;
     private DiagramView dgView;
     private ElementPainter thisClassPainter;
     private InterClass addedInterClass;
     private int x,y;
 
-    public NewClassCommand(PackageView pkgView, DiagramView dgView, int x, int y) {
+    public NewInterClassCommand(PackageView pkgView, DiagramView dgView, int x, int y) {
         this.pkgView = pkgView;
         this.dgView = dgView;
         this.x = x;
         this.y = y;
     }
-    public NewClassCommand(PackageView pkg, DiagramView dv, InterClass addedInterClass, ElementPainter elementPainter){
+    public NewInterClassCommand(PackageView pkg, DiagramView dv, InterClass addedInterClass, ElementPainter elementPainter){
         pkgView = pkg;
         dgView = dv;
         this.addedInterClass = addedInterClass;

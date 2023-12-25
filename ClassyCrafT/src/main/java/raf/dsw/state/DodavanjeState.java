@@ -2,8 +2,7 @@ package raf.dsw.state;
 
 
 import raf.dsw.classyrepository.composite.ClassyNode;
-import raf.dsw.classyrepository.implementation.Diagram;
-import raf.dsw.commands.NewClassCommand;
+import raf.dsw.commands.NewInterClassCommand;
 import raf.dsw.components.DiagramElement;
 
 import raf.dsw.components.Enum;
@@ -17,13 +16,8 @@ import raf.dsw.paint.*;
 
 import raf.dsw.popUps.PopUpChooseIC;
 import raf.dsw.tree.model.ClassyTreeItem;
-import raf.dsw.view.MainFrame;
-import raf.dsw.workspace.WorkSpaceImplementation;
 import raf.dsw.workspace.view.DiagramView;
 import raf.dsw.workspace.view.PackageView;
-
-import javax.swing.*;
-import java.util.List;
 
 //klase, interfejsa, enuma
 public class DodavanjeState implements State{
@@ -74,7 +68,7 @@ public class DodavanjeState implements State{
                 else
                     System.out.println(popUp.getSelectedElement().getName() + " nije nadjen");*/
                 //pkg.addPainterForCurrent(elementPainter);
-                currDiagramView.getCommandManager().addCommand(new NewClassCommand(pkg, currDiagramView, popUp.getSelectedElement(), elementPainter));
+                currDiagramView.getCommandManager().addCommand(new NewInterClassCommand(pkg, currDiagramView, popUp.getSelectedElement(), elementPainter));
             }
 
             /*if (elementPainter == null)
@@ -120,7 +114,7 @@ public class DodavanjeState implements State{
             ElementPainter elementPainter = new InterClassPainter(noviElement);
             //pkg.addPainterForCurrent(elementPainter);
             DiagramView currDiagram = ((DiagramView) pkg.getTabbedPane().getSelectedComponent());
-            currDiagram.getCommandManager().addCommand(new NewClassCommand(pkg, currDiagram, noviElement, elementPainter));
+            currDiagram.getCommandManager().addCommand(new NewInterClassCommand(pkg, currDiagram, noviElement, elementPainter));
         }
         else{
 

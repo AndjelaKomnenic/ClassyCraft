@@ -2,6 +2,7 @@ package raf.dsw.state;
 
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.implementation.Diagram;
+import raf.dsw.commands.NewConnectionCommand;
 import raf.dsw.components.*;
 import raf.dsw.paint.ClassPainter;
 import raf.dsw.paint.ConnectionPainter;
@@ -76,9 +77,11 @@ public class DodavanjeVezaState implements State{
             if( ((Connection) inter).getTo() !=  ((Connection) inter).getFrom()) {
                 Connection c = (Connection) inter;
                 ElementPainter conPain = new ConnectionPainter(c);
-                pkg.addPainterForCurrent(conPain);
+                DiagramView dgView = (DiagramView) pkg.getTabbedPane().getSelectedComponent();
+                dgView.getCommandManager().addCommand(new NewConnectionCommand(c, c.getFrom(), c.getTo(), conPain, pkg, dgView));
+                /*pkg.addPainterForCurrent(conPain);
                 ((Connection) inter).getTo().addToListVeza(c);
-                ((Connection) inter).getFrom().addToListVeza(c);
+                ((Connection) inter).getFrom().addToListVeza(c);*/
             }
         }
     }
