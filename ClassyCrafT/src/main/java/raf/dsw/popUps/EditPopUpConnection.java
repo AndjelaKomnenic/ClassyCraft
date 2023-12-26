@@ -94,8 +94,9 @@ public class EditPopUpConnection extends JDialog {
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
         Connection noviElement = factory.newConnection(rbResult, currDiagram, naziv.getText(), trenutnaVeza.getFrom(), trenutnaVeza.getTo());
         ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
+        ClassyTreeItem myConn = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), trenutnaVeza);
         if(myParent != null) {
-            MainFrame.getInstance().getClassyTree().deleteNode(trenutnaVeza);
+            MainFrame.getInstance().getClassyTree().deleteChild(myConn);
             MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
 
         }
