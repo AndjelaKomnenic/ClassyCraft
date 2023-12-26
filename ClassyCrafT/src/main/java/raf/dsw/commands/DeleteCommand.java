@@ -20,6 +20,8 @@ public class DeleteCommand extends AbstractCommand{
     private DiagramView dgView;
     private List<DiagramElement> listOfDeleted = new ArrayList<>();
     private List<ElementPainter> listOfPainters = new ArrayList<>();
+    private List<DiagramElement> alistOfDeleted = new ArrayList<>();
+    private List<ElementPainter> alistOfPainters = new ArrayList<>();
     public DeleteCommand(PackageView pkg, DiagramView dv, List<DiagramElement> listOfDeleted, List<ElementPainter> listOfPainters){
         pkgView = pkg;
         dgView = dv;
@@ -37,6 +39,10 @@ public class DeleteCommand extends AbstractCommand{
                 for (Connection c : ((InterClass)ep).getListVeza()) {
                     if (pkgView.getPainter(c) != null) {
                         pkgView.removePainter(pkgView.getPainter(c));
+                        if(!alistOfDeleted.contains(c))
+                            alistOfDeleted.add(c);
+                        /*if(pkgView.getPainter(c) != null)
+                            alistOfPainters.add(pkgView.getPainter(c));*/
                         ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), c);
                         if (treeItemZaBrsianje != null)
                             MainFrame.getInstance().getClassyTree().deleteChild(treeItemZaBrsianje);
@@ -66,8 +72,19 @@ public class DeleteCommand extends AbstractCommand{
             else
                 System.out.println("Nije nadjen");
         }
+        for(DiagramElement dgEl: alistOfDeleted) {
+            dgView.getDiagram().addChild(dgEl);
+            ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), dgView.getDiagram());
+            if (myParent != null)
+                MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, dgEl);
+            else
+                System.out.println("Nije nadjen");
+            //pkgView.addPainterForCurrent(pkgView.getPainter(dgEl));
+        }
         for(ElementPainter elp: listOfPainters)
             pkgView.addPainterForCurrent(elp);
+        /*for(ElementPainter elp: alistOfPainters)
+            pkgView.addPainterForCurrent(elp);*/
     }
     public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
         if (root.getClassyNode().equals(targetNode)) {

@@ -80,3 +80,5 @@
 [ERROR][2023-12-15 21:37:38.587] Node with this name already exists
 [ERROR][2023-12-25 14:07:39.783] Name cannot be empty
 [ERROR][2023-12-25 19:56:09.127] Node with this name already exists
+[ERROR][2023-12-26 01:43:55.146] Node with this name already exists
+[ERROR][2023-12-26 01:58:46.663] Node with this name already exists
