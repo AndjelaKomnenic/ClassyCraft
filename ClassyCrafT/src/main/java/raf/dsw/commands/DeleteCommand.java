@@ -39,7 +39,6 @@ public class DeleteCommand extends AbstractCommand{
                 for (Connection c : ((InterClass)ep).getListVeza()) {
                     if (pkgView.getPainter(c) != null) {
                         if(pkgView.getPainter(c) != null) {
-                            System.out.println("dodala sam painter za " + c.getName());
                             alistOfPainters.add(pkgView.getPainter(c));
                         }
                         pkgView.removePainter(pkgView.getPainter(c));

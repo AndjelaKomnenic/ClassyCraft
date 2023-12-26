@@ -26,11 +26,15 @@ public class EditPopUpClass extends Frame {
     JComboBox<String> vidljivostField = new JComboBox<>();
     private DiagramElement diagramElement;
     private List<ClassContent> listaZaBrisanje = new ArrayList<>();
+    private List<ClassContent> listaDodatih = new ArrayList<>();
     private List<JCheckBox> listaCheckova = new ArrayList<>();
     private PackageView packageView;
     private Button btnDodajAtribut = new Button("Dodaj atribut");
     private Button btnDodajMetodu = new Button("Dodaj metodu");
+    private String oldName;
+    private String newName;
     public EditPopUpClass(DiagramElement diagramElement) {
+        this.oldName = diagramElement.getName();
         packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         this.diagramElement = diagramElement;
         add(new Label("Naziv:"));
@@ -109,6 +113,7 @@ public class EditPopUpClass extends Frame {
     private void handleButtonClick() {
         for(int i = 0; i < c; i++){
             if(listaCheckova.get(i).isSelected()){
+                listaZaBrisanje.add(((InterClass)diagramElement).getList().get(i));
                 ((InterClass)diagramElement).getList().remove(i);
             }
         }
