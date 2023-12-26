@@ -14,17 +14,21 @@ import java.util.List;
 @Setter
 
 public class Diagram extends ClassyNodeComposite {
-    public Diagram(String name, ClassyNode parent){
-        super(name, parent);
-    }
     @JsonCreator
     public Diagram(@JsonProperty("name")String name
             , @JsonProperty("parent")ClassyNode parent
             , @JsonProperty("children") List<ClassyNode> children) {
         super(name, parent);
-        for(ClassyNode child: children)
+        for (ClassyNode child : children)
             addChild(child);
+        this.template = false;
     }
+
+    private boolean template;
+    /*public Diagram(String name, ClassyNode parent) {
+        super(name, parent);
+        this.template = false;
+    }*/
 
     @Override
     public void addChild(ClassyNode child) {
@@ -34,5 +38,10 @@ public class Diagram extends ClassyNodeComposite {
             this.notifySubscriber("NEW");
         }
         this.notifySubscriber("REPAINT");
+    }
+
+    @Override
+    public void setName(String name){
+        super.setName(name);
     }
 }

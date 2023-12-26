@@ -18,6 +18,8 @@ public class MyMenuBar extends JMenuBar {
         PackagePackageAction pp = new PackagePackageAction();
         SaveProjectAction sv = new SaveProjectAction();
         OpenProjectAction op = new OpenProjectAction();
+        SaveTemplateAction st = new SaveTemplateAction();
+        OpenTemplateAction ot = new OpenTemplateAction();
         fileMenu.add(ea);
         fileMenu.add(an);
         fileMenu.add(dn);
@@ -26,6 +28,8 @@ public class MyMenuBar extends JMenuBar {
         fileMenu.add(pp);
         fileMenu.add(sv);
         fileMenu.add(op);
+        fileMenu.add(st);
+        fileMenu.add(ot);
         add(fileMenu);
     }
 

@@ -16,7 +16,9 @@ import raf.dsw.view.MainFrame;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+import java.util.Enumeration;
 
 @Getter
 @Setter
@@ -126,6 +128,8 @@ public class ClassyTreeImplementation implements ClassyTree{
         //System.out.println("a getParent(): " + child.getParent());
         update();
     }
+
+
     public ClassyTreeItem getRoot(){
         return root;
     }

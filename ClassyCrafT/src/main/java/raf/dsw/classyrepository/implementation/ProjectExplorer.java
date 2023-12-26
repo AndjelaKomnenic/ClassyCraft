@@ -12,11 +12,14 @@ public class ProjectExplorer extends ClassyNodeComposite {
 
     public ProjectExplorer(String name){
         super(name, null);
+        for (ClassyNode child : children)
+            addChild(child);
     }
     @JsonCreator
     public ProjectExplorer(@JsonProperty("name")String name
             , @JsonProperty("children") List<ClassyNode> children
             , @JsonProperty("counter") int counter){
+
         super(name, null);
         for(ClassyNode child: children)
             addChild(child);
