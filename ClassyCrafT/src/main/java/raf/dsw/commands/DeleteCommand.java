@@ -38,11 +38,13 @@ public class DeleteCommand extends AbstractCommand{
             if(ep instanceof InterClass) {
                 for (Connection c : ((InterClass)ep).getListVeza()) {
                     if (pkgView.getPainter(c) != null) {
+                        if(pkgView.getPainter(c) != null) {
+                            System.out.println("dodala sam painter za " + c.getName());
+                            alistOfPainters.add(pkgView.getPainter(c));
+                        }
                         pkgView.removePainter(pkgView.getPainter(c));
                         if(!alistOfDeleted.contains(c))
                             alistOfDeleted.add(c);
-                        /*if(pkgView.getPainter(c) != null)
-                            alistOfPainters.add(pkgView.getPainter(c));*/
                         ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), c);
                         if (treeItemZaBrsianje != null)
                             MainFrame.getInstance().getClassyTree().deleteChild(treeItemZaBrsianje);
@@ -79,12 +81,11 @@ public class DeleteCommand extends AbstractCommand{
                 MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, dgEl);
             else
                 System.out.println("Nije nadjen");
-            //pkgView.addPainterForCurrent(pkgView.getPainter(dgEl));
         }
         for(ElementPainter elp: listOfPainters)
             pkgView.addPainterForCurrent(elp);
-        /*for(ElementPainter elp: alistOfPainters)
-            pkgView.addPainterForCurrent(elp);*/
+        for(ElementPainter elp: alistOfPainters)
+            pkgView.addPainterForCurrent(elp);
     }
     public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
         if (root.getClassyNode().equals(targetNode)) {
