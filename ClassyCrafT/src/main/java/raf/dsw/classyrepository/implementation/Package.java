@@ -14,9 +14,9 @@ import java.util.List;
 public class Package extends ClassyNodeComposite {
     protected String filePath;
 
-    /*public Package(String name, ClassyNode parent){
+    public Package(String name, ClassyNode parent){
         super(name, parent);
-    }*/
+    }
     @JsonCreator
     public Package(@JsonProperty("name")String name
             , @JsonProperty("parent")ClassyNode parent
