@@ -21,13 +21,13 @@ public class CPublisher implements IPublisher {
 
     @Override
     public void removeSubscriber(ISubscriber subscriber) {
-        /*if (subscribers == null || subscribers.isEmpty() || !subscribers.contains(subscriber))
+        if (subscribers == null || subscribers.isEmpty() || !subscribers.contains(subscriber))
             return;
-        subscribers.remove(subscriber);*/
+        subscribers.remove(subscriber);
 
-        subscribers = subscribers.stream()
+        /*subscribers = subscribers.stream()
                 .filter(s -> !Objects.equals(s, subscriber))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());*/
     }
 
     @Override

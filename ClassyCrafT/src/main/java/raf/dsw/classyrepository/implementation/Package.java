@@ -6,6 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
+import raf.dsw.observer.ISubscriber;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.List;
 
@@ -13,6 +17,10 @@ import java.util.List;
 @Setter
 public class Package extends ClassyNodeComposite {
     protected String filePath;
+    private transient List<ISubscriber> subs;
+    public Package(){
+        subs = new ArrayList<>();
+    }
 
     public Package(String name, ClassyNode parent){
         super(name, parent);

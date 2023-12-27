@@ -53,7 +53,7 @@ public class DeleteRightAction extends AbstractClassyAction {
             ep.setSelected(false);
             packageView.removePainter(packageView.getPainter(ep));
             if(ep instanceof InterClass) {
-                for (Connection c : ((InterClass)ep).getListVeza()) {
+                for (Connection c : ((InterClass)ep).getListaVeza()) {
                     if (packageView.getPainter(c) != null) {
                         packageView.removePainter(packageView.getPainter(c));
                         ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), c);

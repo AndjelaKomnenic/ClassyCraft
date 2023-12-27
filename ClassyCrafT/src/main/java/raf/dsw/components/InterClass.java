@@ -1,5 +1,7 @@
 package raf.dsw.components;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
@@ -11,18 +13,24 @@ import java.util.List;
 
 @Getter
 @Setter
+@JsonIgnoreProperties({"rectangleCoordinates"})
 public abstract class InterClass extends DiagramElement{
 
     private String naziv;
     private String vidljivost;
-    private double x, y;
+
     private double width, height;
     private boolean selected = false;
 
     private List<ClassContent> cl = new ArrayList<>();
     private List<ClanEnuma> nEnum = new ArrayList<>();
-    private List<Connection> listaVeza = new ArrayList<>();
+    @JsonIgnore
+    private transient List<Connection> listaVeza = new ArrayList<>(); // mora transient
 
+    private transient double  x, y;
+
+    public InterClass() {
+    }
     public InterClass(String name, ClassyNode parent, double x, double y) {
         super(name, parent);
         this.x = x;
@@ -36,12 +44,14 @@ public abstract class InterClass extends DiagramElement{
 
     public void setX(double x){
         this.x = x;
-        getParent().notifySubscriber("REPAINT");
+        if (getParent() != null)
+            getParent().notifySubscriber("REPAINT");
     }
 
     public void setY(double y){
         this.y = y;
-        getParent().notifySubscriber("REPAINT");
+        if (getParent() != null)
+            getParent().notifySubscriber("REPAINT");
     }
     public void addToList(ClassContent cc){
         cl.add(cc);
@@ -50,7 +60,6 @@ public abstract class InterClass extends DiagramElement{
     public void addToListE(ClanEnuma ce) {
         nEnum.add(ce);
     }
-    public List<ClassContent> getList(){return cl;}
 
     public void setVidljivost(String vidljivost) {
         this.vidljivost = vidljivost;
@@ -68,7 +77,5 @@ public abstract class InterClass extends DiagramElement{
     public void addToListVeza(Connection c){
         listaVeza.add(c);
     }
-    public List<Connection> getListVeza(){
-        return listaVeza;
-    }
+
 }

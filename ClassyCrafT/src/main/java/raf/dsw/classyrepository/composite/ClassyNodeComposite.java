@@ -9,6 +9,9 @@ public abstract class ClassyNodeComposite extends ClassyNode {
     protected List<ClassyNode> children;
     private int counter;
 
+    public ClassyNodeComposite() {
+
+    }
     public ClassyNodeComposite(String name, ClassyNode parent) {
         super(name, parent);
         this.children = new ArrayList<>();
@@ -17,9 +20,10 @@ public abstract class ClassyNodeComposite extends ClassyNode {
 
     public abstract void addChild(ClassyNode child);
     public void removeChild(ClassyNode child){
-        if(child != null && !children.isEmpty())
+        if(child != null && !children.isEmpty()) {
             children.remove(child);
-        child.notifySubscriber("REMOVE");
+            child.notifySubscriber("REMOVE");
+        }
     }
 
     public boolean cotainsSameNameComponent(String name){

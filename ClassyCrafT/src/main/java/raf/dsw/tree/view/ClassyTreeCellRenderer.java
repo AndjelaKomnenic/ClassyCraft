@@ -31,3 +31,4 @@ public class ClassyTreeCellRenderer extends DefaultTreeCellRenderer {
     }
 
 }
+
