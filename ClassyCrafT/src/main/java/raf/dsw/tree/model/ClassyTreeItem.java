@@ -3,6 +3,7 @@ package raf.dsw.tree.model;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.util.ArrayList;
@@ -15,6 +16,16 @@ public class ClassyTreeItem extends DefaultMutableTreeNode {
     private List<ClassyTreeItem> children = new ArrayList<>();
     public ClassyTreeItem(ClassyNode classyNode){
         this.classyNode = classyNode;
+        if(classyNode instanceof ClassyNodeComposite)
+        {
+            ClassyNodeComposite nodeComposite = (ClassyNodeComposite) classyNode;
+            for (ClassyNode child : nodeComposite.getChildren())
+            {
+                ClassyTreeItem childTreeItem = new ClassyTreeItem(child);
+                this.add(childTreeItem);
+                children.add(childTreeItem);
+            }
+        }
     }
     @Override
     public String toString(){

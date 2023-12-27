@@ -24,6 +24,11 @@ public class OpenProjectAction extends AbstractClassyAction {
             try {
                 File file = jfc.getSelectedFile();
                 Project p = ApplicationFramework.getInstance().getSerializer().loadProject(file);
+                if(p == null)
+                {
+                    //Greska pri ucitavanju
+                    return;
+                }
                 MainFrame.getInstance().getClassyTree().loadProject(p);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);

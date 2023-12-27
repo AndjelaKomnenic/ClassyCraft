@@ -11,10 +11,13 @@ import java.util.List;
 @Setter
 public class Klasa extends InterClass{
 
-    private List<ClassContent> listaClassCont = new ArrayList<>();
-    private InterClass itemFrom, itemTo;
+    //private List<ClassContent> listaClassCont = new ArrayList<>();
+    //private InterClass itemFrom, itemTo;
     private boolean apstraktna;
 
+    public Klasa(){         //za Json, nema drugu svrhu
+
+    }
     public Klasa(String name, ClassyNode parent, double x, double y) {
         super(name, parent, x, y);
     }

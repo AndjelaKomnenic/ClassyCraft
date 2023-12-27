@@ -109,7 +109,7 @@ public class EditPopUpClass extends Frame {
     private void handleButtonClick() {
         for(int i = 0; i < c; i++){
             if(listaCheckova.get(i).isSelected()){
-                ((InterClass)diagramElement).getList().remove(i);
+                ((InterClass)diagramElement).getCl().remove(i);
             }
         }
         packageView.repaint();
