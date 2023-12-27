@@ -1,6 +1,7 @@
 package raf.dsw.state;
 
 import raf.dsw.classyrepository.composite.ClassyNode;
+import raf.dsw.commands.MoveCommand;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
 import raf.dsw.workspace.view.DiagramView;
@@ -14,12 +15,15 @@ public class MoveState implements State {
     int startX = -1;
     int startY = -1;
     HashMap<InterClass, Tacka> originalneTacke = new HashMap<>();
+    HashMap<InterClass, Tacka> noveTacke = new HashMap<>();
     boolean movingView = false;
+    PackageView pkg;
     int viewStartX;
     int viewStartY;
 
     @Override
     public void misKliknut(int x, int y, DiagramView currDiagram, PackageView pkg) {
+        this.pkg = pkg;
         startX = (int)unscaleX(x, currDiagram);
         startY = (int)unscaleY(y, currDiagram);
         originalneTacke.clear();
@@ -73,6 +77,10 @@ public class MoveState implements State {
                                 interClass.setX(orig.getX());
                                 interClass.setY(orig.getY());
                             }
+                            else{
+                                DiagramView dgView = (DiagramView) pkg.getTabbedPane().getSelectedComponent();
+                                dgView.getCommandManager().addCommand(new MoveCommand(pkg, dgView, originalneTacke, noveTacke));
+                            }
                         }
                     }
                 }
@@ -115,6 +123,7 @@ public class MoveState implements State {
         for (InterClass interClass : originalneTacke.keySet()) {
             Tacka orig = originalneTacke.get(interClass);
             Tacka novaTacka = orig.dodajVektor(vektorX, vektorY);
+            noveTacke.put(interClass, novaTacka);
             interClass.setX(novaTacka.getX());
             interClass.setY(novaTacka.getY());
         }

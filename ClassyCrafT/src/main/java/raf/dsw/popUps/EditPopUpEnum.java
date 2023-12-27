@@ -14,31 +14,26 @@ import raf.dsw.workspace.view.PackageView;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.nio.charset.MalformedInputException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditPopUpClass extends Frame {
-    private int cc = 0, c = 0;
-    private Label nazivLabela, vidljivostLabela;
+public class EditPopUpEnum extends Frame{
+    private int c = 0;
+    private Label nazivLabela;
     private TextField nazivField;
-    JComboBox<String> vidljivostField = new JComboBox<>();
     private DiagramElement diagramElement;
-    private List<ClassContent> originalnaListaCC = new ArrayList<>();
-    private List<ClanEnuma> originalnaListaE = new ArrayList<>();
+    private java.util.List<ClassContent> originalnaListaCC = new ArrayList<>();
+    private java.util.List<ClanEnuma> originalnaListaE = new ArrayList<>();
     private List<JCheckBox> listaCheckova = new ArrayList<>();
     private PackageView packageView;
-    private Button btnDodajAtribut = new Button("Dodaj atribut");
-    private Button btnDodajMetodu = new Button("Dodaj metodu");
+    private Button btnDodajClanEnuma = new Button("Dodaj clan enuma");
     private String oldName;
-    private String oldVidljivost;
-    public EditPopUpClass(DiagramElement diagramElement) {
+    public EditPopUpEnum(DiagramElement diagramElement) {
         for(ClassContent cc: ((InterClass)diagramElement).getList())
             originalnaListaCC.add(cc);
         for(ClanEnuma ce: ((InterClass)diagramElement).getNEnum())
             originalnaListaE.add(ce);
         this.oldName = diagramElement.getName();
-        this.oldVidljivost = ((InterClass) diagramElement).getVidljivost();
         packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         this.diagramElement = diagramElement;
         add(new Label("Naziv:"));
@@ -61,40 +56,17 @@ public class EditPopUpClass extends Frame {
             }
         });
         add(nazivLabela);
-        if(diagramElement instanceof Klasa) {
-            add(new Label("Vidljivost:"));
-            vidljivostLabela = new Label(((Klasa) diagramElement).getVidljivost());
-            add(vidljivostLabela);
-            vidljivostLabela.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    if (e.getClickCount() == 2) {
-                        showTextField(vidljivostLabela, vidljivostField, 3);
-                    }
-                }
-            });
-            vidljivostField.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    updateLabel(vidljivostLabela, vidljivostField, 3);
-                }
-            });
-        }
-        add(new Label("Odaberite metode/atribute koje biste zeleli da obrisete"));
+        add(new Label("Odaberite clanove enuma koje biste zeleli da obrisete"));
         listaCheckova = new ArrayList<>();
-        c = 0;
-        for(ClassContent cc: ((InterClass)diagramElement).getCl()){
-            listaCheckova.add(new JCheckBox(cc.getNaziv()));
+        for(ClanEnuma ce: ((InterClass)diagramElement).getNEnum()){
+            listaCheckova.add(new JCheckBox(ce.getValue()));
             add(listaCheckova.get(c));
             c++;
         }
         JPanel dodavanja = new JPanel();
         dodavanja.setLayout(new FlowLayout());
-        dodavanja.add(btnDodajMetodu);
-        if(diagramElement instanceof Klasa)
-            dodavanja.add(btnDodajAtribut);
-        btnDodajAtribut.addActionListener(e -> dodajAtribut());
-        btnDodajMetodu.addActionListener(e -> dodajMetodu());
+        dodavanja.add(btnDodajClanEnuma);
+        btnDodajClanEnuma.addActionListener(e -> dodajClanEnuma());
         add(dodavanja);
         Button b = new Button("Zatvori");
         add(b);
@@ -105,36 +77,26 @@ public class EditPopUpClass extends Frame {
         setVisible(true);
     }
 
-    private void dodajMetodu() {
-        PopUpMetodaAfter popUpMetoda = new PopUpMetodaAfter(this);
-    }
-
-    private void dodajAtribut() {
-        PopUpAtributAfter popUpAtribut = new PopUpAtributAfter(this);
+    private void dodajClanEnuma() {
+        String value = JOptionPane.showInputDialog("Novi clan:");
+        ClanEnuma ce = new ClanEnuma(value);
+        ((InterClass)diagramElement).getNEnum().add(ce);
     }
 
     private void handleButtonClick() {
         for(int i = 0; i < c; i++){
             if(listaCheckova.get(i).isSelected()){
-                ((InterClass)diagramElement).getCl().remove(i);
+                ClanEnuma izbaci = null;
+                for(ClanEnuma enCL: ((InterClass)diagramElement).getNEnum())
+                    if(enCL.getValue().equals(listaCheckova.get(i).getText()))
+                        izbaci = enCL;
+                ((InterClass)diagramElement).getNEnum().remove(izbaci);
             }
         }
         DiagramView dv = (DiagramView) packageView.getTabbedPane().getSelectedComponent();
-        dv.getCommandManager().addCommand(new EditICCommand(packageView, dv, (InterClass) diagramElement, originalnaListaCC, originalnaListaE, oldName, oldVidljivost));
+        dv.getCommandManager().addCommand(new EditICCommand(packageView, dv, (InterClass) diagramElement, originalnaListaCC, originalnaListaE, oldName, ""));
         packageView.repaint();
         dispose();
-    }
-
-    private void showTextField(Label lb, JComboBox tf, int index) {
-        remove(lb);
-        tf.addItem("private");
-        tf.addItem("public");
-        tf.addItem("protected");
-        tf.addItem("package");
-        add(tf, index);
-        tf.requestFocus();
-        revalidate();
-        repaint();
     }
     private void showTextFieldNaziv(Label lb, TextField tf, int index) {
         remove(lb);
@@ -170,19 +132,5 @@ public class EditPopUpClass extends Frame {
         add(lb, index);
         revalidate();
         repaint();
-        cc = 0;
-    }
-    private void updateLabel(Label lb, JComboBox tf, int index) {
-        remove(tf);
-        ((InterClass)diagramElement).setVidljivost((String)tf.getSelectedItem());
-        lb.setText((String)tf.getSelectedItem());
-        packageView.repaint();
-        add(lb, index);
-        revalidate();
-        repaint();
-        cc = 0;
-    }
-    public void addToList(ClassContent cc){
-        ((InterClass)diagramElement).addToList(cc);
     }
 }

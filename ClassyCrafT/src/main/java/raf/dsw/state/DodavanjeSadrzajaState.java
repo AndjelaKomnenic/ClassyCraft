@@ -4,12 +4,14 @@ import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.components.Connection;
 import raf.dsw.components.DiagramElement;
+import raf.dsw.components.Enum;
 import raf.dsw.components.InterClass;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.paint.ConnectionPainter;
 import raf.dsw.paint.ElementPainter;
 import raf.dsw.popUps.EditPopUpClass;
 import raf.dsw.popUps.EditPopUpConnection;
+import raf.dsw.popUps.EditPopUpEnum;
 import raf.dsw.tree.model.ClassyTreeItem;
 import raf.dsw.view.MainFrame;
 import raf.dsw.workspace.view.DiagramView;
@@ -31,6 +33,9 @@ public class DodavanjeSadrzajaState implements State {
         if(selektovani != null){
             if(selektovani instanceof Connection) {
                 EditPopUpConnection editPop = new EditPopUpConnection(this, (Connection)selektovani);
+            }
+            else if(selektovani instanceof Enum) {
+                EditPopUpEnum editPop = new EditPopUpEnum(selektovani);
             }
             else {
                 EditPopUpClass editPop = new EditPopUpClass(selektovani);

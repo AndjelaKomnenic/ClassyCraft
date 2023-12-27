@@ -110,11 +110,11 @@ public class PopUpChooseCon extends JDialog {
             }
         }
         if(flag) {
-            ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
+            /*ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
             if (myParent != null) {
                 MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
             } else
-                System.out.println(currDiagram.getName() + " nije nadjen");
+                System.out.println(currDiagram.getName() + " nije nadjen");*/
             calledFrom.zavrsenaSelekcija(noviElement, packageView);
         }
         else{
