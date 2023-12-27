@@ -1,5 +1,7 @@
 package raf.dsw.components;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
@@ -7,9 +9,11 @@ import raf.dsw.state.Tacka;
 
 @Getter
 @Setter
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public abstract class Connection extends DiagramElement{
-
+    @JsonIgnore
     private InterClass from;
+    @JsonIgnore
     private InterClass to;
 
     private int fromX, fromY;

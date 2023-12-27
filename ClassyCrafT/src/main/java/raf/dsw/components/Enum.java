@@ -10,7 +10,12 @@ import java.util.List;
 @Getter
 public class Enum extends InterClass{
 
-    //List<ClanEnuma> nEnum = new ArrayList<>();
+    List<ClanEnuma> clanE;
+
+    public Enum() {
+        clanE = new ArrayList<>();
+    }
+
     public Enum(String name, ClassyNode parent, double x, double y) {
         super(name, parent, x, y);
     }

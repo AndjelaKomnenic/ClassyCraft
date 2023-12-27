@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
+import raf.dsw.observer.ISubscriber;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,13 +16,17 @@ import java.util.List;
 public class Project extends ClassyNodeComposite {
     protected String filePath;
     private String author;
+    private transient List<ISubscriber> subs;
+    public Project(){
+        subs = new ArrayList<>();
+    }
 
     public Project(String name, ClassyNode parent, String author) {
         super(name, parent);
         this.author = author;
     }
 
-    @JsonCreator
+    /*@JsonCreator
     public Project(@JsonProperty("name")String name
             , @JsonProperty("author")String author
             , @JsonProperty("children") List<ClassyNode> children
@@ -33,7 +39,8 @@ public class Project extends ClassyNodeComposite {
         for(ClassyNode child: children)
             this.addChild(child);
         //this.setCounterVal(counter);
-    }
+    }*/
+
 
     @Override
     public void addChild(ClassyNode child) {

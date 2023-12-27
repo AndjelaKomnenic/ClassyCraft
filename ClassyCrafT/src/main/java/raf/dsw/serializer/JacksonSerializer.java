@@ -3,6 +3,9 @@ package raf.dsw.serializer;
 
 //import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
+import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
@@ -33,8 +36,26 @@ import java.util.List;
 @Setter
 public class JacksonSerializer implements Serializer {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
 
+    public JacksonSerializer(){
+        List<ClassyNode> a = new ArrayList<>();
+        objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+        PolymorphicTypeValidator ptv = BasicPolymorphicTypeValidator.builder()              //prihvatamo ove tipove podataka (bunio se dzekson)
+                .allowIfSubType(Project.class)
+                .allowIfSubType(Package.class)
+                .allowIfSubType(Diagram.class)
+                .allowIfSubType(Klasa.class)
+                .allowIfSubType(Enum.class)
+                .allowIfSubType(Interfejs.class)
+                .allowIfSubType("java.util.List")
+                .allowIfSubType("java.util.ArrayList")
+                .allowIfSubType("java.awt.Point")
+                .allowIfSubType("java.awt.Dimension")
+                .build();
+        objectMapper.activateDefaultTyping(ptv, ObjectMapper.DefaultTyping.NON_FINAL);
+    }
     @Override
     public Project loadProject(File file) {
 
@@ -68,13 +89,13 @@ public class JacksonSerializer implements Serializer {
             TreePath path = new TreePath(root.getPath());
             treeView.setSelectionPath(path);
             treeView.expandPath(treeView.getSelectionPath());
-            SwingUtilities.updateComponentTreeUI(treeView);
 
             ((ClassyNodeComposite) root.getClassyNode()).getChildren().add(project);
+            SwingUtilities.updateComponentTreeUI(treeView);
 
-            for (ClassyNode pkg : project.getChildren()) {
+            /*for (ClassyNode pkg : project.getChildren()) {
                 project.getChildren().add(pkg);
-            }
+            }*/
 
 
             PackageView pkgVIew = MainFrame.getInstance().getWorkspace().getPackageView();

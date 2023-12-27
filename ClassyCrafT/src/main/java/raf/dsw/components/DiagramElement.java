@@ -1,5 +1,6 @@
 package raf.dsw.components;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
@@ -14,9 +15,12 @@ public abstract class DiagramElement extends ClassyNode{
 
     private int strokeWidth;
     private int colourInside;
-    private int colourOutline;
     private boolean selected;
+    private int colourOutline;
 
+
+    public DiagramElement(){
+    }
     public DiagramElement(String name, ClassyNode parent){
         super(name, parent);
         strokeWidth = 2;
@@ -26,12 +30,14 @@ public abstract class DiagramElement extends ClassyNode{
 
     public void setColourInside(String colour){
         this.colourInside = Integer.decode(colour);
-        getParent().notifySubscriber("REPAINT");
+        if (getParent() != null)
+            getParent().notifySubscriber("REPAINT");
     }
 
     public void setColourOutline(String colour){
         this.colourOutline =Integer.decode(colour);
-        getParent().notifySubscriber("REPAINT");
+        if (getParent() != null)
+            getParent().notifySubscriber("REPAINT");
     }
 
     @Override
@@ -46,7 +52,14 @@ public abstract class DiagramElement extends ClassyNode{
 
         DiagramElement that = (DiagramElement) o;
 
-        return this.getName().equals(that.getName()) && this.getParent().equals(that.getParent());
+        if (this.getName() != null ? !this.getName().equals(that.getName()) : that.getName() != null)
+            return false;
+
+        // Check for null parents before comparing
+        if (this.getParent() == null || that.getParent() == null)
+            return false;
+
+        return this.getParent().equals(that.getParent());
     }
 
 }

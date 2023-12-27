@@ -92,7 +92,7 @@ public class DuplicateAction extends AbstractClassyAction {
                             kopija.addToListE(clanEnuma);
                         }
                     }
-                    kopija.getCl().addAll(((InterClass)selectedForDupl).getList());
+                    kopija.getCl().addAll(((InterClass)selectedForDupl).getCl());
                     MainFrame.getInstance().getWorkspace().getPackageView().getStateManager().getCurrState().duplikacija(kopija, startingX, startingY, reqWidth, reqHeight, packageView);
 
                 }
