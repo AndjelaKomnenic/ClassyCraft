@@ -3,10 +3,7 @@ package raf.dsw.popUps;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Diagram;
-import raf.dsw.components.AbstractFactory;
-import raf.dsw.components.Connection;
-import raf.dsw.components.DiagramElement;
-import raf.dsw.components.InterClass;
+import raf.dsw.components.*;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.PossibleErrors;
 import raf.dsw.paint.ClassPainter;
@@ -102,6 +99,13 @@ public class EditPopUpConnection extends JDialog {
         }
         else
             System.out.println(currDiagram.getName() + " nije nadjen");
+        if(noviElement instanceof Agregacija || noviElement instanceof Kompozicija) {
+            AdditionalConPop popUp = new AdditionalConPop(this, noviElement);
+        }
+        else{
+            noviElement.setKardinalnost(0);
+            noviElement.setVidljivost(null);
+        }
         calledFrom.zavrsenaSelekcija(noviElement, packageView);
         dispose();
     }

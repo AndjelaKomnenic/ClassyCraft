@@ -11,6 +11,8 @@ public abstract class Connection extends DiagramElement{
 
     private InterClass from;
     private InterClass to;
+    private String vidljivost;
+    private int kardinalnost;
 
     private int fromX, fromY;
     private int toX, toY;
