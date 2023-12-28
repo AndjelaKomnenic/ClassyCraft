@@ -104,7 +104,7 @@ public class EditPopUpConnection extends JDialog {
             AdditionalConPop popUp = new AdditionalConPop(this, noviElement);
         }
         else{
-            noviElement.setKardinalnost(0);
+            noviElement.setKardinalnost("0");
             noviElement.setVidljivost(null);
         }
         DiagramView dv = (DiagramView) packageView.getTabbedPane().getSelectedComponent();

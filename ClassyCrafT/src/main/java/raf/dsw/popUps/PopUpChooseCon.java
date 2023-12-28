@@ -111,7 +111,7 @@ public class PopUpChooseCon extends JDialog {
                 AdditionalConPop popUp = new AdditionalConPop(this, noviElement);
             }
             else{
-                noviElement.setKardinalnost(0);
+                noviElement.setKardinalnost("0");
                 noviElement.setVidljivost(null);
             }
             calledFrom.zavrsenaSelekcija(noviElement, packageView);

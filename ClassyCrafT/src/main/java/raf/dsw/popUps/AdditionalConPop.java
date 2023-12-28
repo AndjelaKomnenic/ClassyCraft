@@ -47,12 +47,7 @@ public class AdditionalConPop extends JDialog {
     }
     public void handleButtonClick(){
         String v = (String)vidljivost.getSelectedItem();
-        int k = 0;
-        try{
-            k = Integer.parseInt(kardinalnost.getText());
-        }catch(NumberFormatException e){
-            System.out.println("unesite broj za kardinalnost");
-        }
+        String k = kardinalnost.getText();
         c.setVidljivost(v);
         c.setKardinalnost(k);
         dispose();
