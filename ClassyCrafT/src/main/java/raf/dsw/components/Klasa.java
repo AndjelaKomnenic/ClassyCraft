@@ -21,4 +21,9 @@ public class Klasa extends InterClass{
     public Klasa(String name, ClassyNode parent, double x, double y) {
         super(name, parent, x, y);
     }
+
+    @Override
+    public String tipKlase() {
+        return "Klasa";
+    }
 }

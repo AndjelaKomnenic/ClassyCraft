@@ -6,6 +6,9 @@ public class Agregacija extends Connection{
     public Agregacija(String name, ClassyNode parent, InterClass from, InterClass to) {
         super(name, parent, from, to);
     }
-    @Override
-    public String getClassName(){return "Agregacija";}
+
+    public Agregacija(){
+        super(null,null,null,null);
+    }
+
 }

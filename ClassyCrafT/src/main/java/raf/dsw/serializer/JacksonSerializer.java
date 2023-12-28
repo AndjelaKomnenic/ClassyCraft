@@ -13,11 +13,8 @@ import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Diagram;
 import raf.dsw.classyrepository.implementation.Package;
 import raf.dsw.classyrepository.implementation.Project;
-import raf.dsw.components.DiagramElement;
+import raf.dsw.components.*;
 import raf.dsw.components.Enum;
-import raf.dsw.components.InterClass;
-import raf.dsw.components.Interfejs;
-import raf.dsw.components.Klasa;
 import raf.dsw.paint.*;
 import raf.dsw.tree.ClassyTreeImplementation;
 import raf.dsw.tree.model.ClassyTreeItem;
@@ -76,8 +73,20 @@ public class JacksonSerializer implements Serializer {
                             ClassyNodeComposite diagramComposite = (ClassyNodeComposite) diagram;
 
                             // If Diagram contains elements (children), set their parent references
-                            for (ClassyNode element : diagramComposite.getChildren()) {
+                            List<ClassyNode> elementi = diagramComposite.getChildren();
+                            for (ClassyNode element : elementi) {
                                 element.setParent(diagram); // Set parent reference of Element to Diagram
+
+                                if(element instanceof Connection)
+                                {
+                                    Connection konekcija = (Connection)element;
+                                    InterClass from = nadjiKlasu(elementi, konekcija.getFromNaziv(), konekcija.getFromType());
+                                    InterClass to = nadjiKlasu(elementi, konekcija.getToNaziv(), konekcija.getToType());
+                                    konekcija.setFrom(from);
+                                    konekcija.setTo(to);
+                                    from.addToListVeza(konekcija);
+                                    to.addToListVeza(konekcija);
+                                }
                             }
                         }
                     }
@@ -114,16 +123,31 @@ public class JacksonSerializer implements Serializer {
             }
 
 
-            for (ClassyNode diagram : project.getChildren()){
+            /*for (ClassyNode diagram : project.getChildren()){
                 if (diagram instanceof Diagram)
                     repaintTheDiagram(pkgVIew, (Diagram) diagram);
-            }
+            }*/
 
             return project;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+
+    private InterClass nadjiKlasu(List<ClassyNode> klase, String naziv, String tip)
+    {
+        for (ClassyNode element : klase) {
+            if (element instanceof InterClass) {
+                InterClass klasa = (InterClass) element;
+                if(klasa.getName().equals(naziv) && klasa.tipKlase().equals(tip))
+                {
+                    return klasa;
+                }
+            }
+        }
+        return null;
     }
 
     @Override
@@ -148,7 +172,7 @@ public class JacksonSerializer implements Serializer {
             diagram.setParent(currPackage);
             pkgView.updateWorkspace(currPackage);
 
-            
+
             //add to tree
             ClassyTreeImplementation mti = (ClassyTreeImplementation)MainFrame.getInstance().getClassyTree();
             mti.addChildToDiag(mti.getRoot(), diagram);
@@ -157,7 +181,7 @@ public class JacksonSerializer implements Serializer {
             for(ClassyNode element : diagram.getChildren())
                 element.setParent(diagram);
 
-            repaintTheDiagram(pkgView, diagram);
+            //repaintTheDiagram(pkgView, diagram);
         } catch (Exception e){
             e.printStackTrace();
         }

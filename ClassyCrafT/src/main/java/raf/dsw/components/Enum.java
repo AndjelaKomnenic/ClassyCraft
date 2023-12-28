@@ -17,4 +17,9 @@ public class Enum extends InterClass{
     public Enum(String name, ClassyNode parent, double x, double y) {
         super(name, parent, x, y);
     }
+
+    @Override
+    public String tipKlase() {
+        return "Enum";
+    }
 }

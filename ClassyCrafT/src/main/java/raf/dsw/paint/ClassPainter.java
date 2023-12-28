@@ -16,39 +16,39 @@ import static java.awt.Color.cyan;
 @Getter
 @Setter
 public class ClassPainter extends ElementPainter{
-    private PopUpChooseIC popUpChooseICInstance;
-    private InterClass selectedElement;
+    private InterClass klasa;
     private int requiredWidth, requiredHeight;
-    public ClassPainter(DiagramElement dgElement, PopUpChooseIC popUpChooseICInstance) {
-        super(dgElement);
-        this.popUpChooseICInstance = popUpChooseICInstance;
+    public ClassPainter(InterClass klasa) {
+        super(klasa);
+        this.klasa = klasa;
+        requiredHeight = (int) klasa.getHeight();
+        requiredWidth = (int) klasa.getWidth();
     }
-    public ClassPainter(InterClass selectedElement, int w, int h, int x, int y){
-        super(selectedElement);
+    public ClassPainter(InterClass klasa, int w, int h, int x, int y){
+        super(klasa);
         requiredHeight = h;
         requiredWidth = w;
     }
     @Override
     public void draw(Graphics g) {
-        selectedElement = popUpChooseICInstance.getSelectedElement();
-        int startX = (int)selectedElement.getX();
-        int startY = (int)selectedElement.getY();
-        if (selectedElement != null) {
-            List<ClassContent> ccc = selectedElement.getCl();
+        int startX = (int)klasa.getX();
+        int startY = (int)klasa.getY();
+        if (klasa != null) {
+            List<ClassContent> ccc = klasa.getCl();
             //System.out.println("Size of ccc: " + ccc.size());
             Graphics2D g2D = (Graphics2D) g;
             FontMetrics fm = g2D.getFontMetrics();
             BasicStroke basicStroke = new BasicStroke(1);
             g2D.setStroke(basicStroke);
 
-            int maxWidth = fm.stringWidth("(C) " + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName()) + 20;
+            int maxWidth = fm.stringWidth("(C) " + promeniVidljivostUOznaku(klasa.getVidljivost()) + " " + klasa.getName()) + 20;
             int height = fm.getHeight();
-            int yOffset = (int) selectedElement.getY() + fm.getHeight();
+            int yOffset = (int) klasa.getY() + fm.getHeight();
 
             requiredWidth = maxWidth;
             requiredHeight = ((ccc.size() + 1) * (height + 5)) + height * 3;
 
-            int selectedElementNameWidth = fm.stringWidth("(C) " + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName());
+            int klasaNameWidth = fm.stringWidth("(C) " + promeniVidljivostUOznaku(klasa.getVidljivost()) + " " + klasa.getName());
 
 
             int maxAttributeWidth = 0;
@@ -69,35 +69,35 @@ public class ClassPainter extends ElementPainter{
             }
 
 
-            requiredWidth = Math.max(selectedElementNameWidth, Math.max(maxAttributeWidth, maxMethodWidth)) + 20;
+            requiredWidth = Math.max(klasaNameWidth, Math.max(maxAttributeWidth, maxMethodWidth)) + 20;
 
 
-            selectedElement.setWidthAndHeight(requiredWidth, requiredHeight);
-            setShape(new Rectangle2D.Double(selectedElement.getX(), selectedElement.getY(), requiredWidth, requiredHeight));
+            klasa.setWidthAndHeight(requiredWidth, requiredHeight);
+            setShape(new Rectangle2D.Double(klasa.getX(), klasa.getY(), requiredWidth, requiredHeight));
 
 
-            g2D.setColor(new Color(selectedElement.getColourInside()));
-            g2D.fillRect((int) selectedElement.getX(), (int) selectedElement.getY(), requiredWidth, requiredHeight);
+            g2D.setColor(new Color(klasa.getColourInside()));
+            g2D.fillRect((int) klasa.getX(), (int) klasa.getY(), requiredWidth, requiredHeight);
 
 
             if (this.getDgElement().isSelected())
             {
-                selectedElement.setColourOutline("0x00FFFF");
+                klasa.setColourOutline("0x00FFFF");
             }
             else
             {
-                selectedElement.setColourOutline("0x000000");
+                klasa.setColourOutline("0x000000");
             }
-            int xOffset = (int) selectedElement.getX() + 10;
+            int xOffset = (int) klasa.getX() + 10;
 
             g2D.setColor(Color.BLACK); // boja za text``````
             if(((Klasa)this.getDgElement()).isApstraktna())
-                g2D.drawString("(A)" + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName(), xOffset, yOffset);
+                g2D.drawString("(A)" + promeniVidljivostUOznaku(klasa.getVidljivost()) + " " + klasa.getName(), xOffset, yOffset);
             else
-                g2D.drawString("(C)" + promeniVidljivostUOznaku(selectedElement.getVidljivost()) + " " + selectedElement.getName(), xOffset, yOffset);
+                g2D.drawString("(C)" + promeniVidljivostUOznaku(klasa.getVidljivost()) + " " + klasa.getName(), xOffset, yOffset);
             yOffset += height + 5;
 
-            g2D.drawLine((int) selectedElement.getX(), yOffset, (int) (selectedElement.getX() + requiredWidth), yOffset);
+            g2D.drawLine((int) klasa.getX(), yOffset, (int) (klasa.getX() + requiredWidth), yOffset);
             yOffset += height + 5;
 
 
@@ -110,7 +110,7 @@ public class ClassPainter extends ElementPainter{
             }
 
 
-            g2D.drawLine((int) selectedElement.getX(), yOffset, (int) (selectedElement.getX() + requiredWidth), yOffset);
+            g2D.drawLine((int) klasa.getX(), yOffset, (int) (klasa.getX() + requiredWidth), yOffset);
             yOffset += height + 5;
 
             for (ClassContent element : ccc) {
@@ -122,8 +122,8 @@ public class ClassPainter extends ElementPainter{
             }
 
 
-            g2D.setColor(new Color(selectedElement.getColourOutline()));
-            g2D.drawRect((int) selectedElement.getX(), (int) selectedElement.getY(), requiredWidth, requiredHeight);
+            g2D.setColor(new Color(klasa.getColourOutline()));
+            g2D.drawRect((int) klasa.getX(), (int) klasa.getY(), requiredWidth, requiredHeight);
         }
 
         //System.out.println(getRectangleCoordinates());
@@ -132,14 +132,14 @@ public class ClassPainter extends ElementPainter{
     public List<Point2D.Double> getRectangleCoordinates() {
         List<Point2D.Double> coordinates = new ArrayList<>();
 
-        double topLeftX = selectedElement.getX();
-        double topLeftY = selectedElement.getY();
+        double topLeftX = klasa.getX();
+        double topLeftY = klasa.getY();
 
-        double topRightX = topLeftX + selectedElement.getWidth();
+        double topRightX = topLeftX + klasa.getWidth();
         double topRightY = topLeftY;
 
         double bottomLeftX = topLeftX;
-        double bottomLeftY = topLeftY + selectedElement.getHeight();
+        double bottomLeftY = topLeftY + klasa.getHeight();
 
         double bottomRightX = topRightX;
         double bottomRightY = bottomLeftY;
@@ -189,8 +189,8 @@ public class ClassPainter extends ElementPainter{
     }
     public int getRequiredWidth(){return requiredWidth;}
     public int getRequiredHeight(){return  requiredHeight;}
-    public int getXCoord(){return (int)selectedElement.getX();}
-    public int getYCoord(){return (int)selectedElement.getY();}
+    public int getXCoord(){return (int)klasa.getX();}
+    public int getYCoord(){return (int)klasa.getY();}
 
 
 }

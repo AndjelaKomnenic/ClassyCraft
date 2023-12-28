@@ -172,6 +172,15 @@ public class PackageView extends JPanel implements ISubscriber{
         //dodati u stablo
         repaint();
     }
+
+    public void addPainter(Diagram diagram, ElementPainter painter){
+        paintersForDiagram.putIfAbsent(diagram , new ArrayList<>());
+        paintersForDiagram.get(diagram).add(painter);
+        diagram.addChild(painter.getDgElement());
+        //dodati u stablo
+        repaint();
+    }
+
     public void removePainter(ElementPainter painter){
         Diagram currDiagram = ((DiagramView)tabbedPane.getSelectedComponent()).getDiagram();
         paintersForDiagram.get(currDiagram).remove(painter);

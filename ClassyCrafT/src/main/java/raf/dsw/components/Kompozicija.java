@@ -6,6 +6,8 @@ public class Kompozicija extends Connection{
     public Kompozicija(String name, ClassyNode parent, InterClass from, InterClass to) {
         super(name, parent, from, to);
     }
-    @Override
-    public String getClassName(){return "Kompozicija";}
+
+    public Kompozicija(){
+        super(null,null,null,null);
+    }
 }
