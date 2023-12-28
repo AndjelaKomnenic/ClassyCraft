@@ -16,7 +16,6 @@ import java.util.List;
 @JsonIgnoreProperties({"rectangleCoordinates"})
 public abstract class InterClass extends DiagramElement{
 
-    private String naziv;
     private String vidljivost;
 
     private double width, height;
@@ -75,7 +74,13 @@ public abstract class InterClass extends DiagramElement{
         return tacke;
     }
     public void addToListVeza(Connection c){
+        if(listaVeza == null)
+        {
+            listaVeza = new ArrayList<>();
+        }
         listaVeza.add(c);
     }
+
+    public abstract String tipKlase();
 
 }

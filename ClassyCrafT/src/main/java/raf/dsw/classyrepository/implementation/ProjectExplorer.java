@@ -1,8 +1,5 @@
 package raf.dsw.classyrepository.implementation;
 
-//import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 
@@ -15,20 +12,7 @@ public class ProjectExplorer extends ClassyNodeComposite {
         for (ClassyNode child : children)
             addChild(child);
     }
-    @JsonCreator
-    public ProjectExplorer(@JsonProperty("name")String name
-            , @JsonProperty("children") List<ClassyNode> children
-            , @JsonProperty("counter") int counter){
 
-        super(name, null);
-        for(ClassyNode child: children)
-            addChild(child);
-    }
-    /*@JsonCreator
-    public ProjectExplorer(@JsonProperty("name")String name) {
-
-        super(name, null);
-    }*/
 
     @Override
     public void addChild(ClassyNode child) {

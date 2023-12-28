@@ -1,12 +1,13 @@
 package raf.dsw.components;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
 @Getter
 @Setter
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class ClanEnuma {
 
     private Enum en;
@@ -14,10 +15,12 @@ public class ClanEnuma {
     public ClanEnuma(String value) {
         this.value = value;
     }
-    @JsonCreator
-    public ClanEnuma(@JsonProperty("value")String value
-            , @JsonProperty("en") Enum en) {
-        this.value = value;
-        this.en = en;
+
+
+    public ClanEnuma()
+    {
+
     }
 }
+
+

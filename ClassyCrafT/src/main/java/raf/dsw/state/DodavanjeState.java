@@ -56,11 +56,11 @@ public class DodavanjeState implements State{
                 //currDiagramView.getDiagram().addChild(popUp.getSelectedElement());
 
                 if (popUp.getSelectedElement() instanceof Klasa) {
-                    elementPainter = new ClassPainter(popUp.getSelectedElement(), popUp);
+                    elementPainter = new ClassPainter(popUp.getSelectedElement());
                 } else if (popUp.getSelectedElement() instanceof Interfejs) {
-                    elementPainter = new InterfacePainter(popUp.getSelectedElement(), popUp);
+                    elementPainter = new InterfacePainter(popUp.getSelectedElement());
                 } else if (popUp.getSelectedElement() instanceof Enum) {
-                    elementPainter = new EnumPainter(popUp.getSelectedElement(), popUp);
+                    elementPainter = new EnumPainter(popUp.getSelectedElement());
                 }
                 /*ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagramView.getDiagram());
                 if(myParent != null)

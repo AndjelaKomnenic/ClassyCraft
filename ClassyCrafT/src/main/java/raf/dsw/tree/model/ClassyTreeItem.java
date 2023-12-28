@@ -27,6 +27,21 @@ public class ClassyTreeItem extends DefaultMutableTreeNode {
             }
         }
     }
+
+    public ClassyTreeItem findClassyTreeItem(ClassyNode targetNode) {
+        if (this.getClassyNode().getName().equalsIgnoreCase(targetNode.getName())) {
+            return this;
+        } else {
+            for (ClassyTreeItem child : this.getChildren()) {
+                ClassyTreeItem result = child.findClassyTreeItem(targetNode);
+                if (result != null) {
+                    return result;
+                }
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString(){
         return classyNode.getName();

@@ -14,6 +14,11 @@ public class Interfejs extends InterClass{
         super(name, parent, x, y);
     }
 
+    @Override
+    public String tipKlase() {
+        return "Interfejs";
+    }
+
     public Interfejs(){ //za Json, nema drugu svrhu
         methods = new ArrayList<>();
 

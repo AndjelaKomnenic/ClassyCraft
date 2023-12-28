@@ -18,6 +18,13 @@ public abstract class Connection extends DiagramElement{
     private String vidljivost;
     private String kardinalnost;
 
+    private String fromNaziv;
+    private String fromType;
+
+    private String toNaziv;
+    private String toType;
+
+
     private int fromX, fromY;
     private int toX, toY;
 
@@ -30,6 +37,8 @@ public abstract class Connection extends DiagramElement{
     public void setFrom(InterClass fromInter){
         if(fromInter != null) {
             this.from = fromInter;
+            this.fromNaziv = fromInter.getName();
+            this.fromType = fromInter.tipKlase();
             recalculateCoordinates();
         }
     }
@@ -38,6 +47,8 @@ public abstract class Connection extends DiagramElement{
         if(toInter != null)
         {
             this.to = toInter;
+            this.toNaziv = toInter.getName();
+            this.toType = toInter.tipKlase();
             recalculateCoordinates();
         }
     }
@@ -85,5 +96,4 @@ public abstract class Connection extends DiagramElement{
         toX = x;
         toY = y;
     }
-    public String getClassName(){return "";}
 }
