@@ -2,6 +2,7 @@ package raf.dsw.state;
 
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.implementation.Diagram;
+import raf.dsw.commands.DuplicateCommand;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.Enum;
 import raf.dsw.components.InterClass;
@@ -43,14 +44,16 @@ public class DupliranjeState implements State{
             ic.setY(y);
             ic.setX(x);
             ElementPainter elementPainter;
-            Diagram currDiagram = ((DiagramView) pkg.getTabbedPane().getSelectedComponent()).getDiagram();
+            /*Diagram currDiagram = ((DiagramView) pkg.getTabbedPane().getSelectedComponent()).getDiagram();
             ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
             if(myParent != null)
                 MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, ic);
             else
-                System.out.println(currDiagram.getName() + " nije nadjen");
+                System.out.println(currDiagram.getName() + " nije nadjen");*/
             elementPainter = new InterClassPainter(ic, w, h, x, y);
-            pkg.addPainterForCurrent(elementPainter);
+            //pkg.addPainterForCurrent(elementPainter);
+            DiagramView dgView = (DiagramView) pkg.getTabbedPane().getSelectedComponent();
+            dgView.getCommandManager().addCommand(new DuplicateCommand(pkg, dgView, ic, elementPainter));
 
         }else{
             ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.WRONG_SELECTION_FOR_DUPLICATE);

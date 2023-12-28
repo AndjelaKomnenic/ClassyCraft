@@ -1,5 +1,7 @@
 package raf.dsw.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import raf.dsw.classyrepository.composite.ClassyNode;
 
 import java.util.ArrayList;
@@ -19,5 +21,6 @@ public class Interfejs extends InterClass{
 
     public Interfejs(){ //za Json, nema drugu svrhu
         methods = new ArrayList<>();
+
     }
 }

@@ -1,5 +1,7 @@
 package raf.dsw.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
@@ -22,8 +24,10 @@ public class Klasa extends InterClass{
         super(name, parent, x, y);
     }
 
+
     @Override
     public String tipKlase() {
         return "Klasa";
     }
 }
+

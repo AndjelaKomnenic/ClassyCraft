@@ -1,5 +1,7 @@
 package raf.dsw.components;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import raf.dsw.classyrepository.composite.ClassyNode;
 
@@ -23,3 +25,4 @@ public class Enum extends InterClass{
         return "Enum";
     }
 }
+

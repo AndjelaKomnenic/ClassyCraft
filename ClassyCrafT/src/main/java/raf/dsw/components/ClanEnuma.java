@@ -1,6 +1,7 @@
 package raf.dsw.components;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
@@ -15,8 +16,11 @@ public class ClanEnuma {
         this.value = value;
     }
 
+
     public ClanEnuma()
     {
 
     }
 }
+
+
