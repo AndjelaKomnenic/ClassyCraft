@@ -54,7 +54,7 @@ public class DodavanjeSadrzajaState implements State {
 
     }
     public void zavrsenaSelekcija(DiagramElement inter, PackageView pkg){
-        Connection original = (Connection) selektovani;
+        /*Connection original = (Connection) selektovani;
         Connection c = (Connection) inter;
         original.setToX(0);
         original.setToY(0);
@@ -63,7 +63,7 @@ public class DodavanjeSadrzajaState implements State {
         ElementPainter conPain = new ConnectionPainter(c);
         //pkg.removePainter();
         pkg.addPainterForCurrent(conPain);
-        MainFrame.getInstance().getClassyTree().update();
+        MainFrame.getInstance().getClassyTree().update();*/
     }
     public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
         if (root.getClassyNode().getName().equalsIgnoreCase(targetNode.getName())) {

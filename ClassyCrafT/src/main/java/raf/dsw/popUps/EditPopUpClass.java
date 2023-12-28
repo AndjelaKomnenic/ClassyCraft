@@ -33,7 +33,7 @@ public class EditPopUpClass extends Frame {
     private String oldName;
     private String oldVidljivost;
     public EditPopUpClass(DiagramElement diagramElement) {
-        for(ClassContent cc: ((InterClass)diagramElement).getList())
+        for(ClassContent cc: ((InterClass)diagramElement).getCl())
             originalnaListaCC.add(cc);
         for(ClanEnuma ce: ((InterClass)diagramElement).getNEnum())
             originalnaListaE.add(ce);

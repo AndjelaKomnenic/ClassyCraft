@@ -28,7 +28,7 @@ public class EditICCommand extends AbstractCommand{
         this.editedElement = editedElement;
         for(ClassContent clCOn: originalListOfCC)
             this.originalListOfCC.add(clCOn);
-        for(ClassContent clCOn: editedElement.getList())
+        for(ClassContent clCOn: editedElement.getCl())
             this.editedListOfCC.add(clCOn);
         for(ClanEnuma clCOn: originalListOfE)
             this.originalListOfE.add(clCOn);
@@ -43,7 +43,7 @@ public class EditICCommand extends AbstractCommand{
     @Override
     public void doCommand() {
         editedElement.setName(newName);
-        editedElement.getList().clear();
+        editedElement.getCl().clear();
         editedElement.getNEnum().clear();
         for(ClassContent clCOn: editedListOfCC)
             editedElement.getCl().add(clCOn);
@@ -55,7 +55,7 @@ public class EditICCommand extends AbstractCommand{
     @Override
     public void undoCommand() {
         editedElement.setName(oldName);
-        editedElement.getList().clear();
+        editedElement.getCl().clear();
         editedElement.getNEnum().clear();
         for(ClassContent clCOn: originalListOfCC)
             editedElement.getCl().add(clCOn);

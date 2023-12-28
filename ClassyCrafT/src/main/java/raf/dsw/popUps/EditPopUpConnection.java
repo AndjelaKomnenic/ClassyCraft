@@ -3,6 +3,7 @@ package raf.dsw.popUps;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Diagram;
+import raf.dsw.commands.EditConCommand;
 import raf.dsw.components.*;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.PossibleErrors;
@@ -90,7 +91,7 @@ public class EditPopUpConnection extends JDialog {
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
         Connection noviElement = factory.newConnection(rbResult, currDiagram, naziv.getText(), trenutnaVeza.getFrom(), trenutnaVeza.getTo());
-        ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
+        /*ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
         ClassyTreeItem myConn = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), trenutnaVeza);
         if(myParent != null) {
             MainFrame.getInstance().getClassyTree().deleteChild(myConn);
@@ -98,7 +99,7 @@ public class EditPopUpConnection extends JDialog {
 
         }
         else
-            System.out.println(currDiagram.getName() + " nije nadjen");
+            System.out.println(currDiagram.getName() + " nije nadjen");*/
         if(noviElement instanceof Agregacija || noviElement instanceof Kompozicija) {
             AdditionalConPop popUp = new AdditionalConPop(this, noviElement);
         }
@@ -106,7 +107,9 @@ public class EditPopUpConnection extends JDialog {
             noviElement.setKardinalnost(0);
             noviElement.setVidljivost(null);
         }
-        calledFrom.zavrsenaSelekcija(noviElement, packageView);
+        DiagramView dv = (DiagramView) packageView.getTabbedPane().getSelectedComponent();
+        dv.getCommandManager().addCommand(new EditConCommand(trenutnaVeza, noviElement, packageView, dv));
+        //calledFrom.zavrsenaSelekcija(noviElement, packageView);
         dispose();
     }
     public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {

@@ -43,7 +43,7 @@ public class NewInterClassCommand extends AbstractCommand{
     @Override
     public void undoCommand() {
         pkgView.removePainter(pkgView.getPainter(addedInterClass));
-        for (Connection c : ((InterClass)addedInterClass).getListVeza()) {
+        for (Connection c : ((InterClass)addedInterClass).getListaVeza()) {
             if (pkgView.getPainter(c) != null) {
                 pkgView.removePainter(pkgView.getPainter(c));
                 ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), c);

@@ -29,7 +29,7 @@ public class EditPopUpEnum extends Frame{
     private Button btnDodajClanEnuma = new Button("Dodaj clan enuma");
     private String oldName;
     public EditPopUpEnum(DiagramElement diagramElement) {
-        for(ClassContent cc: ((InterClass)diagramElement).getList())
+        for(ClassContent cc: ((InterClass)diagramElement).getCl())
             originalnaListaCC.add(cc);
         for(ClanEnuma ce: ((InterClass)diagramElement).getNEnum())
             originalnaListaE.add(ce);
