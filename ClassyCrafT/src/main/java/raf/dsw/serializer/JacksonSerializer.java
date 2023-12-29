@@ -99,7 +99,7 @@ public class JacksonSerializer implements Serializer {
             treeView.setSelectionPath(path);
             treeView.expandPath(treeView.getSelectionPath());
 
-            ((ClassyNodeComposite) root.getClassyNode()).getChildren().add(project);
+            ((ClassyNodeComposite) root.getClassyNode()).addChild(project);
             SwingUtilities.updateComponentTreeUI(treeView);
 
             /*for (ClassyNode pkg : project.getChildren()) {
@@ -123,10 +123,10 @@ public class JacksonSerializer implements Serializer {
             }
 
 
-            /*for (ClassyNode diagram : project.getChildren()){
+            for (ClassyNode diagram : project.getChildren()){
                 if (diagram instanceof Diagram)
                     repaintTheDiagram(pkgVIew, (Diagram) diagram);
-            }*/
+            }
 
             return project;
         } catch (IOException e) {
@@ -181,7 +181,7 @@ public class JacksonSerializer implements Serializer {
             for(ClassyNode element : diagram.getChildren())
                 element.setParent(diagram);
 
-            //repaintTheDiagram(pkgView, diagram);
+            repaintTheDiagram(pkgView, diagram);
         } catch (Exception e){
             e.printStackTrace();
         }

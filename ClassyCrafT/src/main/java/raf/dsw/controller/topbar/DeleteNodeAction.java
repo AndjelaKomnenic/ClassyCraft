@@ -34,7 +34,10 @@ public class DeleteNodeAction extends AbstractClassyAction {
             return;
         }
 
-        ((ClassyNodeComposite)selected.getParent()).removeChild(selected);
+        if(selected.getParent() != null)
+        {
+            ((ClassyNodeComposite)selected.getParent()).removeChild(selected);
+        }
         MainFrame.getInstance().getClassyTree().deleteChild(MainFrame.getInstance().getClassyTree().getSelectedNode());
     }
 }

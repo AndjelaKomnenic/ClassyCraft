@@ -2,7 +2,6 @@ package raf.dsw.controller.sidebar;
 
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.implementation.Diagram;
-import raf.dsw.commands.DeleteCommand;
 import raf.dsw.components.Connection;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.InterClass;
@@ -20,8 +19,6 @@ import raf.dsw.workspace.view.PackageView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DeleteRightAction extends AbstractClassyAction {
     public DeleteRightAction() {
@@ -41,14 +38,9 @@ public class DeleteRightAction extends AbstractClassyAction {
         if(packageView.getTabbedPane().getSelectedComponent() == null)
             return;
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
-        DiagramView dgView = (DiagramView) packageView.getTabbedPane().getSelectedComponent();
         if(currDiagram == null)
             return;
         MainFrame.getInstance().getWorkspace().getPackageView().startBrisanjeState();
-        List<ElementPainter> listOfPainters = new ArrayList<>();
-        for(DiagramElement dgEl: packageView.getSelectedComponents())
-            listOfPainters.add(packageView.getPainter(dgEl));
-        dgView.getCommandManager().addCommand(new DeleteCommand(packageView, dgView, packageView.getSelectedComponents(), listOfPainters));
         for(DiagramElement ep: packageView.getSelectedComponents()){
             ep.setSelected(false);
             packageView.removePainter(packageView.getPainter(ep));
@@ -56,7 +48,7 @@ public class DeleteRightAction extends AbstractClassyAction {
                 for (Connection c : ((InterClass)ep).getListaVeza()) {
                     if (packageView.getPainter(c) != null) {
                         packageView.removePainter(packageView.getPainter(c));
-                        ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), c);
+                        ClassyTreeItem treeItemZaBrsianje = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(c);
                         if (treeItemZaBrsianje != null)
                             MainFrame.getInstance().getClassyTree().deleteChild(treeItemZaBrsianje);
                         else
@@ -66,25 +58,12 @@ public class DeleteRightAction extends AbstractClassyAction {
                     }
                 }
             }
-            ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), ep);
+            ClassyTreeItem treeItemZaBrsianje = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(ep);
             if(treeItemZaBrsianje != null)
                 MainFrame.getInstance().getClassyTree().deleteChild(treeItemZaBrsianje);
             else
                 System.out.println("Nije nadjen");
         }
         packageView.getSelectedComponents().clear();
-    }
-    public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
-        if (root.getClassyNode().getName().equalsIgnoreCase(targetNode.getName())) {
-            return root;
-        } else {
-            for (ClassyTreeItem child : root.getChildren()) {
-                ClassyTreeItem result = findClassyTreeItem(child, targetNode);
-                if (result != null) {
-                    return result;
-                }
-            }
-        }
-        return null;
     }
 }

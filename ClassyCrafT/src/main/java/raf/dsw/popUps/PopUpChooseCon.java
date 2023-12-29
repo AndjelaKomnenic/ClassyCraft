@@ -3,7 +3,10 @@ package raf.dsw.popUps;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Diagram;
-import raf.dsw.components.*;
+import raf.dsw.components.AbstractFactory;
+import raf.dsw.components.Connection;
+import raf.dsw.components.DiagramElement;
+import raf.dsw.components.InterClass;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.PossibleErrors;
 import raf.dsw.paint.ClassPainter;
@@ -107,13 +110,11 @@ public class PopUpChooseCon extends JDialog {
             }
         }
         if(flag) {
-            if(noviElement instanceof Agregacija || noviElement instanceof Kompozicija) {
-                AdditionalConPop popUp = new AdditionalConPop(this, noviElement);
-            }
-            else{
-                noviElement.setKardinalnost("0");
-                noviElement.setVidljivost(null);
-            }
+            ClassyTreeItem myParent = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(currDiagram);
+            if (myParent != null) {
+                MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
+            } else
+                System.out.println(currDiagram.getName() + " nije nadjen");
             calledFrom.zavrsenaSelekcija(noviElement, packageView);
         }
         else{
@@ -121,19 +122,6 @@ public class PopUpChooseCon extends JDialog {
             ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_ALREADY_EXISTS);
         }
         dispose();
-    }
-    public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
-        if (root.getClassyNode().getName().equalsIgnoreCase(targetNode.getName())) {
-            return root;
-        } else {
-            for (ClassyTreeItem child : root.getChildren()) {
-                ClassyTreeItem result = findClassyTreeItem(child, targetNode);
-                if (result != null) {
-                    return result;
-                }
-            }
-        }
-        return null;
     }
 
    /* public void twoClosestDots(){

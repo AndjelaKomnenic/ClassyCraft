@@ -38,9 +38,13 @@ public abstract class ClassyNodeComposite extends ClassyNode {
         this.counter += 1;
     }
     public int getCounter() {
-    return counter;
+        return counter;
     }
     public List<ClassyNode> getChildren(){
+        if(this.children == null)
+        {
+            this.children = new ArrayList<>();
+        }
         return this.children;
     }
 }

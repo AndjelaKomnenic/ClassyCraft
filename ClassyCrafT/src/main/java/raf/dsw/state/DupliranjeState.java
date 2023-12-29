@@ -2,7 +2,6 @@ package raf.dsw.state;
 
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.implementation.Diagram;
-import raf.dsw.commands.DuplicateCommand;
 import raf.dsw.components.DiagramElement;
 import raf.dsw.components.Enum;
 import raf.dsw.components.InterClass;
@@ -44,32 +43,17 @@ public class DupliranjeState implements State{
             ic.setY(y);
             ic.setX(x);
             ElementPainter elementPainter;
-            /*Diagram currDiagram = ((DiagramView) pkg.getTabbedPane().getSelectedComponent()).getDiagram();
-            ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), currDiagram);
+            Diagram currDiagram = ((DiagramView) pkg.getTabbedPane().getSelectedComponent()).getDiagram();
+            ClassyTreeItem myParent = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(currDiagram);
             if(myParent != null)
                 MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, ic);
             else
-                System.out.println(currDiagram.getName() + " nije nadjen");*/
+                System.out.println(currDiagram.getName() + " nije nadjen");
             elementPainter = new InterClassPainter(ic, w, h, x, y);
-            //pkg.addPainterForCurrent(elementPainter);
-            DiagramView dgView = (DiagramView) pkg.getTabbedPane().getSelectedComponent();
-            dgView.getCommandManager().addCommand(new DuplicateCommand(pkg, dgView, ic, elementPainter));
+            pkg.addPainterForCurrent(elementPainter);
 
         }else{
             ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.WRONG_SELECTION_FOR_DUPLICATE);
         }
-    }
-    public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
-        if (root.getClassyNode().getName().equalsIgnoreCase(targetNode.getName())) {
-            return root;
-        } else {
-            for (ClassyTreeItem child : root.getChildren()) {
-                ClassyTreeItem result = findClassyTreeItem(child, targetNode);
-                if (result != null) {
-                    return result;
-                }
-            }
-        }
-        return null;
     }
 }

@@ -63,11 +63,12 @@ public class DiagramView extends JPanel implements ISubscriber {
             ElementPainter conPain = new ConnectionPainter(connection);
 
             PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
-            ClassyTreeItem root = MainFrame.getInstance().getClassyTree().getRoot();
-            ClassyTreeItem myParent = root.findClassyTreeItem(this.getDiagram());
-            if(myParent != null) {
-                MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, connection);
-            }
+//            ClassyTreeItem root = MainFrame.getInstance().getClassyTree().getRoot();
+//
+//            ClassyTreeItem myParent = root.findClassyTreeItem(this.getDiagram());
+//            if(myParent != null) {
+//                MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, connection);
+//            }
             packageView.addPainter(this.getDiagram(), conPain);
         }
     }
@@ -86,11 +87,11 @@ public class DiagramView extends JPanel implements ISubscriber {
         }
 
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
-        ClassyTreeItem root = MainFrame.getInstance().getClassyTree().getRoot();
-        ClassyTreeItem myParent = root.findClassyTreeItem(this.getDiagram());
-        if(myParent != null) {
-            MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, node);
-        }
+//        ClassyTreeItem root = MainFrame.getInstance().getClassyTree().getRoot();
+//        ClassyTreeItem myParent = root.findClassyTreeItem(this.getDiagram());
+//        if(myParent != null) {
+//            MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, node);
+//        }
         packageView.addPainter(this.getDiagram(), elementPainter);
     }
 
