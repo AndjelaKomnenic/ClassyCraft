@@ -40,7 +40,7 @@ public class PopUpSetUpParameters extends JDialog {
         vidljivost.addItem("private");
         vidljivost.addItem("public");
         vidljivost.addItem("protected");
-        vidljivost.addItem("package");
+        vidljivost.addItem("default");
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
         setLayout(gridbag);

@@ -3,10 +3,7 @@ package raf.dsw.popUps;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Diagram;
-import raf.dsw.components.AbstractFactory;
-import raf.dsw.components.Connection;
-import raf.dsw.components.DiagramElement;
-import raf.dsw.components.InterClass;
+import raf.dsw.components.*;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.PossibleErrors;
 import raf.dsw.paint.ClassPainter;
@@ -109,7 +106,7 @@ public class PopUpChooseCon extends JDialog {
                 break;
             }
         }
-        if(flag) {
+        /*if(flag) {
             ClassyTreeItem myParent = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(currDiagram);
             if (myParent != null) {
                 MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
@@ -120,6 +117,16 @@ public class PopUpChooseCon extends JDialog {
         else{
             noviElement.setName("");
             ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_ALREADY_EXISTS);
+        }*/
+        if(flag) {
+            if(noviElement instanceof Agregacija || noviElement instanceof Kompozicija) {
+                AdditionalConPop popUp = new AdditionalConPop(this, noviElement);
+            }
+            else{
+                noviElement.setKardinalnost("0");
+                noviElement.setVidljivost(null);
+            }
+            calledFrom.zavrsenaSelekcija(noviElement, packageView);
         }
         dispose();
     }
