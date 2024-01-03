@@ -1,1 +1,4 @@
 [WARNING][2023-12-28 19:55:31.46] It is only possible to duplicate one InterClass item
+[ERROR][2023-12-29 01:11:48.446] Name cannot be empty
+[ERROR][2023-12-29 15:08:10.148] Node with this name already exists
+[ERROR][2023-12-29 15:08:15.254] Type of connection not selected

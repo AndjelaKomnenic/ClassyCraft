@@ -3,10 +3,8 @@ package raf.dsw.popUps;
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.composite.ClassyNodeComposite;
 import raf.dsw.classyrepository.implementation.Diagram;
-import raf.dsw.components.AbstractFactory;
-import raf.dsw.components.Connection;
-import raf.dsw.components.DiagramElement;
-import raf.dsw.components.InterClass;
+import raf.dsw.commands.EditConCommand;
+import raf.dsw.components.*;
 import raf.dsw.core.ApplicationFramework;
 import raf.dsw.message.PossibleErrors;
 import raf.dsw.paint.ClassPainter;
@@ -93,15 +91,25 @@ public class EditPopUpConnection extends JDialog {
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         Diagram currDiagram = ((DiagramView) packageView.getTabbedPane().getSelectedComponent()).getDiagram();
         Connection noviElement = factory.newConnection(rbResult, currDiagram, naziv.getText(), trenutnaVeza.getFrom(), trenutnaVeza.getTo());
-        ClassyTreeItem myParent = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(currDiagram);
+        /*ClassyTreeItem myParent = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(currDiagram);
         if(myParent != null) {
             MainFrame.getInstance().getClassyTree().deleteNode(trenutnaVeza);
             MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, noviElement);
 
         }
         else
-            System.out.println(currDiagram.getName() + " nije nadjen");
-        calledFrom.zavrsenaSelekcija(noviElement, packageView);
+            System.out.println(currDiagram.getName() + " nije nadjen");*/
+
+        if(noviElement instanceof Agregacija || noviElement instanceof Kompozicija) {
+            AdditionalConPop popUp = new AdditionalConPop(this, noviElement);
+        }
+        else{
+            noviElement.setKardinalnost("0");
+            noviElement.setVidljivost(null);
+        }
+        DiagramView dv = (DiagramView) packageView.getTabbedPane().getSelectedComponent();
+        dv.getCommandManager().addCommand(new EditConCommand(trenutnaVeza, noviElement, packageView, dv));
+        //calledFrom.zavrsenaSelekcija(noviElement, packageView);
         dispose();
     }
 }

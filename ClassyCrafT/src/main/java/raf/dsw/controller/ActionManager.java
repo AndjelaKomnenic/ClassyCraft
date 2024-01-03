@@ -36,6 +36,8 @@ public class ActionManager {
 
     private SaveTemplateAction saveTemplateAction;
     private OpenTemplateAction openTemplateAction;
+
+    private CodeGeneratorAction codeGeneratorAction;
     public ActionManager() {
         initialiseActions();
     }
@@ -64,6 +66,7 @@ public class ActionManager {
         openProjectAction = new OpenProjectAction();
         saveTemplateAction = new SaveTemplateAction();
         openTemplateAction = new OpenTemplateAction();
+        codeGeneratorAction = new CodeGeneratorAction();
     }
 
 }

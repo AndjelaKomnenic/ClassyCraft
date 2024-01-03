@@ -22,7 +22,7 @@ public class AdditionalConPop extends JDialog {
         vidljivost.addItem("private");
         vidljivost.addItem("public");
         vidljivost.addItem("protected");
-        vidljivost.addItem("package");
+        vidljivost.addItem("default");
         setLayout(new GridLayout(3, 1));
         JPanel firstRow = new JPanel(new GridLayout(1, 2));
         JPanel secondRow = new JPanel(new GridLayout(1, 2));

@@ -3,6 +3,7 @@ package raf.dsw.state;
 
 import raf.dsw.classyrepository.composite.ClassyNode;
 import raf.dsw.classyrepository.implementation.Diagram;
+import raf.dsw.commands.NewInterClassCommand;
 import raf.dsw.components.DiagramElement;
 
 import raf.dsw.components.Enum;
@@ -66,12 +67,14 @@ public class DodavanjeState implements State{
                 } else if (popUp.getSelectedElement() instanceof Enum) {
                     elementPainter = new EnumPainter(popUp.getSelectedElement());
                 }
-                ClassyTreeItem myParent = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(currDiagramView.getDiagram());
+                /*ClassyTreeItem myParent = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(currDiagramView.getDiagram());
                 if(myParent != null)
                     MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, popUp.getSelectedElement());
                 else
-                    System.out.println(popUp.getSelectedElement().getName() + " nije nadjen");
-                pkg.addPainterForCurrent(elementPainter);
+                    System.out.println(popUp.getSelectedElement().getName() + " nije nadjen");*/
+                //pkg.addPainterForCurrent(elementPainter);
+                currDiagramView.getCommandManager().addCommand(new NewInterClassCommand(pkg, currDiagramView, popUp.getSelectedElement(), elementPainter));
+
             }
 
             /*if (elementPainter == null)
