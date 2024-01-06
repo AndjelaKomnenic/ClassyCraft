@@ -68,7 +68,7 @@ public class JacksonSerializer implements Serializer {
 
                     for (ClassyNode diagram : packageComposite.getChildren()) {
                         diagram.setParent(pkg); // Set parent reference of Diagram to Package
-
+                        // odavde ga sibni za tmp
                         if (diagram instanceof ClassyNodeComposite) {
                             ClassyNodeComposite diagramComposite = (ClassyNodeComposite) diagram;
 
@@ -123,10 +123,10 @@ public class JacksonSerializer implements Serializer {
             }
 
 
-            for (ClassyNode diagram : project.getChildren()){
+            /*for (ClassyNode diagram : project.getChildren()){
                 if (diagram instanceof Diagram)
                     repaintTheDiagram(pkgVIew, (Diagram) diagram);
-            }
+            }*/
 
             return project;
         } catch (IOException e) {
@@ -181,7 +181,7 @@ public class JacksonSerializer implements Serializer {
             for(ClassyNode element : diagram.getChildren())
                 element.setParent(diagram);
 
-            repaintTheDiagram(pkgView, diagram);
+            //repaintTheDiagram(pkgView, diagram);
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -214,7 +214,7 @@ public class JacksonSerializer implements Serializer {
         }
     }
 
-    private void repaintTheDiagram(PackageView pkgView, Diagram diagram){
+    /*private void repaintTheDiagram(PackageView pkgView, Diagram diagram){
         List<DiagramElement> elements = new ArrayList<>();
 
         for (ClassyNode el : diagram.getChildren()){
@@ -231,5 +231,5 @@ public class JacksonSerializer implements Serializer {
         }
 
         pkgView.repaintAll();
-    }
+    }*/
 }

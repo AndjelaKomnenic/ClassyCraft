@@ -49,7 +49,7 @@ public class AdditionalConPop extends JDialog {
         String v = (String)vidljivost.getSelectedItem();
         String k = kardinalnost.getText();
         c.setVidljivost(v);
-        c.setKardinalnost(k);
+        c.setKardinalnost(k); //-> i ovo
         dispose();
     }
 

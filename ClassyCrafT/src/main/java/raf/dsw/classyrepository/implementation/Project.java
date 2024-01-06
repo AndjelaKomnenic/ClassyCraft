@@ -16,9 +16,9 @@ import java.util.List;
 public class Project extends ClassyNodeComposite {
     protected String filePath;
     private String author;
-    private transient List<ISubscriber> subs;
+
     public Project(){
-        subs = new ArrayList<>();
+
     }
 
     public Project(String name, ClassyNode parent, String author) {
@@ -67,7 +67,5 @@ public class Project extends ClassyNodeComposite {
     public void setName(String name) {
         super.setName(name);
     }
-    /*public void setCounterVal(int counter) {
-        this.counter = counter;
-    }*/
+
 }

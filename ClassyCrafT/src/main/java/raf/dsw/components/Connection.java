@@ -15,6 +15,7 @@ public abstract class Connection extends DiagramElement{
     private InterClass from;
     @JsonIgnore
     private InterClass to;
+    //ova dva
     private String vidljivost;
     private String kardinalnost;
 

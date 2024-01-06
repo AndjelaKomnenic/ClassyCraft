@@ -19,21 +19,11 @@ import java.util.List;
 @Setter
 
 public class Diagram extends ClassyNodeComposite {
-    @JsonCreator
-    public Diagram(@JsonProperty("name")String name
-            , @JsonProperty("parent")ClassyNode parent
-            , @JsonProperty("children") List<ClassyNode> children) {
-        super(name, parent);
-        for (ClassyNode child : children)
-            addChild(child);
-        this.template = false;
-    }
 
     private boolean template;
-    @JsonIgnore
-    private transient List<ISubscriber> subs;
+
     public Diagram(){
-        subs = new ArrayList<>();
+
     }
     public Diagram(String name, ClassyNode parent) {
         super(name, parent);

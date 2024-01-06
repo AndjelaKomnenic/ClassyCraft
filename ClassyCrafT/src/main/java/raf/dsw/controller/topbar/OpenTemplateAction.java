@@ -20,7 +20,7 @@ public class OpenTemplateAction extends AbstractClassyAction {
         JFileChooser jfc = new JFileChooser();
         String workingDirectory = System.getProperty("user.dir");
 
-        String templatesPath = workingDirectory + "./src/main/resources/templates";
+        String templatesPath = workingDirectory + "./src/main/resources/templates/";
 
         jfc.setCurrentDirectory(new File(templatesPath));
         if (jfc.showOpenDialog(MainFrame.getInstance()) == JFileChooser.APPROVE_OPTION){

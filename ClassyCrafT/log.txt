@@ -2,3 +2,7 @@
 [ERROR][2023-12-29 01:11:48.446] Name cannot be empty
 [ERROR][2023-12-29 15:08:10.148] Node with this name already exists
 [ERROR][2023-12-29 15:08:15.254] Type of connection not selected
+[ERROR][2024-01-04 14:58:16.922] Type of interClass was not selected
+[ERROR][2024-01-05 18:56:05.159] Name cannot be empty
+[ERROR][2024-01-05 23:25:39.798] Node with this name already exists
+[ERROR][2024-01-05 23:25:53.043] Name cannot be empty

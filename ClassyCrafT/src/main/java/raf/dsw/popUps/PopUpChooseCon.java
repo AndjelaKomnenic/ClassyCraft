@@ -118,6 +118,7 @@ public class PopUpChooseCon extends JDialog {
             noviElement.setName("");
             ApplicationFramework.getInstance().getMessageGenerator().createMessage(PossibleErrors.NAME_ALREADY_EXISTS);
         }*/
+
         if(flag) {
             if(noviElement instanceof Agregacija || noviElement instanceof Kompozicija) {
                 AdditionalConPop popUp = new AdditionalConPop(this, noviElement);
@@ -127,7 +128,8 @@ public class PopUpChooseCon extends JDialog {
                 noviElement.setVidljivost(null);
             }
             calledFrom.zavrsenaSelekcija(noviElement, packageView);
-        }
+        } // --> ovde je dodatak sto sam joj sklonila
+        //calledFrom.zavrsenaSelekcija(noviElement, packageView);
         dispose();
     }
 

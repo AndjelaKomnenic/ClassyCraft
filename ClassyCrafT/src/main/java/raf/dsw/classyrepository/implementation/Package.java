@@ -17,25 +17,15 @@ import java.util.List;
 @Setter
 public class Package extends ClassyNodeComposite {
     protected String filePath;
-    private transient List<ISubscriber> subs;
+
     public Package(){
-        subs = new ArrayList<>();
+
     }
 
     public Package(String name, ClassyNode parent){
         super(name, parent);
     }
-    @JsonCreator
-    public Package(@JsonProperty("name")String name
-            , @JsonProperty("parent")ClassyNode parent
-            , @JsonProperty("filePath") String filePath
-            , @JsonProperty("children") List<ClassyNode> children) {
 
-        super(name, parent);
-        for(ClassyNode child: children)
-            addChild(child);
-        this.filePath = filePath;
-    }
 
     @Override
     public void addChild(ClassyNode child) {

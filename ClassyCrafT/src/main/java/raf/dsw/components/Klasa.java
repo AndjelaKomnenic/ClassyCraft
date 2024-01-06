@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import raf.dsw.classyrepository.composite.ClassyNode;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,5 +31,7 @@ public class Klasa extends InterClass{
     public String tipKlase() {
         return "Klasa";
     }
+
+
 }
 

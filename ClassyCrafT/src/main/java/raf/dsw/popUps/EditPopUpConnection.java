@@ -106,7 +106,7 @@ public class EditPopUpConnection extends JDialog {
         else{
             noviElement.setKardinalnost("0");
             noviElement.setVidljivost(null);
-        }
+        } // -> i ovo ovde
         DiagramView dv = (DiagramView) packageView.getTabbedPane().getSelectedComponent();
         dv.getCommandManager().addCommand(new EditConCommand(trenutnaVeza, noviElement, packageView, dv));
         //calledFrom.zavrsenaSelekcija(noviElement, packageView);
