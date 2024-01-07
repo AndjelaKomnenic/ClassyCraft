@@ -162,24 +162,44 @@ public class JacksonSerializer implements Serializer {
     @Override
     public void loadTemplate(File file) {
         PackageView pkgView = MainFrame.getInstance().getWorkspace().getPackageView();
+        ClassyTreeItem selected = MainFrame.getInstance().getClassyTree().getSelectedNode();
 
         try {
             Diagram diagram = objectMapper.readValue(file, Diagram.class);
 
-            //add diagram to currently opened package
-            Package currPackage = (Package) pkgView.getPackageP();
-            if(currPackage == null) return;
-            diagram.setParent(currPackage);
-            pkgView.updateWorkspace(currPackage);
+            Package selectedPackage = (Package) selected.getClassyNode();
 
+            diagram.setParent(selectedPackage);
+            selectedPackage.addChild(diagram);
 
-            //add to tree
+            List<ClassyNode> elementi = diagram.getChildren();
+            for (ClassyNode element : elementi) {
+                element.setParent(diagram);
+
+                if(element instanceof Connection)
+                {
+                    Connection konekcija = (Connection)element;
+                    InterClass from = nadjiKlasu(elementi, konekcija.getFromNaziv(), konekcija.getFromType());
+                    InterClass to = nadjiKlasu(elementi, konekcija.getToNaziv(), konekcija.getToType());
+                    konekcija.setFrom(from);
+                    konekcija.setTo(to);
+                    from.addToListVeza(konekcija);
+                    to.addToListVeza(konekcija);
+                }
+            }
+            pkgView.updateWorkspace(selectedPackage);
+
             ClassyTreeImplementation mti = (ClassyTreeImplementation)MainFrame.getInstance().getClassyTree();
-            mti.addChildToDiag(mti.getRoot(), diagram);
+            mti.addChildToDiag(selected, diagram);
 
 
             for(ClassyNode element : diagram.getChildren())
                 element.setParent(diagram);
+
+            String fileName = file.getName();
+            String diagramName = fileName.replaceFirst("[.][^.]+$", ""); // Removes the file extension
+            
+            diagram.setName(diagramName);
 
             //repaintTheDiagram(pkgView, diagram);
         } catch (Exception e){

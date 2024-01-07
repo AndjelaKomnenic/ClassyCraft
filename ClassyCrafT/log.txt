@@ -6,3 +6,13 @@
 [ERROR][2024-01-05 18:56:05.159] Name cannot be empty
 [ERROR][2024-01-05 23:25:39.798] Node with this name already exists
 [ERROR][2024-01-05 23:25:53.043] Name cannot be empty
+[ERROR][2024-01-06 21:52:43.546] Name cannot be empty
+[ERROR][2024-01-06 22:16:42.683] Node with this name already exists
+[ERROR][2024-01-06 22:16:55.403] Name cannot be empty
+[ERROR][2024-01-07 03:08:30.262] No node was selected for adding child
+[ERROR][2024-01-07 03:08:42.053] No node was selected for adding child
+[ERROR][2024-01-07 03:08:49.658] No node was selected for adding child
+[ERROR][2024-01-07 03:09:19.24] No node was selected for adding child
+[ERROR][2024-01-07 03:12:20.519] No node was selected for adding child
+[ERROR][2024-01-07 03:12:25.123] No node was selected for adding child
+[ERROR][2024-01-07 03:16:11.553] No node was selected for adding child

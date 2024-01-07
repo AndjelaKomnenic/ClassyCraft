@@ -23,7 +23,7 @@ public class Project extends ClassyNodeComposite {
 
     public Project(String name, ClassyNode parent, String author) {
         super(name, parent);
-        this.author = author;
+        this.author = (author != null && !author.isEmpty()) ? author : "Default Author";
     }
 
     /*@JsonCreator

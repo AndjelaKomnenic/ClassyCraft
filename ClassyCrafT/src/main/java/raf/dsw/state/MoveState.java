@@ -46,7 +46,7 @@ public class MoveState implements State {
         }
     }
 
-    @Override
+    /*@Override
     public void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg) {
 
 
@@ -95,7 +95,56 @@ public class MoveState implements State {
         startY = -1;
         originalneTacke.clear();
         movingView = false;
+    }*/
+
+    @Override
+    public void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg) {
+
+        if(!movingView)
+        {
+            for (InterClass interClass : originalneTacke.keySet()) {
+                var orig = originalneTacke.get(interClass);
+
+                var classLeftX = (int) interClass.getX();
+                var classRightX = (int) interClass.getX() + (int) interClass.getWidth();
+                var classTopY = (int) interClass.getY();
+                var classBotY = (int) interClass.getY() + (int) interClass.getHeight();
+
+                for (var drugi : currDiagram.getDiagram().getChildren()) {
+                    if(drugi == interClass)
+                    {
+                        continue;
+                    }
+                    if (drugi instanceof InterClass) {
+                        var drugiClass = (InterClass) drugi;
+                        if (interClass.isSelected()) {
+                            var class2LeftX2 = (int) drugiClass.getX();
+                            var class2RightX = (int) drugiClass.getX() + (int) drugiClass.getWidth();
+                            var class2TopY = (int) drugiClass.getY();
+                            var class2BotY = (int) drugiClass.getY() + (int) drugiClass.getHeight();
+                            if(checkCollision(classLeftX, classTopY, classRightX, classBotY, class2LeftX2, class2TopY, class2RightX, class2BotY))
+                            {
+                                interClass.setX(orig.getX());
+                                interClass.setY(orig.getY());
+                            }else{
+                                DiagramView dgView = (DiagramView) pkg.getTabbedPane().getSelectedComponent();
+                                dgView.getCommandManager().addCommand(new MoveCommand(pkg, dgView, originalneTacke, noveTacke));
+                            }
+                        }
+                    }
+                }
+
+            }
+
+
+        }
+
+        startX = -1;
+        startY = -1;
+        originalneTacke.clear();
+        movingView = false;
     }
+
 
     @Override
     public void misPrevucen(int x, int y, DiagramView currDiagram, PackageView pkg) {
@@ -116,6 +165,7 @@ public class MoveState implements State {
         }
     }
 
+
     void moveItems(int x, int y, DiagramView currDiagram) {
         int vektorX = x - startX;
         int vektorY = y - startY;
@@ -128,6 +178,29 @@ public class MoveState implements State {
             interClass.setY(novaTacka.getY());
         }
     }
+
+    /*void moveItems(int x, int y, DiagramView currDiagram) {
+        double scaledX = unscaleX(x, currDiagram);
+        double scaledY = unscaleY(y, currDiagram);
+
+        double scaledStartX = unscaleX(startX, currDiagram);
+        double scaledStartY = unscaleY(startY, currDiagram);
+
+        double vektorX = scaledX - scaledStartX;
+        double vektorY = scaledY - scaledStartY;
+
+        for (InterClass interClass : originalneTacke.keySet()) {
+            Tacka orig = originalneTacke.get(interClass);
+            double newX = orig.getX() + vektorX;
+            double newY = orig.getY() + vektorY;
+
+            interClass.setX(newX);
+            interClass.setY(newY);
+
+            // Optionally, update the HashMap with new coordinates
+            noveTacke.put(interClass, new Tacka(newX, newY));
+        }
+    }*/
 
 
     static boolean checkCollision(int leftX1, int topY1, int rightX1, int bottomY1,
