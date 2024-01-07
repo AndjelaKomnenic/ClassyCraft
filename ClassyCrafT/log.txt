@@ -16,3 +16,6 @@
 [ERROR][2024-01-07 03:12:20.519] No node was selected for adding child
 [ERROR][2024-01-07 03:12:25.123] No node was selected for adding child
 [ERROR][2024-01-07 03:16:11.553] No node was selected for adding child
+[WARNING][2024-01-07 14:45:13.238] Author can only be set up for a project
+[ERROR][2024-01-07 23:24:49.131] Node with this name already exists
+[ERROR][2024-01-07 23:24:53.679] Node with this name already exists

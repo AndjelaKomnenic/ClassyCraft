@@ -54,6 +54,7 @@ public class ClassyTreeImplementation implements ClassyTree{
         ClassyTreeItem parent  = (ClassyTreeItem) (child.getParent());
         if(parent != null) {
             ((ClassyNodeComposite) parent.getClassyNode()).removeChild(child.getClassyNode());
+            parent.getChildren().remove(child);
             parent.remove(child);
             treeModel.nodeStructureChanged(parent);
         }

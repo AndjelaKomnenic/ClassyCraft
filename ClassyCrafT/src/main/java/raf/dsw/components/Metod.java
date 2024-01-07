@@ -18,4 +18,5 @@ public class Metod extends ClassContent{
             , @JsonProperty("parent") InterClass parent) {
         super(vidljivost, tip, naziv);
     }
+
 }
