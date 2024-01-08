@@ -39,63 +39,14 @@ public class MoveState implements State {
         }
 
 
+
         if (originalneTacke.isEmpty()) {
             movingView = true;
             viewStartX = (int)currDiagram.getTranslateX();
             viewStartY = (int)currDiagram.getTranslateY();
+
         }
     }
-
-    /*@Override
-    public void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg) {
-
-
-        if(!movingView)
-        {
-            for (InterClass interClass : originalneTacke.keySet()) {
-                Tacka orig = originalneTacke.get(interClass);
-
-                int classLeftX = (int) interClass.getX();
-                int classRightX = (int) interClass.getX() + (int) interClass.getWidth();
-                int classTopY = (int) interClass.getY();
-                int classBotY = (int) interClass.getY() + (int) interClass.getHeight();
-
-                for (ClassyNode drugi : currDiagram.getDiagram().getChildren()) {
-                    if(drugi == interClass)
-                    {
-                        continue;
-                    }
-                    if (drugi instanceof InterClass) {
-                        InterClass drugiClass = (InterClass) drugi;
-                        if (interClass.isSelected()) {
-                            int class2LeftX2 = (int) drugiClass.getX();
-                            int class2RightX = (int) drugiClass.getX() + (int) drugiClass.getWidth();
-                            int class2TopY = (int) drugiClass.getY();
-                            int class2BotY = (int) drugiClass.getY() + (int) drugiClass.getHeight();
-                            if(checkCollision(classLeftX, classTopY, classRightX, classBotY, class2LeftX2, class2TopY, class2RightX, class2BotY))
-                            {
-                                interClass.setX(orig.getX());
-                                interClass.setY(orig.getY());
-                            }
-                            else{
-                                DiagramView dgView = (DiagramView) pkg.getTabbedPane().getSelectedComponent();
-                                dgView.getCommandManager().addCommand(new MoveCommand(pkg, dgView, originalneTacke, noveTacke));
-                            }
-                        }
-                    }
-                }
-
-            }
-
-
-        }
-
-
-        startX = -1;
-        startY = -1;
-        originalneTacke.clear();
-        movingView = false;
-    }*/
 
     @Override
     public void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg) {
@@ -167,41 +118,17 @@ public class MoveState implements State {
 
 
     void moveItems(int x, int y, DiagramView currDiagram) {
-        int vektorX = x - startX;
-        int vektorY = y - startY;
+        int vektorX = (int)unscaleX(x, currDiagram) - startX;
+        int vektorY = (int)unscaleY(y, currDiagram) - startY;
 
         for (InterClass interClass : originalneTacke.keySet()) {
             Tacka orig = originalneTacke.get(interClass);
-            Tacka novaTacka = orig.dodajVektor(vektorX, vektorY);
+            Tacka novaTacka = orig.dodajVektor((int)(vektorX / currDiagram.getScaling()), (int)(vektorY / currDiagram.getScaling()));
             noveTacke.put(interClass, novaTacka);
             interClass.setX(novaTacka.getX());
             interClass.setY(novaTacka.getY());
         }
     }
-
-    /*void moveItems(int x, int y, DiagramView currDiagram) {
-        double scaledX = unscaleX(x, currDiagram);
-        double scaledY = unscaleY(y, currDiagram);
-
-        double scaledStartX = unscaleX(startX, currDiagram);
-        double scaledStartY = unscaleY(startY, currDiagram);
-
-        double vektorX = scaledX - scaledStartX;
-        double vektorY = scaledY - scaledStartY;
-
-        for (InterClass interClass : originalneTacke.keySet()) {
-            Tacka orig = originalneTacke.get(interClass);
-            double newX = orig.getX() + vektorX;
-            double newY = orig.getY() + vektorY;
-
-            interClass.setX(newX);
-            interClass.setY(newY);
-
-            // Optionally, update the HashMap with new coordinates
-            noveTacke.put(interClass, new Tacka(newX, newY));
-        }
-    }*/
-
 
     static boolean checkCollision(int leftX1, int topY1, int rightX1, int bottomY1,
                                   int leftX2, int topY2, int rightX2, int bottomY2) {
@@ -228,62 +155,6 @@ public class MoveState implements State {
         return (y * currDiagramView.getScaling()) + currDiagramView.getTranslateY();
     }
 
-    // ovaj radi
-    /*int startX = -1;
-    int startY = -1;
-    HashMap<InterClass, Tacka> originalneTacke = new HashMap<>();
-    @Override
-    public void misKliknut(int x, int y, DiagramView currDiagram, PackageView pkg) {
-        startX = x;
-        startY = y;
-        originalneTacke.clear();
-        for(var child: currDiagram.getDiagram().getChildren())
-        {
-            if (child instanceof InterClass)
-            {
-                var interClass = (InterClass)child;
-                if(interClass.isSelected())
-                {
-                    originalneTacke.put(interClass, new Tacka((int)interClass.getX(), (int)interClass.getY()));
-                }
-            }
-        }
-    }
 
-    @Override
-    public void misOtpusten(int x, int y, DiagramView currDiagram, PackageView pkg) {
-        startX = -1;
-        startY = -1;
-        originalneTacke.clear();
-    }
-
-    @Override
-    public void misPrevucen(int x, int y, DiagramView currDiagram, PackageView pkg)
-    {
-        moveItems(x,y, currDiagram);
-    }
-
-    void moveItems(int x, int y, DiagramView currDiagram)
-    {
-        var vektorX = x - startX;
-        var vektorY = y - startY;
-
-        for(var interClass: originalneTacke.keySet())
-        {
-            var orig = originalneTacke.get(interClass);
-            var novaTacka = orig.dodajVektor(vektorX, vektorY);
-            interClass.setX(novaTacka.getX());
-            interClass.setY(novaTacka.getY());
-        }
-    }
-
-    public void zavrsenaSelekcija(DiagramElement noviElement, PackageView pkg){}
-    @Override
-    public void neispravnoCrtanje() {}
-
-    @Override
-    public void duplikacija(DiagramElement de, int x, int y, int w, int h, PackageView pkg) {
-
-    }*/
 
 }

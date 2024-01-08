@@ -46,7 +46,7 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         DiagramView currDiagramView = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
         packageView.getStateManager().getCurrState().misOtpusten(scaleX(e, currDiagramView), scaleY(e, currDiagramView), currDiagramView, packageView);
-        //packageView.getStateManager().getCurrState().misOtpusten(e.getX(), e.getY(), currDiagramView, packageView);
+
     }
 
     @Override
@@ -64,14 +64,12 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
         PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
         DiagramView currDiagramView = ((DiagramView) packageView.getTabbedPane().getSelectedComponent());
         packageView.getStateManager().getCurrState().misPrevucen(scaleX(e, currDiagramView), scaleY(e, currDiagramView), currDiagramView, packageView);
-        //packageView.getStateManager().getCurrState().misPrevucen(e.getX(), e.getY(), currDiagramView, packageView);
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
 
     }
-
 
     private int scaleX(MouseEvent e, DiagramView currDiagramView){
         return (int)((e.getX() - currDiagramView.getTranslateX()) / currDiagramView.getScaling());
@@ -80,22 +78,5 @@ public class MouseGraphicsEvent implements MouseListener, MouseMotionListener, M
     private int scaleY(MouseEvent e, DiagramView currDiagramView){
         return (int)((e.getY() - currDiagramView.getTranslateY()) / currDiagramView.getScaling());
     }
-    private Point getWorldCoordinates(MouseEvent me){
-        PackageView packageView = ((WorkSpaceImplementation) MainFrame.getInstance().getWorkspace()).getPackageView();
-        DiagramView currDiagramView = (DiagramView) packageView.getTabbedPane().getSelectedComponent();
 
-        AffineTransform atInvert = null;
-
-        try{
-            atInvert = currDiagramView.getAffineTransform().createInverse();
-        } catch (NoninvertibleTransformException | NullPointerException e){
-            System.err.print("Non invertible transformation");
-        }
-
-        Point2D pDest = atInvert.transform(new Point2D.Double(me.getX(), me.getY()), null);
-        Point pDest2 = new Point();
-        pDest2.x = (int) pDest.getX();
-        pDest2.y = (int) pDest.getY();
-        return pDest2;
-    }
 }

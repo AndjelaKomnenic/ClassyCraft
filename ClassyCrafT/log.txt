@@ -19,3 +19,23 @@
 [WARNING][2024-01-07 14:45:13.238] Author can only be set up for a project
 [ERROR][2024-01-07 23:24:49.131] Node with this name already exists
 [ERROR][2024-01-07 23:24:53.679] Node with this name already exists
+[ERROR][2024-01-08 00:56:53.418] Node with this name already exists
+[ERROR][2024-01-08 00:59:16.252] Overlap
+[ERROR][2024-01-08 01:00:25.161] Node with this name already exists
+[ERROR][2024-01-08 01:12:10.931] Overlap
+[ERROR][2024-01-08 01:14:24.966] Overlap
+[ERROR][2024-01-08 01:14:49.296] Node with this name already exists
+[ERROR][2024-01-08 01:15:07.726] Node with this name already exists
+[ERROR][2024-01-08 01:15:10.673] Overlap
+[ERROR][2024-01-08 01:15:55.53] Overlap
+[ERROR][2024-01-08 01:16:30.732] Overlap
+[ERROR][2024-01-08 01:16:35.491] Overlap
+[ERROR][2024-01-08 01:16:44.237] Overlap
+[ERROR][2024-01-08 01:40:27.105] Overlap
+[ERROR][2024-01-08 01:42:22.646] Name cannot be empty
+[ERROR][2024-01-08 01:42:29.982] Overlap
+[ERROR][2024-01-08 01:43:03.16] Overlap
+[ERROR][2024-01-08 01:46:48.808] Name cannot be empty
+[ERROR][2024-01-08 01:51:46.112] Overlap
+[ERROR][2024-01-08 01:52:32.67] Overlap
+[ERROR][2024-01-08 01:59:03.111] Overlap

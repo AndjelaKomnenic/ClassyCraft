@@ -36,16 +36,13 @@ public class DodavanjeState implements State{
             return;
         }
         if(popUp.getSelectedElement().getName() != "") {
-            double scaledX = (x - currDiagramView.getTranslateX()) / currDiagramView.getScaling();
-            double scaledY = (y - currDiagramView.getTranslateY()) / currDiagramView.getScaling();
-            popUp.getSelectedElement().setX(scaledX);
-            popUp.getSelectedElement().setY(scaledY);
+            popUp.getSelectedElement().setX(x);
+            popUp.getSelectedElement().setY(y);
 
             boolean collisionDetected = false;
             for (ClassyNode i : currDiagramView.getDiagram().getChildren()) {
                 if (i instanceof InterClass) {
-                    if (overlap((int) scaledX, (int) scaledY,
-                            (int) ((InterClass) i).getX(), (int) ((InterClass) i).getY(),
+                    if (overlap(x, y, (int) ((InterClass) i).getX(), (int) ((InterClass) i).getY(),
                             (int) popUp.getSelectedElement().getWidth(), (int) ((InterClass) i).getWidth(),
                             (int) popUp.getSelectedElement().getHeight(), (int) ((InterClass) i).getHeight())) {
                         collisionDetected = true;
@@ -54,7 +51,6 @@ public class DodavanjeState implements State{
                     }
                 }
             }
-
 
             if (!collisionDetected) {
                 ElementPainter elementPainter = null;
@@ -67,41 +63,44 @@ public class DodavanjeState implements State{
                 } else if (popUp.getSelectedElement() instanceof Enum) {
                     elementPainter = new EnumPainter(popUp.getSelectedElement());
                 }
-                /*ClassyTreeItem myParent = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(currDiagramView.getDiagram());
-                if(myParent != null)
-                    MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, popUp.getSelectedElement());
-                else
-                    System.out.println(popUp.getSelectedElement().getName() + " nije nadjen");*/
-                //pkg.addPainterForCurrent(elementPainter);
-                currDiagramView.getCommandManager().addCommand(new NewInterClassCommand(pkg, currDiagramView, popUp.getSelectedElement(), elementPainter));
 
+                currDiagramView.getCommandManager().addCommand(new NewInterClassCommand(pkg, currDiagramView, popUp.getSelectedElement(), elementPainter));
             }
 
-            /*if (elementPainter == null)
-                System.out.println("prazno");
-            else
-                System.out.println(elementPainter.getDgElement().getName());*/
         }
     }
 
-    private boolean isWithinBounds(double clickX, double clickY, int elementX, int elementY, int elementWidth, int elementHeight) {
-        return clickX >= elementX && clickX <= elementX + elementWidth &&
-                clickY >= elementY && clickY <= elementY + elementHeight;
-    }
 
-    public boolean overlap(int x1, int y1, int x2, int y2, int w1, int w2, int h1, int h2) {
-        // Calculate the right and bottom coordinates of each rectangle
+    /*public boolean overlap(int x1, int y1, int x2, int y2, int w1, int w2, int h1, int h2) {
         int right1 = x1 + w1;
         int bottom1 = y1 + h1;
         int right2 = x2 + w2;
         int bottom2 = y2 + h2;
 
-        // Check for no overlap conditions
         if (x1 >= right2 || right1 <= x2 || y1 >= bottom2 || bottom1 <= y2) {
-            return false; // No overlap
+            return false;
         }
 
-        return true; // Overlapping
+        return true;
+    }*/
+    public boolean overlap(int x1, int y1, int x2, int y2, int w1, int w2, int h1, int h2) {
+        int expandedBoxSize = 2;
+
+        int right1 = x1 + w1 + expandedBoxSize;
+        int bottom1 = y1 + h1 + expandedBoxSize;
+        int right2 = x2 + w2 + expandedBoxSize;
+        int bottom2 = y2 + h2 + expandedBoxSize;
+
+        x1 -= expandedBoxSize;
+        y1 -= expandedBoxSize;
+        x2 -= expandedBoxSize;
+        y2 -= expandedBoxSize;
+
+        if (x1 >= right2 || right1 <= x2 || y1 >= bottom2 || bottom1 <= y2) {
+            return false;
+        }
+
+        return true;
     }
 
 
@@ -119,9 +118,6 @@ public class DodavanjeState implements State{
             noviElement.setY(y);
             ElementPainter elementPainter = new InterClassPainter(noviElement);
             pkg.addPainterForCurrent(elementPainter);
-        }
-        else{
-
         }
     }
     @Override
