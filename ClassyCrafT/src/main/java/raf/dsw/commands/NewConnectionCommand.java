@@ -27,7 +27,7 @@ public class NewConnectionCommand extends AbstractCommand{
     }
     @Override
     public void doCommand() {
-        ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), dgView.getDiagram());
+        ClassyTreeItem myParent = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(dgView.getDiagram());
         if (myParent != null) {
             MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, connection);
         } else
@@ -40,23 +40,11 @@ public class NewConnectionCommand extends AbstractCommand{
     @Override
     public void undoCommand() {
         pkgView.removePainter(pkgView.getPainter(connection));
-        ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), connection);
+        ClassyTreeItem treeItemZaBrsianje = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(connection);
         if(treeItemZaBrsianje != null)
             MainFrame.getInstance().getClassyTree().deleteChild(treeItemZaBrsianje);
         else
             System.out.println("Nije nadjen");
     }
-    public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
-        if (root.getClassyNode().getName().equalsIgnoreCase(targetNode.getName())) {
-            return root;
-        } else {
-            for (ClassyTreeItem child : root.getChildren()) {
-                ClassyTreeItem result = findClassyTreeItem(child, targetNode);
-                if (result != null) {
-                    return result;
-                }
-            }
-        }
-        return null;
-    }
+
 }

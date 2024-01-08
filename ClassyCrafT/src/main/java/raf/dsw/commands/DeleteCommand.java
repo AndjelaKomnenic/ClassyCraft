@@ -44,7 +44,7 @@ public class DeleteCommand extends AbstractCommand{
                         pkgView.removePainter(pkgView.getPainter(c));
                         if(!alistOfDeleted.contains(c))
                             alistOfDeleted.add(c);
-                        ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), c);
+                        ClassyTreeItem treeItemZaBrsianje = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(c);
                         if (treeItemZaBrsianje != null)
                             MainFrame.getInstance().getClassyTree().deleteChild(treeItemZaBrsianje);
                         else
@@ -54,7 +54,7 @@ public class DeleteCommand extends AbstractCommand{
                     }
                 }
             }
-            ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), ep);
+            ClassyTreeItem treeItemZaBrsianje = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(ep);
             if(treeItemZaBrsianje != null)
                 MainFrame.getInstance().getClassyTree().deleteChild(treeItemZaBrsianje);
             else
@@ -67,7 +67,7 @@ public class DeleteCommand extends AbstractCommand{
     public void undoCommand() {
         for(DiagramElement dgEl: listOfDeleted) {
             dgView.getDiagram().addChild(dgEl);
-            ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), dgView.getDiagram());
+            ClassyTreeItem myParent = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(dgView.getDiagram());
             if (myParent != null)
                 MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, dgEl);
             else
@@ -75,7 +75,7 @@ public class DeleteCommand extends AbstractCommand{
         }
         for(DiagramElement dgEl: alistOfDeleted) {
             dgView.getDiagram().addChild(dgEl);
-            ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), dgView.getDiagram());
+            ClassyTreeItem myParent = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(dgView.getDiagram());
             if (myParent != null)
                 MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, dgEl);
             else
@@ -86,17 +86,5 @@ public class DeleteCommand extends AbstractCommand{
         for(ElementPainter elp: alistOfPainters)
             pkgView.addPainterForCurrent(elp);
     }
-    public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
-        if (root.getClassyNode().equals(targetNode)) {
-            return root;
-        } else {
-            for (ClassyTreeItem child : root.getChildren()) {
-                ClassyTreeItem result = findClassyTreeItem(child, targetNode);
-                if (result != null) {
-                    return result;
-                }
-            }
-        }
-        return null;
-    }
+
 }

@@ -56,26 +56,23 @@ public class JacksonSerializer implements Serializer {
     @Override
     public Project loadProject(File file) {
 
-
         try {
             Project project = objectMapper.readValue(file, Project.class);
 
             for (ClassyNode pkg : project.getChildren()) {
-                pkg.setParent(project); // Set parent reference of Package to Project
+                pkg.setParent(project);
 
                 if (pkg instanceof ClassyNodeComposite) {
                     ClassyNodeComposite packageComposite = (ClassyNodeComposite) pkg;
 
                     for (ClassyNode diagram : packageComposite.getChildren()) {
-                        diagram.setParent(pkg); // Set parent reference of Diagram to Package
-                        // odavde ga sibni za tmp
+                        diagram.setParent(pkg);
                         if (diagram instanceof ClassyNodeComposite) {
                             ClassyNodeComposite diagramComposite = (ClassyNodeComposite) diagram;
 
-                            // If Diagram contains elements (children), set their parent references
                             List<ClassyNode> elementi = diagramComposite.getChildren();
                             for (ClassyNode element : elementi) {
-                                element.setParent(diagram); // Set parent reference of Element to Diagram
+                                element.setParent(diagram);
 
                                 if(element instanceof Connection)
                                 {
@@ -98,13 +95,6 @@ public class JacksonSerializer implements Serializer {
             TreePath path = new TreePath(root.getPath());
             treeView.setSelectionPath(path);
             treeView.expandPath(treeView.getSelectionPath());
-
-            ((ClassyNodeComposite) root.getClassyNode()).addChild(project);
-            SwingUtilities.updateComponentTreeUI(treeView);
-
-            /*for (ClassyNode pkg : project.getChildren()) {
-                project.getChildren().add(pkg);
-            }*/
 
 
             PackageView pkgVIew = MainFrame.getInstance().getWorkspace().getPackageView();
@@ -198,7 +188,7 @@ public class JacksonSerializer implements Serializer {
 
             String fileName = file.getName();
             String diagramName = fileName.replaceFirst("[.][^.]+$", ""); // Removes the file extension
-            
+
             diagram.setName(diagramName);
 
             //repaintTheDiagram(pkgView, diagram);

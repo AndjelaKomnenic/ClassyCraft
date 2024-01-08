@@ -77,12 +77,7 @@ public class ClassyTreeImplementation implements ClassyTree{
 
     @Override
     public void loadProject(Project node) {
-        ClassyTreeItem loadProject = new ClassyTreeItem(node);
-        root.add(loadProject);
-
-        ((ClassyNodeComposite) root.getClassyNode()).addChild(node);
-        treeView.expandPath(treeView.getSelectionPath());
-        SwingUtilities.updateComponentTreeUI(treeView);
+        addChildToDiag(root, node);
     }
 
     public ClassyTreeItem findTreeItemByNode(ClassyNode node, ClassyTreeItem parent){
