@@ -232,21 +232,19 @@ public class Generator {
                 {
                     ClassyNode toNode = generalizacija.getTo();
                     if (toNode instanceof Interfejs) {
-                        writer.write(" implements " + generalizacija.getToNaziv() + " {");
+                        writer.write(" implements " + generalizacija.getToNaziv());
                     }
                     else if (toNode instanceof Klasa) {
-                        writer.write(" extends " + generalizacija.getToNaziv() + " {");
+                        writer.write(" extends " + generalizacija.getToNaziv());
                     }
                 }
-                else
-                {
-                    writer.write(" {");
-                }
 
 
-                writer.write(System.lineSeparator());
             }
         }
+        writer.write(" {");
+        writer.write(System.lineSeparator());
+
     }
     private void writeAttributes(List<ClassContent> classContents, FileWriter writer) throws IOException {
         for (ClassContent ccc : classContents) {
@@ -268,7 +266,10 @@ public class Generator {
             writer.write("// All methods in the connected abstract class are implicitly abstract due to the class being abstract");
             writer.write(System.lineSeparator());
 
+            writeImportedAbstractMethods(interClass, writer);
+
             writeAbstractClassMethods(interClass, writer);
+            writeImportedInterfaceMethods(interClass, writer);
         } else {
             writeConcreteClassMethods(interClass, writer);
             writeImportedAbstractMethods(interClass, writer);
