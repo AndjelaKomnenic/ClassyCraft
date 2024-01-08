@@ -19,9 +19,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class Generator {
-    private int agregacijaCounter = 0;
-    private int kompozicijaCounter = 0;
-    private int generalizacijaCounter = 0;
+
     public Generator() {}
 
     public void createStructure(ClassyTreeItem root, File baseDirectory) {
@@ -61,32 +59,6 @@ public class Generator {
                     createStructureForChildren(child, projectDirectory);
                 }
             }
-
-            /*if (currentItem.getClassyNode() instanceof Package) {
-                Package pkg = (Package) currentItem.getClassyNode();
-                String packageName = pkg.getName();
-                String[] subPackages = packageName.split("\\.");
-
-                File currentDirectory = parentDirectory;
-                for (String subPackage : subPackages) {
-                    File packageDirectory = new File(currentDirectory, subPackage);
-
-                    if (!packageDirectory.exists()) {
-                        if (packageDirectory.mkdirs()) {
-                            System.out.println("Directory created: " + packageDirectory.getAbsolutePath());
-                        } else {
-                            System.out.println("Failed to create directory for package: " + subPackage);
-                        }
-                    }
-
-                    currentDirectory = packageDirectory;
-                }
-
-                for (ClassyTreeItem child : currentItem.getChildren()) {
-                    createStructureForChildren(child, currentDirectory);
-                }
-
-            }*/
 
             if (currentItem.getClassyNode() instanceof Package) {
                 Package pkg = (Package) currentItem.getClassyNode();
@@ -151,33 +123,31 @@ public class Generator {
     }
 
     private void writeKlasaElement(InterClass inter, FileWriter writer) throws IOException {
+        if (inter instanceof Klasa) {
 
-        if (inter instanceof Klasa){
+        } else if (inter instanceof Interfejs) {
 
-        } else if (inter instanceof Interfejs){
-
-        } else if (inter instanceof Enum){
+        } else if (inter instanceof Enum) {
 
         }
-
         writer.write("public");
 
-        if (inter instanceof Klasa){
-            if (((Klasa)inter).isApstraktna()) {
+        if (inter instanceof Klasa) {
+            if (((Klasa) inter).isApstraktna()) {
                 writer.write(" abstract");
             }
             writer.write(" class " + inter.getName());
         }
 
-        if (inter instanceof Interfejs){
+        if (inter instanceof Interfejs) {
             writer.write(" interface " + inter.getName());
         }
 
-        if (inter instanceof Enum){
+        if (inter instanceof Enum) {
             writer.write(" " + inter.getName());
         }
 
-        if (hasGeneralizacija(inter) && generalizacijaCounter % 2 == 0) {
+        if (hasGeneralizacija(inter)) {
             writeGeneralizacijaDetails(inter, writer);
         } else {
             writer.write(" {");
@@ -187,31 +157,23 @@ public class Generator {
         if (inter instanceof Klasa)
             writeAttributes(inter.getCl(), writer);
 
-        if (hasAgregacija(inter) && agregacijaCounter % 2 == 0) {
+        if (hasAgregacija(inter) ) {
             writeAgregacijaDetails(inter, writer);
         }
-        if (hasKompozicija(inter) && kompozicijaCounter % 2 == 0) {
-            writeKompozicijaDetails(inter, writer); // ovde
+        if (hasKompozicija(inter)) {
+            writeKompozicijaDetails(inter, writer);
         }
 
         writer.write("\n");
-        if (!(inter instanceof Enum))
+
+        if (inter instanceof Klasa)
             writeMethods(inter, writer);
 
         if (inter instanceof Enum)
             writeEnumEL(inter.getNEnum(), writer);
 
-
-        if (hasAgregacija(inter)) {
-            agregacijaCounter++;
-        }
-
-        if (hasKompozicija(inter)) {
-            kompozicijaCounter++;
-        }
-
-        if (hasGeneralizacija(inter)) {
-            generalizacijaCounter++;
+        if (inter instanceof Interfejs) {
+            writeInterfaceMethods(inter, writer);
         }
 
         writer.write("}" + System.lineSeparator());
@@ -250,7 +212,7 @@ public class Generator {
             if (connection instanceof Kompozicija) {
                 Kompozicija kompozicija = (Kompozicija) connection;
                 String cardinality = kompozicija.getKardinalnost();
-                if (cardinality == "jedan") {
+                if (cardinality.equals("jedan")) {
                     writer.write("\t" + kompozicija.getVidljivost() + " " + kompozicija.getToNaziv() + " " + kompozicija.getName() + "; // Kompozicija");
                     writer.write(System.lineSeparator());
                 } else {
@@ -265,7 +227,23 @@ public class Generator {
         for (Connection connection : inter.getListaVeza()) {
             if (connection instanceof Generalizacija) {
                 Generalizacija generalizacija = (Generalizacija) connection;
-                writer.write(" extends " + generalizacija.getToNaziv() + " {");
+
+                if(generalizacija.getFrom() == inter)
+                {
+                    ClassyNode toNode = generalizacija.getTo();
+                    if (toNode instanceof Interfejs) {
+                        writer.write(" implements " + generalizacija.getToNaziv() + " {");
+                    }
+                    else if (toNode instanceof Klasa) {
+                        writer.write(" extends " + generalizacija.getToNaziv() + " {");
+                    }
+                }
+                else
+                {
+                    writer.write(" {");
+                }
+
+
                 writer.write(System.lineSeparator());
             }
         }
@@ -287,34 +265,52 @@ public class Generator {
             writer.write("// Transfer abstract methods from abstract class");
             writer.write(System.lineSeparator());
 
-            // Write a comment indicating that all methods in an abstract class are implicitly abstract
             writer.write("// All methods in the connected abstract class are implicitly abstract due to the class being abstract");
             writer.write(System.lineSeparator());
 
-            // Handle logic for abstract class
             writeAbstractClassMethods(interClass, writer);
         } else {
-            // Handle logic for non-abstract class
             writeConcreteClassMethods(interClass, writer);
-            // Check if connected to an abstract class and import its abstract methods
             writeImportedAbstractMethods(interClass, writer);
+            writeImportedInterfaceMethods(interClass, writer);
         }
     }
 
     private void writeImportedAbstractMethods(InterClass inter, FileWriter writer) throws IOException {
         for (Connection connection : inter.getListaVeza()) {
             if (connection instanceof Generalizacija) {
-                ClassyNode connectedNode = connection.getTo();
-                if (!(connectedNode instanceof Klasa) || !((Klasa) connectedNode).isApstraktna()) {
-                    connectedNode = connection.getFrom();
+                if(connection.getFrom() == inter) {
+                    ClassyNode connectedNode = connection.getTo();
+                    if (!(connectedNode instanceof Klasa) || !((Klasa) connectedNode).isApstraktna()) {
+                        connectedNode = connection.getFrom();
+                    }
+                    if (connectedNode instanceof Klasa && ((Klasa) connectedNode).isApstraktna()) {
+                        Klasa abstractClass = (Klasa) connectedNode;
+                        for (ClassContent abstractMethod : abstractClass.getCl()) {
+                            if (abstractMethod instanceof Metod) {
+                                String methodName = "\t@Override\n" +
+                                        "\t" + abstractMethod.getVidljivost() + " " + abstractMethod.getTip() + " " + abstractMethod.getNaziv() + "() {\n" + "\t\t// TODO: Method implementation\n" + "\t}\n\n";
+                                writer.write(methodName);
+                            }
+                        }
+                    }
                 }
-                if (connectedNode instanceof Klasa && ((Klasa) connectedNode).isApstraktna()) {
-                    Klasa abstractClass = (Klasa) connectedNode;
-                    for (ClassContent abstractMethod : abstractClass.getCl()) {
-                        if (abstractMethod instanceof Metod) {
-                            String methodName = "\t@Override\n" +
-                                    "\t" + abstractMethod.getVidljivost() + " " + abstractMethod.getTip() + " " + abstractMethod.getNaziv() + "() {\n" + "\t\t// TODO: Method implementation\n" + "\t}\n\n";
-                            writer.write(methodName);
+            }
+        }
+    }
+
+    private void writeImportedInterfaceMethods(InterClass inter, FileWriter writer) throws IOException {
+        for (Connection connection : inter.getListaVeza()) {
+            if (connection instanceof Generalizacija) {
+                if(connection.getFrom() == inter) {
+                    ClassyNode connectedNode = connection.getTo();
+                    if (connectedNode instanceof Interfejs) {
+                        Interfejs interfejs = (Interfejs) connectedNode;
+                        for (ClassContent metoda : interfejs.getCl()) {
+                            if (metoda instanceof Metod) {
+                                String methodName = metoda.getTip() + " " + metoda.getNaziv() + "() {\n" + "\t\t// TODO: Method implementation\n" + "\t}\n\n";
+                                writer.write(methodName);
+                            }
                         }
                     }
                 }
@@ -323,7 +319,6 @@ public class Generator {
     }
 
     private void writeAbstractClassMethods(InterClass interClass, FileWriter writer) throws IOException {
-        // Write abstract methods of the abstract class
         for (ClassContent abstractMethod : interClass.getCl()) {
             if (abstractMethod instanceof Metod) {
                 String methodName = abstractMethod.getNaziv();
@@ -337,13 +332,35 @@ public class Generator {
         writer.write("// Concrete class methods");
         writer.write(System.lineSeparator());
 
-        // Write methods of the concrete class
         for (ClassContent concreteMethod : interClass.getCl()) {
             if (concreteMethod instanceof Metod) {
                 String methodInfo = "\t" + concreteMethod.getVidljivost() + " " + concreteMethod.getTip() + " " + concreteMethod.getNaziv() + "() {\n" +
                         "\t\t// TODO: Method implementation\n" +
                         "\t}\n\n";
                 writer.write(methodInfo);
+            }
+        }
+    }
+
+    private void writeInterfaceMethods(InterClass interClass, FileWriter writer) throws IOException {
+        for (Connection connection : interClass.getListaVeza()) {
+            if (connection instanceof Generalizacija) {
+                Generalizacija generalizacija = (Generalizacija) connection;
+                ClassyNode toNode = generalizacija.getTo();
+
+                if (toNode instanceof Interfejs) {
+                    writer.write("// Interface methods implementation");
+                    writer.write(System.lineSeparator());
+
+                    for (ClassContent abstractMethod : interClass.getCl()) {
+                        if (abstractMethod instanceof Metod) {
+                            String methodName = abstractMethod.getNaziv();
+                            String returnType = abstractMethod.getTip();
+                            String methodInfo = "\t" + returnType + " " + methodName + "();\n\n";
+                            writer.write(methodInfo);
+                        }
+                    }
+                }
             }
         }
     }

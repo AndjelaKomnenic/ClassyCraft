@@ -47,3 +47,4 @@
 [ERROR][2024-01-08 17:13:42.863] Name cannot be empty
 [ERROR][2024-01-08 17:16:30.541] Node with this name already exists
 [INFORMATION][2024-01-08 18:25:21.987] You did not select any component
+[ERROR][2024-01-08 22:10:37.681] Node with this name already exists

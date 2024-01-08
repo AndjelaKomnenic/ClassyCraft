@@ -1,0 +1,106 @@
+{
+  "@class" : "raf.dsw.classyrepository.implementation.Diagram",
+  "name" : "primer",
+  "children" : [ "java.util.ArrayList", [ {
+    "@class" : "raf.dsw.components.Klasa",
+    "name" : "Covek",
+    "strokeWidth" : 2,
+    "colourInside" : 16777215,
+    "selected" : false,
+    "colourOutline" : 0,
+    "vidljivost" : "private",
+    "width" : 82.0,
+    "height" : 111.0,
+    "cl" : [ "java.util.ArrayList", [ {
+      "@class" : "raf.dsw.components.Metod",
+      "vidljivost" : "private",
+      "tip" : "int",
+      "naziv" : "visina"
+    }, {
+      "@class" : "raf.dsw.components.Atribut",
+      "vidljivost" : "private",
+      "tip" : "string",
+      "naziv" : "ime"
+    } ] ],
+    "apstraktna" : true,
+    "x" : 89.0,
+    "y" : 121.0,
+    "nenum" : [ "java.util.ArrayList", [ ] ]
+  }, {
+    "@class" : "raf.dsw.components.Klasa",
+    "name" : "Zena",
+    "strokeWidth" : 2,
+    "colourInside" : 16777215,
+    "selected" : false,
+    "colourOutline" : 0,
+    "vidljivost" : "private",
+    "width" : 115.0,
+    "height" : 90.0,
+    "cl" : [ "java.util.ArrayList", [ {
+      "@class" : "raf.dsw.components.Metod",
+      "vidljivost" : "private",
+      "tip" : "String",
+      "naziv" : "bojaKose"
+    } ] ],
+    "apstraktna" : true,
+    "x" : 419.0,
+    "y" : 103.0,
+    "nenum" : [ "java.util.ArrayList", [ ] ]
+  }, {
+    "@class" : "raf.dsw.components.Klasa",
+    "name" : "Zivadinka",
+    "strokeWidth" : 2,
+    "colourInside" : 16777215,
+    "selected" : false,
+    "colourOutline" : 0,
+    "vidljivost" : "private",
+    "width" : 100.0,
+    "height" : 90.0,
+    "cl" : [ "java.util.ArrayList", [ {
+      "@class" : "raf.dsw.components.Atribut",
+      "vidljivost" : "private",
+      "tip" : "int",
+      "naziv" : "brojCipela"
+    } ] ],
+    "apstraktna" : false,
+    "x" : 205.0,
+    "y" : 364.0,
+    "nenum" : [ "java.util.ArrayList", [ ] ]
+  }, {
+    "@class" : "raf.dsw.components.Generalizacija",
+    "name" : "1",
+    "strokeWidth" : 2,
+    "colourInside" : 16777215,
+    "selected" : false,
+    "colourOutline" : 0,
+    "vidljivost" : null,
+    "kardinalnost" : "0",
+    "fromNaziv" : "Zivadinka",
+    "fromType" : "Klasa",
+    "toNaziv" : "Zena",
+    "toType" : "Klasa",
+    "fromX" : 305,
+    "fromY" : 364,
+    "toX" : 419,
+    "toY" : 193
+  }, {
+    "@class" : "raf.dsw.components.Generalizacija",
+    "name" : "2",
+    "strokeWidth" : 2,
+    "colourInside" : 16777215,
+    "selected" : false,
+    "colourOutline" : 0,
+    "vidljivost" : null,
+    "kardinalnost" : "0",
+    "fromNaziv" : "Zena",
+    "fromType" : "Klasa",
+    "toNaziv" : "Covek",
+    "toType" : "Klasa",
+    "fromX" : 419,
+    "fromY" : 103,
+    "toX" : 171,
+    "toY" : 121
+  } ] ],
+  "counter" : 0,
+  "template" : true
+}
