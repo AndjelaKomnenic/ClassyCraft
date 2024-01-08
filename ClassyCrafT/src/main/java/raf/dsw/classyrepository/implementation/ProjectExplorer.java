@@ -19,7 +19,10 @@ public class ProjectExplorer extends ClassyNodeComposite {
         if (child != null && child instanceof Project){
             Project newProject = (Project) child;
             if (!children.contains(newProject))
+            {
                 children.add(child);
+                updateChanged();
+            }
         }
         this.notifySubscriber("NEW");
         this.setCounter();

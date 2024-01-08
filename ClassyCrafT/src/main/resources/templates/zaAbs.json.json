@@ -1,0 +1,64 @@
+{
+  "@class" : "raf.dsw.classyrepository.implementation.Diagram",
+  "name" : "zaAbs.json",
+  "children" : [ "java.util.ArrayList", [ {
+    "@class" : "raf.dsw.components.Klasa",
+    "name" : "asdasd",
+    "strokeWidth" : 2,
+    "colourInside" : 16777215,
+    "selected" : false,
+    "colourOutline" : 0,
+    "vidljivost" : "private",
+    "width" : 89.0,
+    "height" : 90.0,
+    "cl" : [ "java.util.ArrayList", [ {
+      "@class" : "raf.dsw.components.Metod",
+      "vidljivost" : "private",
+      "tip" : "as",
+      "naziv" : "as"
+    } ] ],
+    "apstraktna" : true,
+    "x" : 130.0,
+    "y" : 235.0,
+    "nenum" : [ "java.util.ArrayList", [ ] ]
+  }, {
+    "@class" : "raf.dsw.components.Klasa",
+    "name" : "dasdasdasd",
+    "strokeWidth" : 2,
+    "colourInside" : 16777215,
+    "selected" : true,
+    "colourOutline" : 65535,
+    "vidljivost" : "private",
+    "width" : 124.0,
+    "height" : 90.0,
+    "cl" : [ "java.util.ArrayList", [ {
+      "@class" : "raf.dsw.components.Metod",
+      "vidljivost" : "private",
+      "tip" : "alalala",
+      "naziv" : "alalalalala"
+    } ] ],
+    "apstraktna" : false,
+    "x" : 433.0,
+    "y" : 157.0,
+    "nenum" : [ "java.util.ArrayList", [ ] ]
+  }, {
+    "@class" : "raf.dsw.components.Zavisnost",
+    "name" : "78549",
+    "strokeWidth" : 2,
+    "colourInside" : 16777215,
+    "selected" : false,
+    "colourOutline" : 0,
+    "vidljivost" : null,
+    "kardinalnost" : "0",
+    "fromNaziv" : "asdasd",
+    "fromType" : "Klasa",
+    "toNaziv" : "dasdasdasd",
+    "toType" : "Klasa",
+    "fromX" : 219,
+    "fromY" : 235,
+    "toX" : 433,
+    "toY" : 247
+  } ] ],
+  "counter" : 0,
+  "template" : true
+}

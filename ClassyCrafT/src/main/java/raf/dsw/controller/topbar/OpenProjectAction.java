@@ -29,6 +29,7 @@ public class OpenProjectAction extends AbstractClassyAction {
                     //Greska pri ucitavanju
                     return;
                 }
+                p.resetChanged();
                 MainFrame.getInstance().getClassyTree().loadProject(p);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);

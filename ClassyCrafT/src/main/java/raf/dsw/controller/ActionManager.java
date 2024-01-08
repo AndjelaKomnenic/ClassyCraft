@@ -32,6 +32,7 @@ public class ActionManager {
 
     private ScreenshotAction screenshotAction;
     private SaveProjectAction saveProjectAction;
+    private SaveAsProjectAction saveAsProjectAction;
     private OpenProjectAction openProjectAction;
 
     private SaveTemplateAction saveTemplateAction;
@@ -63,6 +64,7 @@ public class ActionManager {
         redoAction = new RedoAction();
         screenshotAction = new ScreenshotAction();
         saveProjectAction = new SaveProjectAction();
+        saveAsProjectAction = new SaveAsProjectAction();
         openProjectAction = new OpenProjectAction();
         saveTemplateAction = new SaveTemplateAction();
         openTemplateAction = new OpenTemplateAction();

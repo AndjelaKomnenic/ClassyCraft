@@ -27,6 +27,13 @@ public class Klasa extends InterClass{
     }
 
 
+    public void setApstraktna(boolean apstraktna) {
+        if(this.apstraktna == apstraktna)
+            return;
+        this.apstraktna = apstraktna;
+        updateChanged();
+    }
+
     @Override
     public String tipKlase() {
         return "Klasa";
@@ -34,4 +41,3 @@ public class Klasa extends InterClass{
 
 
 }
-

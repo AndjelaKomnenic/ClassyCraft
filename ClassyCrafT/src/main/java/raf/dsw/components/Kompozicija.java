@@ -9,7 +9,6 @@ public class Kompozicija extends Connection{
         super(name, parent, from, to);
     }
 
-
     public Kompozicija(){
         super(null,null,null,null);
     }

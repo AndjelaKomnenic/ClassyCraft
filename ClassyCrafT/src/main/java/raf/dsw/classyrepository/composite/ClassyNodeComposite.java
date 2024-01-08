@@ -9,6 +9,7 @@ public abstract class ClassyNodeComposite extends ClassyNode {
     protected List<ClassyNode> children;
     private int counter;
 
+
     public ClassyNodeComposite() {
 
     }
@@ -22,8 +23,21 @@ public abstract class ClassyNodeComposite extends ClassyNode {
     public void removeChild(ClassyNode child){
         if(child != null && !children.isEmpty()) {
             children.remove(child);
+            updateChanged();
             child.notifySubscriber("REMOVE");
         }
+    }
+
+    @Override
+    public void resetChanged() {
+        if (children != null && !children.isEmpty())
+        {
+            for (ClassyNode child: children)
+            {
+                child.resetChanged();
+            }
+        }
+        super.resetChanged();
     }
 
     public boolean cotainsSameNameComponent(String name){
@@ -36,6 +50,7 @@ public abstract class ClassyNodeComposite extends ClassyNode {
 
     public void setCounter() {
         this.counter += 1;
+        updateChanged();
     }
     public int getCounter() {
         return counter;
@@ -46,5 +61,14 @@ public abstract class ClassyNodeComposite extends ClassyNode {
             this.children = new ArrayList<>();
         }
         return this.children;
+    }
+
+    public void setChildren(List<ClassyNode> children) {
+        if (this.children == children)
+        {
+            return;
+        }
+        this.children = children;
+        updateChanged();
     }
 }

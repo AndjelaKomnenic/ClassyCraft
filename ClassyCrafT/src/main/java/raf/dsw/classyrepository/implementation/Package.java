@@ -33,8 +33,18 @@ public class Package extends ClassyNodeComposite {
         {
             this.setCounter();
             children.add(child);
+            updateChanged();
             this.notifySubscriber("NEW");
         }
+    }
+
+    public void setFilePath(String filePath) {
+        if (this.filePath == null && filePath == null)
+            return;
+        if(this.filePath != null && this.filePath.equals(filePath))
+            return;
+        this.filePath = filePath;
+        updateChanged();
     }
 
     @Override

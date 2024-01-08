@@ -26,40 +26,38 @@ public class Project extends ClassyNodeComposite {
         this.author = (author != null && !author.isEmpty()) ? author : "Default Author";
     }
 
-    /*@JsonCreator
-    public Project(@JsonProperty("name")String name
-            , @JsonProperty("author")String author
-            , @JsonProperty("children") List<ClassyNode> children
-            , @JsonProperty("counter") int counter
-            , @JsonProperty("filePath") String filePath) {
-        super(name, null);
-        this.author = author;
-        this.setName(name);
-        this.filePath = filePath;
-        for(ClassyNode child: children)
-            this.addChild(child);
-        //this.setCounterVal(counter);
-    }*/
-
 
     @Override
     public void addChild(ClassyNode child) {
         if(child != null && child instanceof Package) {
             Package newPackage = (Package) child;
             if(!children.contains(newPackage))
+            {
                 children.add(child);
+                updateChanged();
+            }
         }
         this.notifySubscriber("NEW");
         this.setCounter();
     }
 
     public void setAuthor(String author){
+        if(this.author == null && author == null)
+            return;
+        if(this.author != null && this.author.equals(author))
+            return;
         this.author = author;
         this.notifySubscriber("ADD_AUTHOR");
+        updateChanged();
     }
 
     public void setFilePath(String filePath) {
+        if(this.filePath == null && filePath == null)
+            return;
+        if(this.filePath != null && this.filePath.equals(filePath))
+            return;
         this.filePath = filePath;
+        updateChanged();
     }
 
 

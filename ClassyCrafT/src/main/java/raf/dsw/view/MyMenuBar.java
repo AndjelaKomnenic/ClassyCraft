@@ -17,6 +17,7 @@ public class MyMenuBar extends JMenuBar {
         AddAuthorAction aa = new AddAuthorAction();
         PackagePackageAction pp = new PackagePackageAction();
         SaveProjectAction sv = new SaveProjectAction();
+        SaveAsProjectAction sav = new SaveAsProjectAction();
         OpenProjectAction op = new OpenProjectAction();
         SaveTemplateAction st = new SaveTemplateAction();
         OpenTemplateAction ot = new OpenTemplateAction();
@@ -27,6 +28,7 @@ public class MyMenuBar extends JMenuBar {
         fileMenu.add(aa);
         fileMenu.add(pp);
         fileMenu.add(sv);
+        fileMenu.add(sav);
         fileMenu.add(op);
         fileMenu.add(st);
         fileMenu.add(ot);

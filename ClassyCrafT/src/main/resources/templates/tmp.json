@@ -1,0 +1,117 @@
+{
+  "@class" : "raf.dsw.classyrepository.implementation.Diagram",
+  "name" : "tmp",
+  "children" : [ "java.util.ArrayList", [ {
+    "@class" : "raf.dsw.components.Klasa",
+    "name" : "racun",
+    "strokeWidth" : 2,
+    "colourInside" : 16777215,
+    "selected" : false,
+    "colourOutline" : 0,
+    "vidljivost" : "private",
+    "width" : 78.0,
+    "height" : 111.0,
+    "cl" : [ "java.util.ArrayList", [ {
+      "@class" : "raf.dsw.components.Metod",
+      "vidljivost" : "private",
+      "tip" : "int",
+      "naziv" : "calc"
+    }, {
+      "@class" : "raf.dsw.components.Atribut",
+      "vidljivost" : "private",
+      "tip" : "int",
+      "naziv" : "br"
+    } ] ],
+    "apstraktna" : false,
+    "x" : 116.0,
+    "y" : 173.0,
+    "nenum" : [ "java.util.ArrayList", [ ] ]
+  }, {
+    "@class" : "raf.dsw.components.Enum",
+    "name" : "brojevi",
+    "strokeWidth" : 2,
+    "colourInside" : 16777215,
+    "selected" : false,
+    "colourOutline" : 0,
+    "vidljivost" : null,
+    "width" : 72.0,
+    "height" : 132.0,
+    "cl" : [ "java.util.ArrayList", [ ] ],
+    "clanE" : null,
+    "x" : 422.0,
+    "y" : 111.0,
+    "nenum" : [ "java.util.ArrayList", [ {
+      "@class" : "raf.dsw.components.ClanEnuma",
+      "en" : null,
+      "value" : "1"
+    }, {
+      "@class" : "raf.dsw.components.ClanEnuma",
+      "en" : null,
+      "value" : "2"
+    }, {
+      "@class" : "raf.dsw.components.ClanEnuma",
+      "en" : null,
+      "value" : "3"
+    } ] ]
+  }, {
+    "@class" : "raf.dsw.components.Interfejs",
+    "name" : "maca",
+    "strokeWidth" : 2,
+    "colourInside" : 16777215,
+    "selected" : false,
+    "colourOutline" : 0,
+    "vidljivost" : "private",
+    "width" : 82.0,
+    "height" : 111.0,
+    "cl" : [ "java.util.ArrayList", [ {
+      "@class" : "raf.dsw.components.Metod",
+      "vidljivost" : "private",
+      "tip" : "void",
+      "naziv" : "glad"
+    }, {
+      "@class" : "raf.dsw.components.Metod",
+      "vidljivost" : "private",
+      "tip" : "string",
+      "naziv" : "ime"
+    } ] ],
+    "x" : 400.0,
+    "y" : 400.0,
+    "nenum" : [ "java.util.ArrayList", [ ] ]
+  }, {
+    "@class" : "raf.dsw.components.Agregacija",
+    "name" : "123",
+    "strokeWidth" : 2,
+    "colourInside" : 16777215,
+    "selected" : false,
+    "colourOutline" : 0,
+    "vidljivost" : "private",
+    "kardinalnost" : "5",
+    "fromNaziv" : "racun",
+    "fromType" : "Klasa",
+    "toNaziv" : "maca",
+    "toType" : "Interfejs",
+    "fromX" : 194,
+    "fromY" : 284,
+    "toX" : 400,
+    "toY" : 400
+  }, {
+    "@class" : "raf.dsw.components.Generalizacija",
+    "name" : "555",
+    "strokeWidth" : 2,
+    "colourInside" : 16777215,
+    "selected" : false,
+    "colourOutline" : 0,
+    "vidljivost" : null,
+    "kardinalnost" : "0",
+    "fromNaziv" : "racun",
+    "fromType" : "Klasa",
+    "toNaziv" : "brojevi",
+    "toType" : "Enum",
+    "fromX" : 194,
+    "fromY" : 284,
+    "toX" : 422,
+    "toY" : 243
+  } ] ],
+  "counter" : 0,
+  "template" : true
+}

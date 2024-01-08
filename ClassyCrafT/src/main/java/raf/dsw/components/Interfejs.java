@@ -23,4 +23,11 @@ public class Interfejs extends InterClass{
         methods = new ArrayList<>();
 
     }
+
+    public void setMethods(List<ClassContent> methods) {
+        if(this.methods == methods)
+            return;
+        this.methods = methods;
+        updateChanged();
+    }
 }

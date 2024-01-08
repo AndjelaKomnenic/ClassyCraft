@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public class AdditionalConPop extends JDialog {
     private JComboBox<String> vidljivost = new JComboBox<>();
-    private JTextField kardinalnost = new JTextField();
+    private JComboBox<String> kardinalnost = new JComboBox<>();
     private JButton dodaj = new JButton("Podesi");
     private Connection c;
     public AdditionalConPop(JDialog parent, Connection c){
@@ -23,6 +23,8 @@ public class AdditionalConPop extends JDialog {
         vidljivost.addItem("public");
         vidljivost.addItem("protected");
         vidljivost.addItem("default");
+        kardinalnost.addItem("jedan");
+        kardinalnost.addItem("vise");
         setLayout(new GridLayout(3, 1));
         JPanel firstRow = new JPanel(new GridLayout(1, 2));
         JPanel secondRow = new JPanel(new GridLayout(1, 2));
@@ -47,7 +49,7 @@ public class AdditionalConPop extends JDialog {
     }
     public void handleButtonClick(){
         String v = (String)vidljivost.getSelectedItem();
-        String k = kardinalnost.getText();
+        String k = (String)kardinalnost.getSelectedItem();
         c.setVidljivost(v);
         c.setKardinalnost(k); //-> i ovo
         dispose();

@@ -35,9 +35,18 @@ public class Diagram extends ClassyNodeComposite {
         if(!children.contains(child))
         {
             children.add(child);
+            updateChanged();
             this.notifySubscriber("NEW");
         }
         this.notifySubscriber("REPAINT");
+    }
+
+    public void setTemplate(boolean template) {
+        if(this.template == template)
+            return;
+
+        this.template = template;
+        updateChanged();
     }
 
     @Override

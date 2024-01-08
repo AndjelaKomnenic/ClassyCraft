@@ -20,9 +20,15 @@ public class Enum extends InterClass{
         super(name, parent, x, y);
     }
 
+    public void setClanE(List<ClanEnuma> clanE) {
+        if(this.clanE == clanE)
+            return;
+        this.clanE = clanE;
+        updateChanged();
+    }
+
     @Override
     public String tipKlase() {
         return "Enum";
     }
 }
-

@@ -36,32 +36,82 @@ public abstract class InterClass extends DiagramElement{
         this.y = y;
     }
 
-    public void setWidthAndHeight(double width, double height){
+    public void setWidth(double width) {
+        if (this.width == width)
+            return;
         this.width = width;
+        updateChanged();
+    }
+
+    public void setHeight(double height) {
+        if(this.height == height)
+            return;
         this.height = height;
+        updateChanged();
+    }
+
+    public void setWidthAndHeight(double width, double height){
+        setHeight(height);
+        setWidth(width);
     }
 
     public void setX(double x){
+        if (this.x == x)
+            return;
         this.x = x;
+        updateChanged();
         if (getParent() != null)
+        {
+
             getParent().notifySubscriber("REPAINT");
+        }
     }
 
     public void setY(double y){
+        if(this.y ==y)
+            return;
         this.y = y;
+        updateChanged();
         if (getParent() != null)
+        {
+
             getParent().notifySubscriber("REPAINT");
+        }
     }
     public void addToList(ClassContent cc){
         cl.add(cc);
+        updateChanged();
+    }
+
+//    public void setCl(List<ClassContent> cl) {
+//        this.cl = cl;
+//        updateChanged();
+//    }
+//
+//    public void setnEnum(List<ClanEnuma> nEnum) {
+//        this.nEnum = nEnum;
+//        updateChanged();
+//    }
+
+    public void setListaVeza(List<Connection> listaVeza) {
+        if(this.listaVeza == listaVeza)
+            return;
+        this.listaVeza = listaVeza;
+        updateChanged();
     }
 
     public void addToListE(ClanEnuma ce) {
         nEnum.add(ce);
+        updateChanged();
     }
 
     public void setVidljivost(String vidljivost) {
+        if(this.vidljivost == null && vidljivost == null)
+            return;
+        if(this.vidljivost != null && vidljivost.equals(vidljivost))
+            return;
         this.vidljivost = vidljivost;
+        updateChanged();
     }
 
     public ArrayList<Tacka> getRectangleCoordinates()
@@ -79,6 +129,7 @@ public abstract class InterClass extends DiagramElement{
             listaVeza = new ArrayList<>();
         }
         listaVeza.add(c);
+        updateChanged();
     }
 
     public abstract String tipKlase();

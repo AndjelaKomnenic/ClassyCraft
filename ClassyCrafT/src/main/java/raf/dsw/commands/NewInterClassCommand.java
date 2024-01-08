@@ -14,14 +14,14 @@ public class NewInterClassCommand extends AbstractCommand{
     private DiagramView dgView;
     private ElementPainter thisClassPainter;
     private InterClass addedInterClass;
-    //private int x,y;
+    private int x,y;
 
-    /*public NewInterClassCommand(PackageView pkgView, DiagramView dgView, int x, int y) {
+    public NewInterClassCommand(PackageView pkgView, DiagramView dgView, int x, int y) {
         this.pkgView = pkgView;
         this.dgView = dgView;
         this.x = x;
         this.y = y;
-    }*/
+    }
     public NewInterClassCommand(PackageView pkg, DiagramView dv, InterClass addedInterClass, ElementPainter elementPainter){
         pkgView = pkg;
         dgView = dv;
@@ -32,7 +32,7 @@ public class NewInterClassCommand extends AbstractCommand{
     @Override
     public void doCommand() {
         dgView.getDiagram().addChild(addedInterClass);
-        ClassyTreeItem myParent = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(dgView.getDiagram());
+        ClassyTreeItem myParent = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), dgView.getDiagram());
         if(myParent != null)
             MainFrame.getInstance().getClassyTree().addChildToDiag(myParent, addedInterClass);
         else
@@ -46,7 +46,7 @@ public class NewInterClassCommand extends AbstractCommand{
         for (Connection c : ((InterClass)addedInterClass).getListaVeza()) {
             if (pkgView.getPainter(c) != null) {
                 pkgView.removePainter(pkgView.getPainter(c));
-                ClassyTreeItem treeItemZaBrsianje = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(c);
+                ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), c);
 
                 if (treeItemZaBrsianje != null)
                     MainFrame.getInstance().getClassyTree().deleteChild(treeItemZaBrsianje);
@@ -56,7 +56,7 @@ public class NewInterClassCommand extends AbstractCommand{
             else{
             }
         }
-        ClassyTreeItem treeItemZaBrsianje = MainFrame.getInstance().getClassyTree().getRoot().findClassyTreeItem(addedInterClass);
+        ClassyTreeItem treeItemZaBrsianje = findClassyTreeItem(MainFrame.getInstance().getClassyTree().getRoot(), addedInterClass);
         if(treeItemZaBrsianje != null) {
             MainFrame.getInstance().getClassyTree().deleteChild(treeItemZaBrsianje);
         }
@@ -64,5 +64,18 @@ public class NewInterClassCommand extends AbstractCommand{
             System.out.println("Nije nadjen");
         dgView.getDiagram().getChildren().remove(addedInterClass);
         //MainFrame.getInstance().getClassyTree().deleteNode(addedInterClass);
+    }
+    public ClassyTreeItem findClassyTreeItem(ClassyTreeItem root, ClassyNode targetNode) {
+        if (root.getClassyNode().equals(targetNode)) {
+            return root;
+        } else {
+            for (ClassyTreeItem child : root.getChildren()) {
+                ClassyTreeItem result = findClassyTreeItem(child, targetNode);
+                if (result != null) {
+                    return result;
+                }
+            }
+        }
+        return null;
     }
 }

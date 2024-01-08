@@ -18,6 +18,17 @@ public class CommandManager {
         doCommand();
     }
 
+    public boolean canUndo()
+    {
+        return currCommand > 0;
+    }
+
+    public boolean canDo()
+    {
+        return currCommand < commands.size();
+    }
+
+
     public void doCommand(){
         if (currCommand < commands.size()){
             commands.get(currCommand++).doCommand();;

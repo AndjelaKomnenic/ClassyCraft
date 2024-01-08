@@ -28,16 +28,47 @@ public abstract class DiagramElement extends ClassyNode{
         colourOutline = 0x000000;
     }
 
-    public void setColourInside(String colour){
-        this.colourInside = Integer.decode(colour);
-        if (getParent() != null)
+    public void setStrokeWidth(int strokeWidth) {
+        if(this.strokeWidth == strokeWidth)
+            return;
+        this.strokeWidth = strokeWidth;
+        updateChanged();
+    }
+
+    public void setColourInside(int colourInside) {
+        if(this.colourInside == colourInside)
+            return;
+        this.colourInside = colourInside;
+        updateChanged();
+        if (getParent() != null) {
             getParent().notifySubscriber("REPAINT");
+        }
+    }
+
+    public void setSelected(boolean selected) {
+        if(this.selected == selected)
+            return;
+        this.selected = selected;
+        updateChanged();
+    }
+
+    public void setColourOutline(int colourOutline) {
+        if(this.colourOutline == colourOutline)
+            return;
+        this.colourOutline = colourOutline;
+        updateChanged();
+        if (getParent() != null) {
+            getParent().notifySubscriber("REPAINT");
+        }
+    }
+
+    public void setColourInside(String colour){
+        setColourInside(Integer.decode(colour));
     }
 
     public void setColourOutline(String colour){
-        this.colourOutline =Integer.decode(colour);
-        if (getParent() != null)
-            getParent().notifySubscriber("REPAINT");
+        setColourOutline(Integer.decode(colour));
+
     }
 
     @Override
